@@ -6,14 +6,14 @@
       <!-- 语言切换 -->
       <!-- <lang-selector class="lang-selector"></lang-selector>    -->
     </span>
-    <h2 class="title" style="padding-left:22px;" >系统登录</h2>
+    <h2 class="title" style="padding-left:22px;" >银行文档材料登录系统</h2>
     <el-form-item prop="account">
       <el-input type="text" v-model="loginForm.account" auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
     <el-form-item prop="password">
       <el-input type="password" v-model="loginForm.password" auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
-    <el-form-item >
+   <!-- <el-form-item >
       <el-col :span="12">
         <el-form-item prop="captcha">
           <el-input type="test" v-model="loginForm.captcha" auto-complete="off" placeholder="验证码, 单击图片刷新"
@@ -27,7 +27,7 @@
             <img style="width: 100%;" class="pointer" :src="loginForm.src" @click="refreshCaptcha">
         </el-form-item>
       </el-col>
-    </el-form-item>
+    </el-form-item>-->
     <!-- <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox> -->
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:48%;" @click.native.prevent="reset">重 置</el-button>
