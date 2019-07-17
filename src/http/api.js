@@ -8,7 +8,10 @@ import * as role from './moudules/role'
 import * as menu from './moudules/menu'
 import * as dict from './moudules/dict'
 import * as log from './moudules/log'
-import * as noticeAnnouncement from './moudules/notice_announcement'
+import * as noticeAnnouncement from './moudules/noticeAnnouncement'
+import * as customer from './moudules/customer'
+import * as docProduct from './moudules/docProduct'
+import * as configuration from './moudules/configuration'
 
 
 // 默认全部导出
@@ -20,5 +23,8 @@ export default {
     menu,
     dict,
     log,
-    noticeAnnouncement
+    noticeAnnouncement,
+    customer,
+    docProduct,
+    configuration
 }

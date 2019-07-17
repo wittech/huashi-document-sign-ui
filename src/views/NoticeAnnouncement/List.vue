@@ -15,7 +15,7 @@
       </el-form>
     </div>
     <!--表格内容栏-->
-    <kt-table :height="350" permsEdit="notice_announcement:edit" permsDelete="notice_announcement:delete"
+    <kt-table :height="350" permsEdit="noticeAnnouncement:edit" permsDelete="noticeAnnouncement:delete"
               :data="pageResult" :columns="columns"
               @findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
     </kt-table>
@@ -123,7 +123,8 @@
         this.dataForm = {
           id: 0,
           title: '',
-          content: ''
+          content: '',
+          createBy:'',
         }
       },
       // 显示编辑界面
@@ -160,6 +161,10 @@
       }
     },
     mounted() {
+      let user = sessionStorage.getItem("user");
+      if (user) {
+         this.dataForm.createBy=user;
+      }
     }
   }
 </script>
