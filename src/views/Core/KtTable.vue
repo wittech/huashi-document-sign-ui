@@ -1,12 +1,12 @@
 <template>
   <div>
     <!--表格栏-->
-    <el-table :data="data.content" :highlight-current-row="highlightCurrentRow" @selection-change="selectionChange" 
+    <el-table :data="data.content" :highlight-current-row="highlightCurrentRow" @selection-change="selectionChange"
           @current-change="handleCurrentChange" v-loading="loading" :element-loading-text="$t('action.loading')" :border="border" :stripe="stripe"
           :show-overflow-tooltip="showOverflowTooltip" :max-height="maxHeight" :height="height" :size="size" :align="align" style="width:100%;" >
       <el-table-column type="selection" width="40" v-if="showBatchDelete & showOperation"></el-table-column>
       <el-table-column v-for="column in columns" header-align="center" align="center"
-        :prop="column.prop" :label="column.label" :width="column.width" :min-width="column.minWidth" 
+        :prop="column.prop" :label="column.label" :width="column.width" :min-width="column.minWidth"
         :fixed="column.fixed" :key="column.prop" :type="column.type" :formatter="column.formatter"
         :sortable="column.sortable==null?true:column.sortable">
       </el-table-column>
@@ -19,9 +19,9 @@
     </el-table>
     <!--分页栏-->
     <div class="toolbar" style="padding:10px;">
-      <kt-button :label="$t('action.batchDelete')" :perms="permsDelete" :size="size" type="danger" @click="handleBatchDelete()" 
+      <kt-button :label="$t('action.batchDelete')" :perms="permsDelete" :size="size" type="danger" @click="handleBatchDelete()"
         :disabled="this.selections.length===0" style="float:left;" v-if="showBatchDelete & showOperation"/>
-      <el-pagination layout="total, prev, pager, next, jumper" @current-change="refreshPageRequest" 
+      <el-pagination layout="total, prev, pager, next, jumper" @current-change="refreshPageRequest"
         :current-page="pageRequest.pageNum" :page-size="pageRequest.pageSize" :total="data.totalSize" style="float:right;">
       </el-pagination>
     </div>
@@ -40,6 +40,8 @@ export default {
     data: Object, // 表格分页数据
     permsEdit: String,  // 编辑权限标识
     permsDelete: String,  // 删除权限标识
+    permsDeail:String,//详情权限标识
+    permsAuditing:String,//审核权限标识
     size: { // 尺寸样式
       type: String,
       default: 'mini'
@@ -99,6 +101,7 @@ export default {
         let callback = res => {
           this.loading = false
         }
+        alert(1);
       this.$emit('findPage', {pageRequest:this.pageRequest, callback:callback})
     },
     // 选择切换
@@ -119,6 +122,10 @@ export default {
 		handleEdit: function (index, row) {
       this.$emit('handleEdit', {index:index, row:row})
 		},
+    //查看
+    handleDeail: function (index, row) {
+      this.$emit('handleDeail', {index:index, row:row})
+    },
     // 删除
 		handleDelete: function (index, row) {
 			this.delete(row.id)

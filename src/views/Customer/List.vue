@@ -1,11 +1,43 @@
 <template>
-  <div class="container" style="width:99%;margin-top:-25px;">
+  <div class="page-container">
 	<!--工具栏-->
 	<div class="toolbar" style="float:left;padding-top:10px;padding-left:15px;">
 		<el-form :inline="true" :model="filters" :size="size">
 			<el-form-item>
-				<el-input v-model="filters.label" placeholder="名称"></el-input>
+				<el-input v-model="filters.name" placeholder="文档名称"></el-input>
 			</el-form-item>
+      <el-form-item>
+        <el-select v-model="filters.productId" placeholder="请选择所属模板">
+          <el-option
+            v-for="item in StatusOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-select v-model="filters.status" placeholder="请选择状态">
+          <el-option
+            v-for="item in StatusOptions"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-date-picker
+          v-model="filters.startTime"
+          type="date"
+          placeholder="选择开始日期">
+        </el-date-picker>
+        <el-date-picker
+          v-model="filters.endTime"
+          type="date"
+          placeholder="选择截止日期">
+        </el-date-picker>
+      </el-form-item>
 			<el-form-item>
 				<kt-button :label="$t('action.search')" perms="customer:view" type="primary" @click="findPage(null)"/>
 			</el-form-item>
@@ -15,36 +47,27 @@
 		</el-form>
 	</div>
 	<!--表格内容栏-->
-	<kt-table permsEdit="customer:edit" permsDelete="customer:delete"
+	<kt-table permsEdit="customer:edit" permsDelete="customer:delete" permsDeail="customer:view" permsAuditing="customer:auditing"
 		:data="pageResult" :columns="columns"
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</kt-table>
 	<!--新增编辑界面-->
 	<el-dialog :title="operation?'新增':'编辑'" width="40%" :visible.sync="editDialogVisible" :close-on-click-modal="false">
 		<el-form :model="dataForm" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
-			<el-form-item label="" prop="id"  v-if="dataForm.isPrimaryKey">
-				<el-input v-model="dataForm.id" auto-complete="off"></el-input>
-			</el-form-item>
-			<el-form-item label="产品ID" prop="productId"  v-if="dataForm.isPrimaryKey">
+      <el-form-item label="ID" prop="id"  v-if="false">
+        <el-input v-model="dataForm.id" :disabled="true" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="文档名称" prop="name">
+        <el-input v-model="dataForm.name" auto-complete="off"></el-input>
+      </el-form-item>
+			<el-form-item label="文档模板" prop="productId">
 				<el-input v-model="dataForm.productId" auto-complete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="文件名称" prop="name"  v-if="dataForm.isPrimaryKey">
-				<el-input v-model="dataForm.name" auto-complete="off"></el-input>
-			</el-form-item>
-			<el-form-item label="文件类型， xls, doc" prop="type"  v-if="dataForm.isPrimaryKey">
+			<el-form-item label="审批人" prop="type">
 				<el-input v-model="dataForm.type" auto-complete="off"></el-input>
 			</el-form-item>
-			<el-form-item label="文件大小，存储字节" prop="size"  v-if="dataForm.isPrimaryKey">
+			<el-form-item label="备注" prop="size">
 				<el-input v-model="dataForm.size" auto-complete="off"></el-input>
-			</el-form-item>
-			<el-form-item label="存储路径" prop="path"  v-if="dataForm.isPrimaryKey">
-				<el-input v-model="dataForm.path" auto-complete="off"></el-input>
-			</el-form-item>
-			<el-form-item label="" prop="createTime"  v-if="dataForm.isPrimaryKey">
-				<el-input v-model="dataForm.createTime" auto-complete="off"></el-input>
-			</el-form-item>
-			<el-form-item label="" prop="lastUpdateTime"  v-if="dataForm.isPrimaryKey">
-				<el-input v-model="dataForm.lastUpdateTime" auto-complete="off"></el-input>
 			</el-form-item>
 		</el-form>
 		<div slot="footer" class="dialog-footer">
@@ -68,16 +91,18 @@ export default {
 		return {
 			size: 'small',
 			filters: {
-				label: ''
+				name: '',
+        productId:'',
+        status:'',
+        startTime:'',
+        endTime:'',
 			},
 			columns: [
-				{prop:"id", label:"", minWidth:100},
-				{prop:"name", label:"文档名称", minWidth:100},
+				{prop:"name",label:"文档名称", minWidth:100},
         {prop:"productId", label:"所属模板", minWidth:100},
-				{prop:"type", label:"文件类型， xls, doc", minWidth:100},
-				{prop:"size", label:"文件大小，存储字节", minWidth:100},
-				{prop:"path", label:"存储路径", minWidth:100},
-        {prop:"createTime", label:"创建时间", minWidth:120, formatter:this.dateFormat}
+				{prop:"type", createBy:"创建人", minWidth:100},
+        {prop:"createTime", label:"创建时间", minWidth:120, formatter:this.dateFormat},
+				{prop:"path", label:"状态", minWidth:100}
 			],
 			pageRequest: { pageNum: 1, pageSize: 8 },
 			pageResult: {},

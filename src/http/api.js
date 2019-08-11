@@ -12,7 +12,13 @@ import * as noticeAnnouncement from './moudules/noticeAnnouncement'
 import * as customer from './moudules/customer'
 import * as docProduct from './moudules/docProduct'
 import * as configuration from './moudules/configuration'
-
+import * as loan from './moudules/loan'
+import * as relatedPersonnel from './moudules/loan/relatedPersonnel'
+import * as oterRelatedPersonnel from './moudules/loan/oterRelatedPersonnel'
+import * as pawn from './moudules/loan/pawn'
+import * as loanBusinessInformation from './moudules/loan/loanBusinessInformation'
+import * as personalLoanSurveyReport from './moudules/loan/personalLoanSurveyReport'
+import * as contractInformation from './moudules/loan/contractInformation'
 
 // 默认全部导出
 export default {
@@ -26,5 +32,12 @@ export default {
     noticeAnnouncement,
     customer,
     docProduct,
-    configuration
+    configuration,
+    loan,
+    relatedPersonnel,
+    oterRelatedPersonnel,
+    pawn,
+    loanBusinessInformation,
+    personalLoanSurveyReport,
+    contractInformation
 }
