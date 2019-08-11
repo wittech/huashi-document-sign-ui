@@ -41,9 +41,9 @@
       <el-table-column
         prop="loanDate" header-align="center" align="center" label="放款时间" :formatter="dateFormat">
       </el-table-column>
-      <el-table-column
+     <!-- <el-table-column
         prop="status" header-align="center" align="center" label="状态" :formatter="statusFormat">
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column
         fixed="right" header-align="center" align="center" width="185" :label="$t('action.operation')">
         <template slot-scope="scope">

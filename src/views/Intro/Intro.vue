@@ -1,6 +1,6 @@
 <template>
   <div class="page-container" style="width:99%;margin-top:15px;">
-    <el-carousel :interval="3000" type="card" height="450px" class="carousel">
+   <!-- <el-carousel :interval="3000" type="card" height="450px" class="carousel">
       <el-carousel-item class="carousel-item-intro">
         <h2>项目介绍</h2>
         <ul>
@@ -46,7 +46,7 @@
           <li>...</li>
         </ul>
       </el-carousel-item>
-    </el-carousel>
+    </el-carousel>-->
   </div>
 </template>
 
