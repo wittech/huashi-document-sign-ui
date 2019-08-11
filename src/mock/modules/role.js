@@ -28,6 +28,7 @@ export function batchDelete() {
 }
 // 查询全部
 export function findAll() {
+  alert(1);
   let findAllData = {
     "code": 200,
     "msg": null,

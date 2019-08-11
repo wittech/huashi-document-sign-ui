@@ -17,7 +17,7 @@
         <el-input v-model="filters.borrower" placeholder="借款人及相关人"></el-input>
       </el-form-item>
 			<el-form-item>
-				<kt-button :label="$t('action.search')" perms="customer:view" type="primary" @click="findPage(null)"/>
+				<kt-button :label="$t('action.search')" perms="customer:view" type="primary" @click="findPages(null)"/>
 			</el-form-item>
 			<el-form-item>
 				<kt-button :label="$t('action.add')" perms="customer:add" type="primary" @click="handleAdd" />
@@ -76,16 +76,14 @@
         </el-form-item>
         <br>
       </el-form>
+      <el-button icon="fa fa-plus" type="primary" @click="generateDoc">生成文档</el-button>
       <el-table :data="fileList" stripe size="mini" style="width: 100%;">
         <el-table-column
-          prop="originMame" header-align="center" align="center" width="80" label="文件原名称">
+          prop="docName" header-align="center" align="center" width="80" label="文档名称">
         </el-table-column>
         <table-tree-column
-          prop="newName" header-align="center" treeKey="id" width="150" label="文件新名称">
+          prop="docSize" header-align="center" treeKey="id" width="150" label="文件大小">
         </table-tree-column>
-        <el-table-column
-          prop="type" header-align="center" align="center" width="120" label="文件类型" :formatter="applicationMattersFormat">
-        </el-table-column>
         <el-table-column
           fixed="right" header-align="center" align="center" width="185" :label="$t('action.operation')">
           <template slot-scope="scope">
@@ -151,13 +149,7 @@ export default {
         borrower: '',
       },
       //文件列表
-		  fileList:[{
-        id:'1',
-        originMame:'1.jpg',
-        newName:'2.jpg',
-        type:'1',
-        url:''
-      }],
+		  fileList:[],
 		  //查看
       deailDialogVisible:false,
 		  //状态
@@ -202,7 +194,8 @@ export default {
 				path: null,
 				createTime: null,
 				lastUpdateTime: null,
-			}
+			},
+      loanBasisId:'',
 		}
 	},
 
@@ -210,21 +203,45 @@ export default {
 
   },
   created(){
-	  this.findPage(null);
+	  this.findPages(null);
   },
 
 	methods: {
-    ...mapActions([
-      'getById'
-    ]),
+
+    /**
+     * 生成文档
+     */
+    generateDoc(){
+      let dataParams = {
+        loanBasisId:this.loanBasisId
+      }
+      this.$api.loan.generateDoc(dataParams).then((res) => {
+          alert(res);
+      }).then(data!=null?data.callback:'')
+    },
+
     /**
      * 查看
      */
     handleDeail(row){
         //获取对象信息
-        this.getByIds(row);
+        //this.getByIds(row);
+        //获取文件对象
+        this.loanBasisId=row.id;
+        this.findList(row);
+        //this.getByLoanBasisId(row);
         //获取文件列表数据
         this.deailDialogVisible=true;
+    },
+
+    //根据id获取文件数据
+    findList: function (data) {
+      let dataParams = {
+        loanBasisId:data.id
+      }
+      this.$api.fileDoc.findPage(dataParams).then((res) => {
+        this.fileList = res.data
+      });
     },
 
     //根据id获取对象信息
@@ -238,13 +255,13 @@ export default {
     },
 
 		// 获取分页数据
-		findPage: function (data) {
+		findPages: function (data) {
 			if(data !== null) {
 				this.pageRequest = data.pageRequest
 			}
 			this.pageRequest.columnFilters = {label: {name:'label', value:this.filters.name}}
 			this.$api.loan.findPage(this.pageRequest).then((res) => {
-				this.pageResult = res.data
+				this.pageResult = res.data;
 			}).then(data!=null?data.callback:'')
 		},
 		// 批量删除
@@ -288,7 +305,7 @@ export default {
 							this.editLoading = false
 							this.$refs['dataForm'].resetFields()
 							this.editDialogVisible = false
-							this.findPage(null)
+							this.findPages(null)
 						})
 					})
 				}

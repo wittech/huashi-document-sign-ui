@@ -93,7 +93,7 @@
         class="upload-demo"
         action="https://jsonplaceholder.typicode.com/posts/"
         :on-preview="handlePreview"
-        :on-remove="handleRemove"
+        :on-remove="emove"
         :file-list="fileList2"
         list-type="picture">
         <el-button size="small" type="primary">点击上传</el-button>
@@ -186,7 +186,7 @@ export default {
 		}
 	},
 	methods: {
-    handleRemove(file, fileList) {
+    emove(file, fileList) {
       console.log(file, fileList);
     },
     handlePreview(file) {

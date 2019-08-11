@@ -16,7 +16,7 @@
 	</div>
 	<!--表格内容栏-->
 	<kt-table :height="220" permsEdit="sys:role:edit" permsDelete="sys:role:delete" :highlightCurrentRow="true" :stripe="false"
-		:data="pageResult" :columns="columns" :showBatchDelete="false" @handleCurrentChange="handleRoleSelectChange"
+		:data="pageResult" :columns="columns" :showBatchDelete="false" @handleCurrentChange="oleSelectChange"
 		@findPage="findPage" @handleEdit="handleEdit" @handleDelete="handleDelete">
 	</kt-table>
 	<!-- </el-col> -->
@@ -52,9 +52,9 @@
 			<el-checkbox v-model="checkAll" @change="handleCheckAll" :disabled="this.selectRole.id == null"><b>全选</b></el-checkbox>
 		</div>
 		<div style="float:right;padding-right:15px;padding-top:4px;padding-bottom:4px;">
-			<kt-button :label="$t('action.reset')" perms="sys:role:edit" type="primary" @click="resetSelection" 
+			<kt-button :label="$t('action.reset')" perms="sys:role:edit" type="primary" @click="resetSelection"
 				:disabled="this.selectRole.id == null"/>
-			<kt-button :label="$t('action.submit')" perms="sys:role:edit" type="primary" @click="submitAuthForm" 
+			<kt-button :label="$t('action.submit')" perms="sys:role:edit" type="primary" @click="submitAuthForm"
 				:disabled="this.selectRole.id == null" :loading="authLoading"/>
 		</div>
 	</div>
@@ -180,7 +180,7 @@ export default {
 			})
 		},
 		// 角色选择改变监听
-		handleRoleSelectChange(val) {
+		oleSelectChange(val) {
 			if(val == null || val.val == null) {
 				return
 			}
@@ -270,7 +270,7 @@ export default {
       	dateFormat: function (row, column, cellValue, index){
           	return format(row[column.property])
       	}
-		
+
 	},
 	mounted() {
 	}
@@ -286,6 +286,6 @@ export default {
 	text-align: left;
 	font-size: 16px;
 	color: rgb(20, 89, 121);
-	
+
 }
 </style>

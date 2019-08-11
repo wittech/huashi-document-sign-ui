@@ -19,6 +19,7 @@ import * as pawn from './moudules/loan/pawn'
 import * as loanBusinessInformation from './moudules/loan/loanBusinessInformation'
 import * as personalLoanSurveyReport from './moudules/loan/personalLoanSurveyReport'
 import * as contractInformation from './moudules/loan/contractInformation'
+import * as fileDoc from './moudules/fileDoc'
 
 // 默认全部导出
 export default {
@@ -39,5 +40,6 @@ export default {
     pawn,
     loanBusinessInformation,
     personalLoanSurveyReport,
-    contractInformation
+    contractInformation,
+    fileDoc
 }

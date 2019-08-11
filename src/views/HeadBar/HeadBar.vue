@@ -117,7 +117,7 @@ export default {
     }
   },
   mounted() {
-    this.sysName = "银行文档材料管理系统"
+    this.sysName = "信贷材料管理系统"
     var user = sessionStorage.getItem("user")
     if (user) {
       this.user.name = user

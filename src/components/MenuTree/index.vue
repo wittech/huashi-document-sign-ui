@@ -6,7 +6,7 @@
     </template>
     <MenuTree v-for="item in menu.children" :key="item.id" :menu="item"></MenuTree>
   </el-submenu>
-  <el-menu-item v-else :index="'' + menu.id" @click="handleRoute(menu)">
+  <el-menu-item v-else :index="'' + menu.id" @click="oute(menu)">
     <i :class="menu.icon"></i>
     <span slot="title">{{menu.name}}</span>
   </el-menu-item>
@@ -23,7 +23,7 @@ export default {
     }
   },
   methods: {
-    handleRoute (menu) {
+    oute (menu) {
       // 如果是嵌套页面，转换成iframe的path
       let path = getIFramePath(menu.url)
       if(!path) {

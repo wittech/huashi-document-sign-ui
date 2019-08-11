@@ -30,3 +30,12 @@ export const findyId = (data) => {
     data
   })
 }
+
+// 生成文档
+export const generateDoc = (data) => {
+  return axios({
+    url: '/loan/born',
+    method: 'post',
+    data
+  })
+}

@@ -27,7 +27,6 @@ export function batchDelete() {
   }
 }
 export function findDeptTree(params) {
-  alert(1);
   // 查询机构树
   let findTreeData = {
     "code": 200,

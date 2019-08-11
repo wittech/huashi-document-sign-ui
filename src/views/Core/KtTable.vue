@@ -101,7 +101,6 @@ export default {
         let callback = res => {
           this.loading = false
         }
-        alert(1);
       this.$emit('findPage', {pageRequest:this.pageRequest, callback:callback})
     },
     // 选择切换

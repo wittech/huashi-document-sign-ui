@@ -2,7 +2,7 @@
   <el-color-picker
     class="theme-picker"
     popper-class="theme-picker-dropdown"
-    v-model="theme" 
+    v-model="theme"
     :size="size">
   </el-color-picker>
 </template>
@@ -44,7 +44,7 @@ export default {
       const themeCluster = this.getThemeCluster(val.replace('#', ''))
       const originalCluster = this.getThemeCluster(oldVal.replace('#', ''))
       console.log(themeCluster, originalCluster)
-      const getHandler = (variable, id) => {
+      const get = (variable, id) => {
         return () => {
           const originalCluster = this.getThemeCluster(ORIGINAL_THEME.replace('#', ''))
           const newStyle = this.updateStyle(this[variable], originalCluster, themeCluster)
@@ -59,13 +59,13 @@ export default {
         }
       }
 
-      const chalkHandler = getHandler('chalk', 'chalk-style')
+      const chalk = get('chalk', 'chalk-style')
 
       if (!this.chalk) {
         const url = `https://unpkg.com/element-ui@${version}/lib/theme-chalk/index.css`
-        this.getCSSString(url, chalkHandler, 'chalk')
+        this.getCSSString(url, chalk, 'chalk')
       } else {
-        chalkHandler()
+        chalk()
       }
 
       const styles = [].slice.call(document.querySelectorAll('style'))
@@ -78,7 +78,7 @@ export default {
         if (typeof innerText !== 'string') return
         style.innerText = this.updateStyle(innerText, originalCluster, themeCluster)
       })
-      
+
       // 响应外部操作
       this.$emit('onThemeChange', val)
       if(this.showSuccess) {

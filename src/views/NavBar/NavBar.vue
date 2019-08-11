@@ -39,10 +39,10 @@ export default {
     }
   },
   watch: {
-    $route: 'handleRoute'
+    $route: 'oute'
   },
   created () {
-    this.handleRoute(this.$route)
+    this.oute(this.$route)
   },
   methods: {
     handleopen() {
@@ -55,7 +55,7 @@ export default {
       console.log('handleselect')
     },
     // 路由操作处理
-    handleRoute (route) {
+    oute (route) {
       // tab标签页选中, 如果不存在则先添加
       var tab = this.mainTabs.filter(item => item.name === route.name)[0]
       if (!tab) {
@@ -94,7 +94,7 @@ export default {
   .logo {
     position:absolute;
     top: 0px;
-    height: 60px;   
+    height: 60px;
     line-height: 60px;
     background: #545c64;
     cursor:pointer;

@@ -239,7 +239,7 @@
                   label="操作">
                   <template slot-scope="scope">
                     <el-button @click="removeHousAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                    <el-button @click="handleHousAssetEdit(scope.row.assetTypeHouses)" type="text" size="small">编辑</el-button>
+                    <!--<el-button @click="handleHousAssetEdit(scope.row.assetTypeHouses)" type="text" size="small">编辑</el-button>-->
                   </template>
                 </el-table-column>
               </el-table>
@@ -374,7 +374,7 @@
                   label="操作">
                   <template slot-scope="scope">
                     <el-button @click="removeLandAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                    <el-button @click="handleLandAssetEdit(scope.row.assetTypeLand)" type="text" size="small">编辑</el-button>
+                    <!--<el-button @click="handleLandAssetEdit(scope.row.assetTypeLand)" type="text" size="small">编辑</el-button>-->
                   </template>
                 </el-table-column>
               </el-table>
@@ -487,7 +487,7 @@
                   label="操作">
                   <template slot-scope="scope">
                     <el-button @click="removeCarAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                    <el-button @click="handleCarAssetEdit(scope.row.assetTypeCar)" type="text" size="small">编辑</el-button>
+                   <!-- <el-button @click="handleCarAssetEdit(scope.row.assetTypeCar)" type="text" size="small">编辑</el-button>-->
                   </template>
                 </el-table-column>
               </el-table>
@@ -549,7 +549,7 @@
                   label="操作">
                   <template slot-scope="scope">
                     <el-button @click="removeSecuritiesAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                    <el-button @click="handleSecuritiesAssetEdit(scope.row.assetTypeSecurities)" type="text" size="small">编辑</el-button>
+                    <!--<el-button @click="handleSecuritiesAssetEdit(scope.row.assetTypeSecurities)" type="text" size="small">编辑</el-button>-->
                   </template>
                 </el-table-column>
               </el-table>
@@ -597,7 +597,7 @@
                   label="操作">
                   <template slot-scope="scope">
                     <el-button @click="removeOtherAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                    <el-button @click="handleOtherAssetEdit(scope.row.assetTypeOther)" type="text" size="small">编辑</el-button>
+                    <!--<el-button @click="handleOtherAssetEdit(scope.row.assetTypeOther)" type="text" size="small">编辑</el-button>-->
                   </template>
                 </el-table-column>
               </el-table>
@@ -822,7 +822,7 @@
                         label="操作">
                         <template slot-scope="scope">
                           <el-button @click="removeSpouseHousAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                          <el-button @click="handleSpouseHousAssetEdit(scope.row.assetTypeHouses)" type="text" size="small">编辑</el-button>
+                         <!-- <el-button @click="handleSpouseHousAssetEdit(scope.row.assetTypeHouses)" type="text" size="small">编辑</el-button>-->
                         </template>
                       </el-table-column>
                     </el-table>
@@ -957,7 +957,7 @@
                         label="操作">
                         <template slot-scope="scope">
                           <el-button @click="removeSpouseLandAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                          <el-button @click="handleSpouseLandAssetEdit(scope.row.assetTypeLand)" type="text" size="small">编辑</el-button>
+                          <!--<el-button @click="handleSpouseLandAssetEdit(scope.row.assetTypeLand)" type="text" size="small">编辑</el-button>-->
                         </template>
                       </el-table-column>
                     </el-table>
@@ -1070,7 +1070,7 @@
                         label="操作">
                         <template slot-scope="scope">
                           <el-button @click="removeSpouseCarAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                          <el-button @click="handleSpouseCarAssetEdit(scope.row.assetTypeCar)" type="text" size="small">编辑</el-button>
+                         <!-- <el-button @click="handleSpouseCarAssetEdit(scope.row.assetTypeCar)" type="text" size="small">编辑</el-button>-->
                         </template>
                       </el-table-column>
                     </el-table>
@@ -1132,7 +1132,7 @@
                         label="操作">
                         <template slot-scope="scope">
                           <el-button @click="removeSpouseSecuritiesAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                          <el-button @click="handleSpouseSecuritiesAssetEdit(scope.row.assetTypeSecurities)" type="text" size="small">编辑</el-button>
+                         <!-- <el-button @click="handleSpouseSecuritiesAssetEdit(scope.row.assetTypeSecurities)" type="text" size="small">编辑</el-button>-->
                         </template>
                       </el-table-column>
                     </el-table>
@@ -1180,7 +1180,7 @@
                         label="操作">
                         <template slot-scope="scope">
                           <el-button @click="removeSpouseOtherAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                          <el-button @click="handleSpouseOtherAssetEdit(scope.row.assetTypeOther)" type="text" size="small">编辑</el-button>
+                          <!--<el-button @click="handleSpouseOtherAssetEdit(scope.row.assetTypeOther)" type="text" size="small">编辑</el-button>-->
                         </template>
                       </el-table-column>
                     </el-table>
@@ -1415,7 +1415,7 @@
                 label="操作">
                 <template slot-scope="scope">
                   <el-button @click="removeOtherPersonnelAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                  <el-button @click="handleOtherPersonnelAssetEdit(scope.row.relatedOterPersonnelInformationForm)" type="text" size="small">编辑</el-button>
+                  <!--<el-button @click="handleOtherPersonnelAssetEdit(scope.row.relatedOterPersonnelInformationForm)" type="text" size="small">编辑</el-button>-->
                 </template>
               </el-table-column>
             </el-table>
@@ -1620,7 +1620,7 @@
                     label="操作">
                     <template slot-scope="scope">
                       <el-button @click="removeHousAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                      <el-button @click="handleHousAssetEdit(scope.row.assetTypeHouses)" type="text" size="small">编辑</el-button>
+                     <!-- <el-button @click="handleHousAssetEdit(scope.row.assetTypeHouses)" type="text" size="small">编辑</el-button>-->
                     </template>
                   </el-table-column>
                 </el-table>
@@ -1755,7 +1755,7 @@
                     label="操作">
                     <template slot-scope="scope">
                       <el-button @click="removeLandAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                      <el-button @click="handleLandAssetEdit(scope.row.assetTypeLand)" type="text" size="small">编辑</el-button>
+                    <!--  <el-button @click="handleLandAssetEdit(scope.row.assetTypeLand)" type="text" size="small">编辑</el-button>-->
                     </template>
                   </el-table-column>
                 </el-table>
@@ -1868,7 +1868,7 @@
                     label="操作">
                     <template slot-scope="scope">
                       <el-button @click="removeCarAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                      <el-button @click="handleCarAssetEdit(scope.row.assetTypeCar)" type="text" size="small">编辑</el-button>
+                    <!--  <el-button @click="handleCarAssetEdit(scope.row.assetTypeCar)" type="text" size="small">编辑</el-button>-->
                     </template>
                   </el-table-column>
                 </el-table>
@@ -1930,7 +1930,7 @@
                     label="操作">
                     <template slot-scope="scope">
                       <el-button @click="removeSecuritiesAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                      <el-button @click="handleSecuritiesAssetEdit(scope.row.assetTypeSecurities)" type="text" size="small">编辑</el-button>
+                      <!--<el-button @click="handleSecuritiesAssetEdit(scope.row.assetTypeSecurities)" type="text" size="small">编辑</el-button>-->
                     </template>
                   </el-table-column>
                 </el-table>
@@ -1978,7 +1978,7 @@
                     label="操作">
                     <template slot-scope="scope">
                       <el-button @click="removeOtherAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                      <el-button @click="handleOtherAssetEdit(scope.row.assetTypeOther)" type="text" size="small">编辑</el-button>
+                     <!-- <el-button @click="handleOtherAssetEdit(scope.row.assetTypeOther)" type="text" size="small">编辑</el-button>-->
                     </template>
                   </el-table-column>
                 </el-table>
@@ -2203,7 +2203,7 @@
                         label="操作">
                         <template slot-scope="scope">
                           <el-button @click="removeSpouseHousAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                          <el-button @click="handleSpouseHousAssetEdit(scope.row.assetTypeHouses)" type="text" size="small">编辑</el-button>
+                         <!-- <el-button @click="handleSpouseHousAssetEdit(scope.row.assetTypeHouses)" type="text" size="small">编辑</el-button>-->
                         </template>
                       </el-table-column>
                     </el-table>
@@ -2338,7 +2338,7 @@
                         label="操作">
                         <template slot-scope="scope">
                           <el-button @click="removeSpouseLandAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                          <el-button @click="handleSpouseLandAssetEdit(scope.row.assetTypeLand)" type="text" size="small">编辑</el-button>
+                         <!-- <el-button @click="handleSpouseLandAssetEdit(scope.row.assetTypeLand)" type="text" size="small">编辑</el-button>-->
                         </template>
                       </el-table-column>
                     </el-table>
@@ -2451,7 +2451,7 @@
                         label="操作">
                         <template slot-scope="scope">
                           <el-button @click="removeSpouseCarAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                          <el-button @click="handleSpouseCarAssetEdit(scope.row.assetTypeCar)" type="text" size="small">编辑</el-button>
+                         <!-- <el-button @click="handleSpouseCarAssetEdit(scope.row.assetTypeCar)" type="text" size="small">编辑</el-button>-->
                         </template>
                       </el-table-column>
                     </el-table>
@@ -2513,7 +2513,7 @@
                         label="操作">
                         <template slot-scope="scope">
                           <el-button @click="removeSpouseSecuritiesAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                          <el-button @click="handleSpouseSecuritiesAssetEdit(scope.row.assetTypeSecurities)" type="text" size="small">编辑</el-button>
+                        <!--  <el-button @click="handleSpouseSecuritiesAssetEdit(scope.row.assetTypeSecurities)" type="text" size="small">编辑</el-button>-->
                         </template>
                       </el-table-column>
                     </el-table>
@@ -2561,7 +2561,7 @@
                         label="操作">
                         <template slot-scope="scope">
                           <el-button @click="removeSpouseOtherAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                          <el-button @click="handleSpouseOtherAssetEdit(scope.row.assetTypeOther)" type="text" size="small">编辑</el-button>
+                         <!-- <el-button @click="handleSpouseOtherAssetEdit(scope.row.assetTypeOther)" type="text" size="small">编辑</el-button>-->
                         </template>
                       </el-table-column>
                     </el-table>
@@ -2733,7 +2733,7 @@
                   label="操作">
                   <template slot-scope="scope">
                     <el-button @click="removePawnAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                    <el-button @click="handlePawnEdit(scope.row.pawn)" type="text" size="small">编辑</el-button>
+                   <!-- <el-button @click="handlePawnEdit(scope.row.pawn)" type="text" size="small">编辑</el-button>-->
                   </template>
                 </el-table-column>
               </el-table>
@@ -3159,7 +3159,7 @@
                 label="操作">
                 <template slot-scope="scope">
                   <el-button @click="removeCounterpartyAsset(scope.$index + 1)" type="text" size="small">删除</el-button>
-                  <el-button @click="handleCounterpartyEdit(scope.row.counterpartyInformation)" type="text" size="small">编辑</el-button>
+                 <!-- <el-button @click="handleCounterpartyEdit(scope.row.counterpartyInformation)" type="text" size="small">编辑</el-button>-->
                 </template>
               </el-table-column>
             </el-table>
@@ -3241,7 +3241,7 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="用途">
-                  <el-radio-group v-model="loanBusinessInformation.use">
+                  <el-radio-group v-model="loanBusinessInformation.useInfo">
                     <el-radio  v-for="(vl, index) in UseOptions" :label="vl.VAL_CODE" :key="index">
                       {{vl.VAL_NAME}}
                     </el-radio>
@@ -3319,7 +3319,7 @@
               list-type="picture-card"
               :on-preview="handlePictureCardPreview"
               :on-success="success"
-              :on-remove="handleRemove">
+              :on-remove="emove">
 
               <i class="el-icon-plus"></i>
             </el-upload>
@@ -3332,7 +3332,7 @@
               list-type="picture-card"
               :on-preview="handlePictureCardPreview"
               :on-success="success"
-              :on-remove="handleRemove">
+              :on-remove="emove">
               <i class="el-icon-plus"></i>
             </el-upload>
             <el-dialog :visible.sync="dialogVisible2" size="tiny">
@@ -3588,6 +3588,7 @@
 import KtTable from "@/views/Core/KtTable"
 import KtButton from "@/views/Core/KtButton"
 import { format } from "@/utils/datetime"
+import { getIFrameUrl, getIFramePath } from '@/utils/iframe'
 export default {
 	components:{
 			KtTable,
@@ -3769,7 +3770,7 @@ export default {
         applicationRate:'',
         marginRatio:'',
         originalCreditBalance:'',
-        use:'',
+        useInfo:'',
         description:'',
         repayment:'',
         value:'',
@@ -5048,6 +5049,13 @@ export default {
            // let params = Object.assign({}, this.relatedPersonnelInformationForm);
             this.$api.relatedPersonnel.save(datas).then((res) => {
               if(res.code == 200) {
+                this.housFlag=false;
+                this.landFlag=false;
+                this.carFlag=false;
+                this.securitiesFlag=false;
+                this.otherFlag=false;
+
+                this.clearRelatedPersonnelInformationForm();
                 this.active=type;
                 //显示列表
                 this.listRelevantPeopleFlag = true;
@@ -5224,6 +5232,7 @@ export default {
      * 添加房屋资产
      */
     addHousAsset(){
+      this.clearAssetTypeHouses();
       this.addHousAssetDialogVisible = true;
       this.operation = true;
     },
@@ -5259,6 +5268,7 @@ export default {
      * 添加房屋资产 配偶
      */
     addSpouseHousAsset(){
+      this.clearAssetTypeHouses();
       this.addSpouseHousAssetDialogVisible = true;
       this.operationSpouse = true;
     },
@@ -5294,6 +5304,7 @@ export default {
      * 添加土地资产
      */
     addLandAsset(){
+      this.clearAssetTypeLand();
       this.addLandAssetDialogVisible = true;
       this.operationLand = true;
     },
@@ -5329,6 +5340,7 @@ export default {
      * 添加土地资产 配偶
      */
     addSpouseLandAsset(){
+      this.clearAssetTypeLand();
       this.addSpouseLandAssetDialogVisible = true;
       this.operationSpouseLand = true;
     },
@@ -5364,6 +5376,7 @@ export default {
      * 添加汽车资产
      */
     addCarAsset(){
+      this.clearAssetTypeCar();
       this.addCarAssetDialogVisible = true;
       this.operationCar = true;
     },
@@ -5399,6 +5412,7 @@ export default {
      * 添加汽车资产 配偶
      */
     addSpouseCarAsset(){
+      this.clearAssetTypeCar();
       this.addSpouseCarAssetDialogVisible = true;
       this.operationSpouseCar = true;
     },
@@ -5434,6 +5448,7 @@ export default {
      * 添加证券资产
      */
     addSecuritiesAsset(){
+      this.clearAssetTypeSecurities();
       this.addSecuritiesAssetDialogVisible = true;
       this.operationSecurities = true;
     },
@@ -5469,6 +5484,7 @@ export default {
      * 添加证券资产 配偶
      */
     addSpouseSecuritiesAsset(){
+      this.clearAssetTypeSecurities();
       this.addSpouseSecuritiesAssetDialogVisible = true;
       this.operationSpouseSecurities = true;
     },
@@ -6223,6 +6239,7 @@ export default {
      * @param value
      */
     addPawn(){
+        this.clearPawn();
         this.pawnListFlag=false;
         this.pawnAddFlag=true;
     },
@@ -6432,6 +6449,7 @@ export default {
      *  新增交易对手
      */
     addCounterparty(){
+      this.clearCounterpartyInformation();
       this.addCounterpartyDialogVisible=true;
     },
 
@@ -6610,6 +6628,11 @@ export default {
             console.log("params:",params);
             this.$api.contractInformation.save(params).then((res) => {
               if(res.code == 200) {
+                let dataPs = {
+                  url:'loan/list'
+                }
+                this.$store.commit('menuRouteLoaded', false); // 要求重新加载导航菜单
+                this.$router.push('/loan/list');
                 this.active=0;
                 this.$message({ message: '操作成功', type: 'success' })
               } else {
@@ -6632,7 +6655,122 @@ export default {
       }
     },
 
+    //清空房屋
+    clearAssetTypeHouses(){
+      let  assetTypeHouses={
+        rpiId:'',
+          //是否不动产权证（1、不动产权证）（2、非不动产权证）
+          whetherOwnershipCertificates:'',
+          //不动产权证号
+          propertyCertificateNumber:'',
+          //房产证号
+          deed:'',
+          //土地证号
+          landCertificate:'',
+          affiliation:'',
+          address:'',
+          constructionArea:'',
+          value:'',
+          financingSituation:'',
+          whetherCoowner:'',
+          coOwnerName:'',
+          whetherLease:''
+      };
+      this.assetTypeHouses = assetTypeHouses;
+    },
 
+    //清空土地
+    clearAssetTypeLand(){
+      let   assetTypeLand={
+          rpiId:'',
+          //是否不动产权证（1、不动产权证）（2、非不动产权证）
+          whetherOwnershipCertificates:'',
+          //不动产权证号
+          propertyCertificateNumber:'',
+          //房产证号
+          deed:'',
+          //土地证号
+          landCertificate:'',
+          affiliation:'',
+          address:'',
+          constructionArea:'',
+          value:'',
+          financingSituation:'',
+          whetherCoowner:'',
+          coOwnerMame:'',
+          whetherLease:''
+        };
+      this.assetTypeLand = assetTypeLand;
+    },
+
+    //清空汽车信息
+    clearAssetTypeCar(){
+      let   assetTypeCar={
+        rpiId:'',
+        brand:'',
+        value:'',
+        numberPlate:'',
+        drivingLicenseNumber:''
+      }
+      this.assetTypeCar = assetTypeCar;
+    },
+
+    //清空证券信息
+    clearAssetTypeSecurities(){
+      let   assetTypeSecurities={
+        rpiId:'',
+        brand:'',
+        value:'',
+        numberPlate:'',
+        drivingLicenseNumber:''
+      }
+      this.assetTypeSecurities = assetTypeSecurities;
+    },
+
+    //清空抵押物
+    clearPawn(){
+      let pawn={
+          loanBasisId:'',
+          mortgageType:'',
+          whetherOwnershipCertificates:'',
+          propertyCertificateNumber:'',
+          landCertificateNumber:'',
+          buildingArea:'',
+          collateralName:'',
+          landNature:'',
+          affiliation:'',
+          collateralDeposit:'',
+          value:'',
+          evaluationCorporation:'',
+          financingSituation:'',
+          whetherCoowner:'',
+          coownerName:'',
+          whetherLease:'',
+          leaseContractName:'',
+          lesseeName:'',
+          leaseTermStartTime:'',
+          leaseTermEndTime:'',
+          rentPaymentMethod:'',
+          rent:'',
+          contractSigningTime:'',
+          groups:'',
+          pawnPersonnelMapping:[],
+      }
+      this.pawn = pawn;
+
+    },
+
+    //清空交易对手信息
+    clearCounterpartyInformation(){
+      let counterpartyInformation={
+        loanNusinessInformationId:'',
+          name:'',
+          accountNumber:'',
+          bank:'',
+          amount:''
+      };
+      this.counterpartyInformation = counterpartyInformation;
+    },
 
     /**
      * 下一步
@@ -6642,7 +6780,16 @@ export default {
       this.active=value;
     },
 
-
+    handleRoute (menu) {
+      // 如果是嵌套页面，转换成iframe的path
+      let path = getIFramePath(menu.url);
+      alert(path);
+      if(!path) {
+        path = menu.url
+      }
+      // 通过菜单URL跳转至指定路由
+      this.$router.push("/" + path)
+    },
 
 	},
 	mounted() {

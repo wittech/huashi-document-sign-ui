@@ -3,11 +3,11 @@
 	<el-dialog :title="$t('common.backupRestore')" width="40%" :visible.sync="backupVisible" :close-on-click-modal="false" :modal=false>
         <el-table :data="tableData" style="width: 100%;font-size:16px;" height="330px" :show-header="showHeader"
             size="mini" v-loading="tableLoading" :element-tableLoading-text="$t('action.loading')">
-            <el-table-column prop="title" :label="$t('common.versionName')" header-align="center" align="center">  
+            <el-table-column prop="title" :label="$t('common.versionName')" header-align="center" align="center">
             </el-table-column>
             <el-table-column fixed="right" :label="$t('action.operation')" width="180">
                 <template slot-scope="scope">
-                    <el-button @click="handleRestore(scope.row)" type="primary" size="mini">{{$t('common.restore')}}</el-button>
+                    <el-button @click="estore(scope.row)" type="primary" size="mini">{{$t('common.restore')}}</el-button>
                     <el-button @click="handleDelete(scope.row)" type="danger" :disabled="scope.row.name=='backup'?true:false" size="mini">{{$t('action.delete')}}</el-button>
                 </template>
             </el-table-column>
@@ -64,7 +64,7 @@ export default {
 			})
 		},
 		// 数据还原
-		handleRestore: function (data) {
+		estore: function (data) {
             this.tableLoading = true
             axios.get(this.baseUrl + '/backup/restore', {params : {name : data.name }}).then((res) => {
                 res = res.data
