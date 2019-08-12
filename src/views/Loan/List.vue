@@ -3,7 +3,7 @@
 	<!--工具栏-->
 	<div class="toolbar" style="float:left;padding-top:10px;padding-left:15px;">
 		<el-form :inline="true" :model="filters" :size="size">
-      <el-form-item>
+     <!-- <el-form-item>
         <el-select v-model="filters.status" placeholder="请选择状态">
           <el-option
             v-for="item in StatusOptions"
@@ -12,16 +12,16 @@
             :value="item.value">
           </el-option>
         </el-select>
-      </el-form-item>
+      </el-form-item>-->
       <el-form-item>
         <el-input v-model="filters.borrower" placeholder="借款人及相关人"></el-input>
       </el-form-item>
 			<el-form-item>
 				<kt-button :label="$t('action.search')" perms="customer:view" type="primary" @click="findPages(null)"/>
 			</el-form-item>
-			<el-form-item>
+		<!--	<el-form-item>
 				<kt-button :label="$t('action.add')" perms="customer:add" type="primary" @click="handleAdd" />
-			</el-form-item>
+			</el-form-item>-->
 		</el-form>
 	</div>
     <!--表格内容栏-->
@@ -36,14 +36,14 @@
         prop="applicationMatters" header-align="center" align="center" width="120" label="申请事项" :formatter="applicationMattersFormat">
       </el-table-column>
       <el-table-column
-        prop="applicationAmount" header-align="center" align="center" label="申请金额">
+        prop="guaranteeMethod" header-align="center" align="center" label="担保方式">
       </el-table-column>
       <el-table-column
-        prop="loanDate" header-align="center" align="center" label="放款时间" :formatter="dateFormat">
+        prop="createTime" header-align="center" align="center" label="添加时间" :formatter="dateFormat">
       </el-table-column>
-     <!-- <el-table-column
-        prop="status" header-align="center" align="center" label="状态" :formatter="statusFormat">
-      </el-table-column>-->
+      <el-table-column
+        prop="createBy" header-align="center" align="center" label="添加人">
+      </el-table-column>
       <el-table-column
         fixed="right" header-align="center" align="center" width="185" :label="$t('action.operation')">
         <template slot-scope="scope">
@@ -54,7 +54,7 @@
     </el-table>
 
     <!--查看界面-->
-    <el-dialog title="查看" width="40%" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
+    <el-dialog title="查看" width="50%" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
       <el-form :model="loanBasisForm" label-width="80px" :rules="dataFormRules" ref="loanBasisForm" :size="size">
         <div>
           <el-form-item label="贷款类型">
@@ -76,56 +76,40 @@
         </el-form-item>
         <br>
       </el-form>
-      <el-button icon="fa fa-plus" type="primary" @click="generateDoc">生成文档</el-button>
-      <el-table :data="fileList" stripe size="mini" style="width: 100%;">
+      <el-button icon="fa fa-plus" type="primary" @click="generateDocOnckick">生成文档</el-button>
+      <el-button icon="fa fa-plus" type="primary" @click="batchDown">批量下载</el-button>
+      <el-table
+        border
+        :data="fileList"
+        @selection-change="handleSelectionChange"
+        style="width: 100%">
         <el-table-column
-          prop="docName" header-align="center" align="center" width="80" label="文档名称">
+          type="selection"
+          width="55">
         </el-table-column>
-        <table-tree-column
-          prop="docSize" header-align="center" treeKey="id" width="150" label="文件大小">
-        </table-tree-column>
         <el-table-column
-          fixed="right" header-align="center" align="center" width="185" :label="$t('action.operation')">
+          fixed
+          prop="docName"
+          label="文档名称"
+          width="150">
+        </el-table-column>
+        <el-table-column
+          label="操作">
           <template slot-scope="scope">
-            <kt-button icon="fa fa-edit" label="下载" perms="loan:view" @click="handleDeail(scope.row)"/>
+            <el-button @click="download(scope.row)" type="text" size="small">下载</el-button>
           </template>
         </el-table-column>
       </el-table>
     </el-dialog>
-
-	<!--新增编辑界面-->
-	<el-dialog :title="operation?'新增':'编辑'" width="40%" :visible.sync="editDialogVisible" :close-on-click-modal="false">
-		<el-form :model="dataForm" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
-      <el-form-item label="ID" prop="id"  v-if="false">
-        <el-input v-model="dataForm.id" :disabled="true" auto-complete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="文档名称" prop="name">
-        <el-input v-model="dataForm.name" auto-complete="off"></el-input>
-      </el-form-item>
-			<el-form-item label="文档模板" prop="productId">
-				<el-input v-model="dataForm.productId" auto-complete="off"></el-input>
-			</el-form-item>
-			<el-form-item label="审批人" prop="type">
-				<el-input v-model="dataForm.type" auto-complete="off"></el-input>
-			</el-form-item>
-			<el-form-item label="备注" prop="size">
-				<el-input v-model="dataForm.size" auto-complete="off"></el-input>
-			</el-form-item>
-		</el-form>
-		<div slot="footer" class="dialog-footer">
-			<el-button :size="size" @click.native="editDialogVisible = false">{{$t('action.cancel')}}</el-button>
-			<el-button :size="size" type="primary" @click.native="submitForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
-		</div>
-	</el-dialog>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-import { mapGetters } from 'vuex'
+import axios from 'axios';
 import KtTable from "@/views/Core/KtTable"
 import KtButton from "@/views/Core/KtButton"
 import { format } from "@/utils/datetime"
+import api from '@/http/api'
 export default {
 	components:{
 			KtTable,
@@ -165,14 +149,6 @@ export default {
         borrower: '',
         status:'0'
 			},
-			columns: [
-				{prop:"borrower",label:"借款人", minWidth:100},
-        {prop:"loanType", label:"贷款类型", minWidth:100, formatter:this.loanTypeFormat},
-				{prop:"applicationMatters", label:"申请事项", minWidth:100, formatter:this.applicationMattersFormat},
-        {prop:"type", label:"申请金额", minWidth:100},
-        {prop:"loanDate", label:"放款时间", minWidth:120, formatter:this.dateFormat},
-				{prop:"status", label:"状态", minWidth:100, formatter:this.statusFormat}
-			],
 			pageRequest: { pageNum: 1, pageSize: 8 },
 			pageResult: {},
 
@@ -196,6 +172,9 @@ export default {
 				lastUpdateTime: null,
 			},
       loanBasisId:'',
+      baseUrl: this.global.backupBaseUrl,
+      //选中相关人员数据
+      multipleSelection: [],
 		}
 	},
 
@@ -209,64 +188,161 @@ export default {
 	methods: {
 
     /**
+     *选择文件
+     */
+    handleSelectionChange(val){
+      this.multipleSelection = val;
+    },
+
+    /**
+     * 下载
+     */
+    download(data) {
+      let dataParams = {
+        loanDocIds:data.id
+      }
+      let params = Object.assign({}, dataParams);
+      api.fileDoc.batchDownload(params).then((res) => {
+        if(res.code == 200) {
+          this.$message({ message: '操作成功', type: 'success' })
+        } else {
+          this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+        }
+      })
+    },
+
+    /**
+     * 批量下载
+     */
+    batchDown() {
+      let multipleSelection =  this.multipleSelection;
+      let stars ="";
+      if(multipleSelection){
+        for(let index in multipleSelection){
+          let data = multipleSelection[index];
+          stars+=data.id+',';
+        }
+      }
+      if(stars==''){
+        this.$alert('请选择文件', '批量下载提示', {
+          confirmButtonText: '确定'
+        });
+        return;
+      }
+      let dataParams = {
+        loanDocIds:stars.substr(0,stars.length-1)
+      }
+      let params = Object.assign({}, dataParams);
+      api.fileDoc.batchDownload(params).then((res) => {
+        if(res.code == 200) {
+          this.$message({ message: '操作成功', type: 'success' })
+        } else {
+          this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+        }
+      })
+
+    },
+
+    /**
      * 生成文档
      */
-    generateDoc(){
+    generateDocOnckick(){
       let dataParams = {
         loanBasisId:this.loanBasisId
       }
-      this.$api.loan.generateDoc(dataParams).then((res) => {
-          alert(res);
-      }).then(data!=null?data.callback:'')
+      let params = Object.assign({}, dataParams);
+      api.loan.generateDoc(params).then((res) => {
+        if(res.code == 200) {
+          this.$message({ message: '操作成功', type: 'success' })
+        } else {
+          this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+        }
+     })
     },
 
     /**
      * 查看
      */
     handleDeail(row){
-        //获取对象信息
-        //this.getByIds(row);
-        //获取文件对象
         this.loanBasisId=row.id;
-        this.findList(row);
-        //this.getByLoanBasisId(row);
+        //获取对象信息
+        this.getByIds(row);
+        //获取文件数据
+        this.findFileList(row);
         //获取文件列表数据
         this.deailDialogVisible=true;
     },
 
     //根据id获取文件数据
-    findList: function (data) {
+    findFileList: function (data) {
       let dataParams = {
         loanBasisId:data.id
       }
-      this.$api.fileDoc.findPage(dataParams).then((res) => {
-        this.fileList = res.data
+      let params = Object.assign({}, dataParams)
+      api.loan.queryByLoanBasisId(params).then((res) => {
+          if(res.code=='200'){
+            this.fileList = res.data;
+          }else {
+            this.fileList = {};
+          }
       });
     },
 
     //根据id获取对象信息
-    getByIds: function (data) {
-        let dataParams = {
-          id:data.id
-        }
-        this.$api.loan.getById(dataParams).then((res) => {
-          this.loanBasisForm = res.data
-         });
+    getByIds(data) {
+      let dataParams = {
+        id:data.id
+      }
+      let params = Object.assign({}, dataParams)
+      api.loan.findById(params).then((res) => {
+          if(res.code=='200'){
+            this.loanBasisFormInfp(res.data);
+          }else {
+            this.loanBasisForm = {};
+          }
+      })
+    },
+
+    //根据基础信息id获取基础对象
+    loanBasisFormInfp(data){
+      if(data){
+          //贷款类型: 0新增 1续贷
+          let loanTypeName = '';
+          if(data.loanType=='0'){
+            loanTypeName='新增';
+          }else if(data.loanType=='1'){
+            loanTypeName='续贷';
+          }
+          //申请事项：0 个人经营性贷款 1信用贷款 2 房屋按揭贷款 3个人消费类贷款
+          let applicationMattersName = '';
+          if(data.applicationMatters=='0'){
+            applicationMattersName='个人经营性贷款';
+          }else if(data.applicationMatters=='1'){
+            applicationMattersName='信用贷款';
+          }else if(data.applicationMatters=='2'){
+            applicationMattersName='房屋按揭贷款';
+          }else if(data.applicationMatters=='3'){
+            applicationMattersName='个人消费类贷款';
+          }
+          this.loanBasisForm=data;
+          this.loanBasisForm.loanType=loanTypeName;
+          this.loanBasisForm.applicationMatters=applicationMattersName;
+      }
     },
 
 		// 获取分页数据
-		findPages: function (data) {
+		findPages :function (data) {
 			if(data !== null) {
 				this.pageRequest = data.pageRequest
 			}
-			this.pageRequest.columnFilters = {label: {name:'label', value:this.filters.name}}
-			this.$api.loan.findPage(this.pageRequest).then((res) => {
+			this.pageRequest.columnFilters = {borrower: {name:'borrower', value:this.filters.borrower}}
+      api.loan.findPage(this.pageRequest).then((res) => {
 				this.pageResult = res.data;
-			}).then(data!=null?data.callback:'')
+			});
 		},
 		// 批量删除
 		handleDelete: function (data) {
-			this.$api.customer.batchDelete(data.params).then(data!=null?data.callback:'')
+      api.customer.batchDelete(data.params).then(data!=null?data.callback:'')
 		},
 		// 显示新增界面
 		handleAdd: function () {
@@ -315,18 +391,28 @@ export default {
   dateFormat: function (row, column, cellValue, index){
     	return format(row[column.property])
   },
-    //申请事项：0 个人经营性贷款 1信用贷款 2 房屋按揭贷款 3个人消费类贷款
-    applicationMattersFormat: function (row, column, cellValue, index){
-        if(row[column.property]=='0'){
-            return '个人经营性贷款';
-        }else if(row[column.property]=='1'){
-          return '信用贷款';
-        }else if(row[column.property]=='2'){
-          return '房屋按揭贷款';
-        }else if(row[column.property]=='3'){
-          return '个人消费类贷款';
+    //申请期限
+    applicationPeriodFormat:function (row, column, cellValue, index){
+        if(row[column.property] !='' && row[column.property] !=undefined && row[column.property] !=null){
+          return row[column.property]+'年';
+        }else{
+          return '';
         }
     },
+
+    //申请事项：0 个人经营性贷款 1信用贷款 2 房屋按揭贷款 3个人消费类贷款
+    applicationMattersFormat: function (row, column, cellValue, index){
+      if(row[column.property]=='0'){
+        return '个人经营性贷款';
+      }else if(row[column.property]=='1'){
+        return '信用贷款';
+      }else if(row[column.property]=='2'){
+        return '房屋按揭贷款';
+      }else if(row[column.property]=='3'){
+        return '个人消费类贷款';
+      }
+    },
+
     // 状态 0未处理 1已处理
     statusFormat: function (row, column, cellValue, index){
       if(row[column.property]=='0'){

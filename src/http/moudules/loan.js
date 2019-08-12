@@ -22,20 +22,38 @@ export const findPage = (data) => {
   })
 }
 
-// 查询文件list
-export const findyId = (data) => {
+// 根据基础信息获取相关人员列表信息
+export const findByBaseIdList = (params) => {
+  return axios({
+    url: '/loan/findByBaseIdList',
+    method: 'get',
+    params
+  })
+}
+
+// 根据id获取基础信息数据
+export const findById = (params) => {
   return axios({
     url: '/loan/getById',
-    method: 'post',
-    data
+    method: 'get',
+    params
+  })
+}
+
+// 基础信息id查询文件list
+export const queryByLoanBasisId = (params) => {
+  return axios({
+    url: '/loan/queryByLoanBasisId',
+    method: 'get',
+    params
   })
 }
 
 // 生成文档
-export const generateDoc = (data) => {
+export const generateDoc = (params) => {
   return axios({
     url: '/loan/born',
-    method: 'post',
-    data
+    method: 'get',
+    params
   })
 }

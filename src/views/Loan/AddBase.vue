@@ -6,9 +6,17 @@
           <el-step title="相关人情况" @click.native="stepClick(2)" class="schedule"></el-step>
           <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
           <el-step title="相关贷款业务信息" @click.native="stepClick(4)" class="schedule"></el-step>
-          <el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>
+          <!--<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>-->
           <el-step title="个人贷款调查报告表" @click.native="stepClick(6)" class="schedule"></el-step>
           <el-step title="合同信息" @click.native="stepClick(7)" class="schedule"></el-step>
+      <!--  <el-step title="基础信息"></el-step>
+          <el-step title="借款人情况"></el-step>
+          <el-step title="相关人情况"></el-step>
+          <el-step title="抵押物"></el-step>
+          <el-step title="相关贷款业务信息"></el-step>
+         &lt;!&ndash; <el-step title="合影"></el-step>&ndash;&gt;
+          <el-step title="个人贷款调查报告表"></el-step>
+          <el-step title="合同信息"></el-step>-->
         </el-steps>
         <!--0、基础信息-->
         <div v-if="active==0" class="step1">
@@ -259,15 +267,15 @@
                     <el-input v-model="assetTypeHouses.propertyCertificateNumber" size="small" class="width180"></el-input>
                   </el-form-item>
 
-                  <el-row v-show="deedLandCertificateFlag">
-                    <el-col span="8">
+                  <el-row>
+                    <el-col span="8" v-show="deedNumberFlag">
                       <el-form-item label="房产证号">
-                        <el-input v-model="assetTypeHouses.deed" size="small" class="width180"></el-input>
+                        <el-input v-model="assetTypeHouses.deed"  size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
-                    <el-col span="8">
+                    <el-col span="8" v-show="deedLandCertificateFlag">
                       <el-form-item label="土地证号">
-                        <el-input v-model="assetTypeHouses.landCertificate" size="small" class="width180"></el-input>
+                        <el-input v-model="assetTypeHouses.landCertificate"  size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -842,13 +850,13 @@
                           <el-input v-model="assetTypeHouses.propertyCertificateNumber" size="small" class="width180"></el-input>
                         </el-form-item>
 
-                        <el-row v-show="deedLandCertificateFlag">
-                          <el-col span="8">
+                        <el-row >
+                          <el-col span="8" v-show="deedNumberFlag">
                             <el-form-item label="房产证号">
-                              <el-input v-model="assetTypeHouses.deed" size="small" class="width180"></el-input>
+                              <el-input v-model="assetTypeHouses.deed"  size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
-                          <el-col span="8">
+                          <el-col span="8" v-show="deedLandCertificateFlag">
                             <el-form-item label="土地证号">
                               <el-input v-model="assetTypeHouses.landCertificate" size="small" class="width180"></el-input>
                             </el-form-item>
@@ -1640,13 +1648,13 @@
                       <el-input v-model="assetTypeHouses.propertyCertificateNumber" size="small" class="width180"></el-input>
                     </el-form-item>
 
-                    <el-row v-show="deedLandCertificateFlag">
-                      <el-col span="8">
+                    <el-row >
+                      <el-col span="8" v-show="deedNumberFlag">
                         <el-form-item label="房产证号">
                           <el-input v-model="assetTypeHouses.deed" size="small" class="width180"></el-input>
                         </el-form-item>
                       </el-col>
-                      <el-col span="8">
+                      <el-col span="8" v-show="deedLandCertificateFlag">
                         <el-form-item label="土地证号">
                           <el-input v-model="assetTypeHouses.landCertificate" size="small" class="width180"></el-input>
                         </el-form-item>
@@ -2223,13 +2231,13 @@
                           <el-input v-model="assetTypeHouses.propertyCertificateNumber" size="small" class="width180"></el-input>
                         </el-form-item>
 
-                        <el-row v-show="deedLandCertificateFlag">
-                          <el-col span="8">
+                        <el-row >
+                          <el-col span="8" v-show="deedNumberFlag">
                             <el-form-item label="房产证号">
                               <el-input v-model="assetTypeHouses.deed" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
-                          <el-col span="8">
+                          <el-col span="8" v-show="deedLandCertificateFlag">
                             <el-form-item label="土地证号">
                               <el-input v-model="assetTypeHouses.landCertificate" size="small" class="width180"></el-input>
                             </el-form-item>
@@ -2761,9 +2769,12 @@
                 <el-input v-model="pawn.propertyCertificateNumber" size="small" class="width180"></el-input>
               </el-form-item>
 
-              <el-row v-show="deedLandCertificateFlag">
+              <el-row >
                 <el-col span="8">
-                  <el-form-item label="土地证号">
+                  <el-form-item label="房产证号" v-show="deedNumberFlag">
+                    <el-input v-model="pawn.propertyCertificateNumber" size="small" class="width180"></el-input>
+                  </el-form-item>
+                  <el-form-item label="土地证号" v-show="deedLandCertificateFlag">
                     <el-input v-model="pawn.landCertificateNumber" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
@@ -2893,7 +2904,12 @@
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="合同签署时间">
-                      <el-input v-model="pawn.contractSigningTime" size="small" class="width180"></el-input>
+                      <el-date-picker
+                        v-model="pawn.contractSigningTime"
+                        type="date"
+                        placeholder="合同签署时间">
+                      </el-date-picker>
+                     <!-- <el-input v-model="pawn.contractSigningTime" size="small" class="width180"></el-input>-->
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -2907,11 +2923,11 @@
                 <el-button :size="size" type="primary" @click.native="assetTypePawnForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
               </div>
             </div>
-            <el-dialog title="相关人员列表" width="60%" :visible.sync="addPawnDialogVisible" :close-on-click-modal="false">
+            <el-dialog title="相关人员列表" width="50%" :visible.sync="addPawnDialogVisible" :close-on-click-modal="false">
               <el-table
                 border
                 :data="assetsTableData"
-                @selection-change="handleSelectionChange">
+                @selection-change="handleSelectionChange"
                 style="width: 100%">
                 <el-table-column
                   type="selection"
@@ -2923,7 +2939,7 @@
                   label="姓名"
                   width="150">
                 </el-table-column>
-                <el-table-column
+                <!--<el-table-column
                   prop="landNatures"
                   label="与借款人关系"
                   width="120">
@@ -2937,7 +2953,7 @@
                   prop="collateralDeposit"
                   label="配偶"
                   width="100">
-                </el-table-column>
+                </el-table-column>-->
                 <el-table-column
                   label="操作">
                   <template slot-scope="scope">
@@ -2992,7 +3008,7 @@
                 </el-col>
               </el-row>
 
-              <<el-form-item label="土地性质">
+              <el-form-item label="土地性质">
               <el-radio-group v-model="pawn.landNature">
                 <el-radio  v-for="(vl, index) in LandNatureOptions" :label="vl.VAL_CODE" :key="index">
                   {{vl.VAL_NAME}}
@@ -3306,7 +3322,7 @@
             </div>
             <br>
             <el-form-item>
-              <el-button type="primary" @click="loanBusinessNextStep(5)">下一步</el-button>
+              <el-button type="primary" @click="loanBusinessNextStep(6)">下一步</el-button>
             </el-form-item>
           </el-form>
       </div>
@@ -3490,7 +3506,7 @@
             </el-form-item>
             <br>
             <hr>担保情况审查
-            <el-checkbox v-model="personalLoanSurveyReport.loanAethodGuarantee" >贷款方式为保证担保</el-checkbox>
+            <el-checkbox v-model="loanAethodGuaranteeCheckbox" @change="loanAethodGuaranteeChange">贷款方式为保证担保</el-checkbox>
             <el-form-item label="">
               <el-input type="textarea" v-model="personalLoanSurveyReport.loanMethodGuaranteeRemark"></el-input>
             </el-form-item>
@@ -3501,7 +3517,7 @@
                 </el-radio>
               </el-radio-group>
             </el-form-item>
-            <el-checkbox v-model="personalLoanSurveyReport.loanMethodPledgeGuarantee">贷款方式为抵（质）押担保</el-checkbox>
+            <el-checkbox v-model="loanMethodPledgeGuaranteeCheckbox" @change="loanMethodPledgeGuaranteeChange">贷款方式为抵（质）押担保</el-checkbox>
             <el-form-item label="">
               <el-input type="textarea" v-model="personalLoanSurveyReport.loanMethodPledgeGuaranteeRemark"></el-input>
             </el-form-item>
@@ -3525,18 +3541,18 @@
                   <el-input v-model="contractInformation.mortgageGuaranteeContractMo" size="small" class="width180"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+             <!-- <el-col span="8">
                 <el-form-item label="抵押物清单合同编号">
                   <el-input v-model="contractInformation.pawnContractNo" size="small" class="width150"></el-input>
                 </el-form-item>
-              </el-col>
+              </el-col>-->
             </el-row>
             <el-row>
-              <el-col span="8">
+           <!--   <el-col span="8">
                 <el-form-item label="抵押物清单合同编号">
                   <el-input v-model="contractInformation.pawnContractNo" size="small" class="width150"></el-input>
                 </el-form-item>
-              </el-col>
+              </el-col>-->
               <el-col span="8">
                 <el-form-item label="保证担保合同编号">
                   <el-input v-model="contractInformation.guaranteeGuaranteeContractNo" size="small" class="width150"></el-input>
@@ -3546,7 +3562,12 @@
             <el-row>
               <el-col span="8">
                 <el-form-item label="合同签订日">
-                  <el-input v-model="contractInformation.contractSigningDate" size="small" class="width150"></el-input>
+                  <el-date-picker
+                    v-model="contractInformation.contractSigningDate"
+                    type="date"
+                    placeholder="合同签订日">
+                  </el-date-picker>
+                 <!-- <el-input v-model="contractInformation.contractSigningDate" size="small" class="width150"></el-input>-->
                 </el-form-item>
               </el-col>
               <el-col span="8">
@@ -3589,6 +3610,7 @@ import KtTable from "@/views/Core/KtTable"
 import KtButton from "@/views/Core/KtButton"
 import { format } from "@/utils/datetime"
 import { getIFrameUrl, getIFramePath } from '@/utils/iframe'
+import api from '@/http/api'
 export default {
 	components:{
 			KtTable,
@@ -3643,6 +3665,8 @@ export default {
         loanMethodPledgeGuarantee:'',
         loanMethodPledgeGuaranteeRemark:''
       },
+      loanAethodGuaranteeCheckbox:'',
+      loanMethodPledgeGuaranteeCheckbox:'',
       //婚姻状况
       PersonalLoanSurveyMaritalOptions:[{
         VAL_CODE: '0',
@@ -4163,20 +4187,20 @@ export default {
         VAL_NAME: '新增',
       },{
         VAL_CODE: '02',
-        VAL_NAME: '续约',
+        VAL_NAME: '续贷',
       }],
       //申请事项
       ApplicationMattersOptions:[{
-        VAL_CODE: '01',
+        VAL_CODE: '0',
         VAL_NAME: '个人经营性贷款',
       },{
-        VAL_CODE: '02',
+        VAL_CODE: '1',
         VAL_NAME: '信用贷款',
       },{
-        VAL_CODE: '03',
+        VAL_CODE: '2',
         VAL_NAME: '房屋按揭贷款',
       },{
-        VAL_CODE: '04',
+        VAL_CODE: '3',
         VAL_NAME: '个人消费类贷款',
       }],
       //担保方式
@@ -4292,10 +4316,10 @@ export default {
       assetTypeFlagSpouse:false,
       //是否不动产权证
       WhetherOwnershipCertificatesOptions:[{
-        VAL_CODE: '1',
+        VAL_CODE: '0',
         VAL_NAME: '不动产权证',
       },{
-        VAL_CODE: '2',
+        VAL_CODE: '1',
         VAL_NAME: '非不动产权证',
       }],
       //是否不动产权证 标记
@@ -4304,6 +4328,8 @@ export default {
       propertyCertificateNumberFlag:false,
       //非不动产权证 房产证号/土地证号 标记
       deedLandCertificateFlag:false,
+      //房产证号
+      deedNumberFlag:false,
       //所属地
       AffiliationOptions:[{
         VAL_CODE: '桂林',
@@ -4700,13 +4726,17 @@ export default {
      * 抵押物类型显示各自
      */
     mortgageTypeChange(value){
-      this.whetherOwnershipCertificatesFlag=false
+      this.whetherOwnershipCertificatesFlag=false;
+      this.propertyCertificateNumberFlag=false;
+      this.deedLandCertificateFlag=false;
+      this.deedNumberFlag=false;
       if(value){
+          //房屋
          if(value=='0'){
             this.whetherOwnershipCertificatesFlag=true;
-            this.propertyCertificateNumberFlag=false;
-         }else {
-            this.propertyCertificateNumberFlag=true;
+         }else if(value=='1'){
+            this.pawn.whetherOwnershipCertificates='';
+            this.deedLandCertificateFlag=true;
          }
       }
     },
@@ -5049,13 +5079,11 @@ export default {
            // let params = Object.assign({}, this.relatedPersonnelInformationForm);
             this.$api.relatedPersonnel.save(datas).then((res) => {
               if(res.code == 200) {
-                this.housFlag=false;
-                this.landFlag=false;
-                this.carFlag=false;
-                this.securitiesFlag=false;
-                this.otherFlag=false;
-
+                this.clearAssetType();
+                this.clearAssetSpouseType();
                 this.clearRelatedPersonnelInformationForm();
+                this.clearRelatedPersonnelInformationSpouseForm();
+                this.householdIncomeFormClear();
                 this.active=type;
                 //显示列表
                 this.listRelevantPeopleFlag = true;
@@ -5198,6 +5226,86 @@ export default {
        assetTypeOther:[],
      };
       this.relatedPersonnelInformationForm = relatedPersonnelInformationForm;
+    },
+
+    /**
+     * 清空 其他相关人
+     */
+    clearRelatedPersonnelInformationSpouseForm(){
+      //相关人员信息
+      let relatedPersonnelInformationSpouseForm={
+        loanBasisId:'',
+        //类型
+        type:'',
+        //姓名
+        name:'',
+        //年龄
+        age:'',
+        //性别
+        sex:'',
+        //户籍所在地
+        domicile:'',
+        //身份证号码
+        identityNumber:'',
+        //现居住地址
+        currentHomeAddress:'',
+        //常用通信地址
+        contactAddress:'',
+        //本地居住时间
+        localResidenceTime:'',
+        //电子邮箱
+        email:'',
+        //联系电话
+        contactNumber:'',
+        qq:'',
+        //微信
+        wechat:'',
+        //文化程度
+        educationalLevel:'',
+        //文化程度 其他
+        educationalLevelValue:'',
+        //现住房来源
+        currentHousingSource:'',
+        //现住房来源其他值
+        currentHousingSourceValue:'',
+        //工作单位
+        employer:'',
+        //职务
+        position:'',
+        //单位工作年限
+        unitWorkingYears:'',
+        //所投资或经营企业名称
+        companyName:'',
+        //持股比例
+        shareholdingRatio:'',
+        //本行业和相近行业经营年限
+        yearsOperation:'',
+        //资产情况（0、无）（1、有）
+        assetSituation:'',
+        //资产类型（1、房屋）（2、土地）（3、汽车）（4、有价证券）（5、其他）
+        assetType:[],
+        //婚姻状况（0、未婚）（1、已婚）（2、离异未婚）（3、丧偶未婚）（4、其他）
+        maritalStatus:'',
+        //原配偶姓名
+        originalSpouseName:'',
+        //离婚方式 （1、协议离婚）（2、协议离婚）
+        divorceMethod:'',
+        //时间
+        time:'',
+        unitWorkingRears:'',
+
+        //房屋信息
+        assetTypeHouses:[],
+        //土地信息
+        assetTypeLand:[],
+        //汽车信息
+        assetTypeCar:[],
+        //证券信息
+        assetTypeSecurities:[],
+        //其他
+        assetTypeOther:[],
+      };
+      this.relatedPersonnelInformationSpouseForm = relatedPersonnelInformationSpouseForm;
     },
 
     /**
@@ -6099,8 +6207,12 @@ export default {
      */
     assetSituationChange(value){
       this.assetTypeFlag=false;
+      this.relatedPersonnelInformationForm.assetType=[];
       if(value=='1'){
           this.assetTypeFlag=true;
+      }else{
+        //无的时候清空
+        this.clearAssetType();
       }
     },
 
@@ -6109,9 +6221,13 @@ export default {
      * @param value
      */
     assetSituationSpouseChange(value){
+      this.relatedPersonnelInformationSpouseForm.assetType=[]
       this.assetTypeFlagSpouse=false;
       if(value=='1'){
         this.assetTypeFlagSpouse=true;
+      }else{
+        //无的时候清空
+        this.clearAssetSpouseType();
       }
     },
 
@@ -6124,9 +6240,12 @@ export default {
     whetherOwnershipCertificatesChange(value){
       this.propertyCertificateNumberFlag=false;
       this.deedLandCertificateFlag=false;
-      if(value=='1'){
+      this.deedNumberFlag=false;
+      //不动产权证
+      if(value=='0'){
           this.propertyCertificateNumberFlag=true;
       }else {
+          this.deedNumberFlag=true;
           this.deedLandCertificateFlag=true;
       }
     },
@@ -6142,16 +6261,41 @@ export default {
     },
 
     /**
+     *  清空 资产类型选中
+     * @param data
+     */
+    clearAssetType(){
+      this.housFlag=false;
+      this.landFlag=false;
+      this.carFlag=false;
+      this.securitiesFlag=false;
+      this.otherFlag=false;
+    },
+
+    /**
+     *  清空 资产类型选中
+     * @param data
+     */
+    clearAssetSpouseType(){
+      //其他资产 配偶
+      this.otherSpouseFlag =false;
+      //证券标记 配偶
+      this.securitiesSpouseFlag=false;
+      //汽车标记 配偶
+      this.carSpouseFlag=false;
+      //房屋标记 配偶
+      this.housSpouseFlag=false;
+      //土地标记 配偶
+      this.landSpouseFlag=false;
+    },
+
+    /**
      * 资产类型选中
      * @param data
      */
     checkedChange(data){
-        this.housFlag=false;
-        this.landFlag=false;
-        this.carFlag=false;
-        this.securitiesFlag=false;
-        this.otherFlag=false;
-        let assetTypeVal = this.relatedPersonnelInformationForm.assetType;
+        this.clearAssetType();
+      let assetTypeVal = this.relatedPersonnelInformationForm.assetType;
         if(assetTypeVal==''){
           this.housFlag=false;
           return;
@@ -6171,6 +6315,32 @@ export default {
             }
         }
     },
+
+    /**
+     * 贷款方式为抵（质）押担保
+     * @param data
+     */
+    loanMethodPledgeGuaranteeChange(value){
+      if(value){
+        this.personalLoanSurveyReport.loanMethodPledgeGuarantee='1';
+      }else{
+        this.personalLoanSurveyReport.loanMethodPledgeGuarantee='0';
+      }
+    },
+
+    /**
+     * 贷款方式为保证担保
+     * @param data
+     */
+    loanAethodGuaranteeChange(value){
+      if(value){
+        this.personalLoanSurveyReport.loanAethodGuarantee='1';
+      }else{
+        this.personalLoanSurveyReport.loanAethodGuarantee='0';
+      }
+    },
+
+
 
     /**
      * 资产类型选中配偶
@@ -6368,7 +6538,6 @@ export default {
             let params = Object.assign({}, datas)
             console.log("params:",params);
             this.$api.pawn.save(params).then((res) => {
-              this.loanBasisId = '';
               if(res.code == 200) {
                 this.active=type;
                 this.$message({ message: '操作成功', type: 'success' })
@@ -6406,10 +6575,14 @@ export default {
       let dataParams = {
         loanBasisId:this.loanBasisId
       };
-      this.$api.relatedPersonnel.findByBaseIdList(dataParams).then((res) => {
-        console.log("res:",res);
-        this.assetsTableData = res.data;
-      });
+      let params = Object.assign({}, dataParams)
+      api.loan.findByBaseIdList(params).then((res) => {
+        if(res.code=='200'){
+          this.assetsTableData = res.data;
+        }else {
+          this.assetsTableData = {};
+        }
+      })
     },
 
     /**
@@ -6554,7 +6727,7 @@ export default {
      * @param value
      */
     loanBusinessNextStep(type){
-      this.loanBusinessInformation.loanBasisId=this.loanBasisId;;
+      this.loanBusinessInformation.loanBasisId=this.loanBasisId;
       this.loanBusinessInformation.counterpartyInformation= this.counterpartyTableData;
       this.loanBusinessInformation.repaymentPlan=this.repaymentPlanList;
       //this.loanBusinessInformation.createBy=sessionStorage.getItem("user");
@@ -6570,7 +6743,7 @@ export default {
               } else {
                 this.$message({message: '操作失败, ' + res.msg, type: 'error'})
               }
-              this.$refs['loanBusinessInformation'].resetFields()
+              //this.$refs['loanBusinessInformation'].resetFields()
             })
           })
         }
@@ -6783,12 +6956,40 @@ export default {
     handleRoute (menu) {
       // 如果是嵌套页面，转换成iframe的path
       let path = getIFramePath(menu.url);
-      alert(path);
       if(!path) {
         path = menu.url
       }
       // 通过菜单URL跳转至指定路由
       this.$router.push("/" + path)
+    },
+
+    /**
+     * 清空家庭收支情况
+     */
+    householdIncomeFormClear(){
+      let householdIncomeForm={
+        loanBasisId:'',
+          totalAssets:'',
+          totalRevenue:'',
+          applicantAnnualIncome:'',
+          applicantOperatingIncome:'',
+          applicantOtherIncome:'',
+          spouseAnnualIncome:'',
+          spouseOperatingIncome:'',
+          spouseOtherIncome:'',
+          totalAnnualExpenditure:'',
+          lifeTotalExpenditure:'',
+          basicLifeTotalExpenditure:'',
+          educationExpenditure:'',
+          temporaryExpenditure:'',
+          debtTotalExpenditure:'',
+          annualLoanExpenditure:'',
+          spouseTemporaryExpenditure:'',
+          supportPopulation:'',
+          foreignGuaranteeLumpSum:'',
+          totalLiability:''
+      };
+      this.householdIncomeForm=householdIncomeForm;
     },
 
 	},

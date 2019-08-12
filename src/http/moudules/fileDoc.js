@@ -1,10 +1,10 @@
 import axios from '../axios'
 
-// 保存
-export const findPage = (data) => {
+// 批量下载
+export const batchDownload = (params) => {
   return axios({
-    url: '/loan/saveContractInformation',
+    url: '/file/download',
     method: 'get',
-    data
+    params
   })
 }
