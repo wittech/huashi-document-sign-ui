@@ -3,7 +3,7 @@
 	<!--工具栏-->
 	<div class="toolbar" style="float:left;padding-top:10px;padding-left:15px;">
 		<el-form :inline="true" :model="filters" :size="size">
-     <!-- <el-form-item>
+    <el-form-item>
         <el-select v-model="filters.status" placeholder="请选择状态">
           <el-option
             v-for="item in StatusOptions"
@@ -12,16 +12,13 @@
             :value="item.value">
           </el-option>
         </el-select>
-      </el-form-item>-->
+      </el-form-item>
       <el-form-item>
         <el-input v-model="filters.borrower" placeholder="借款人及相关人"></el-input>
       </el-form-item>
 			<el-form-item>
 				<kt-button :label="$t('action.search')" perms="customer:view" type="primary" @click="findPages(null)"/>
 			</el-form-item>
-		<!--	<el-form-item>
-				<kt-button :label="$t('action.add')" perms="customer:add" type="primary" @click="handleAdd" />
-			</el-form-item>-->
 		</el-form>
 	</div>
     <!--表格内容栏-->
@@ -29,29 +26,152 @@
       <el-table-column
         prop="borrower" header-align="center" align="center" width="80" label="借款人">
       </el-table-column>
-      <table-tree-column
-        prop="loanType" header-align="center" treeKey="id" width="150" label="贷款类型" :formatter="loanTypeFormat">
-      </table-tree-column>
+      <el-table-column
+        prop="loanType" header-align="center" align="center" width="150" label="贷款类型" :formatter="loanTypeFormat">
+      </el-table-column>
       <el-table-column
         prop="applicationMatters" header-align="center" align="center" width="120" label="申请事项" :formatter="applicationMattersFormat">
       </el-table-column>
       <el-table-column
-        prop="guaranteeMethod" header-align="center" align="center" label="担保方式">
+        prop="applicationAmount" header-align="center" align="center" label="申请金额">
       </el-table-column>
       <el-table-column
-        prop="createTime" header-align="center" align="center" label="添加时间" :formatter="dateFormat">
+        prop="loanDate" header-align="center" align="center" label="放款时间" :formatter="dateFormat">
       </el-table-column>
       <el-table-column
-        prop="createBy" header-align="center" align="center" label="添加人">
+        prop="status" header-align="center" align="center" label="状态" :formatter="statusFormat">
       </el-table-column>
       <el-table-column
-        fixed="right" header-align="center" align="center" width="185" :label="$t('action.operation')">
+        fixed="right" header-align="center" align="center" :label="$t('action.operation')">
         <template slot-scope="scope">
+          <kt-button icon="fa fa-edit" label="填写" perms="loan:view" @click="fillDialog(scope.row)"/>
           <kt-button icon="fa fa-edit" label="查看" perms="loan:view" @click="handleDeail(scope.row)"/>
+          <kt-button icon="fa fa-edit" label="已处理" perms="loan:view" @click="processedClick(scope.row)"/>
         </template>
       </el-table-column>
-
     </el-table>
+
+    <!--填写界面-->
+    <el-dialog title="填写" width="70%" :visible.sync="fillDialogVisible" :close-on-click-modal="false">
+      <el-form :model="postLoanCheckForm" label-width="80px" ref="postLoanCheckForm" :size="size">
+        <el-form-item label="检查时间">
+          <el-date-picker
+            v-model="postLoanCheckForm.checkTime"
+            type="date"
+            placeholder="检查时间">
+          </el-date-picker>
+        </el-form-item>
+        <el-row>
+          <el-col span="8">
+            <el-form-item label="借款人">
+              <el-input v-model="postLoanCheckForm.borrower" disabled="true" size="small" class="width350"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col span="8">
+            <el-form-item label="贷款品种">
+              <el-input v-model="postLoanCheckForm.loanVariety" disabled="true" size="small" class="width350"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col span="8">
+            <el-form-item label="贷款用途">
+              <el-input v-model="postLoanCheckForm.loanUse" disabled="true" size="small" class="width350"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col span="8">
+            <el-form-item label="贷款金额">
+              <el-input v-model="postLoanCheckForm.loanAmount" disabled="true" size="small" class="width350"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col span="8">
+            <el-form-item label="贷款余额">
+              <el-input v-model="postLoanCheckForm.loanBalance" size="small" class="width350"></el-input>万元
+            </el-form-item>
+          </el-col>
+          <el-col span="8">
+            <el-form-item label="担保方式">
+              <el-input v-model="postLoanCheckForm.guaranteeMethod" disabled="true" size="small" class="width350"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item label="贷款起止日期">
+          <el-input v-model="postLoanCheckForm.loanStartAndStopDate" disabled="true" size="small" class="width350"></el-input>
+        </el-form-item>
+        <br>
+        检查结果<hr>
+        <el-row>
+          <el-col span="8">
+            <el-form-item label="自主支付方式提款">
+              <el-radio-group v-model="postLoanCheckForm.paymentMethodWithdrawal">
+                <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
+                  {{vl.VAL_NAME}}
+                </el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col span="8">
+            <el-form-item label="资金支付交易对手是否符合合同约定">
+              <el-radio-group v-model="postLoanCheckForm.contractualAgreement">
+                <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
+                  {{vl.VAL_NAME}}
+                </el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row>
+          <el-col span="8">
+            <el-form-item label="资金使用是否符合约定用途">
+              <el-radio-group v-model="postLoanCheckForm.intendedUse">
+                <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
+                  {{vl.VAL_NAME}}
+                </el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col span="8">
+            <el-form-item label="贷款资料是否完整">
+              <el-radio-group v-model="postLoanCheckForm.isComplete">
+                <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
+                  {{vl.VAL_NAME}}
+                </el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+
+        <el-row>
+          <el-col span="8">
+            <el-form-item label="抵（质押）登记或担保手续是否完备">
+              <el-radio-group v-model="postLoanCheckForm.complete">
+                <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
+                  {{vl.VAL_NAME}}
+                </el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col span="8">
+            <el-form-item label="部门提出的限制性条款以及贷后管理要求是否已落实">
+              <el-radio-group v-model="postLoanCheckForm.hasImplemented">
+                <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
+                  {{vl.VAL_NAME}}
+                </el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item>
+          <el-button type="primary" @click="postLoanCheckFormSave(7)">保存</el-button>
+          <el-button type="primary" @click="returnUrl">返回</el-button>
+        </el-form-item>
+        <br>
+      </el-form>
+    </el-dialog>
 
     <!--查看界面-->
     <el-dialog title="查看" width="50%" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
@@ -78,7 +198,6 @@
       </el-form>
       <el-button icon="fa fa-plus" type="primary" @click="generateDocOnckick">生成文档</el-button>
       <el-button icon="fa fa-plus" type="primary" @click="batchDown">批量下载</el-button>
-      <el-button icon="fa fa-plus" type="primary" @click="batchPrint">批量打印</el-button>
       <el-table
         border
         :data="fileList"
@@ -103,8 +222,10 @@
         <el-table-column
           label="操作">
           <template slot-scope="scope">
+            <el-button @click="printFile(scope.row)" type="text" size="small">打印</el-button>
+          </template>
+          <template slot-scope="scope">
             <el-button @click="download(scope.row)" type="text" size="small">下载</el-button>
-            <el-button @click="printClick(scope.row)" type="text" size="small">打印</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -125,6 +246,37 @@ export default {
 	},
 	data() {
 		return {
+      //是否数据
+      WhetherOptions:[{
+        VAL_CODE: 0,
+        VAL_NAME: '否',
+      },{
+        VAL_CODE: 1,
+        VAL_NAME: '是',
+      }],
+		  //保存 贷后信息
+      postLoanCheckForm:{
+        id:'',
+        loanBasisId:'',
+        checkTime:'',
+        borrower:'',
+        loanStartAndStopDate:'',
+        loanVariety:'',
+        loanUse:'',
+        loanAmount:'',
+        loanBalance:'',
+        guaranteeMethod:'',
+        paymentMethodWithdrawal:'',
+        contractualAgreement:'',
+        intendedUse:'',
+        isComplete:'',
+        complete:'',
+        hasImplemented:'',
+        createBy:'',
+        status:''
+      },
+		  //填写页面标记
+      fillDialogVisible:false,
       //贷款类型
       LoanTypeOptions:[{
         VAL_CODE: '01',
@@ -146,6 +298,9 @@ export default {
       deailDialogVisible:false,
 		  //状态
       StatusOptions:[{
+        value:'-1',
+        label:'全部',
+      },{
         value:'0',
         label:'未处理',
       },{
@@ -155,7 +310,7 @@ export default {
 			size: 'small',
 			filters: {
         borrower: '',
-        status:'0'
+        status:'-1'
 			},
 			pageRequest: { pageNum: 1, pageSize: 8 },
 			pageResult: {},
@@ -194,6 +349,113 @@ export default {
   },
 
 	methods: {
+
+    /**
+     *填写
+     */
+    fillDialog(data){
+        //获取对象信息
+        this.getById(data);
+    },
+
+    //根据loanBasisId获取对象信息
+    getById(data) {
+      let dataParams = {
+        id:data.id
+      }
+      let params = Object.assign({}, dataParams)
+      api.postLoanCheck.findById(params).then((res) => {
+        this.postLoanCheckFormClear();
+        if(res.code=='200'){
+          this.postLoanCheckForm=res.data;
+          this.fillDialogVisible=true;
+        }else {
+          this.loanBasisForm = {};
+        }
+      })
+    },
+
+    /**
+     *清空
+     */
+    postLoanCheckFormClear(){
+     let postLoanCheckForm={
+        loanBasisId:'',
+          checkTime:'',
+          borrower:'',
+          loanStartAndStopDate:'',
+          loanVariety:'',
+          loanUse:'',
+          loanAmount:'',
+          loanBalance:'',
+          guaranteeMethod:'',
+          paymentMethodWithdrawal:'',
+          contractualAgreement:'',
+          intendedUse:'',
+          isComplete:'',
+          complete:'',
+          hasImplemented:'',
+          createBy:''
+      };
+      this.postLoanCheckForm=postLoanCheckForm;
+    },
+
+    /**
+     *返回
+     */
+    returnUrl(){
+        this.fillDialogVisible=false;
+        // 要求重新加载导航菜单
+        this.$store.commit('menuRouteLoaded', false);
+        this.$router.push('/postLoanCheck/list');
+    },
+
+    /**
+     *保存
+     */
+    postLoanCheckFormSave(){
+      api.postLoanCheck.save(this.postLoanCheckForm).then((res) => {
+        console.log("res:",res);
+        if(res.code == 200) {
+            this.fillDialogVisible=false;
+            this.postLoanCheckFormClear();
+            this.returnUrl();
+            this.$message({ message: '操作成功', type: 'success' })
+        } else {
+            this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+        }
+        this.$refs['postLoanCheckForm'].resetFields();
+      })
+    },
+
+    /**
+     *已处理
+     */
+    processedClick(data){
+      this.postLoanCheckForm=data;
+      this.postLoanCheckForm.status ='1';
+      this.postLoanCheckForm.lastUpdateBy = sessionStorage.getItem("user");
+      this.$confirm('确认要处理吗？', '提示', {}).then(() => {
+        api.postLoanCheck.processed(this.postLoanCheckForm).then((res) => {
+          console.log("res:", res);
+          if (res.code == 200) {
+            this.postLoanCheckFormClear();
+            this.returnUrl();
+            this.$message({message: '操作成功', type: 'success'})
+          } else {
+            this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+          }
+          this.$refs['postLoanCheckForm'].resetFields();
+        })
+      });
+    },
+
+    /**
+     *打印
+     */
+    printFile(data){
+      this.$message({ message: '建设中', type: 'error' });
+    },
 
     /**
      *选择文件
@@ -235,54 +497,6 @@ export default {
          navigator.msSaveBlob(blob, fileName)
        }
       })
-    },
-
-    /**
-     * 打印
-     */
-    printClick(data){
-      let dataParams = {
-          loanDocIds:data.id
-      }
-      let params = Object.assign({}, dataParams);
-      api.fileDoc.batchPrint(params).then((url) => {
-        if(url !='' && url !=null){
-          window.open(url);
-        }else{
-          this.$message({message: '操作失败, ' + res.msg, type: 'error'})
-        }
-      })
-    },
-
-    /**
-     * 批量打印
-     */
-    batchPrint(){
-      let multipleSelection =  this.multipleSelection;
-      let stars ="";
-      if(multipleSelection){
-        for(let index in multipleSelection){
-          let data = multipleSelection[index];
-          stars+=data.id+',';
-        }
-      }
-      if(stars==''){
-        this.$alert('请选择文件', '批量下载提示', {
-          confirmButtonText: '确定'
-        });
-        return;
-      }
-      let dataParams = {
-        loanDocIds:stars.substr(0,stars.length-1)
-      }
-      let params = Object.assign({}, dataParams);
-      api.fileDoc.batchPrint(params).then((url) => {
-          if(url !='' && url !=null){
-            window.open(url);
-          }else{
-            this.$message({message: '操作失败, ' + res.msg, type: 'error'})
-          }
-      });
     },
 
     /**
@@ -368,9 +582,9 @@ export default {
      * 查看
      */
     handleDeail(row){
-        this.loanBasisId=row.id;
+        this.loanBasisId=row.loanBasisId;
         //获取对象信息
-        this.getByIds(row);
+        this.getByIoanBasisId(row);
         //获取文件数据
         this.findFileList(row);
         //获取文件列表数据
@@ -380,7 +594,7 @@ export default {
     //根据id获取文件数据
     findFileList: function (data) {
       let dataParams = {
-        loanBasisId:data.id
+        loanBasisId:data.loanBasisId
       }
       let params = Object.assign({}, dataParams)
       api.loan.queryByLoanBasisId(params).then((res) => {
@@ -402,10 +616,10 @@ export default {
         }
     },
 
-    //根据id获取对象信息
-    getByIds(data) {
+    //根据loanBasisId获取对象信息
+    getByIoanBasisId(data) {
       let dataParams = {
-        id:data.id
+        id:data.loanBasisId
       }
       let params = Object.assign({}, dataParams)
       api.loan.findById(params).then((res) => {
@@ -449,9 +663,10 @@ export default {
 			if(data !== null) {
 				this.pageRequest = data.pageRequest
 			}
-			this.pageRequest.columnFilters = {borrower: {name:'borrower', value:this.filters.borrower}}
-      api.loan.findPage(this.pageRequest).then((res) => {
-				this.pageResult = res.data;
+			this.pageRequest.columnFilters = {borrower: {name:'borrower', value:this.filters.borrower},status: {name:'status', value:this.filters.status}}
+      api.postLoanCheck.findPage(this.pageRequest).then((res) => {
+         console.log("res:",res);
+				  this.pageResult = res.data;
 			});
 		},
 		// 批量删除
@@ -472,34 +687,6 @@ export default {
 				createTime: null,
 				lastUpdateTime: null,
 			}
-		},
-		// 显示编辑界面
-		handleEdit: function (params) {
-			this.editDialogVisible = true
-			this.operation = false
-			this.dataForm = Object.assign({}, params.row)
-		},
-		// 编辑
-		submitForm: function () {
-			this.$refs.dataForm.validate((valid) => {
-				if (valid) {
-					this.$confirm('确认提交吗？', '提示', {}).then(() => {
-						this.editLoading = true
-						let params = Object.assign({}, this.dataForm)
-						this.$api.customer.save(params).then((res) => {
-							if(res.code == 200) {
-								this.$message({ message: '操作成功', type: 'success' })
-							} else {
-								this.$message({message: '操作失败, ' + res.msg, type: 'error'})
-							}
-							this.editLoading = false
-							this.$refs['dataForm'].resetFields()
-							this.editDialogVisible = false
-							this.findPages(null)
-						})
-					})
-				}
-			})
 		},
 		// 时间格式化
   dateFormat: function (row, column, cellValue, index){

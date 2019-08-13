@@ -20,6 +20,9 @@ import * as loanBusinessInformation from './moudules/loan/loanBusinessInformatio
 import * as personalLoanSurveyReport from './moudules/loan/personalLoanSurveyReport'
 import * as contractInformation from './moudules/loan/contractInformation'
 import * as fileDoc from './moudules/fileDoc'
+import * as postLoanCheck from './moudules/afterLoan/postLoanCheck'
+import * as collectionNotice from './moudules/maturity/collectionNotice'
+
 
 // 默认全部导出
 export default {
@@ -41,5 +44,7 @@ export default {
     loanBusinessInformation,
     personalLoanSurveyReport,
     contractInformation,
-    fileDoc
+    fileDoc,
+    postLoanCheck,
+    collectionNotice
 }

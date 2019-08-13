@@ -1,22 +1,22 @@
 <template>
     <div>
         <el-steps :active="active" finish-status="success">
-          <el-step title="基础信息" @click.native="stepClick(0)"  class="schedule"></el-step>
+        <!--  <el-step title="基础信息" @click.native="stepClick(0)"  class="schedule"></el-step>
           <el-step title="借款人情况" @click.native="stepClick(1)" class="schedule"></el-step>
           <el-step title="相关人情况" @click.native="stepClick(2)" class="schedule"></el-step>
           <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
           <el-step title="相关贷款业务信息" @click.native="stepClick(4)" class="schedule"></el-step>
-          <!--<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>-->
+          &lt;!&ndash;<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>&ndash;&gt;
           <el-step title="个人贷款调查报告表" @click.native="stepClick(6)" class="schedule"></el-step>
-          <el-step title="合同信息" @click.native="stepClick(7)" class="schedule"></el-step>
-      <!--  <el-step title="基础信息"></el-step>
+          <el-step title="合同信息" @click.native="stepClick(7)" class="schedule"></el-step>-->
+          <el-step title="基础信息"></el-step>
           <el-step title="借款人情况"></el-step>
           <el-step title="相关人情况"></el-step>
           <el-step title="抵押物"></el-step>
           <el-step title="相关贷款业务信息"></el-step>
-         &lt;!&ndash; <el-step title="合影"></el-step>&ndash;&gt;
+         <!-- <el-step title="合影"></el-step>-->
           <el-step title="个人贷款调查报告表"></el-step>
-          <el-step title="合同信息"></el-step>-->
+          <el-step title="合同信息"></el-step>
         </el-steps>
         <!--0、基础信息-->
         <div v-if="active==0" class="step1">
@@ -2954,12 +2954,12 @@
                   label="配偶"
                   width="100">
                 </el-table-column>-->
-                <el-table-column
+               <!-- <el-table-column
                   label="操作">
                   <template slot-scope="scope">
                     <el-button @click="removeAssetsTableData(scope.$index + 1)" type="text" size="small">选择</el-button>
                   </template>
-                </el-table-column>
+                </el-table-column>-->
               </el-table>
               <el-form-item>
                 <el-button type="primary" @click="selectSubmit()">选择</el-button>
@@ -3919,19 +3919,7 @@ export default {
 		  //选中相关人员数据
       multipleSelection: [],
 		  //相关人员列表
-      assetsTableData:[{
-        id:'1',
-        name:'咯征',
-        landNatures:'本人',
-        collateralName:'男',
-        collateralDeposit:'无'
-      },{
-        id:'2',
-        name:'咯征2',
-        landNatures:'本人2',
-        collateralName:'男',
-        collateralDeposit:'无'
-      }],
+      assetsTableData:[],
 		  //抵押物list
       pawnTableData:[],
       //抵押物列表标记
@@ -6577,10 +6565,9 @@ export default {
       };
       let params = Object.assign({}, dataParams)
       api.loan.findByBaseIdList(params).then((res) => {
+        this.assetsTableData=[];
         if(res.code=='200'){
           this.assetsTableData = res.data;
-        }else {
-          this.assetsTableData = {};
         }
       })
     },
