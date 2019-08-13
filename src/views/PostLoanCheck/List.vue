@@ -198,6 +198,7 @@
       </el-form>
       <el-button icon="fa fa-plus" type="primary" @click="generateDocOnckick">生成文档</el-button>
       <el-button icon="fa fa-plus" type="primary" @click="batchDown">批量下载</el-button>
+      <el-button icon="fa fa-plus" type="primary" @click="batchPrint">批量打印</el-button>
       <el-table
         border
         :data="fileList"
@@ -222,10 +223,8 @@
         <el-table-column
           label="操作">
           <template slot-scope="scope">
-            <el-button @click="printFile(scope.row)" type="text" size="small">打印</el-button>
-          </template>
-          <template slot-scope="scope">
             <el-button @click="download(scope.row)" type="text" size="small">下载</el-button>
+            <el-button @click="printClick(scope.row)" type="text" size="small">打印</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -349,6 +348,54 @@ export default {
   },
 
 	methods: {
+
+    /**
+     * 打印
+     */
+    printClick(data){
+      let dataParams = {
+        loanDocIds:data.id
+      }
+      let params = Object.assign({}, dataParams);
+      api.fileDoc.batchPrint(params).then((url) => {
+        if(url !='' && url !=null){
+          window.open(url);
+        }else{
+          this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+        }
+      })
+    },
+
+    /**
+     * 批量打印
+     */
+    batchPrint(){
+      let multipleSelection =  this.multipleSelection;
+      let stars ="";
+      if(multipleSelection){
+        for(let index in multipleSelection){
+          let data = multipleSelection[index];
+          stars+=data.id+',';
+        }
+      }
+      if(stars==''){
+        this.$alert('请选择文件', '批量下载提示', {
+          confirmButtonText: '确定'
+        });
+        return;
+      }
+      let dataParams = {
+        loanDocIds:stars.substr(0,stars.length-1)
+      }
+      let params = Object.assign({}, dataParams);
+      api.fileDoc.batchPrint(params).then((url) => {
+        if(url !='' && url !=null){
+          window.open(url);
+        }else{
+          this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+        }
+      });
+    },
 
     /**
      *填写
