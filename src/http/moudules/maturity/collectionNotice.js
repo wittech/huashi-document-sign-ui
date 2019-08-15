@@ -39,3 +39,40 @@ export const findById = (params) => {
     params
   })
 }
+
+// 批量下载
+export const batchDownload = (params) => {
+  return axios({
+    url: '/loanNoticeDoc/download',
+    method: 'get',
+    params,
+    responseType: 'blob'
+  })
+}
+
+// 批量打印
+export const batchPrint = (params) => {
+  return axios({
+    url: '/loanNoticeDoc/print',
+    method: 'get',
+    params
+  })
+}
+
+// 生成文档
+export const generateDoc = (params) => {
+  return axios({
+    url: '/loanNoticeDoc/born',
+    method: 'get',
+    params
+  })
+}
+
+// id查询文件list
+export const findByLoanNoticeId = (params) => {
+  return axios({
+    url: '/loanNoticeDoc/findByLoanNoticeId',
+    method: 'get',
+    params
+  })
+}

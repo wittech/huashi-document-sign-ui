@@ -210,7 +210,7 @@
         </el-table-column>
         <el-table-column
           fixed
-          prop="fileName"
+          prop="docName"
           label="文档名称"
           width="150">
         </el-table-column>
@@ -333,6 +333,7 @@ export default {
 				createTime: null,
 				lastUpdateTime: null,
 			},
+      loanCheckId:'',
       loanBasisId:'',
       baseUrl: this.global.backupBaseUrl,
       //选中相关人员数据
@@ -354,10 +355,10 @@ export default {
      */
     printClick(data){
       let dataParams = {
-        loanDocIds:data.id
+        loanCheckDocIds:data.id
       }
       let params = Object.assign({}, dataParams);
-      api.fileDoc.batchPrint(params).then((url) => {
+      api.postLoanCheck.batchPrint(params).then((url) => {
         if(url !='' && url !=null){
           window.open(url);
         }else{
@@ -385,10 +386,10 @@ export default {
         return;
       }
       let dataParams = {
-        loanDocIds:stars.substr(0,stars.length-1)
+        loanCheckDocIds:stars.substr(0,stars.length-1)
       }
       let params = Object.assign({}, dataParams);
-      api.fileDoc.batchPrint(params).then((url) => {
+      api.postLoanCheck.batchPrint(params).then((url) => {
         if(url !='' && url !=null){
           window.open(url);
         }else{
@@ -523,10 +524,10 @@ export default {
         return;
       }
       let dataParams = {
-        loanDocIds:data.id
+        loanCheckDocIds:data.id
       }
       let params = Object.assign({}, dataParams);
-      api.fileDoc.batchDownload(params).then((res) => {
+      api.postLoanCheck.batchDownload(params).then((res) => {
         const blob = new Blob([res],{type:'application.zip'})//构造一个blob对象来处理数据
         const fileName = data.fileName+'.zip';
        //对于<a>标签，只有 Firefox 和 Chrome（内核） 支持 download 属性
@@ -565,10 +566,10 @@ export default {
         return;
       }
       let dataParams = {
-        loanDocIds:stars.substr(0,stars.length-1)
+        loanCheckDocIds:stars.substr(0,stars.length-1)
       }
       let params = Object.assign({}, dataParams);
-      api.fileDoc.batchDownload(params).then((res) => {
+      api.postLoanCheck.batchDownload(params).then((res) => {
         const blob = new Blob([res],{type:'application.zip'})//构造一个blob对象来处理数据
         const fileName = this.dateFtt('yyyyMMddHHmmss',new Date())+'.zip';
         //对于<a>标签，只有 Firefox 和 Chrome（内核） 支持 download 属性
@@ -613,10 +614,10 @@ export default {
      */
     generateDocOnckick(){
       let dataParams = {
-        loanBasisId:this.loanBasisId
+        loanCheckId:this.loanCheckId
       }
       let params = Object.assign({}, dataParams);
-      api.loan.generateDoc(params).then((res) => {
+      api.postLoanCheck.generateDoc(params).then((res) => {
         if(res.code == 200) {
           this.$message({ message: '操作成功', type: 'success' })
         } else {
@@ -630,6 +631,7 @@ export default {
      */
     handleDeail(row){
         this.loanBasisId=row.loanBasisId;
+        this.loanCheckId=row.id;
         //获取对象信息
         this.getByIoanBasisId(row);
         //获取文件数据
@@ -641,10 +643,10 @@ export default {
     //根据id获取文件数据
     findFileList: function (data) {
       let dataParams = {
-        loanBasisId:data.loanBasisId
+        loanCheckId:data.id
       }
       let params = Object.assign({}, dataParams)
-      api.loan.queryByLoanBasisId(params).then((res) => {
+      api.postLoanCheck.findByLoanCheckId(params).then((res) => {
           if(res.code=='200'){
             this.setFileList(res.data);
           }else {
