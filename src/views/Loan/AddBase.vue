@@ -1,22 +1,22 @@
 <template>
     <div>
         <el-steps :active="active" finish-status="success">
-        <!--  <el-step title="基础信息" @click.native="stepClick(0)"  class="schedule"></el-step>
+          <el-step title="基础信息" @click.native="stepClick(0)"  class="schedule"></el-step>
           <el-step title="借款人情况" @click.native="stepClick(1)" class="schedule"></el-step>
           <el-step title="相关人情况" @click.native="stepClick(2)" class="schedule"></el-step>
           <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
           <el-step title="相关贷款业务信息" @click.native="stepClick(4)" class="schedule"></el-step>
           &lt;!&ndash;<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>&ndash;&gt;
           <el-step title="个人贷款调查报告表" @click.native="stepClick(6)" class="schedule"></el-step>
-          <el-step title="合同信息" @click.native="stepClick(7)" class="schedule"></el-step>-->
-          <el-step title="基础信息"></el-step>
+          <el-step title="合同信息" @click.native="stepClick(7)" class="schedule"></el-step>
+         <!-- <el-step title="基础信息"></el-step>
           <el-step title="借款人情况"></el-step>
           <el-step title="相关人情况"></el-step>
           <el-step title="抵押物"></el-step>
           <el-step title="相关贷款业务信息"></el-step>
-         <!-- <el-step title="合影"></el-step>-->
+         &lt;!&ndash; <el-step title="合影"></el-step>&ndash;&gt;
           <el-step title="个人贷款调查报告表"></el-step>
-          <el-step title="合同信息"></el-step>
+          <el-step title="合同信息"></el-step>-->
         </el-steps>
         <!--0、基础信息-->
         <div v-if="active==0" class="step1">
@@ -375,7 +375,7 @@
                 </el-table-column>
                 <el-table-column
                   prop="constructionArea"
-                  label="房屋建筑面积"
+                  label="土地占用面积"
                   width="120">
                 </el-table-column>
                 <el-table-column
@@ -416,7 +416,7 @@
 
                   <el-row>
                     <el-col span="8">
-                      <el-form-item label="房屋建筑面积">
+                      <el-form-item label="土地占用面积">
                         <el-input v-model="assetTypeLand.constructionArea" size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
@@ -2219,7 +2219,7 @@
                     <!--新增编辑界面-->
                     <el-dialog :title="operationSpouse?'新增':'新增'" width="60%" :visible.sync="addSpouseHousAssetDialogVisible" :close-on-click-modal="false">
                       <el-form :model="assetTypeHouses" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
-                        <<el-form-item label="是否不动产权证">
+                        <el-form-item label="是否不动产权证">
                         <el-radio-group v-model="assetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
                           <el-radio  v-for="(vl, index) in WhetherOwnershipCertificatesOptions" :label="vl.VAL_CODE" :key="index">
                             {{vl.VAL_NAME}}
@@ -3219,8 +3219,15 @@
                   </el-col>
                 </el-row>
                 <el-form-item label="是否申请循环额度">
-                  <el-radio-group v-model="loanBusinessInformation.cycleQuota" @change="cycleQuotaChange">
+                  <el-radio-group v-model="loanBusinessInformation.cycleQuota">
                     <el-radio  v-for="(vl, index) in CycleQuotaOptions" :label="vl.VAL_CODE" :key="index">
+                      {{vl.VAL_NAME}}
+                    </el-radio>
+                  </el-radio-group>
+                </el-form-item>
+                <el-form-item label="利率调整方式" v-if="interestRateFlag">
+                  <el-radio-group v-model="loanBusinessInformation.adjustmentMethod">
+                    <el-radio  v-for="(vl, index) in AdjustmentMethodOptions" :label="vl.VAL_CODE" :key="index">
                       {{vl.VAL_NAME}}
                     </el-radio>
                   </el-radio-group>
@@ -3228,13 +3235,6 @@
                 <el-form-item label="利率">
                   <el-radio-group v-model="loanBusinessInformation.interestRate" @change="interestRateChange">
                     <el-radio  v-for="(vl, index) in InterestRateOptions" :label="vl.VAL_CODE" :key="index">
-                      {{vl.VAL_NAME}}
-                    </el-radio>
-                  </el-radio-group>
-                </el-form-item>
-                <el-form-item label="利率调整方式">
-                  <el-radio-group v-model="loanBusinessInformation.adjustmentMethod">
-                    <el-radio  v-for="(vl, index) in AdjustmentMethodOptions" :label="vl.VAL_CODE" :key="index">
                       {{vl.VAL_NAME}}
                     </el-radio>
                   </el-radio-group>
@@ -3274,6 +3274,18 @@
                   </el-radio-group>
                   <el-input v-if="repaymentOtherFlag" v-model="loanBusinessInformation.value" size="small" class="width180"></el-input>
                 </el-form-item>
+                <el-row>
+                  <el-col span="8">
+                    <el-form-item label="扣款账户户名（扣款人）">
+                      <el-input v-model="loanBusinessInformation.debitAccountName" size="small" class="width180"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col span="8">
+                    <el-form-item label="扣款账号（扣款账号）">
+                      <el-input v-model="loanBusinessInformation.accountNumber" size="small" class="width180"></el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
                 <el-form-item label="还款期数" v-if="repaymentFlag">
                   <el-input v-model="loanBusinessInformation.repaymentPeriod" size="small" class="width180"></el-input>
                 </el-form-item>
@@ -3316,7 +3328,18 @@
                   </el-radio-group>
                 </el-form-item>
                 <el-form-item label="必须于**前在我行开立基本存款账户" v-if="whetherExclusiveCreditClientFlagFlag">
-                  <el-input v-model="loanBusinessInformation.depositAccount" size="small" class="width180"></el-input>
+                  <el-date-picker
+                    v-model="loanBusinessInformation.depositAccount"
+                    type="date"
+                    placeholder="必须于**前在我行开立基本存款账户">
+                  </el-date-picker>
+                </el-form-item>
+                <el-form-item label="必须于**前在我行开立一般存款账户" v-if="whetherExclusiveCreditClientNoFlag">
+                  <el-date-picker
+                    v-model="loanBusinessInformation.depositAccount"
+                    type="date"
+                    placeholder="必须于**前在我行开立一般存款账户">
+                  </el-date-picker>
                 </el-form-item>
               </el-form>
             </div>
@@ -3760,6 +3783,8 @@ export default {
       whetherProvidentFundCombinationLoanFlag :false,
       //借款人是否为我行独家信贷客户
       whetherExclusiveCreditClientFlagFlag :false,
+      //借款人是否为我行独家信贷客户 一般
+      whetherExclusiveCreditClientNoFlag :false,
       //交易对手弹窗
       addCounterpartyDialogVisible:false,
       ///交易对手弹窗标题
@@ -3798,6 +3823,8 @@ export default {
         description:'',
         repayment:'',
         value:'',
+        debitAccountName:'',
+        accountNumber:'',
         repaymentPeriod:'',
         whetherPersonalHomeLoan:'',
         whetherProvidentFundCombinationLoan:'',
@@ -3984,12 +4011,28 @@ export default {
         VAL_NAME: '划拨',
       }],
       //评估公司
-      EvaluationCorporationOptions:[{
-        VAL_CODE: '评估公司1',
-        VAL_NAME: '评估公司1',
+      EvaluationCorporationOptions:[],
+      //房产评估公司
+      HousEvaluationCorporationOptions:[{
+        VAL_CODE: '广西方中利和房地产评估事务所',
+        VAL_NAME: '广西方中利和房地产评估事务所',
       },{
-        VAL_CODE: '评估公司2',
-        VAL_NAME: '评估公司2',
+        VAL_CODE: '广西景林房地产评估有限责任公司',
+        VAL_NAME: '广西景林房地产评估有限责任公司',
+      },{
+        VAL_CODE: '广西中实房地产评估顾问有限公司',
+        VAL_NAME: '广西中实房地产评估顾问有限公司',
+      },{
+        VAL_CODE: '广西中银信通房地产评估有限公司',
+        VAL_NAME: '广西中银信通房地产评估有限公司',
+      }],
+      //土地评估公司
+      LandEvaluationCorporationOptions:[{
+        VAL_CODE: '广西方中土地评估有限公司',
+        VAL_NAME: '广西方中土地评估有限公司',
+      },{
+        VAL_CODE: '广西中实土地评估有限公司',
+        VAL_NAME: '广西中实土地评估有限公司',
       }],
       //融资情况
       FinancingSituationOptions:[{
@@ -4013,11 +4056,8 @@ export default {
         VAL_CODE: '4',
         VAL_NAME: '按年',
       }],
-
-
-
-
-
+      //利率标记
+      interestRateFlag:false,
 		  //相关人列表标记默认显示
       listRelevantPeopleFlag:true,
       //相关人添加标记默认隐藏
@@ -4721,8 +4761,10 @@ export default {
       if(value){
           //房屋
          if(value=='0'){
+            this.EvaluationCorporationOptions=this.HousEvaluationCorporationOptions;
             this.whetherOwnershipCertificatesFlag=true;
          }else if(value=='1'){
+            this.EvaluationCorporationOptions=this.LandEvaluationCorporationOptions;
             this.pawn.whetherOwnershipCertificates='';
             this.deedLandCertificateFlag=true;
          }
@@ -6702,9 +6744,12 @@ export default {
      */
     whetherExclusiveCreditClientChange(value){
       this.whetherExclusiveCreditClientFlagFlag=false;
+      this.whetherExclusiveCreditClientNoFlag = false;
       if(value){
         if(value=='1'){
           this.whetherExclusiveCreditClientFlagFlag=true;
+        }else{
+          this.whetherExclusiveCreditClientNoFlag = true;
         }
       }
     },
@@ -6977,6 +7022,17 @@ export default {
           totalLiability:''
       };
       this.householdIncomeForm=householdIncomeForm;
+    },
+
+    /**
+     * 利率
+     */
+    interestRateChange(value){
+        this.interestRateFlag=true;
+        if(value=='2'){
+          this.loanBusinessInformation.adjustmentMethod ='';
+          this.interestRateFlag=false;
+        }
     },
 
 	},
