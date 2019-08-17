@@ -1231,7 +1231,7 @@
                     <el-col span="8">
                       <el-form-item label="离婚时间">
                         <el-date-picker
-                          v-model="relatedPersonnelInformationForm.time"
+                          v-model="relatedPersonnelInformationForm.divorceTime"
                           type="date"
                           placeholder="离婚时间">
                         </el-date-picker>
@@ -1258,7 +1258,7 @@
                     <el-col span="8">
                       <el-form-item label="原配偶死亡时间">
                         <el-date-picker
-                          v-model="relatedPersonnelInformationForm.time"
+                          v-model="relatedPersonnelInformationForm.divorceTime"
                           type="date"
                           placeholder="离婚时间">
                         </el-date-picker>
@@ -2616,7 +2616,7 @@
                     <el-col span="8">
                       <el-form-item label="离婚时间">
                         <el-date-picker
-                          v-model="relatedPersonnelInformationForm.time"
+                          v-model="relatedPersonnelInformationForm.divorceTime"
                           type="date"
                           placeholder="离婚时间">
                         </el-date-picker>
@@ -2643,7 +2643,7 @@
                     <el-col span="8">
                       <el-form-item label="原配偶死亡时间">
                         <el-date-picker
-                          v-model="relatedPersonnelInformationForm.time"
+                          v-model="relatedPersonnelInformationForm.divorceTime"
                           type="date"
                           placeholder="离婚时间">
                         </el-date-picker>
@@ -4554,7 +4554,7 @@ export default {
         //离婚方式 （1、协议离婚）（2、协议离婚）
         divorceMethod:'',
         //时间
-        time:'',
+        divorceTime:'',
 
         //房屋信息
         assetTypeHouses:[],
@@ -4626,7 +4626,7 @@ export default {
         //离婚方式 （1、协议离婚）（2、协议离婚）
         divorceMethod:'',
         //时间
-        time:'',
+        divorceTime:'',
         //房屋信息
         assetTypeHouses:[],
         //土地信息
@@ -4697,7 +4697,7 @@ export default {
         //离婚方式 （1、协议离婚）（2、协议离婚）
         divorceMethod:'',
         //时间
-        time:'',
+        divorceTime:'',
 
         //房屋信息
         assetTypeHouses:[],
@@ -5062,7 +5062,7 @@ export default {
         //离婚方式 （1、协议离婚）（2、协议离婚）
         divorceMethod:relatedPersonnelInformationSpouseForm.divorceMethod,
         //时间
-        time:relatedPersonnelInformationSpouseForm.time,
+        divorceTime:relatedPersonnelInformationSpouseForm.divorceTime,
         //房屋
         assetTypeHouses:relatedPersonnelInformationSpouseForm.assetTypeHouses,
         //土地信息
@@ -5149,7 +5149,7 @@ export default {
               //离婚方式 （1、协议离婚）（2、协议离婚）
               divorceMethod:relatedPersonnelInformationForm.divorceMethod,
               //时间
-              time:relatedPersonnelInformationForm.time,
+              divorceTime:relatedPersonnelInformationForm.divorceTime,
               //房屋
               assetTypeHouses:relatedPersonnelInformationForm.assetTypeHouses,
               //土地信息
@@ -5311,7 +5311,7 @@ export default {
        //离婚方式 （1、协议离婚）（2、协议离婚）
        divorceMethod:'',
        //时间
-       time:'',
+       divorceTime:'',
 
        //房屋信息
        assetTypeHouses:[],
@@ -5390,7 +5390,7 @@ export default {
         //离婚方式 （1、协议离婚）（2、协议离婚）
         divorceMethod:'',
         //时间
-        time:[],
+        divorceTime:'',
         //房屋信息
         assetTypeHouses:[],
         //土地信息
