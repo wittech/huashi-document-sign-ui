@@ -4199,6 +4199,8 @@ export default {
       //配偶 end
       //其他相关人
       oterPersonneltableData:[],
+      //其他相关人
+      oterPersonneltableDataformationForm:[],
       operationOterPersonnel:false,
       addOterPersonnelAssetDialogVisible:false,
 
@@ -5204,16 +5206,9 @@ export default {
       this.$refs.relatedOterPersonnelInformationForm.validate((valid) => {
         if (valid) {
           this.$confirm('确认提交吗？', '提示', {}).then(() => {
-            let relatedPersonnelInformationForm= this.relatedPersonnelInformationForm;
-            //配偶信息
-            let relatedPersonnelInformationSpouseForm = this.relatedPersonnelInformationSpouseForm;
-            //资产类型数据组装
-            this.assetTypeAppend();
-            //资产类型数据组装 配偶
-            console.log("assetTypeHouses:",relatedPersonnelInformationForm.assetTypeHouses);
             let datas = {
               loanBasisId:this.loanBasisId,
-              relatedPersonnelInformation:this.oterPersonneltableData,
+              relatedPersonnelInformation:this.oterPersonneltableDataformationForm
             };
             console.log("datas:",datas);
             this.$api.oterRelatedPersonnel.save(datas).then((res) => {
@@ -5228,7 +5223,6 @@ export default {
                 this.active=1;
                 this.$message({message: '操作失败, ' + res.msg, type: 'error'})
               }
-              this.$refs['relatedPersonnelInformationForm'].resetFields()
             })
           })
         }
@@ -6208,6 +6202,8 @@ export default {
       let relatedPersonnelInformationForm = this.relatedPersonnelInformationForm;
       let dataParams = {};
       if(relatedPersonnelInformationForm){
+        /*//资产类型数据组装
+        this.assetTypeAppend();
         //家庭收支情况
         relatedPersonnelInformationForm.householdIncomeForm = this.householdIncomeForm;
         //类型BORROWER(1, "借款人本人"), BORROWER_COUPLE(2, "借款人配偶"), MORTGAGE_GUARANTOR(3, "抵押担保人"),GUARANTOR(4, "保证担保人"), GUARANTOR_BOTH(5, "抵押担保人、保证担保人");
@@ -6217,7 +6213,95 @@ export default {
           identityNumber:relatedPersonnelInformationForm.identityNumber,
           age:relatedPersonnelInformationForm.age,
           relatedPersonnelInformationForm:relatedPersonnelInformationForm
+        };*/
+        let relatedPersonnelInformationForm= this.relatedPersonnelInformationForm;
+        //配偶信息
+        let relatedPersonnelInformationSpouseForm = this.relatedPersonnelInformationSpouseForm;
+        //资产类型数据组装
+        this.assetTypeAppend();
+        //资产类型数据组装 配偶
+        let datas = {
+          loanBasisId:this.loanBasisId,
+          //类型
+          type:'1',
+          //姓名
+          name:relatedPersonnelInformationForm.name,
+          //年龄
+          age:relatedPersonnelInformationForm.age,
+          //性别
+          sex:relatedPersonnelInformationForm.sex,
+          //户籍所在地
+          domicile:relatedPersonnelInformationForm.domicile,
+          //身份证号码
+          identityNumber:relatedPersonnelInformationForm.identityNumber,
+          //现居住地址
+          currentHomeAddress:relatedPersonnelInformationForm.currentHomeAddress,
+          //常用通信地址
+          contactAddress:relatedPersonnelInformationForm.contactAddress,
+          //本地居住时间
+          localResidenceTime:relatedPersonnelInformationForm.localResidenceTime,
+          //电子邮箱
+          email:relatedPersonnelInformationForm.email,
+          //联系电话
+          contactNumber:relatedPersonnelInformationForm.contactNumber,
+          qq:relatedPersonnelInformationForm.qq,
+          //微信
+          wechat:relatedPersonnelInformationForm.wechat,
+          //文化程度
+          educationalLevel:relatedPersonnelInformationForm.educationalLevel,
+          //文化程度 其他
+          educationalLevelValue:relatedPersonnelInformationForm.educationalLevelValue,
+          //现住房来源
+          currentHousingSource:relatedPersonnelInformationForm.currentHousingSource,
+          //现住房来源其他值
+          currentHousingSourceValue:relatedPersonnelInformationForm.currentHousingSourceValue,
+          //工作单位
+          employer:relatedPersonnelInformationForm.employer,
+          //职务
+          position:relatedPersonnelInformationForm.position,
+          //单位工作年限
+          unitWorkingYears:relatedPersonnelInformationForm.unitWorkingYears,
+          //所投资或经营企业名称
+          companyName:relatedPersonnelInformationForm.companyName,
+          //持股比例
+          shareholdingRatio:relatedPersonnelInformationForm.shareholdingRatio,
+          //本行业和相近行业经营年限
+          yearsOperation:relatedPersonnelInformationForm.yearsOperation,
+          //资产情况（0、无）（1、有）
+          assetSituation:relatedPersonnelInformationForm.assetSituation,
+          //资产类型（1、房屋）（2、土地）（3、汽车）（4、有价证券）（5、其他）
+          // assetType:relatedPersonnelInformationForm.assetType,
+          //婚姻状况（0、未婚）（1、已婚）（2、离异未婚）（3、丧偶未婚）（4、其他）
+          maritalStatus:relatedPersonnelInformationForm.maritalStatus,
+          //原配偶姓名
+          originalSpouseName:relatedPersonnelInformationForm.originalSpouseName,
+          //离婚方式 （1、协议离婚）（2、协议离婚）
+          divorceMethod:relatedPersonnelInformationForm.divorceMethod,
+          //时间
+          divorceTime:relatedPersonnelInformationForm.divorceTime,
+          //房屋
+          assetTypeHouses:relatedPersonnelInformationForm.assetTypeHouses,
+          //土地信息
+          assetTypeLand:relatedPersonnelInformationForm.assetTypeLand,
+          //汽车信息
+          assetTypeCar:relatedPersonnelInformationForm.assetTypeCar,
+          //证券信息
+          assetTypeSecurities:relatedPersonnelInformationForm.assetTypeSecurities,
+          //其他
+          assetTypeOther:relatedPersonnelInformationForm.assetTypeOther,
+          //配偶信息
+          spouseInfo : this.spouseAppend(),
+          //家庭收支情况
+          householdIncomeForm:this.householdIncomeForm,
+          createBy :sessionStorage.getItem("user")
         };
+        dataParams = {
+          name:relatedPersonnelInformationForm.name,
+          identityNumber:relatedPersonnelInformationForm.identityNumber,
+          age:relatedPersonnelInformationForm.age,
+          relatedPersonnelInformationForm:datas
+        };
+        this.oterPersonneltableDataformationForm.push(datas);
       }
       if(assetTypeHousesTableData){
         for(let index in assetTypeHousesTableData){
@@ -6226,7 +6310,9 @@ export default {
       }
       assetTypeHousesTableDataNew.push(dataParams);
       //赋值列表
-      this.oterPersonneltableData = assetTypeHousesTableDataNew;
+      this.oterPersonneltableData=assetTypeHousesTableDataNew;
+      console.log("assetTypeHousesTableDataNew:",assetTypeHousesTableDataNew);
+      console.log("oterPersonneltableData:",this.oterPersonneltableData);
       //隐藏添加页面
       this.addRelevantPeopleFlag= false;
       //显示列表
