@@ -20,7 +20,7 @@
         </el-steps>
         <!--0、基础信息-->
         <div v-if="active==0" class="step1">
-          <el-form :model="loanBasisForm" label-width="80px" :rules="dataFormRules" ref="loanBasisForm" :size="size">
+          <el-form :model="loanBasisForm" label-width="80px" :rules="loanBasisFormRules" ref="loanBasisForm" :size="size">
             <div>
               <el-form-item label="贷款类型">
                 <el-radio-group v-model="loanBasisForm.loanType" @change="loanTypeChage">
@@ -46,8 +46,8 @@
               </el-checkbox-group>
             </el-form-item>
 
-            <el-form-item label="借款人">
-              <el-input v-model="loanBasisForm.borrower" size="small" class="width350"></el-input>
+            <el-form-item label="借款人" prop="borrower">
+              <el-input v-model="loanBasisForm.borrower" auto-complete="off" size="small" class="width350"></el-input>
             </el-form-item>
             <br>
             <el-form-item>
@@ -3694,6 +3694,12 @@ export default {
 	},
 	data() {
 		return {
+      //基础信息验证
+      loanBasisFormRules:{
+        borrower: [
+          { required: true, message: '请输入借款人！', trigger: 'blur' }
+        ]
+      },
       //房屋资产弹窗标记
       referenceDialogVisible:false,
       //房屋土地资产列表
