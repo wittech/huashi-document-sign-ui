@@ -5498,6 +5498,10 @@ export default {
      * 添加房屋资产
      */
     addHousAsset(){
+      this.propertyCertificateNumberFlag=false;
+      this.deedNumberFlag=false;
+      this.deedLandCertificateFlag = false;
+      this.coOwnerNameFlag=false;
       this.clearAssetTypeHouses();
       this.addHousAssetDialogVisible = true;
       this.operation = true;
@@ -5534,6 +5538,10 @@ export default {
      * 添加房屋资产 配偶
      */
     addSpouseHousAsset(){
+      this.propertyCertificateNumberFlag=false;
+      this.deedNumberFlag=false;
+      this.deedLandCertificateFlag = false;
+      this.coOwnerNameFlag=false;
       this.clearAssetTypeHouses();
       this.addSpouseHousAssetDialogVisible = true;
       this.operationSpouse = true;
@@ -5543,6 +5551,7 @@ export default {
      * 编辑房屋资产 配偶
      */
     handleSpouseHousAssetEdit: function (params) {
+      this.coOwnerNameFlag=false;
       console.log("assetTypeHouses:",params);
       this.addSpouseHousAssetDialogVisible = true;
       this.operationSpouse = false;
@@ -5570,6 +5579,10 @@ export default {
      * 添加土地资产
      */
     addLandAsset(){
+      this.propertyCertificateNumberFlag=false;
+      this.deedNumberFlag=false;
+      this.deedLandCertificateFlag = false;
+      this.coOwnerNameFlag=false;
       this.clearAssetTypeLand();
       this.addLandAssetDialogVisible = true;
       this.operationLand = true;
@@ -5606,6 +5619,10 @@ export default {
      * 添加土地资产 配偶
      */
     addSpouseLandAsset(){
+      this.propertyCertificateNumberFlag=false;
+      this.deedNumberFlag=false;
+      this.deedLandCertificateFlag = false;
+      this.coOwnerNameFlag=false;
       this.clearAssetTypeLand();
       this.addSpouseLandAssetDialogVisible = true;
       this.operationSpouseLand = true;
@@ -5786,6 +5803,11 @@ export default {
      * 添加其他资产
      */
     addOtherAsset(){
+      spouseAssetTypeHouses
+      spouseAssetTypeLand
+      spouseAssetTypeCar
+      spouseAssetTypeSecurities
+      spouseAssetTypeOther
       this.addOtherAssetDialogVisible = true;
       this.operationOther = true;
     },
@@ -7243,6 +7265,84 @@ export default {
       this.assetTypeSecurities = assetTypeSecurities;
     },
 
+    //清空房屋
+    clearSpouseAssetTypeHouses(){
+      let  spouseAssetTypeHouses={
+        rpiId:'',
+        //是否不动产权证（1、不动产权证）（2、非不动产权证）
+        whetherOwnershipCertificates:'',
+        //不动产权证号
+        propertyCertificateNumber:'',
+        //房产证号
+        deed:'',
+        //土地证号
+        landCertificate:'',
+        affiliation:'',
+        address:'',
+        constructionArea:'',
+        value:'',
+        financingSituation:'',
+        whetherCoOwner:'',
+        coOwnerName:'',
+        whetherLease:''
+      };
+      this.spouseAssetTypeHouses = spouseAssetTypeHouses;
+    },
+
+    //清空土地
+    clearSpouseAssetTypeLand(){
+      let   spouseAssetTypeLand={
+        rpiId:'',
+        //是否不动产权证（1、不动产权证）（2、非不动产权证）
+        whetherOwnershipCertificates:'',
+        //不动产权证号
+        propertyCertificateNumber:'',
+        //房产证号
+        deed:'',
+        //土地证号
+        landCertificate:'',
+        affiliation:'',
+        address:'',
+        constructionArea:'',
+        value:'',
+        financingSituation:'',
+        whetherCoOwner:'',
+        coOwnerName:'',
+        whetherLease:''
+      };
+      this.spouseAssetTypeLand = spouseAssetTypeLand;
+    },
+
+    //清空汽车信息
+    clearSpouseAssetTypeCar(){
+      let   spouseAssetTypeCar={
+        rpiId:'',
+        brand:'',
+        value:'',
+        numberPlate:'',
+        drivingLicenseNumber:''
+      }
+      this.spouseAssetTypeCar = spouseAssetTypeCar;
+    },
+
+    //清空证券信息
+    clearSpouseAssetTypeSecurities(){
+      let   spouseAssetTypeSecurities={
+        rpiId:'',
+        brand:'',
+        value:'',
+        numberPlate:'',
+        drivingLicenseNumber:''
+      }
+      this.spouseAssetTypeSecurities = spouseAssetTypeSecurities;
+    },
+
+
+
+
+
+
+
     //清空抵押物
     clearPawn(){
       let pawn={
@@ -7477,6 +7577,7 @@ export default {
                       this.pawn.propertyCertificateNumber = '';
                     }
                   }
+
                   //土地证号
                   let landCertificate = data.landCertificate;
                   if(!this.isNull(landCertificate)){
@@ -7638,6 +7739,13 @@ export default {
       this.spouseCarTableData=[];
       this.spouseSecuritiesTableData=[];
       this.spouseOtherTableData=[];
+
+      //清空
+      this.coOwnerNameFlag=false;
+      this.clearSpouseAssetTypeHouses();
+      this.clearSpouseAssetTypeLand();
+      this.clearSpouseAssetTypeCar();
+      this.clearSpouseAssetTypeSecurities();
     },
 
 
