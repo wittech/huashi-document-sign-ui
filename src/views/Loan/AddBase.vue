@@ -3267,15 +3267,17 @@
                       <el-input v-model="loanBusinessInformation.applicationPeriod" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
-                  <el-col span="8">
-                    <el-form-item label="利率上浮幅度">
-                      <el-input v-model="loanBusinessInformation.interestRateRise" size="small" class="width150"></el-input>
-                    </el-form-item>
-                  </el-col>
                 </el-row>
                 <el-form-item label="是否申请循环额度">
                   <el-radio-group v-model="loanBusinessInformation.cycleQuota">
                     <el-radio  v-for="(vl, index) in CycleQuotaOptions" :label="vl.VAL_CODE" :key="index">
+                      {{vl.VAL_NAME}}
+                    </el-radio>
+                  </el-radio-group>
+                </el-form-item>
+                <el-form-item label="利率">
+                  <el-radio-group v-model="loanBusinessInformation.interestRate" @change="interestRateChange">
+                    <el-radio  v-for="(vl, index) in InterestRateOptions" :label="vl.VAL_CODE" :key="index">
                       {{vl.VAL_NAME}}
                     </el-radio>
                   </el-radio-group>
@@ -3287,12 +3289,8 @@
                     </el-radio>
                   </el-radio-group>
                 </el-form-item>
-                <el-form-item label="利率">
-                  <el-radio-group v-model="loanBusinessInformation.interestRate" @change="interestRateChange">
-                    <el-radio  v-for="(vl, index) in InterestRateOptions" :label="vl.VAL_CODE" :key="index">
-                      {{vl.VAL_NAME}}
-                    </el-radio>
-                  </el-radio-group>
+                <el-form-item label="利率上浮幅度">
+                  <el-input v-model="loanBusinessInformation.interestRateRise" size="small" class="width150"></el-input>
                 </el-form-item>
                 <el-row>
                   <el-col span="8">
