@@ -2047,6 +2047,9 @@
                       </el-form-item>
                     </el-col>
                   </el-row>
+                  <el-form-item label="年龄">
+                    <el-input v-model="relatedPersonnelInformationSpouseForm.age" size="small" class="width150"></el-input>
+                  </el-form-item>
                   <el-form-item label="性别">
                     <el-radio-group v-model="relatedPersonnelInformationSpouseForm.sex">
                       <el-radio  v-for="(vl, index) in SexOptions" :label="vl.VAL_CODE" :key="index">
@@ -6223,7 +6226,7 @@ export default {
         let datas = {
           loanBasisId:this.loanBasisId,
           //类型
-          type:'1',
+          type:this.getType(relatedPersonnelInformationForm.type),
           //姓名
           name:relatedPersonnelInformationForm.name,
           //年龄
