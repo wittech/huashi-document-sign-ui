@@ -6173,7 +6173,7 @@ export default {
     assetTypeSpouseSecuritiesForm(){
       let assetTypeHousesTableData = this.spouseSecuritiesTableData;
       let assetTypeHousesTableDataNew = [];
-      let assetTypeSecurities = this.assetTypeSecurities;
+      let assetTypeSecurities = this.spouseAssetTypeSecurities;
       let dataParams = {};
       if(assetTypeSecurities){
         dataParams = {
@@ -6243,7 +6243,7 @@ export default {
     assetTypeSpouseOtherForm(){
       let assetTypeHousesTableData = this.spouseOtherTableData;
       let assetTypeHousesTableDataNew = [];
-      let assetTypeOther = this.assetTypeOther;
+      let assetTypeOther = this.spouseAssetTypeOther;
       let dataParams = {};
       if(assetTypeOther){
         dataParams = {
@@ -6257,9 +6257,12 @@ export default {
           assetTypeHousesTableDataNew.push(assetTypeHousesTableData[index]);
         }
       }
+      console.log("dataParams:",dataParams);
+      console.log(" assetTypeHousesTableDataNew:", assetTypeHousesTableDataNew);
       assetTypeHousesTableDataNew.push(dataParams);
       //赋值列表
       this.spouseOtherTableData = assetTypeHousesTableDataNew;
+      console.log(" this.spouseOtherTableData:", this.spouseOtherTableData);
       //关闭弹窗
       this.addSpouseOtherAssetDialogVisible = false;
     },
@@ -7439,7 +7442,7 @@ export default {
                 this.pawn.mortgageType= mortgageType;
                 this.mortgageTypeChange(mortgageType);
                 //抵押物名称
-                this.pawn.collateralName = checkedRadioData.name;
+                this.pawn.collateralName = checkedRadioData.assetName;
                 //面积
                 let constructionAreaValue = '';
                 //所属地
@@ -7459,17 +7462,20 @@ export default {
                   this.whetherOwnershipCertificatesChange(whetherOwnershipCertificates);
                   //不动产权证号
                   let propertyCertificateNumber = data.propertyCertificateNumber;
-                  if(propertyCertificateNumber){
+                  if(whetherOwnershipCertificates=='1'){
+                    if(!this.isNull(propertyCertificateNumber)){
                       this.pawn.propertyCertificateNumber = propertyCertificateNumber;
-                  }else{
+                    }else{
                       this.pawn.propertyCertificateNumber = '';
-                  }
-                  //房产证号
-                  let deed = data.deed;
-                  if(deed){
-                    this.pawn.propertyCertificateNumber = deed;
+                    }
                   }else{
-                    this.pawn.propertyCertificateNumber = '';
+                    //房产证号
+                    let deed = data.deed;
+                    if(deed){
+                      this.pawn.propertyCertificateNumber = deed;
+                    }else{
+                      this.pawn.propertyCertificateNumber = '';
+                    }
                   }
                   //土地证号
                   let landCertificate = data.landCertificate;
