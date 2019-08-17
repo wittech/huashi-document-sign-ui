@@ -255,7 +255,7 @@
               <!--新增编辑界面-->
               <el-dialog :title="operation?'新增':'新增'" width="60%" :visible.sync="addHousAssetDialogVisible" :close-on-click-modal="false">
                 <el-form :model="assetTypeHouses" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
-                  <<el-form-item label="是否不动产权证">
+                  <el-form-item label="是否不动产权证">
                   <el-radio-group v-model="assetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
                     <el-radio  v-for="(vl, index) in WhetherOwnershipCertificatesOptions" :label="vl.VAL_CODE" :key="index">
                       {{vl.VAL_NAME}}
@@ -838,7 +838,7 @@
                     <!--新增编辑界面-->
                     <el-dialog :title="operationSpouse?'新增':'新增'" width="60%" :visible.sync="addSpouseHousAssetDialogVisible" :close-on-click-modal="false">
                       <el-form :model="assetTypeHouses" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
-                        <<el-form-item label="是否不动产权证">
+                        <el-form-item label="是否不动产权证">
                         <el-radio-group v-model="assetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
                           <el-radio  v-for="(vl, index) in WhetherOwnershipCertificatesOptions" :label="vl.VAL_CODE" :key="index">
                             {{vl.VAL_NAME}}
@@ -1636,7 +1636,7 @@
                 <!--新增编辑界面-->
                 <el-dialog :title="operation?'新增':'新增'" width="60%" :visible.sync="addHousAssetDialogVisible" :close-on-click-modal="false">
                   <el-form :model="assetTypeHouses" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
-                    <<el-form-item label="是否不动产权证">
+                    <el-form-item label="是否不动产权证">
                     <el-radio-group v-model="assetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
                       <el-radio  v-for="(vl, index) in WhetherOwnershipCertificatesOptions" :label="vl.VAL_CODE" :key="index">
                         {{vl.VAL_NAME}}
@@ -2754,12 +2754,51 @@
               </el-form-item>
             </div>
             <div v-if="pawnAddFlag">
+              <!--编辑-->
+              <el-dialog title="相关房屋土地资产列表" width="72%" :visible.sync="referenceDialogVisible" :close-on-click-modal="false">
+                <el-table
+                  border
+                  :data="referenceAssetList"
+                  style="width: 80%">
+                  <el-table-column
+                    fixed
+                    prop="mortgageTypes"
+                    label="资产类型"
+                    width="150">
+                  </el-table-column>
+                  <el-table-column
+                    prop="landNatures"
+                    label="资产名称"
+                    width="120">
+                  </el-table-column>
+                  <el-table-column
+                    prop="collateralName"
+                    label="资产归属"
+                    width="120">
+                  </el-table-column>
+                  <el-table-column
+                    prop="collateralDeposit"
+                    label="共有人"
+                    width="120">
+                  </el-table-column>
+                  <el-table-column
+                    prop="value"
+                    label="地址">
+                  </el-table-column>
+                </el-table>
+                <br>
+                <div slot="footer" class="dialog-footer" style="text-align: center">
+                  <el-button :size="size" type="primary" @click.native="selectReference">选择</el-button>
+                  <el-button :size="size" type="primary" @click.native="referenceDialogClose">关闭</el-button>
+                </div>
+              </el-dialog>
               <el-form-item label="抵押物类型">
-                <el-radio-group v-model="pawn.mortgageType" @change="mortgageTypeChange">
+                <el-radio-group v-model="pawn.mortgageType" @change="referenceDialog">
                   <el-radio  v-for="(vl, index) in MortgageTypeOptions" :label="vl.VAL_CODE" :key="index">
                     {{vl.VAL_NAME}}
                   </el-radio>
                 </el-radio-group>
+                <el-button type="primary" @click="referenceDialog()">引用</el-button>
               </el-form-item>
               <el-form-item label="是否不动产权证" v-if="whetherOwnershipCertificatesFlag">
                 <el-radio-group v-model="pawn.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
@@ -2797,7 +2836,7 @@
                 </el-col>
               </el-row>
 
-              <<el-form-item label="土地性质">
+              <el-form-item label="土地性质">
               <el-radio-group v-model="pawn.landNature">
                 <el-radio  v-for="(vl, index) in LandNatureOptions" :label="vl.VAL_CODE" :key="index">
                   {{vl.VAL_NAME}}
@@ -3645,6 +3684,10 @@ export default {
 	},
 	data() {
 		return {
+      //房屋资产弹窗标记
+      referenceDialogVisible:false,
+      //房屋土地资产列表
+      referenceAssetList:[],
       //合同信息
       contractInformation:{
         personalLoanContractNo:'',
@@ -7054,6 +7097,32 @@ export default {
           this.interestRateFlag=false;
         }
     },
+
+    /**
+     * 引用
+     */
+    referenceDialog(){
+        //查询房屋土地资产
+        this.referenceAssetList=[];
+        this.referenceDialogVisible =true;
+    },
+
+    /**
+     * 选择房屋土地资产 进行选中
+     */
+    selectReference(){
+
+    },
+
+    /**
+     * 关闭
+     */
+    referenceDialogClose(){
+      this.referenceDialogVisible =false;
+    },
+
+
+
 
 	},
 	mounted() {
