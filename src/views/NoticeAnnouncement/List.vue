@@ -48,15 +48,15 @@
   import KtTable from "@/views/Core/KtTable"
   import KtButton from "@/views/Core/KtButton"
   import { format } from "@/utils/datetime"
-  import { quillEditor } from 'vue-quill-editor' //调用编辑器
-  import 'quill/dist/quill.core.css'
+ /* import { quillEditor } from 'vue-quill-editor' //调用编辑器*/
+/*  import 'quill/dist/quill.core.css'
   import 'quill/dist/quill.snow.css'
-  import 'quill/dist/quill.bubble.css'
+  import 'quill/dist/quill.bubble.css'*/
   export default {
     components:{
       KtTable,
-      KtButton,
-      quillEditor
+      KtButton
+     /* quillEditor*/
     },
     computed: {
       editor() {
