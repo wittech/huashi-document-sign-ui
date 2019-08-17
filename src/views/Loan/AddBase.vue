@@ -6247,6 +6247,12 @@ export default {
       this.maritalStatusOtherFlag=false;
       //清空list
       this.clearTableDataList();
+      //资产类型
+      this.assetTypeFlagSpouse=false;
+      //清空 其他相关人
+      this.clearRelatedPersonnelInformationSpouseForm();
+      //清空家庭资产
+      this.householdIncomeFormClear();
     },
 
     /**
