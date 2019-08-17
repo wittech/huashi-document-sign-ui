@@ -5174,6 +5174,8 @@ export default {
               if(res.code == 200) {
                 this.maritalStatusFlag=false;
                 this.assetTypeFlag=false;
+                //清空list
+                this.clearTableDataList();
                 this.clearAssetType();
                 this.clearAssetSpouseType();
                 this.clearRelatedPersonnelInformationForm();
@@ -6243,6 +6245,8 @@ export default {
       this.maritalStatusWidowedFlag=false;
       //其他
       this.maritalStatusOtherFlag=false;
+      //清空list
+      this.clearTableDataList();
     },
 
     /**
@@ -7422,6 +7426,19 @@ export default {
       this.checkedRadioData = data;
     },
 
+    //清空房屋
+    clearTableDataList(){
+      //清空房屋资产
+      this.assetTypeHousesTableData=[];
+      //清空土地资产
+      this.landTableData=[];
+      //清空汽车资产
+      this.carTableData=[];
+      //清空证券资产
+      this.securitiesTableData=[];
+      //清空其他资产
+      this.otherTableData=[];
+    },
 
 
 
