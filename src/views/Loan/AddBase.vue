@@ -2765,7 +2765,7 @@
                   style="width: 80%">
                   <el-table-column
                     fixed width="150">
-                    <template scope="scope">
+                    <template slot-scope="scope">
                       <el-radio class="radio" v-model="radioData"  :label="scope.row.id" @change="checkAll(scope.row)"></el-radio>
                     </template>
                   </el-table-column>
@@ -5795,6 +5795,10 @@ export default {
      * 添加其他资产 配偶
      */
     addSpouseOtherAsset(){
+      //清空 其他相关人
+      this.clearRelatedPersonnelInformationSpouseForm();
+      //清空家庭资产
+      this.householdIncomeFormClear();
       this.addSpouseOtherAssetDialogVisible = true;
       this.operationSpouseOther = true;
     },
