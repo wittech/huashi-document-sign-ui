@@ -323,14 +323,14 @@
                   </el-form-item>
 
                   <el-form-item label="是否有共有人">
-                    <el-radio-group v-model="assetTypeHouses.whetherCoowner" @change="whetherCoownerChange">
+                    <el-radio-group v-model="assetTypeHouses.whetherCoOwner" @change="whetherCoownerChange">
                       <el-radio  v-for="(vl, index) in WhetherCoownerOptions" :label="vl.VAL_CODE" :key="index">
                         {{vl.VAL_NAME}}
                       </el-radio>
                     </el-radio-group>
                   </el-form-item>
                   <el-form-item label="共有人姓名" v-show="coOwnerNameFlag">
-                    <el-input v-model="assetTypeHouses.coownerName" size="small" class="width180"></el-input>
+                    <el-input v-model="assetTypeHouses.coOwnerName" size="small" class="width180"></el-input>
                   </el-form-item>
 
                   <el-form-item label="是否有租赁">
@@ -436,7 +436,7 @@
                   </el-form-item>
 
                   <el-form-item label="是否有共有人">
-                    <el-radio-group v-model="assetTypeLand.whetherCoowner" @change="whetherCoownerChange">
+                    <el-radio-group v-model="assetTypeLand.whetherCoOwner" @change="whetherCoownerChange">
                       <el-radio  v-for="(vl, index) in WhetherCoownerOptions" :label="vl.VAL_CODE" :key="index">
                         {{vl.VAL_NAME}}
                       </el-radio>
@@ -909,7 +909,7 @@
                         </el-form-item>
 
                         <el-form-item label="是否有共有人">
-                          <el-radio-group v-model="assetTypeHouses.whetherCoowner" @change="whetherCoownerChange">
+                          <el-radio-group v-model="assetTypeHouses.whetherCoOwner" @change="whetherCoownerChange">
                             <el-radio  v-for="(vl, index) in WhetherCoownerOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
@@ -1022,7 +1022,7 @@
                         </el-form-item>
 
                         <el-form-item label="是否有共有人">
-                          <el-radio-group v-model="assetTypeLand.whetherCoowner" @change="whetherCoownerChange">
+                          <el-radio-group v-model="assetTypeLand.whetherCoOwner" @change="whetherCoownerChange">
                             <el-radio  v-for="(vl, index) in WhetherCoownerOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
@@ -1707,14 +1707,14 @@
                     </el-form-item>
 
                     <el-form-item label="是否有共有人">
-                      <el-radio-group v-model="assetTypeHouses.whetherCoowner" @change="whetherCoownerChange">
+                      <el-radio-group v-model="assetTypeHouses.whetherCoOwner" @change="whetherCoownerChange">
                         <el-radio  v-for="(vl, index) in WhetherCoownerOptions" :label="vl.VAL_CODE" :key="index">
                           {{vl.VAL_NAME}}
                         </el-radio>
                       </el-radio-group>
                     </el-form-item>
                     <el-form-item label="共有人姓名" v-show="coOwnerNameFlag">
-                      <el-input v-model="assetTypeHouses.co_owner_name" size="small" class="width180"></el-input>
+                      <el-input v-model="assetTypeHouses.coOwnerName" size="small" class="width180"></el-input>
                     </el-form-item>
 
                     <el-form-item label="是否有租赁">
@@ -1820,7 +1820,7 @@
                     </el-form-item>
 
                     <el-form-item label="是否有共有人">
-                      <el-radio-group v-model="assetTypeLand.whetherCoowner" @change="whetherCoownerChange">
+                      <el-radio-group v-model="assetTypeLand.whetherCoOwner" @change="whetherCoownerChange">
                         <el-radio  v-for="(vl, index) in WhetherCoownerOptions" :label="vl.VAL_CODE" :key="index">
                           {{vl.VAL_NAME}}
                         </el-radio>
@@ -2297,14 +2297,14 @@
                         </el-form-item>
 
                         <el-form-item label="是否有共有人">
-                          <el-radio-group v-model="assetTypeHouses.whetherCoowner" @change="whetherCoownerChange">
+                          <el-radio-group v-model="assetTypeHouses.whetherCoOwner" @change="whetherCoownerChange">
                             <el-radio  v-for="(vl, index) in WhetherCoownerOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
                           </el-radio-group>
                         </el-form-item>
                         <el-form-item label="共有人姓名" v-show="coOwnerNameFlag">
-                          <el-input v-model="assetTypeHouses.co_owner_name" size="small" class="width180"></el-input>
+                          <el-input v-model="assetTypeHouses.coOwnerName" size="small" class="width180"></el-input>
                         </el-form-item>
 
                         <el-form-item label="是否有租赁">
@@ -2410,7 +2410,7 @@
                         </el-form-item>
 
                         <el-form-item label="是否有共有人">
-                          <el-radio-group v-model="assetTypeLand.whetherCoowner" @change="whetherCoownerChange">
+                          <el-radio-group v-model="assetTypeLand.whetherCoOwner" @change="whetherCoownerChange">
                             <el-radio  v-for="(vl, index) in WhetherCoownerOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
@@ -4033,7 +4033,7 @@ export default {
         evaluationCorporation:'',
         financingSituation:'',
         whetherCoowner:'',
-        coownerName:'',
+        coOwnerName:'',
         whetherLease:'',
         leaseContractName:'',
         lesseeName:'',
@@ -4731,7 +4731,7 @@ export default {
         constructionArea:'',
         value:'',
         financingSituation:'',
-        whetherCoowner:'',
+        whetherCoOwner:'',
         coOwnerName:'',
         whetherLease:''
       },
@@ -4751,8 +4751,8 @@ export default {
         constructionArea:'',
         value:'',
         financingSituation:'',
-        whetherCoowner:'',
-        coOwnerMame:'',
+        whetherCoOwner:'',
+        coOwnerName:'',
         whetherLease:''
       },
       //汽车信息
@@ -4771,13 +4771,13 @@ export default {
       },
       //证券下拉列表
       SecuritiesTypeOptions:[{
-        VAL_CODE: '0',
+        VAL_CODE: '1',
         VAL_NAME: '定期存单',
       },{
-        VAL_CODE: '1',
+        VAL_CODE: '2',
         VAL_NAME: '股权',
       },{
-        VAL_CODE: '2',
+        VAL_CODE: '3',
         VAL_NAME: '股金',
       }],
       //其他信息
@@ -5884,9 +5884,10 @@ export default {
         let assetTypeHousesTableData = this.assetTypeHousesTableData;
         let assetTypeHousesTableDataNew = [];
         let assetTypeHouses = this.assetTypeHouses;
-        let dataParams = {};
+        //let dataParams = {};
         if(assetTypeHouses){
-          dataParams = {
+          assetTypeHouses.whetherOwnershipCertificatess = this.getWhetherOwnershipCertificatesOptions(assetTypeHouses.whetherOwnershipCertificates);
+          /*dataParams = {
             whetherOwnershipCertificatess:this.getWhetherOwnershipCertificatesOptions(assetTypeHouses.whetherOwnershipCertificates),
             propertyCertificateNumber:assetTypeHouses.propertyCertificateNumber,
             deed:assetTypeHouses.deed,
@@ -5894,15 +5895,14 @@ export default {
             name:assetTypeHouses.name,
             constructionArea:assetTypeHouses.constructionArea,
             assetTypeHouses:assetTypeHouses
-          };
+          };*/
         }
-      console.log("dataParams:",dataParams);
         if(assetTypeHousesTableData){
             for(let index in assetTypeHousesTableData){
                 assetTypeHousesTableDataNew.push(assetTypeHousesTableData[index]);
             }
         }
-        assetTypeHousesTableDataNew.push(dataParams);
+        assetTypeHousesTableDataNew.push(assetTypeHouses);
         //赋值列表
         this.assetTypeHousesTableData = assetTypeHousesTableDataNew;
         //关闭弹窗
@@ -5916,9 +5916,10 @@ export default {
       let assetTypeHousesTableData = this.assetTypeSpouseHousesTableData;
       let assetTypeHousesTableDataNew = [];
       let assetTypeHouses = this.assetTypeHouses;
-      let dataParams = {};
+      //let dataParams = {};
       if(assetTypeHouses){
-        dataParams = {
+        assetTypeHouses.whetherOwnershipCertificatess = this.getWhetherOwnershipCertificatesOptions(assetTypeHouses.whetherOwnershipCertificates);
+      /*  dataParams = {
           whetherOwnershipCertificatess:this.getWhetherOwnershipCertificatesOptions(assetTypeHouses.whetherOwnershipCertificates),
           propertyCertificateNumber:assetTypeHouses.propertyCertificateNumber,
           deed:assetTypeHouses.deed,
@@ -5926,14 +5927,14 @@ export default {
           name:assetTypeHouses.name,
           constructionArea:assetTypeHouses.constructionArea,
           assetTypeHouses:assetTypeHouses
-        };
+        };*/
       }
       if(assetTypeHousesTableData){
         for(let index in assetTypeHousesTableData){
           assetTypeHousesTableDataNew.push(assetTypeHousesTableData[index]);
         }
       }
-      assetTypeHousesTableDataNew.push(dataParams);
+      assetTypeHousesTableDataNew.push(assetTypeHouses);
       //赋值列表
       this.assetTypeSpouseHousesTableData = assetTypeHousesTableDataNew;
       //关闭弹窗
@@ -5963,8 +5964,8 @@ export default {
       let assetTypeHousesTableData = this.landTableData;
       let assetTypeHousesTableDataNew = [];
       let assetTypeLand = this.assetTypeLand;
-      let dataParams = {};
-      if(assetTypeLand){
+      /*let dataParams = {};*/
+     /* if(assetTypeLand){
         dataParams = {
           landCertificate:assetTypeLand.landCertificate,
           name:assetTypeLand.name,
@@ -5972,13 +5973,13 @@ export default {
           constructionArea:assetTypeLand.constructionArea,
           assetTypeLand:assetTypeLand
         };
-      }
+      }*/
       if(assetTypeHousesTableData){
         for(let index in assetTypeHousesTableData){
           assetTypeHousesTableDataNew.push(assetTypeHousesTableData[index]);
         }
       }
-      assetTypeHousesTableDataNew.push(dataParams);
+      assetTypeHousesTableDataNew.push(assetTypeLand);
       //赋值列表
       this.landTableData = assetTypeHousesTableDataNew;
       //关闭弹窗
@@ -5992,7 +5993,7 @@ export default {
       let assetTypeHousesTableData = this.spouseLandTableData;
       let assetTypeHousesTableDataNew = [];
       let assetTypeLand = this.assetTypeLand;
-      let dataParams = {};
+     /* let dataParams = {};
       if(assetTypeLand){
         dataParams = {
           landCertificate:assetTypeLand.landCertificate,
@@ -6001,13 +6002,13 @@ export default {
           constructionArea:assetTypeLand.constructionArea,
           assetTypeLand:assetTypeLand
         };
-      }
+      }*/
       if(assetTypeHousesTableData){
         for(let index in assetTypeHousesTableData){
           assetTypeHousesTableDataNew.push(assetTypeHousesTableData[index]);
         }
       }
-      assetTypeHousesTableDataNew.push(dataParams);
+      assetTypeHousesTableDataNew.push(assetTypeLand);
       //赋值列表
       this.spouseLandTableData = assetTypeHousesTableDataNew;
       //关闭弹窗
@@ -6084,6 +6085,8 @@ export default {
         dataParams = {
           types:this.getSecuritiesOptions(assetTypeSecurities.type),
           value:assetTypeSecurities.value,
+          type:assetTypeSecurities.type,
+          createBy :sessionStorage.getItem("user"),
           assetTypeSecurities:assetTypeSecurities
         };
       }
@@ -7115,7 +7118,7 @@ export default {
           constructionArea:'',
           value:'',
           financingSituation:'',
-          whetherCoowner:'',
+          whetherCoOwner:'',
           coOwnerName:'',
           whetherLease:''
       };
@@ -7139,8 +7142,8 @@ export default {
           constructionArea:'',
           value:'',
           financingSituation:'',
-          whetherCoowner:'',
-          coOwnerMame:'',
+          whetherCoOwner:'',
+          coOwnerName:'',
           whetherLease:''
         };
       this.assetTypeLand = assetTypeLand;
@@ -7187,7 +7190,7 @@ export default {
           evaluationCorporation:'',
           financingSituation:'',
           whetherCoowner:'',
-          coownerName:'',
+          coOwnerName:'',
           whetherLease:'',
           leaseContractName:'',
           lesseeName:'',
