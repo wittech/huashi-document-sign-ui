@@ -659,6 +659,9 @@
                         </el-form-item>
                       </el-col>
                     </el-row>
+                  <el-form-item label="年龄">
+                    <el-input v-model="relatedPersonnelInformationSpouseForm.age" size="small" class="width150"></el-input>
+                  </el-form-item>
                     <el-form-item label="性别">
                       <el-radio-group v-model="relatedPersonnelInformationSpouseForm.sex">
                         <el-radio  v-for="(vl, index) in SexOptions" :label="vl.VAL_CODE" :key="index">
@@ -758,7 +761,7 @@
                       </el-col>
                       <el-col span="8">
                         <el-form-item label="在该单位工作年限">
-                          <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingRears" size="small" class="width150"></el-input>
+                          <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" size="small" class="width150"></el-input>
                         </el-form-item>
                       </el-col>
                     </el-row>
@@ -2143,7 +2146,7 @@
                     </el-col>
                     <el-col span="8">
                       <el-form-item label="在该单位工作年限">
-                        <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingRears" size="small" class="width150"></el-input>
+                        <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" size="small" class="width150"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -4552,7 +4555,6 @@ export default {
         divorceMethod:'',
         //时间
         time:'',
-        unitWorkingRears:'',
 
         //房屋信息
         assetTypeHouses:[],
@@ -4625,8 +4627,6 @@ export default {
         divorceMethod:'',
         //时间
         time:'',
-        unitWorkingRears:'',
-
         //房屋信息
         assetTypeHouses:[],
         //土地信息
@@ -4698,7 +4698,6 @@ export default {
         divorceMethod:'',
         //时间
         time:'',
-        unitWorkingRears:'',
 
         //房屋信息
         assetTypeHouses:[],
@@ -5005,6 +5004,7 @@ export default {
       //配偶信息
       let relatedPersonnelInformationSpouseForm = this.relatedPersonnelInformationSpouseForm;
       let datas = {
+        createBy :sessionStorage.getItem("user"),
         loanBasisId:this.loanBasisId,
         //类型
         type:this.getType(this.relatedPersonnelInformationSpouseForm.type),
@@ -5056,14 +5056,13 @@ export default {
         //资产类型（1、房屋）（2、土地）（3、汽车）（4、有价证券）（5、其他）
         // assetType:relatedPersonnelInformationForm.assetType,
         //婚姻状况（0、未婚）（1、已婚）（2、离异未婚）（3、丧偶未婚）（4、其他）
-        maritalStatus:relatedPersonnelInformationSpouseForm.maritalStatus,
+        maritalStatus:'1',
         //原配偶姓名
         originalSpouseName:relatedPersonnelInformationSpouseForm.originalSpouseName,
         //离婚方式 （1、协议离婚）（2、协议离婚）
         divorceMethod:relatedPersonnelInformationSpouseForm.divorceMethod,
         //时间
         time:relatedPersonnelInformationSpouseForm.time,
-        unitWorkingRears:relatedPersonnelInformationSpouseForm.unitWorkingRears,
         //房屋
         assetTypeHouses:relatedPersonnelInformationSpouseForm.assetTypeHouses,
         //土地信息
@@ -5118,7 +5117,7 @@ export default {
               contactNumber:relatedPersonnelInformationForm.contactNumber,
               qq:relatedPersonnelInformationForm.qq,
               //微信
-              wechat:relatedPersonnelInformationForm.weChat,
+              wechat:relatedPersonnelInformationForm.wechat,
               //文化程度
               educationalLevel:relatedPersonnelInformationForm.educationalLevel,
               //文化程度 其他
@@ -5151,7 +5150,6 @@ export default {
               divorceMethod:relatedPersonnelInformationForm.divorceMethod,
               //时间
               time:relatedPersonnelInformationForm.time,
-              unitWorkingRears:relatedPersonnelInformationForm.unitWorkingRears,
               //房屋
               assetTypeHouses:relatedPersonnelInformationForm.assetTypeHouses,
               //土地信息
@@ -5165,7 +5163,8 @@ export default {
               //配偶信息
               spouseInfo : this.spouseAppend(),
               //家庭收支情况
-              householdIncomeForm:this.householdIncomeForm
+              householdIncomeForm:this.householdIncomeForm,
+              createBy :sessionStorage.getItem("user")
             };
             console.log("datas:",datas);
             //this.relatedPersonnelInformationForm.loanBasisId = this.loanBasisId;
@@ -5313,7 +5312,6 @@ export default {
        divorceMethod:'',
        //时间
        time:'',
-       unitWorkingRears:'',
 
        //房屋信息
        assetTypeHouses:[],
@@ -5393,8 +5391,6 @@ export default {
         divorceMethod:'',
         //时间
         time:[],
-        unitWorkingRears:'',
-
         //房屋信息
         assetTypeHouses:[],
         //土地信息
