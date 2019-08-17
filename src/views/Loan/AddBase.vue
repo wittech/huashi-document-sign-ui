@@ -2027,7 +2027,11 @@
               <div v-show="maritalStatusFlag">
                 <!--已婚-->
                 <div v-show="maritalStatusMarriedFlag">
-
+                  <el-form-item label="与借款人关系">
+                    <el-checkbox-group  v-model="relatedPersonnelInformationSpouseForm.type" class="checkgroup">
+                      <el-checkbox v-for="vl in SpouseTypeOptions" :key="vl.VAL_CODE" :label="vl.VAL_CODE">{{vl.VAL_NAME}}</el-checkbox>
+                    </el-checkbox-group>
+                  </el-form-item>
                   <el-row>
                     <el-col span="8">
                       <el-form-item label="姓名" class="item">
@@ -4338,6 +4342,14 @@ export default {
         VAL_CODE: '2',
         VAL_NAME: '保证担保人',
       }],
+      //与借款人关系
+      SpouseTypeOptions:[{
+        VAL_CODE: '1',
+        VAL_NAME: '同时是保证担保人',
+      },{
+        VAL_CODE: '2',
+        VAL_NAME: '同时是抵押担保人',
+      }],
       //资产类型标记
       assetTypeFlag:false,
       //资产类型标记 配偶
@@ -4508,7 +4520,7 @@ export default {
       relatedPersonnelInformationSpouseForm:{
         loanBasisId:'',
         //类型
-        type:'',
+        type:[],
         //姓名
         name:'',
         //年龄
@@ -4944,7 +4956,7 @@ export default {
       let datas = {
         loanBasisId:this.loanBasisId,
         //类型
-        type:'2',
+        type:this.getType(this.relatedPersonnelInformationSpouseForm.type),
         //姓名
         name:relatedPersonnelInformationSpouseForm.name,
         //年龄
@@ -5109,6 +5121,8 @@ export default {
            // let params = Object.assign({}, this.relatedPersonnelInformationForm);
             this.$api.relatedPersonnel.save(datas).then((res) => {
               if(res.code == 200) {
+                this.maritalStatusFlag=false;
+                this.assetTypeFlag=false;
                 this.clearAssetType();
                 this.clearAssetSpouseType();
                 this.clearRelatedPersonnelInformationForm();
@@ -5152,6 +5166,10 @@ export default {
             console.log("datas:",datas);
             this.$api.oterRelatedPersonnel.save(datas).then((res) => {
               if(res.code == 200) {
+                //清空 资产类型选中
+                this.clearAssetType();
+                //清空 资产类型选中
+                this.clearAssetSpouseType();
                 this.active=type;
                 this.$message({ message: '操作成功', type: 'success' })
               } else {
@@ -5266,7 +5284,7 @@ export default {
       let relatedPersonnelInformationSpouseForm={
         loanBasisId:'',
         //类型
-        type:'',
+        type:[],
         //姓名
         name:'',
         //年龄
@@ -5321,7 +5339,7 @@ export default {
         //离婚方式 （1、协议离婚）（2、协议离婚）
         divorceMethod:'',
         //时间
-        time:'',
+        time:[],
         unitWorkingRears:'',
 
         //房屋信息
@@ -6140,7 +6158,7 @@ export default {
         //家庭收支情况
         relatedPersonnelInformationForm.householdIncomeForm = this.householdIncomeForm;
         //类型BORROWER(1, "借款人本人"), BORROWER_COUPLE(2, "借款人配偶"), MORTGAGE_GUARANTOR(3, "抵押担保人"),GUARANTOR(4, "保证担保人"), GUARANTOR_BOTH(5, "抵押担保人、保证担保人");
-        relatedPersonnelInformationForm.type=this.getType();
+        relatedPersonnelInformationForm.type=this.getType(this.relatedPersonnelInformationForm.type);
         dataParams = {
           name:relatedPersonnelInformationForm.name,
           identityNumber:relatedPersonnelInformationForm.identityNumber,
@@ -6166,10 +6184,10 @@ export default {
      * 获取其他相关人类型
      * 类型BORROWER(1, "借款人本人"), BORROWER_COUPLE(2, "借款人配偶"), MORTGAGE_GUARANTOR(3, "抵押担保人"),GUARANTOR(4, "保证担保人"), GUARANTOR_BOTH(5, "抵押担保人、保证担保人");
      */
-    getType(){
+    getType(typValue){
         let typeValue ='';
         let values ='';
-        let type = this.relatedPersonnelInformationForm.type;
+        let type = typValue;
         if(type){
           if(typeof(type)=='object'){
             for(let key in type){
@@ -6183,14 +6201,16 @@ export default {
               values+=strs[key]+',';
             }
           }
-          if(values !=''){
-              if(values.indexOf('1') !=-1 && values.indexOf('2') !=-1){
-                  typeValue ='5';
-              }else if(values.indexOf('1') !=-1){
-                  typeValue ='3';
-              }else if(values.indexOf('2') !=-1){
-                  typeValue ='4';
-              }
+          if(values !='') {
+            if (values.indexOf('1') != -1 && values.indexOf('2') != -1) {
+              typeValue = '5';
+            } else if (values.indexOf('1') != -1) {
+              typeValue = '3';
+            } else if (values.indexOf('2') != -1) {
+              typeValue = '4';
+            }
+          }else{
+            typeValue = '2';
           }
         }
         return typeValue;
