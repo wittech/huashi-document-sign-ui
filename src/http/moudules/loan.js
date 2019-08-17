@@ -57,3 +57,13 @@ export const generateDoc = (params) => {
     params
   })
 }
+
+// 根据基础id获取 引用房产 和土地信息
+export const findByLoanBasisIdList = (params) => {
+  return axios({
+    url: '/loan/findByLoanBasisIdList',
+    method: 'get',
+    params
+  })
+}
+

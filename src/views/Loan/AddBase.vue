@@ -330,7 +330,7 @@
                     </el-radio-group>
                   </el-form-item>
                   <el-form-item label="共有人姓名" v-show="coOwnerNameFlag">
-                    <el-input v-model="assetTypeHouses.co_owner_name" size="small" class="width180"></el-input>
+                    <el-input v-model="assetTypeHouses.coownerName" size="small" class="width180"></el-input>
                   </el-form-item>
 
                   <el-form-item label="是否有租赁">
@@ -2755,34 +2755,46 @@
             </div>
             <div v-if="pawnAddFlag">
               <!--编辑-->
-              <el-dialog title="相关房屋土地资产列表" width="72%" :visible.sync="referenceDialogVisible" :close-on-click-modal="false">
+              <el-dialog title="相关房屋土地资产列表" width="100%" :visible.sync="referenceDialogVisible" :close-on-click-modal="false">
                 <el-table
                   border
                   :data="referenceAssetList"
                   style="width: 80%">
                   <el-table-column
+                    fixed width="150">
+                    <template scope="scope">
+                      <el-radio class="radio" v-model="radioData"  :label="scope.row.id" @change="checkAll(scope.row)"></el-radio>
+                    </template>
+                  </el-table-column>
+                  <el-table-column
                     fixed
-                    prop="mortgageTypes"
+                    prop="assetType"
                     label="资产类型"
                     width="150">
                   </el-table-column>
                   <el-table-column
-                    prop="landNatures"
+                    fixed
+                    prop="assetType"
+                    label="资产名称"
+                    width="150">
+                  </el-table-column>
+                  <el-table-column
+                    prop="assetName"
                     label="资产名称"
                     width="120">
                   </el-table-column>
                   <el-table-column
-                    prop="collateralName"
+                    prop="name"
                     label="资产归属"
                     width="120">
                   </el-table-column>
                   <el-table-column
-                    prop="collateralDeposit"
+                    prop="coowner"
                     label="共有人"
                     width="120">
                   </el-table-column>
                   <el-table-column
-                    prop="value"
+                    prop="address"
                     label="地址">
                   </el-table-column>
                 </el-table>
@@ -2793,7 +2805,7 @@
                 </div>
               </el-dialog>
               <el-form-item label="抵押物类型">
-                <el-radio-group v-model="pawn.mortgageType" @change="referenceDialog">
+                <el-radio-group v-model="pawn.mortgageType" @change="mortgageTypeChange">
                   <el-radio  v-for="(vl, index) in MortgageTypeOptions" :label="vl.VAL_CODE" :key="index">
                     {{vl.VAL_NAME}}
                   </el-radio>
@@ -2982,27 +2994,21 @@
                   label="姓名"
                   width="150">
                 </el-table-column>
-                <!--<el-table-column
-                  prop="landNatures"
+                <el-table-column
+                  prop="borrowerRelationship"
                   label="与借款人关系"
                   width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="collateralName"
+                  prop="sexName"
                   label="性别"
                   width="120">
                 </el-table-column>
                 <el-table-column
-                  prop="collateralDeposit"
+                  prop="spouse"
                   label="配偶"
                   width="100">
-                </el-table-column>-->
-               <!-- <el-table-column
-                  label="操作">
-                  <template slot-scope="scope">
-                    <el-button @click="removeAssetsTableData(scope.$index + 1)" type="text" size="small">选择</el-button>
-                  </template>
-                </el-table-column>-->
+                </el-table-column>
               </el-table>
               <el-form-item>
                 <el-button type="primary" @click="selectSubmit()">选择</el-button>
@@ -4043,10 +4049,10 @@ export default {
       }],
       //是否不动产权证
       WhetherOwnershipCertificateseOptions:[{
-        VAL_CODE: '0',
+        VAL_CODE: '1',
         VAL_NAME: '不动产权证',
       },{
-        VAL_CODE: '1',
+        VAL_CODE: '2',
         VAL_NAME: '非不动产权证',
       }],
       //是否不动产权证
@@ -4151,7 +4157,7 @@ export default {
       //配偶 end
 
 
-      loanBasisId:'9',
+      loanBasisId:'80',
       size: 'small',
       dialogImageUrl: '',
       dialogVisible: false,
@@ -4800,6 +4806,10 @@ export default {
         foreignGuaranteeLumpSum:'',
         totalLiability:''
       },
+      //选中model
+      radioData:'',
+      //选中赋值
+      checkedRadioData:'',
 
 		}
 	},
@@ -4813,17 +4823,15 @@ export default {
       this.propertyCertificateNumberFlag=false;
       this.deedLandCertificateFlag=false;
       this.deedNumberFlag=false;
-      if(value){
-          //房屋
-         if(value=='0'){
-            this.EvaluationCorporationOptions=this.HousEvaluationCorporationOptions;
-            this.whetherOwnershipCertificatesFlag=true;
-         }else if(value=='1'){
-            this.EvaluationCorporationOptions=this.LandEvaluationCorporationOptions;
-            this.pawn.whetherOwnershipCertificates='';
-            this.deedLandCertificateFlag=true;
-         }
-      }
+        //房屋
+       if(value=='0'){
+          this.EvaluationCorporationOptions=this.HousEvaluationCorporationOptions;
+          this.whetherOwnershipCertificatesFlag=true;
+       }else if(value=='1'){
+          this.EvaluationCorporationOptions=this.LandEvaluationCorporationOptions;
+          this.pawn.whetherOwnershipCertificates='';
+          this.deedLandCertificateFlag=true;
+       }
     },
 
     /**
@@ -6221,6 +6229,20 @@ export default {
       this.addRelevantPeopleFlag= false;
       //显示列表
       this.listRelevantPeopleFlag = true;
+
+      this.clearAssetType();
+      this.clearAssetSpouseType();
+      this.assetTypeFlag=false;
+      //婚姻状况
+      this.maritalStatusFlag = false;
+      //已婚
+      this.maritalStatusMarriedFlag=false;
+      //离异
+      this.maritalStatusDivorcedFlag=false;
+      //丧偶
+      this.maritalStatusWidowedFlag=false;
+      //其他
+      this.maritalStatusOtherFlag=false;
     },
 
     /**
@@ -6335,9 +6357,12 @@ export default {
       this.deedLandCertificateFlag=false;
       this.deedNumberFlag=false;
       //不动产权证
-      if(value=='0'){
+      if(value=='1'){
           this.propertyCertificateNumberFlag=true;
+          this.pawn.landCertificateNumber = '';
+          this.pawn.propertyCertificateNumber = '';
       }else {
+          this.pawn.propertyCertificateNumber='';
           this.deedNumberFlag=true;
           this.deedLandCertificateFlag=true;
       }
@@ -6505,6 +6530,11 @@ export default {
         this.clearPawn();
         this.pawnListFlag=false;
         this.pawnAddFlag=true;
+        this.whetherOwnershipCertificatesFlag=false;
+        this.propertyCertificateNumberFlag=false;
+        this.deedNumberFlag=false;
+        this.deedLandCertificateFlag=false;
+        this.coOwnerNameFlag=false;
     },
 
     /**
@@ -6672,9 +6702,55 @@ export default {
       api.loan.findByBaseIdList(params).then((res) => {
         this.assetsTableData=[];
         if(res.code=='200'){
-          this.assetsTableData = res.data;
+          this.setAssetsTableData(res.data);
+          //this.assetsTableData = res.data;
         }
       })
+    },
+
+    /**
+     *相关人员数据设置
+     */
+    setAssetsTableData(dataList){
+      if(dataList){
+          let assetsTableDataNew = [];
+          for(let index in dataList){
+            let dataNew ={};
+            let data = dataList[index];
+            let typeName ='';
+            if(data.type=='1'){
+              typeName='借款人本人';
+            }else if(data.type=='2'){
+              typeName='借款人配偶';
+            }else if(data.type=='3'){
+              typeName='抵押担保人';
+            }else if(data.type=='4'){
+              typeName='保证担保人';
+            }else if(data.type=='5'){
+              typeName='抵押担保人、保证担保人';
+            }else{
+              typeName='无';
+            }
+            dataNew.borrowerRelationship = typeName;
+            let sexName ='';
+            if(data.sex =='0'){
+              sexName='男';
+            }else if(data.sex =='1'){
+              sexName='女';
+            }else {
+              sexName='无';
+            }
+            dataNew.sexName = sexName;
+            let spouse ='无';
+            if(!this.isNull(data.spouse)){
+              spouse=data.spouse;
+            }
+            dataNew.spouse = spouse;
+            dataNew.name = data.name;
+            assetsTableDataNew.push(dataNew);
+          }
+          this.assetsTableData = assetsTableDataNew;
+      }
     },
 
     /**
@@ -7102,16 +7178,234 @@ export default {
      * 引用
      */
     referenceDialog(){
+        this.radioData='';
         //查询房屋土地资产
         this.referenceAssetList=[];
-        this.referenceDialogVisible =true;
+        let dataParams = {
+          loanBasisId:this.loanBasisId
+        }
+        let params = Object.assign({}, dataParams)
+        api.loan.findByLoanBasisIdList(params).then((res) => {
+            if(res.code=='200'){
+              this.setReferenceAssetList(res.data);
+            }
+            this.referenceDialogVisible =true;
+        })
+    },
+
+    /**
+     * 设置引用数据
+     */
+    setReferenceAssetList(dataList){
+        if(dataList){
+            let referenceAssetTempList = [];
+            for(let index in dataList){
+                let tempData = {};
+                let data = dataList[index];
+                tempData.data = data;
+                let assetName ='';
+                let assetType ='';
+                let coowner = '';
+                let id='';
+                let mortgageType='';
+                let addressValue='';
+                let whetherOwnershipCertificatesValue ='';
+                if(!this.isNull(data.typeHous)){
+                    assetName=data.namehouses;
+                    assetType='房屋';
+                    coowner=data.coownerName;
+                    id = data.typeHous;
+                    mortgageType='0';
+                    addressValue=data.address;
+                    let whetherOwnershipCertificates = data.whetherOwnershipCertificates;
+                    if(!this.isNull(whetherOwnershipCertificates)){
+                      if(whetherOwnershipCertificates=='1'){
+                          whetherOwnershipCertificatesValue ='1';
+                      }else{
+                          whetherOwnershipCertificatesValue ='2';
+                      }
+                    }
+                }
+                if(!this.isNull(data.typeLand)){
+                    assetName=data.nameLand;
+                    assetType='土地';
+                    coowner=data.coownerNameLand;
+                    id = data.typeLand;
+                    mortgageType='1';
+                   addressValue=data.addressLand;
+                }
+                tempData.mortgageType = mortgageType;
+                tempData.assetType = assetType;
+                tempData.assetName = assetName;
+                tempData.name = data.name;
+                tempData.coowner = coowner;
+                tempData.address =addressValue;
+                tempData.whetherOwnershipCertificates =whetherOwnershipCertificatesValue;
+                tempData.id=id;
+                referenceAssetTempList.push(tempData);
+            }
+            this.referenceAssetList = referenceAssetTempList;
+        }
+    },
+
+    /**
+     * 是否为空
+     */
+    isNull(value){
+      if(value ==null || value ==''|| value == undefined){
+          return true;
+      }
+      return false
     },
 
     /**
      * 选择房屋土地资产 进行选中
      */
     selectReference(){
+        let checkedRadioData = this.checkedRadioData;
+        console.log("checkedRadioData:",checkedRadioData);
+        if(checkedRadioData){
+            //类型
+            let mortgageType = checkedRadioData.mortgageType;
+            if(mortgageType){
+                let data = checkedRadioData.data;
+                this.pawn.mortgageType= mortgageType;
+                this.mortgageTypeChange(mortgageType);
+                //抵押物名称
+                this.pawn.collateralName = checkedRadioData.name;
+                //面积
+                let constructionAreaValue = '';
+                //所属地
+                let affiliationValue = '';
+                //价值
+                let values = '';
+                //融资情况
+                let whetherCoownerValue='';
+                //共同人
+                let coownerNameValue= '';
+                //是否有租赁
+                let whetherLeaseLandValue = '';
+                if(mortgageType=='0') {
+                  //房屋 是否不动产权证
+                  let whetherOwnershipCertificates = checkedRadioData.whetherOwnershipCertificates;
+                  if(!this.isNull(whetherOwnershipCertificates)){
+                    this.pawn.whetherOwnershipCertificates =whetherOwnershipCertificates;
+                    this.whetherOwnershipCertificatesChange(whetherOwnershipCertificates);
+                  }
+                  //不动产权证号
+                  let propertyCertificateNumber = data.propertyCertificateNumber;
+                  if(propertyCertificateNumber){
+                      this.pawn.propertyCertificateNumber = propertyCertificateNumber;
+                  }
+                  //房产证号
+                  let deed = data.deed;
+                  if(deed){
+                    this.pawn.propertyCertificateNumber = deed;
+                  }
+                  //土地证号
+                  let landCertificate = data.landCertificate;
+                  if(!this.isNull(landCertificate)){
+                    this.pawn.landCertificateNumber = landCertificate;
+                  }
+                  //房屋面积
+                  let constructionArea = data.constructionArea;
+                  if(!this.isNull(constructionArea)){
+                    constructionAreaValue=constructionArea;
+                  }
+                  //所属地
+                  let affiliation = data.affiliation;
+                  if(!this.isNull(affiliation)){
+                    affiliationValue=affiliation;
+                  }
+                  //融资情况 （0、无抵押）（1、有抵押）
+                  let financingSituation = data.financingSituation;
+                  if(!this.isNull(financingSituation)){
+                    this.pawn.financingSituation =financingSituation;
+                  }
+                  //价值
+                  let value = data.value;
+                  if(!this.isNull(value)){
+                    values=value;
+                  }
+                  //是否有共有人
+                  let whetherCoowner = data.whetherCoowner;
+                  if(!this.isNull(whetherCoowner)){
+                    whetherCoownerValue=whetherCoowner;
+                  }
+                  //共有人姓名
+                  let coownerName = data.coownerName;
+                  if(!this.isNull(coownerName)){
+                    coownerNameValue=coownerName;
+                  }
+                  //是否有租赁
+                  let whetherLease = data.whetherLease;
+                  if(!this.isNull(whetherLease)){
+                    whetherLeaseLandValue=whetherLease;
+                  }
 
+                }else if(mortgageType=='1'){
+                  //土地  土地证号
+                  let landTypeCertificate = data.landTypeCertificate;
+                  if(!this.isNull(landTypeCertificate)){
+                    this.pawn.landCertificateNumber = landTypeCertificate;
+                  }
+                  //土地面积
+                  let constructionAreaLand = data.constructionAreaLand;
+                  if(!this.isNull(constructionAreaLand)){
+                    constructionAreaValue=constructionAreaLand;
+                  }
+                  //所属地
+                  let affiliationLand = data.affiliationLand;
+                  if(!this.isNull(affiliationLand)){
+                    affiliationValue=affiliationLand;
+                  }
+                  //融资情况 （0、无抵押）（1、有抵押）
+                  let financingSituationLand = data.financingSituationLand;
+                  if(!this.isNull(financingSituationLand)){
+                    this.pawn.financingSituation =financingSituationLand;
+                  }
+                  //价值
+                  let valueLand = data.valueLand;
+                  if(!this.isNull(valueLand)){
+                      values=valueLand;
+                  }
+                  //是否有共有人
+                  let whetherCoownerLand = data.whetherCoownerLand;
+                  if(!this.isNull(whetherCoownerLand)){
+                    whetherCoownerValue=whetherCoownerLand;
+                  }
+                  //共有人姓名
+                  let coownerNameLand = data.coownerNameLand;
+                  if(!this.isNull(coownerNameLand)){
+                    coownerNameValue=coownerNameLand;
+                  }
+                  //是否有租赁
+                  let whetherLeaseLand = data.whetherLeaseLand;
+                  if(!this.isNull(whetherLeaseLand)){
+                      whetherLeaseLandValue=whetherLeaseLand;
+                  }
+                }
+                //房屋建筑面积
+                this.pawn.buildingArea=constructionAreaValue;
+                //所属地
+                this.pawn.affiliation = affiliationValue;
+                //价值
+                this.pawn.value = values;
+                //是否有共有人
+                this.pawn.whetherCoowner= whetherCoownerValue;
+                this.whetherCoownerChange(whetherCoownerValue);
+                //共有人姓名
+                if(!this.isNull(coownerNameValue)){
+                    this.pawn.coownerName = coownerNameValue;
+                }
+                //是否有租赁
+                this.pawn.whetherLease = whetherLeaseLandValue;
+                this.whetherLeaseChange(whetherLeaseLandValue);
+                this.referenceDialogVisible =false;
+            }
+        }else{
+            this.$message({message: '请选择需要引用的数据！', type: 'error'})
+        }
     },
 
     /**
@@ -7119,6 +7413,13 @@ export default {
      */
     referenceDialogClose(){
       this.referenceDialogVisible =false;
+    },
+
+    /**
+     * 选中
+     */
+    checkAll(data){
+      this.checkedRadioData = data;
     },
 
 
