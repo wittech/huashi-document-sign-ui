@@ -1,22 +1,22 @@
 <template>
     <div>
         <el-steps :active="active" finish-status="success">
-         <!-- <el-step title="基础信息" @click.native="stepClick(0)"  class="schedule"></el-step>
+          <el-step title="基础信息" @click.native="stepClick(0)"  class="schedule"></el-step>
           <el-step title="借款人情况" @click.native="stepClick(1)" class="schedule"></el-step>
           <el-step title="相关人情况" @click.native="stepClick(2)" class="schedule"></el-step>
           <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
           <el-step title="相关贷款业务信息" @click.native="stepClick(4)" class="schedule"></el-step>
-          &lt;!&ndash;<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>&ndash;&gt;
+          <!--<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>-->
           <el-step title="个人贷款调查报告表" @click.native="stepClick(6)" class="schedule"></el-step>
-          <el-step title="合同信息" @click.native="stepClick(7)" class="schedule"></el-step>-->
-          <el-step title="基础信息"></el-step>
+          <el-step title="合同信息" @click.native="stepClick(7)" class="schedule"></el-step>
+         <!-- <el-step title="基础信息"></el-step>
           <el-step title="借款人情况"></el-step>
           <el-step title="相关人情况"></el-step>
           <el-step title="抵押物"></el-step>
           <el-step title="相关贷款业务信息"></el-step>
-         <!-- <el-step title="合影"></el-step>-->
+         &lt;!&ndash; <el-step title="合影"></el-step>&ndash;&gt;
           <el-step title="个人贷款调查报告表"></el-step>
-          <el-step title="合同信息"></el-step>
+          <el-step title="合同信息"></el-step>-->
         </el-steps>
         <!--0、基础信息-->
         <div v-if="active==0" class="step1">
