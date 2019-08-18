@@ -22,7 +22,7 @@
         <div v-if="active==0" class="step1">
           <el-form :model="loanBasisForm" label-width="80px" :rules="loanBasisFormRules" ref="loanBasisForm" :size="size">
             <div>
-              <el-form-item label="贷款类型">
+              <el-form-item label="贷款类型" prop="loanType">
                 <el-radio-group v-model="loanBasisForm.loanType" @change="loanTypeChage">
                   <el-radio  v-for="(vl, index) in LoanTypeOptions" :label="vl.VAL_CODE" :key="index">
                     {{vl.VAL_NAME}}
@@ -49,7 +49,7 @@
             <el-form-item label="借款人" prop="borrower">
               <el-input v-model="loanBasisForm.borrower" auto-complete="off" size="small" class="width350"></el-input>
             </el-form-item>
-            <br>
+
             <el-form-item>
               <el-button type="primary"  @click="saveBasicSubmit">下一步</el-button>
               <el-button @click="previous">返回</el-button>
@@ -59,22 +59,22 @@
         </div>
         <!--1、借款人情况-->
         <div v-if="active==1">
-          <el-form :model="relatedPersonnelInformationForm" label-width="100px" :rules="dataFormRules" ref="relatedPersonnelInformationForm" :size="size">
+          <el-form :model="relatedPersonnelInformationForm" label-width="150px" :rules="add2Rules" ref="relatedPersonnelInformationForm" :size="size">
               <el-row>
                 <el-col span="8">
-                  <el-form-item label="姓名" class="item">
+                  <el-form-item label="姓名" class="item" prop="name">
                     <el-input v-model="relatedPersonnelInformationForm.name" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
-                  <el-form-item label="身份证号码">
+                  <el-form-item label="身份证号码" prop="identityNumber">
                     <el-input v-model="relatedPersonnelInformationForm.identityNumber" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
 
-              <el-form-item label="年龄">
-                <el-input v-model="relatedPersonnelInformationForm.age" size="small" class="width150"></el-input>
+              <el-form-item label="年龄" prop="age">
+                <el-input v-model.number="relatedPersonnelInformationForm.age" size="small" class="width150"></el-input>
               </el-form-item>
               <el-form-item label="性别">
                 <el-radio-group v-model="relatedPersonnelInformationForm.sex">
@@ -98,8 +98,8 @@
 
               <el-row>
                 <el-col span="8">
-                  <el-form-item label="本地居住时间">
-                    <el-input v-model="relatedPersonnelInformationForm.localResidenceTime" size="small" class="width150" placeholder="本地居住时间 年"></el-input>
+                  <el-form-item label="本地居住时间" prop="localResidenceTime">
+                    <el-input v-model="relatedPersonnelInformationForm.localResidenceTime" size="small" class="width150"></el-input> 年
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -174,20 +174,20 @@
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
-                  <el-form-item label="在该单位工作年限">
-                    <el-input v-model="relatedPersonnelInformationForm.unitWorkingYears" placeholder="在该单位工作年限 年" size="small" class="width150"></el-input>
+                  <el-form-item label="工作年限" prop="unitWorkingYears">
+                    <el-input v-model="relatedPersonnelInformationForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
                 <el-col span="8">
-                  <el-form-item label="所投资或经营企业名称">
-                    <el-input v-model="relatedPersonnelInformationForm.companyName" size="small" class="width150"></el-input>
+                  <el-form-item label="投资经营企业">
+                    <el-input v-model="relatedPersonnelInformationForm.companyName" placeholder="所投资或经营企业名称" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
-                  <el-form-item label="本行业和相近行业经营年限">
-                    <el-input v-model="relatedPersonnelInformationForm.yearsOperation" placeholder="在该单位工作年限 年" size="small" class="width180"></el-input>
+                  <el-form-item label="行业经营年限" prop="yearsOperation">
+                    <el-input v-model="relatedPersonnelInformationForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -212,7 +212,7 @@
                 <el-button icon="fa fa-plus" type="primary" @click="onSubmit">新增房屋</el-button>
               </el-form-item>-->
               <el-button icon="fa fa-plus" type="primary" @click="addHousAsset">增加房屋资产</el-button>
-              <br>
+
               <el-table
                 border
                 :data="assetTypeHousesTableData"
@@ -254,7 +254,7 @@
 
               <!--新增编辑界面-->
               <el-dialog :title="operation?'新增':'新增'" width="60%" :visible.sync="addHousAssetDialogVisible" :close-on-click-modal="false">
-                <el-form :model="assetTypeHouses" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                <el-form :model="assetTypeHouses" label-width="150px" :rules="dataFormRules" ref="dataForm" :size="size">
                   <el-form-item label="是否不动产权证">
                   <el-radio-group v-model="assetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
                     <el-radio  v-for="(vl, index) in WhetherOwnershipCertificatesOptions" :label="vl.VAL_CODE" :key="index">
@@ -273,6 +273,8 @@
                         <el-input v-model="assetTypeHouses.deed"  size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
+                  </el-row>
+                  <el-row>
                     <el-col span="8" v-show="deedLandCertificateFlag">
                       <el-form-item label="土地证号">
                         <el-input v-model="assetTypeHouses.landCertificate"  size="small" class="width180"></el-input>
@@ -286,6 +288,8 @@
                         <el-input v-model="assetTypeHouses.name" size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
+                  </el-row>
+                  <el-row>
                     <el-col span="8">
                       <el-form-item label="地址">
                         <el-input v-model="assetTypeHouses.address" size="small" class="width180"></el-input>
@@ -307,6 +311,8 @@
                         <el-input v-model="assetTypeHouses.constructionArea" size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
+                  </el-row>
+                  <el-row>
                     <el-col span="8">
                       <el-form-item label="价值">
                         <el-input v-model="assetTypeHouses.value" size="small" class="width180"></el-input>
@@ -389,7 +395,7 @@
 
               <!--新增编辑土地界面-->
               <el-dialog :title="operationLand?'新增':'编辑'" width="60%" :visible.sync="addLandAssetDialogVisible" :close-on-click-modal="false">
-                <el-form :model="assetTypeLand" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                <el-form :model="assetTypeLand" label-width="150px" :rules="dataFormRules" ref="dataForm" :size="size">
                   <el-form-item label="土地证号">
                     <el-input v-model="assetTypeLand.landCertificate" size="small" class="width180"></el-input>
                   </el-form-item>
@@ -399,6 +405,8 @@
                         <el-input v-model="assetTypeLand.name" size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
+                  </el-row>
+                  <el-row>
                     <el-col span="8">
                       <el-form-item label="地址">
                         <el-input v-model="assetTypeLand.address" size="small" class="width180"></el-input>
@@ -420,6 +428,8 @@
                         <el-input v-model="assetTypeLand.constructionArea" size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
+                  </el-row>
+                  <el-row>
                     <el-col span="8">
                       <el-form-item label="价值">
                         <el-input v-model="assetTypeLand.value" size="small" class="width180"></el-input>
@@ -634,7 +644,7 @@
             <!--其他 end-->
 
             <!--婚姻状态-->
-             <el-form-item label="婚姻状况">
+             <el-form-item label="婚姻状况" prop="maritalStatus">
                 <el-radio-group v-model="relatedPersonnelInformationForm.maritalStatus" @change="maritalStatusChange">
                   <el-radio  v-for="(vl, index) in MaritalStatusOptions" :label="vl.VAL_CODE" :key="index">
                     {{vl.VAL_NAME}}
@@ -760,20 +770,20 @@
                         </el-form-item>
                       </el-col>
                       <el-col span="8">
-                        <el-form-item label="在该单位工作年限">
-                          <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" size="small" class="width150"></el-input>
+                        <el-form-item label="单位工作年限">
+                          <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" placeholder="该单位工作年限" size="small" class="width150"></el-input>
                         </el-form-item>
                       </el-col>
                     </el-row>
                     <el-row>
                       <el-col span="8">
-                        <el-form-item label="所投资或经营企业名称">
-                          <el-input v-model="relatedPersonnelInformationSpouseForm.companyName" size="small" class="width150"></el-input>
+                        <el-form-item label="投资经营企业">
+                          <el-input v-model="relatedPersonnelInformationSpouseForm.companyName" placeholder="所投资或经营企业名称" size="small" class="width150"></el-input>
                         </el-form-item>
                       </el-col>
                       <el-col span="8">
-                        <el-form-item label="本行业和相近行业经营年限">
-                          <el-input v-model="relatedPersonnelInformationSpouseForm.yearsOperation" size="small" class="width180"></el-input>
+                        <el-form-item label="行业经营年限">
+                          <el-input v-model="relatedPersonnelInformationSpouseForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input>
                         </el-form-item>
                       </el-col>
                     </el-row>
@@ -840,7 +850,7 @@
 
                     <!--新增编辑界面-->
                     <el-dialog :title="spouseAssetTypeHouses?'新增':'新增'" width="60%" :visible.sync="addSpouseHousAssetDialogVisible" :close-on-click-modal="false">
-                      <el-form :model="spouseAssetTypeHouses" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                      <el-form :model="spouseAssetTypeHouses" label-width="150px" :rules="dataFormRules" ref="dataForm" :size="size">
                         <el-form-item label="是否不动产权证">
                         <el-radio-group v-model="spouseAssetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
                           <el-radio  v-for="(vl, index) in WhetherOwnershipCertificatesOptions" :label="vl.VAL_CODE" :key="index">
@@ -853,12 +863,14 @@
                           <el-input v-model="spouseAssetTypeHouses.propertyCertificateNumber" size="small" class="width180"></el-input>
                         </el-form-item>
 
-                        <el-row >
+                        <el-row>
                           <el-col span="8" v-show="deedNumberFlag">
                             <el-form-item label="房产证号">
                               <el-input v-model="spouseAssetTypeHouses.deed"  size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
+                        </el-row>
+                        <el-row>
                           <el-col span="8" v-show="deedLandCertificateFlag">
                             <el-form-item label="土地证号">
                               <el-input v-model="spouseAssetTypeHouses.landCertificate" size="small" class="width180"></el-input>
@@ -872,6 +884,8 @@
                               <el-input v-model="spouseAssetTypeHouses.name" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
+                        </el-row>
+                        <el-row>
                           <el-col span="8">
                             <el-form-item label="地址">
                               <el-input v-model="spouseAssetTypeHouses.address" size="small" class="width180"></el-input>
@@ -893,6 +907,8 @@
                               <el-input v-model="spouseAssetTypeHouses.constructionArea" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
+                        </el-row>
+                        <el-row>
                           <el-col span="8">
                             <el-form-item label="价值">
                               <el-input v-model="spouseAssetTypeHouses.value" size="small" class="width180"></el-input>
@@ -975,7 +991,7 @@
 
                     <!--新增编辑土地界面-->
                     <el-dialog :title="operationSpouseLand?'新增':'编辑'" width="60%" :visible.sync="addSpouseLandAssetDialogVisible" :close-on-click-modal="false">
-                      <el-form :model="spouseAssetTypeLand" label-width="80px" :rules="dataFormRules" ref="spouseAssetTypeLand" :size="size">
+                      <el-form :model="spouseAssetTypeLand" label-width="150px" :rules="dataFormRules" ref="spouseAssetTypeLand" :size="size">
                         <el-form-item label="土地证号">
                           <el-input v-model="spouseAssetTypeLand.landCertificate" size="small" class="width180"></el-input>
                         </el-form-item>
@@ -985,6 +1001,8 @@
                               <el-input v-model="spouseAssetTypeLand.name" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
+                        </el-row>
+                        <el-row>
                           <el-col span="8">
                             <el-form-item label="地址">
                               <el-input v-model="spouseAssetTypeLand.address" size="small" class="width180"></el-input>
@@ -1006,6 +1024,8 @@
                               <el-input v-model="spouseAssetTypeLand.constructionArea" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
+                        </el-row>
+                        <el-row>
                           <el-col span="8">
                             <el-form-item label="价值">
                               <el-input v-model="spouseAssetTypeLand.value" size="small" class="width180"></el-input>
@@ -1278,7 +1298,7 @@
 
               <!--家庭收支情况 start-->
               <div>
-                <hr>家庭收支情况
+                <hr>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="家庭总资产">
@@ -1310,17 +1330,17 @@
                 </el-row>
                 <el-row>
                   <el-col span="8">
-                    <el-form-item label="申请人配偶年薪金收入">
+                    <el-form-item label="配偶年薪金收入">
                       <el-input v-model="householdIncomeForm.spouseAnnualIncome" size="small" class="width150"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
-                    <el-form-item label="申请人配偶年经营性收入">
+                    <el-form-item label="配偶年经营性收入">
                       <el-input v-model="householdIncomeForm.spouseOperatingIncome" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
-                    <el-form-item label="申请人配偶其他收入">
+                    <el-form-item label="配偶其他收入">
                       <el-input v-model="householdIncomeForm.spouseOtherIncome" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
@@ -1366,7 +1386,7 @@
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
-                    <el-form-item label="申请人配偶年还贷支出">
+                    <el-form-item label="配偶年还贷支出">
                       <el-input v-model="householdIncomeForm.spouseTemporaryExpenditure" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
@@ -1438,20 +1458,20 @@
           </div>
           <!--添加相关人标记-->
           <div v-if="addRelevantPeopleFlag">
-            <el-form :model="relatedPersonnelInformationForm" label-width="100px" :rules="dataFormRules" ref="relatedPersonnelInformationForm" :size="size">
-              <el-form-item label="与借款人关系">
+            <el-form :model="relatedPersonnelInformationForm" label-width="150px" :rules="add3Rules" ref="relatedPersonnelInformationForm" :size="size">
+              <el-form-item label="与借款人关系" prop="type">
                 <el-checkbox-group  v-model="relatedPersonnelInformationForm.type" class="checkgroup">
                   <el-checkbox v-for="vl in TypeOptions" :key="vl.VAL_CODE" :label="vl.VAL_CODE">{{vl.VAL_NAME}}</el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
               <el-row>
                 <el-col span="8">
-                  <el-form-item label="姓名" class="item">
+                  <el-form-item label="姓名" class="item" prop="name">
                     <el-input v-model="relatedPersonnelInformationForm.name" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
-                  <el-form-item label="身份证号码">
+                  <el-form-item label="身份证号码" prop="identityNumber">
                     <el-input v-model="relatedPersonnelInformationForm.identityNumber" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
@@ -1558,20 +1578,20 @@
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
-                  <el-form-item label="在该单位工作年限">
-                    <el-input v-model="relatedPersonnelInformationForm.unitWorkingYears" size="small" class="width150"></el-input>
+                  <el-form-item label="单位工作年限">
+                    <el-input v-model="relatedPersonnelInformationForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
                 <el-col span="8">
-                  <el-form-item label="所投资或经营企业名称">
-                    <el-input v-model="relatedPersonnelInformationForm.companyName" size="small" class="width150"></el-input>
+                  <el-form-item label="投资经营企业">
+                    <el-input v-model="relatedPersonnelInformationForm.companyName" placeholder="所投资或经营企业名称" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
-                  <el-form-item label="本行业和相近行业经营年限">
-                    <el-input v-model="relatedPersonnelInformationForm.yearsOperation" size="small" class="width180"></el-input>
+                  <el-form-item label="行业经营年限">
+                    <el-input v-model="relatedPersonnelInformationForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -2018,7 +2038,7 @@
               <!--其他 end-->
 
               <!--婚姻状态-->
-              <el-form-item label="婚姻状况">
+              <el-form-item label="婚姻状况" prop="maritalStatus">
                 <el-radio-group v-model="relatedPersonnelInformationForm.maritalStatus" @change="maritalStatusChange">
                   <el-radio  v-for="(vl, index) in MaritalStatusOptions" :label="vl.VAL_CODE" :key="index">
                     {{vl.VAL_NAME}}
@@ -2148,20 +2168,20 @@
                       </el-form-item>
                     </el-col>
                     <el-col span="8">
-                      <el-form-item label="在该单位工作年限">
-                        <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" size="small" class="width150"></el-input>
+                      <el-form-item label="单位工作年限">
+                        <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col span="8">
-                      <el-form-item label="所投资或经营企业名称">
-                        <el-input v-model="relatedPersonnelInformationSpouseForm.companyName" size="small" class="width150"></el-input>
+                      <el-form-item label="投资经营企业">
+                        <el-input v-model="relatedPersonnelInformationSpouseForm.companyName" placeholder="所投资或经营企业名称" size="small" class="width150"></el-input>
                       </el-form-item>
                     </el-col>
                     <el-col span="8">
-                      <el-form-item label="本行业和相近行业经营年限">
-                        <el-input v-model="relatedPersonnelInformationSpouseForm.yearsOperation" size="small" class="width180"></el-input>
+                      <el-form-item label="行业经营年限">
+                        <el-input v-model="relatedPersonnelInformationSpouseForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -2228,7 +2248,7 @@
 
                     <!--新增编辑界面-->
                     <el-dialog :title="operationSpouse?'新增':'新增'" width="60%" :visible.sync="addSpouseHousAssetDialogVisible" :close-on-click-modal="false">
-                      <el-form :model="spouseAssetTypeHouses" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                      <el-form :model="spouseAssetTypeHouses" label-width="150px" :rules="dataFormRules" ref="dataForm" :size="size">
                         <el-form-item label="是否不动产权证">
                         <el-radio-group v-model="spouseAssetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
                           <el-radio  v-for="(vl, index) in WhetherOwnershipCertificatesOptions" :label="vl.VAL_CODE" :key="index">
@@ -2241,12 +2261,14 @@
                           <el-input v-model="spouseAssetTypeHouses.propertyCertificateNumber" size="small" class="width180"></el-input>
                         </el-form-item>
 
-                        <el-row >
+                        <el-row>
                           <el-col span="8" v-show="deedNumberFlag">
                             <el-form-item label="房产证号">
                               <el-input v-model="spouseAssetTypeHouses.deed" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
+                        </el-row>
+                        <el-row>
                           <el-col span="8" v-show="deedLandCertificateFlag">
                             <el-form-item label="土地证号">
                               <el-input v-model="spouseAssetTypeHouses.landCertificate" size="small" class="width180"></el-input>
@@ -2260,6 +2282,8 @@
                               <el-input v-model="spouseAssetTypeHouses.name" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
+                        </el-row>
+                        <el-row>
                           <el-col span="8">
                             <el-form-item label="地址">
                               <el-input v-model="spouseAssetTypeHouses.address" size="small" class="width180"></el-input>
@@ -2281,6 +2305,8 @@
                               <el-input v-model="spouseAssetTypeHouses.constructionArea" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
+                        </el-row>
+                        <el-row>
                           <el-col span="8">
                             <el-form-item label="价值">
                               <el-input v-model="spouseAssetTypeHouses.value" size="small" class="width180"></el-input>
@@ -2363,7 +2389,7 @@
 
                     <!--新增编辑土地界面-->
                     <el-dialog :title="operationSpouseLand?'新增':'编辑'" width="60%" :visible.sync="addSpouseLandAssetDialogVisible" :close-on-click-modal="false">
-                      <el-form :model="spouseAssetTypeLand" label-width="80px" :rules="dataFormRules" ref="spouseAssetTypeLand" :size="size">
+                      <el-form :model="spouseAssetTypeLand" label-width="150px" :rules="dataFormRules" ref="spouseAssetTypeLand" :size="size">
                         <el-form-item label="土地证号">
                           <el-input v-model="spouseAssetTypeLand.landCertificate" size="small" class="width180"></el-input>
                         </el-form-item>
@@ -2373,6 +2399,8 @@
                               <el-input v-model="spouseAssetTypeLand.name" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
+                        </el-row>
+                        <el-row>
                           <el-col span="8">
                             <el-form-item label="地址">
                               <el-input v-model="spouseAssetTypeLand.address" size="small" class="width180"></el-input>
@@ -2394,6 +2422,8 @@
                               <el-input v-model="spouseAssetTypeLand.constructionArea" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
+                        </el-row>
+                        <el-row>
                           <el-col span="8">
                             <el-form-item label="价值">
                               <el-input v-model="spouseAssetTypeLand.value" size="small" class="width180"></el-input>
@@ -2666,7 +2696,7 @@
 
               <!--家庭收支情况 start-->
               <div>
-                <hr>家庭收支情况
+                <hr>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="家庭总资产">
@@ -2713,7 +2743,7 @@
         </div>
         <!--3、抵押物-->
         <div v-if="active==3">
-          <el-form :model="pawn" label-width="100px" :rules="dataFormRules" ref="pawn" :size="size">
+          <el-form :model="pawn" label-width="150px" :rules="dataFormRules" ref="pawn" :size="size">
             <div v-if="pawnListFlag">
               <el-button icon="fa fa-plus" type="primary" @click="addPawn">增加其他抵押物</el-button>
               <br>
@@ -2847,6 +2877,8 @@
                     <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
+              </el-row>
+                <el-row>
                 <el-col span="8">
                   <el-form-item label="抵押物名称">
                     <el-input v-model="pawn.collateralName" size="small" class="width180"></el-input>
@@ -2876,6 +2908,8 @@
                     <el-input v-model="pawn.collateralDeposit" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
+              </el-row>
+              <el-row>
                 <el-col span="8">
                   <el-form-item label="价值">
                     <el-input v-model="pawn.value" size="small" class="width180"></el-input>
@@ -2981,7 +3015,7 @@
               </el-form-item>
               <br>
               <div slot="footer" class="dialog-footer">
-                <el-button :size="size" type="primary" @click.native="assetTypePawnForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                <el-button :size="size" type="primary" @click.native="assetTypePawnForm" :loading="editLoading">保存</el-button>
               </div>
             </div>
             <el-dialog title="相关人员列表" width="50%" :visible.sync="addPawnDialogVisible" :close-on-click-modal="false">
@@ -3186,7 +3220,7 @@
         </div>
         <!--4、其他相关贷款业务信息-->
         <div v-if="active==4">
-          <el-form :model="loanBusinessInformation" label-width="100px" :rules="dataFormRules" ref="loanBusinessInformation" :size="size">
+          <el-form :model="loanBusinessInformation" label-width="150px" :rules="dataFormRules" ref="loanBusinessInformation" :size="size">
             <el-row>
               <el-col span="8">
                 <el-form-item label="借款人账号" class="item">
@@ -3234,7 +3268,7 @@
                 </template>
               </el-table-column>
             </el-table>
-            <el-dialog title="新增交易对手信息" width="60%" :visible.sync="addCounterpartyDialogVisible" :close-on-click-modal="false">
+            <el-dialog title="新增交易对手" width="60%" :visible.sync="addCounterpartyDialogVisible" :close-on-click-modal="false">
               <el-form-item label="交易对手名称">
                 <el-input v-model="counterpartyInformation.name" size="small" class="width180"></el-input>
               </el-form-item>
@@ -3254,14 +3288,16 @@
             </el-dialog>
             <br>
             <div>
-              <hr>申请借款情况
-              <el-form :model="loanBusinessInformation" label-width="100px" :rules="dataFormRules" ref="loanBusinessInformation" :size="size">
+              <hr>
+              <el-form :model="loanBusinessInformation" label-width="150px" :rules="dataFormRules" ref="loanBusinessInformation" :size="size">
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="申请金额">
                       <el-input v-model="loanBusinessInformation.applicationAmount" size="small" class="width150"></el-input>
                     </el-form-item>
                   </el-col>
+                </el-row>
+                  <el-row>
                   <el-col span="8">
                     <el-form-item label="申请期限">
                       <el-input v-model="loanBusinessInformation.applicationPeriod" size="small" class="width180"></el-input>
@@ -3298,11 +3334,15 @@
                       <el-input v-model="loanBusinessInformation.applicationRate" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
+                </el-row>
+                <el-row>
                   <el-col span="8">
                     <el-form-item label="保证金比例">
                       <el-input v-model="loanBusinessInformation.marginRatio" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
+                </el-row>
+                <el-row>
                   <el-col span="8">
                     <el-form-item label="原信贷业务余额">
                       <el-input v-model="loanBusinessInformation.originalCreditBalance" size="small" class="width180"></el-input>
@@ -3329,12 +3369,14 @@
                 </el-form-item>
                 <el-row>
                   <el-col span="8">
-                    <el-form-item label="扣款账户户名（扣款人）">
+                    <el-form-item label="扣款账户户名">
                       <el-input v-model="loanBusinessInformation.debitAccountName" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
+                </el-row>
+                <el-row>
                   <el-col span="8">
-                    <el-form-item label="扣款账号（扣款账号）">
+                    <el-form-item label="扣款账号">
                       <el-input v-model="loanBusinessInformation.accountNumber" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
@@ -3356,7 +3398,7 @@
                 </el-row>
 
 
-                <el-form-item label="是否申请个人购房贷款">
+                <el-form-item label="是否个人购房贷款">
                   <el-radio-group v-model="loanBusinessInformation.whetherPersonalHomeLoan">
                     <el-radio  v-for="(vl, index) in WhetherPersonalHomeLoanOptions" :label="vl.VAL_CODE" :key="index">
                       {{vl.VAL_NAME}}
@@ -3373,25 +3415,25 @@
                 <el-form-item label="其中公积金贷款金额" v-if="whetherProvidentFundCombinationLoanFlag">
                   <el-input v-model="loanBusinessInformation.providentFundLoanAmount" size="small" class="width180"></el-input>
                 </el-form-item>
-                <el-form-item label="借款人是否为我行独家信贷客户">
+                <el-form-item label="是否独家信贷客户">
                   <el-radio-group v-model="loanBusinessInformation.whetherExclusiveCreditClient" @change="whetherExclusiveCreditClientChange">
                     <el-radio  v-for="(vl, index) in WhetherExclusiveCreditClientOptions" :label="vl.VAL_CODE" :key="index">
                       {{vl.VAL_NAME}}
                     </el-radio>
                   </el-radio-group>
                 </el-form-item>
-                <el-form-item label="必须于**前在我行开立基本存款账户" v-if="whetherExclusiveCreditClientFlagFlag">
+                <el-form-item label="开立基本存款账户" v-if="whetherExclusiveCreditClientFlagFlag">
                   <el-date-picker
                     v-model="loanBusinessInformation.depositAccount"
                     type="date"
-                    placeholder="必须于**前在我行开立基本存款账户">
+                    placeholder="必须于xx前在我行开立基本存款账户">
                   </el-date-picker>
                 </el-form-item>
-                <el-form-item label="必须于**前在我行开立一般存款账户" v-if="whetherExclusiveCreditClientNoFlag">
+                <el-form-item label="开立一般存款账户" v-if="whetherExclusiveCreditClientNoFlag">
                   <el-date-picker
                     v-model="loanBusinessInformation.depositAccount"
                     type="date"
-                    placeholder="必须于**前在我行开立一般存款账户">
+                    placeholder="必须于xx前在我行开立一般存款账户">
                   </el-date-picker>
                 </el-form-item>
               </el-form>
@@ -3439,9 +3481,9 @@
         </div>
         <!--6、个人贷款调查报告表-->
         <div v-if="active==6">
-          <el-form :model="personalLoanSurveyReport" label-width="100px" :rules="dataFormRules" ref="personalLoanSurveyReport" :size="size">
-            <hr>申请借款情况
-            <el-form-item label="借款人姓名">
+          <el-form :model="personalLoanSurveyReport" label-width="250px" :rules="dataFormRules" ref="personalLoanSurveyReport" :size="size">
+
+            <!--<el-form-item label="借款人姓名">
               <el-input v-model="personalLoanSurveyReport.borrowerName" size="small" class="width180"></el-input>
             </el-form-item>
             <el-form-item label="婚姻状况">
@@ -3502,7 +3544,7 @@
                   <el-input v-model="personalLoanSurveyReport.familyExpense" size="small" class="width180"></el-input>
                 </el-form-item>
               </el-col>
-            </el-row>
+            </el-row>-->
             <el-form-item label="借款人健康状况">
               <el-radio-group v-model="personalLoanSurveyReport.borrowerHealthStatus">
                 <el-radio  v-for="(vl, index) in BorrowerHealthStatusOptions" :label="vl.VAL_CODE" :key="index">
@@ -3513,8 +3555,7 @@
             <el-form-item label="其他需调查反映的情况">
               <el-input type="textarea" v-model="personalLoanSurveyReport.othersurveyhappening"></el-input>
             </el-form-item>
-            <br>
-            <hr>借款人合法合规性审查
+
             <el-form-item label="借款人是否具有完全民事行为能力">
               <el-radio-group v-model="personalLoanSurveyReport.borrowerWhetherHaveCivilAction">
                 <el-radio  v-for="(vl, index) in HorrowerWhetherHaveCivilActionOptions" :label="vl.VAL_CODE" :key="index">
@@ -3522,23 +3563,19 @@
                 </el-radio>
               </el-radio-group>
             </el-form-item>
-            <el-row>
-              <el-col span="8">
+
                 <el-form-item label="申贷金额">
-                  <el-input v-model="personalLoanSurveyReport.amountLoan" size="small" class="width180"></el-input>万元
+                  <el-input v-model="personalLoanSurveyReport.amountLoan" size="small" class="width180"></el-input>
                 </el-form-item>
-              </el-col>
-              <el-col span="8">
+
                 <el-form-item label="自筹资金">
-                  <el-input v-model="personalLoanSurveyReport.selfFunding" size="small" class="width180"></el-input>万元
+                  <el-input v-model="personalLoanSurveyReport.selfFunding" size="small" class="width180"></el-input>
                 </el-form-item>
-              </el-col>
-              <el-col span="8">
+
                 <el-form-item label="借款期限">
-                  <el-input v-model="personalLoanSurveyReport.borrowingPeriod" size="small" class="width180"></el-input>年
+                  <el-input v-model="personalLoanSurveyReport.borrowingPeriod" size="small" class="width180"></el-input>
                 </el-form-item>
-              </el-col>
-            </el-row>
+
             <el-form-item label="申贷金额是否合理">
               <el-radio-group v-model="personalLoanSurveyReport.loanAmountWhetherReasonable">
                 <el-radio  v-for="(vl, index) in LoanAmountWhetherReasonableOptions" :label="vl.VAL_CODE" :key="index">
@@ -3554,7 +3591,7 @@
               </el-radio-group>
             </el-form-item>
             <el-form-item label="借款用途">
-              <el-input v-model="personalLoanSurveyReport.useLoan" size="small" class="width180"></el-input>年
+              <el-input v-model="personalLoanSurveyReport.useLoan" size="small" class="width180"></el-input>
             </el-form-item>
             <el-form-item label="第一还款来源是否充足">
               <el-radio-group v-model="personalLoanSurveyReport.repaymentSourceWhetherSufficient">
@@ -3581,7 +3618,8 @@
               </el-radio-group>
             </el-form-item>
             <br>
-            <hr>担保情况审查
+            <!--
+            <hr>
             <el-checkbox v-model="loanAethodGuaranteeCheckbox" @change="loanAethodGuaranteeChange">贷款方式为保证担保</el-checkbox>
             <el-form-item label="">
               <el-input type="textarea" v-model="personalLoanSurveyReport.loanMethodGuaranteeRemark"></el-input>
@@ -3596,7 +3634,7 @@
             <el-checkbox v-model="loanMethodPledgeGuaranteeCheckbox" @change="loanMethodPledgeGuaranteeChange">贷款方式为抵（质）押担保</el-checkbox>
             <el-form-item label="">
               <el-input type="textarea" v-model="personalLoanSurveyReport.loanMethodPledgeGuaranteeRemark"></el-input>
-            </el-form-item>
+            </el-form-item>-->
             <br>
             <el-form-item>
               <el-button type="primary" @click="personalLoanSurveyReportNextStep(7)">下一步</el-button>
@@ -3605,38 +3643,34 @@
         </div>
         <!--7、合同信息-->
         <div v-if="active==7">
-          <el-form :model="contractInformation" label-width="100px" :rules="dataFormRules" ref="contractInformation" :size="size">
-            <el-row>
-              <el-col span="8">
+          <el-form :model="contractInformation" label-width="150px" :rules="dataFormRules" ref="contractInformation" :size="size">
+
+
                 <el-form-item label="个人借款合同编号">
                   <el-input v-model="contractInformation.personalLoanContractNo" size="small" class="width150"></el-input>
                 </el-form-item>
-              </el-col>
-              <el-col span="8">
+
                 <el-form-item label="抵押担保合同编号">
                   <el-input v-model="contractInformation.mortgageGuaranteeContractMo" size="small" class="width180"></el-input>
                 </el-form-item>
-              </el-col>
+
              <!-- <el-col span="8">
                 <el-form-item label="抵押物清单合同编号">
                   <el-input v-model="contractInformation.pawnContractNo" size="small" class="width150"></el-input>
                 </el-form-item>
               </el-col>-->
-            </el-row>
-            <el-row>
+
            <!--   <el-col span="8">
                 <el-form-item label="抵押物清单合同编号">
                   <el-input v-model="contractInformation.pawnContractNo" size="small" class="width150"></el-input>
                 </el-form-item>
               </el-col>-->
-              <el-col span="8">
+
                 <el-form-item label="保证担保合同编号">
                   <el-input v-model="contractInformation.guaranteeGuaranteeContractNo" size="small" class="width150"></el-input>
                 </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col span="8">
+
+
                 <el-form-item label="合同签订日">
                   <el-date-picker
                     v-model="contractInformation.contractSigningDate"
@@ -3645,8 +3679,7 @@
                   </el-date-picker>
                  <!-- <el-input v-model="contractInformation.contractSigningDate" size="small" class="width150"></el-input>-->
                 </el-form-item>
-              </el-col>
-              <el-col span="8">
+
 
                 <el-form-item label="借款期限">
                   <el-date-picker
@@ -3661,8 +3694,7 @@
                     placeholder="截至日期">
                   </el-date-picker>
                 </el-form-item>
-              </el-col>
-            </el-row>
+
             <el-form-item label="放款日期">
               <el-date-picker
                 v-model="contractInformation.loanDate"
@@ -3697,7 +3729,39 @@ export default {
       //基础信息验证
       loanBasisFormRules:{
         borrower: [
-          { required: true, message: '请输入借款人！', trigger: 'blur' }
+          { required: true, message: '请输入借款人姓名', trigger: 'blur' }
+        ],
+        loanType: [
+          { required: true, message: '请选择贷款类型', trigger: 'change' }
+        ]
+      },
+      add2Rules:{
+        name: [
+          { required: true, message: '请输入姓名', trigger: 'blur' }
+        ],
+        identityNumber: [
+          { required: true, message: '请输入身份证号', trigger: 'blur' }
+        ],
+        maritalStatus: [
+          { required: true, message: '请选择婚姻状况', trigger: 'change' }
+        ],
+        age: [
+          { type: 'number',required:false, message: '年龄必须为数字值'}
+        ]
+      },
+
+      add3Rules:{
+        maritalStatus: [
+          { type: 'array',required: true, message: '请选择与借款人关系！', trigger: 'change' }
+        ],
+        name: [
+          { required: true, message: '请输入姓名！', trigger: 'blur' }
+        ],
+        identityNumber: [
+          { required: true, message: '请输入身份证号！', trigger: 'blur' }
+        ],
+        maritalStatus: [
+          { required: true, message: '请选择婚姻状况！', trigger: 'change' }
         ]
       },
       //房屋资产弹窗标记
@@ -6301,154 +6365,156 @@ export default {
       this.clearSpouseAssetTypeOther();
     },
 
-    /**
-     * 保存其他相关人信息
-     */
-    assetTypeOterPersonnelForm(){
-      let assetTypeHousesTableData = this.oterPersonneltableData;
-      let assetTypeHousesTableDataNew = [];
-      let relatedPersonnelInformationForm = this.relatedPersonnelInformationForm;
-      let dataParams = {};
-      if(relatedPersonnelInformationForm){
-        /*//资产类型数据组装
-        this.assetTypeAppend();
-        //家庭收支情况
-        relatedPersonnelInformationForm.householdIncomeForm = this.householdIncomeForm;
-        //类型BORROWER(1, "借款人本人"), BORROWER_COUPLE(2, "借款人配偶"), MORTGAGE_GUARANTOR(3, "抵押担保人"),GUARANTOR(4, "保证担保人"), GUARANTOR_BOTH(5, "抵押担保人、保证担保人");
-        relatedPersonnelInformationForm.type=this.getType(this.relatedPersonnelInformationForm.type);
-        dataParams = {
-          name:relatedPersonnelInformationForm.name,
-          identityNumber:relatedPersonnelInformationForm.identityNumber,
-          age:relatedPersonnelInformationForm.age,
-          relatedPersonnelInformationForm:relatedPersonnelInformationForm
-        };*/
-        let relatedPersonnelInformationForm= this.relatedPersonnelInformationForm;
-        //配偶信息
-        let relatedPersonnelInformationSpouseForm = this.relatedPersonnelInformationSpouseForm;
-        console.log("relatedPersonnelInformationSpouseForm:",relatedPersonnelInformationSpouseForm);
-        //资产类型数据组装
-        this.assetTypeAppend();
-        //资产类型数据组装 配偶
-        let datas = {
-          loanBasisId:this.loanBasisId,
-          //类型
-          type:this.getType(relatedPersonnelInformationForm.type),
-          //姓名
-          name:relatedPersonnelInformationForm.name,
-          //年龄
-          age:relatedPersonnelInformationForm.age,
-          //性别
-          sex:relatedPersonnelInformationForm.sex,
-          //户籍所在地
-          domicile:relatedPersonnelInformationForm.domicile,
-          //身份证号码
-          identityNumber:relatedPersonnelInformationForm.identityNumber,
-          //现居住地址
-          currentHomeAddress:relatedPersonnelInformationForm.currentHomeAddress,
-          //常用通信地址
-          contactAddress:relatedPersonnelInformationForm.contactAddress,
-          //本地居住时间
-          localResidenceTime:relatedPersonnelInformationForm.localResidenceTime,
-          //电子邮箱
-          email:relatedPersonnelInformationForm.email,
-          //联系电话
-          contactNumber:relatedPersonnelInformationForm.contactNumber,
-          qq:relatedPersonnelInformationForm.qq,
-          //微信
-          wechat:relatedPersonnelInformationForm.wechat,
-          //文化程度
-          educationalLevel:relatedPersonnelInformationForm.educationalLevel,
-          //文化程度 其他
-          educationalLevelValue:relatedPersonnelInformationForm.educationalLevelValue,
-          //现住房来源
-          currentHousingSource:relatedPersonnelInformationForm.currentHousingSource,
-          //现住房来源其他值
-          currentHousingSourceValue:relatedPersonnelInformationForm.currentHousingSourceValue,
-          //工作单位
-          employer:relatedPersonnelInformationForm.employer,
-          //职务
-          position:relatedPersonnelInformationForm.position,
-          //单位工作年限
-          unitWorkingYears:relatedPersonnelInformationForm.unitWorkingYears,
-          //所投资或经营企业名称
-          companyName:relatedPersonnelInformationForm.companyName,
-          //持股比例
-          shareholdingRatio:relatedPersonnelInformationForm.shareholdingRatio,
-          //本行业和相近行业经营年限
-          yearsOperation:relatedPersonnelInformationForm.yearsOperation,
-          //资产情况（0、无）（1、有）
-          assetSituation:relatedPersonnelInformationForm.assetSituation,
-          //资产类型（1、房屋）（2、土地）（3、汽车）（4、有价证券）（5、其他）
-          // assetType:relatedPersonnelInformationForm.assetType,
-          //婚姻状况（0、未婚）（1、已婚）（2、离异未婚）（3、丧偶未婚）（4、其他）
-          maritalStatus:relatedPersonnelInformationForm.maritalStatus,
-          //原配偶姓名
-          originalSpouseName:relatedPersonnelInformationForm.originalSpouseName,
-          //离婚方式 （1、协议离婚）（2、协议离婚）
-          divorceMethod:relatedPersonnelInformationForm.divorceMethod,
-          //时间
-          divorceTime:relatedPersonnelInformationForm.divorceTime,
-          //房屋
-          assetTypeHouses:relatedPersonnelInformationForm.assetTypeHouses,
-          //土地信息
-          assetTypeLand:relatedPersonnelInformationForm.assetTypeLand,
-          //汽车信息
-          assetTypeCar:relatedPersonnelInformationForm.assetTypeCar,
-          //证券信息
-          assetTypeSecurities:relatedPersonnelInformationForm.assetTypeSecurities,
-          //其他
-          assetTypeOther:relatedPersonnelInformationForm.assetTypeOther,
-          //配偶信息
-          spouseInfo : this.spouseAppend(),
-          //家庭收支情况
-          householdIncomeForm:this.householdIncomeForm,
-          createBy :sessionStorage.getItem("user")
-        };
-        dataParams = {
-          name:relatedPersonnelInformationForm.name,
-          identityNumber:relatedPersonnelInformationForm.identityNumber,
-          age:relatedPersonnelInformationForm.age,
-          relatedPersonnelInformationForm:datas
-        };
-        console.log("datas:",datas);
-        this.oterPersonneltableDataformationForm.push(datas);
-      }
-      if(assetTypeHousesTableData){
-        for(let index in assetTypeHousesTableData){
-          assetTypeHousesTableDataNew.push(assetTypeHousesTableData[index]);
-        }
-      }
-      assetTypeHousesTableDataNew.push(dataParams);
-      //赋值列表
-      this.oterPersonneltableData=assetTypeHousesTableDataNew;
-      console.log("assetTypeHousesTableDataNew:",assetTypeHousesTableDataNew);
-      console.log("oterPersonneltableData:",this.oterPersonneltableData);
-      //隐藏添加页面
-      this.addRelevantPeopleFlag= false;
-      //显示列表
-      this.listRelevantPeopleFlag = true;
+    assetTypeOterPersonnelForm: function () {
+      this.$refs.relatedPersonnelInformationForm.validate((valid) => {
+        if (valid) {
+          let assetTypeHousesTableData = this.oterPersonneltableData;
+          let assetTypeHousesTableDataNew = [];
+          let relatedPersonnelInformationForm = this.relatedPersonnelInformationForm;
+          let dataParams = {};
+          if (relatedPersonnelInformationForm) {
+            /*//资产类型数据组装
+            this.assetTypeAppend();
+            //家庭收支情况
+            relatedPersonnelInformationForm.householdIncomeForm = this.householdIncomeForm;
+            //类型BORROWER(1, "借款人本人"), BORROWER_COUPLE(2, "借款人配偶"), MORTGAGE_GUARANTOR(3, "抵押担保人"),GUARANTOR(4, "保证担保人"), GUARANTOR_BOTH(5, "抵押担保人、保证担保人");
+            relatedPersonnelInformationForm.type=this.getType(this.relatedPersonnelInformationForm.type);
+            dataParams = {
+              name:relatedPersonnelInformationForm.name,
+              identityNumber:relatedPersonnelInformationForm.identityNumber,
+              age:relatedPersonnelInformationForm.age,
+              relatedPersonnelInformationForm:relatedPersonnelInformationForm
+            };*/
+            let relatedPersonnelInformationForm = this.relatedPersonnelInformationForm;
+            //配偶信息
+            let relatedPersonnelInformationSpouseForm = this.relatedPersonnelInformationSpouseForm;
+            console.log("relatedPersonnelInformationSpouseForm:", relatedPersonnelInformationSpouseForm);
+            //资产类型数据组装
+            this.assetTypeAppend();
+            //资产类型数据组装 配偶
+            let datas = {
+              loanBasisId: this.loanBasisId,
+              //类型
+              type: this.getType(relatedPersonnelInformationForm.type),
+              //姓名
+              name: relatedPersonnelInformationForm.name,
+              //年龄
+              age: relatedPersonnelInformationForm.age,
+              //性别
+              sex: relatedPersonnelInformationForm.sex,
+              //户籍所在地
+              domicile: relatedPersonnelInformationForm.domicile,
+              //身份证号码
+              identityNumber: relatedPersonnelInformationForm.identityNumber,
+              //现居住地址
+              currentHomeAddress: relatedPersonnelInformationForm.currentHomeAddress,
+              //常用通信地址
+              contactAddress: relatedPersonnelInformationForm.contactAddress,
+              //本地居住时间
+              localResidenceTime: relatedPersonnelInformationForm.localResidenceTime,
+              //电子邮箱
+              email: relatedPersonnelInformationForm.email,
+              //联系电话
+              contactNumber: relatedPersonnelInformationForm.contactNumber,
+              qq: relatedPersonnelInformationForm.qq,
+              //微信
+              wechat: relatedPersonnelInformationForm.wechat,
+              //文化程度
+              educationalLevel: relatedPersonnelInformationForm.educationalLevel,
+              //文化程度 其他
+              educationalLevelValue: relatedPersonnelInformationForm.educationalLevelValue,
+              //现住房来源
+              currentHousingSource: relatedPersonnelInformationForm.currentHousingSource,
+              //现住房来源其他值
+              currentHousingSourceValue: relatedPersonnelInformationForm.currentHousingSourceValue,
+              //工作单位
+              employer: relatedPersonnelInformationForm.employer,
+              //职务
+              position: relatedPersonnelInformationForm.position,
+              //单位工作年限
+              unitWorkingYears: relatedPersonnelInformationForm.unitWorkingYears,
+              //所投资或经营企业名称
+              companyName: relatedPersonnelInformationForm.companyName,
+              //持股比例
+              shareholdingRatio: relatedPersonnelInformationForm.shareholdingRatio,
+              //本行业和相近行业经营年限
+              yearsOperation: relatedPersonnelInformationForm.yearsOperation,
+              //资产情况（0、无）（1、有）
+              assetSituation: relatedPersonnelInformationForm.assetSituation,
+              //资产类型（1、房屋）（2、土地）（3、汽车）（4、有价证券）（5、其他）
+              // assetType:relatedPersonnelInformationForm.assetType,
+              //婚姻状况（0、未婚）（1、已婚）（2、离异未婚）（3、丧偶未婚）（4、其他）
+              maritalStatus: relatedPersonnelInformationForm.maritalStatus,
+              //原配偶姓名
+              originalSpouseName: relatedPersonnelInformationForm.originalSpouseName,
+              //离婚方式 （1、协议离婚）（2、协议离婚）
+              divorceMethod: relatedPersonnelInformationForm.divorceMethod,
+              //时间
+              divorceTime: relatedPersonnelInformationForm.divorceTime,
+              //房屋
+              assetTypeHouses: relatedPersonnelInformationForm.assetTypeHouses,
+              //土地信息
+              assetTypeLand: relatedPersonnelInformationForm.assetTypeLand,
+              //汽车信息
+              assetTypeCar: relatedPersonnelInformationForm.assetTypeCar,
+              //证券信息
+              assetTypeSecurities: relatedPersonnelInformationForm.assetTypeSecurities,
+              //其他
+              assetTypeOther: relatedPersonnelInformationForm.assetTypeOther,
+              //配偶信息
+              spouseInfo: this.spouseAppend(),
+              //家庭收支情况
+              householdIncomeForm: this.householdIncomeForm,
+              createBy: sessionStorage.getItem("user")
+            };
+            dataParams = {
+              name: relatedPersonnelInformationForm.name,
+              identityNumber: relatedPersonnelInformationForm.identityNumber,
+              age: relatedPersonnelInformationForm.age,
+              relatedPersonnelInformationForm: datas
+            };
+            console.log("datas:", datas);
+            this.oterPersonneltableDataformationForm.push(datas);
+          }
+          if (assetTypeHousesTableData) {
+            for (let index in assetTypeHousesTableData) {
+              assetTypeHousesTableDataNew.push(assetTypeHousesTableData[index]);
+            }
+          }
+          assetTypeHousesTableDataNew.push(dataParams);
+          //赋值列表
+          this.oterPersonneltableData = assetTypeHousesTableDataNew;
+          console.log("assetTypeHousesTableDataNew:", assetTypeHousesTableDataNew);
+          console.log("oterPersonneltableData:", this.oterPersonneltableData);
+          //隐藏添加页面
+          this.addRelevantPeopleFlag = false;
+          //显示列表
+          this.listRelevantPeopleFlag = true;
 
-      this.clearAssetType();
-      this.clearAssetSpouseType();
-      this.assetTypeFlag=false;
-      //婚姻状况
-      this.maritalStatusFlag = false;
-      //已婚
-      this.maritalStatusMarriedFlag=false;
-      //离异
-      this.maritalStatusDivorcedFlag=false;
-      //丧偶
-      this.maritalStatusWidowedFlag=false;
-      //其他
-      this.maritalStatusOtherFlag=false;
-      //清空list
-      this.clearTableDataList();
-      //资产类型
-      this.assetTypeFlagSpouse=false;
-      //清空 其他相关人
-      this.clearRelatedPersonnelInformationSpouseForm();
-      //清空家庭资产
-      this.householdIncomeFormClear();
+          this.clearAssetType();
+          this.clearAssetSpouseType();
+          this.assetTypeFlag = false;
+          //婚姻状况
+          this.maritalStatusFlag = false;
+          //已婚
+          this.maritalStatusMarriedFlag = false;
+          //离异
+          this.maritalStatusDivorcedFlag = false;
+          //丧偶
+          this.maritalStatusWidowedFlag = false;
+          //其他
+          this.maritalStatusOtherFlag = false;
+          //清空list
+          this.clearTableDataList();
+          //资产类型
+          this.assetTypeFlagSpouse = false;
+          //清空 其他相关人
+          this.clearRelatedPersonnelInformationSpouseForm();
+          //清空家庭资产
+          this.householdIncomeFormClear();
+        }
+      })
+
     },
 
     /**
@@ -7784,10 +7850,13 @@ export default {
     width:180px!important;
   }
   .el-form-item{
-    margin-bottom: 1px!important;
+    margin-bottom: 15px!important;
   }
   .el-radio-group{
     width: 660px!important;
+  }
+  .el-form-item__label{
+    width: 150px!important;
   }
   .el-checkbox-group{
     width: 660px!important;
