@@ -1211,7 +1211,7 @@
                         </el-row>
                       </el-form>
                       <div slot="footer" class="dialog-footer">
-                        <el-button :size="size" @click.native="addOtherAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
+                        <el-button :size="size" @click.native="addSpouseOtherAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
                         <el-button :size="size" type="primary" @click.native="assetTypeSpouseOtherForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
                       </div>
                     </el-dialog>
@@ -5886,7 +5886,7 @@ export default {
      */
     addSpouseOtherAsset(){
       //清空 其他相关人
-      this.clearRelatedPersonnelInformationSpouseForm();
+      //this.clearRelatedPersonnelInformationSpouseForm();
       //清空家庭资产
       this.householdIncomeFormClear();
       this.addSpouseOtherAssetDialogVisible = true;
@@ -6291,14 +6291,14 @@ export default {
           assetTypeHousesTableDataNew.push(assetTypeHousesTableData[index]);
         }
       }
-      console.log("dataParams:",dataParams);
-      console.log(" assetTypeHousesTableDataNew:", assetTypeHousesTableDataNew);
+    /*  console.log("dataParams:",dataParams);
+      console.log(" assetTypeHousesTableDataNew:", assetTypeHousesTableDataNew);*/
       assetTypeHousesTableDataNew.push(dataParams);
       //赋值列表
       this.spouseOtherTableData = assetTypeHousesTableDataNew;
-      console.log(" this.spouseOtherTableData:", this.spouseOtherTableData);
       //关闭弹窗
       this.addSpouseOtherAssetDialogVisible = false;
+      this.clearSpouseAssetTypeOther();
     },
 
     /**
@@ -7350,7 +7350,15 @@ export default {
       this.spouseAssetTypeSecurities = spouseAssetTypeSecurities;
     },
 
-
+    //清空其他资产信息
+    clearSpouseAssetTypeOther(){
+      let   spouseAssetTypeOther={
+        rpiId:'',
+        assetName:'',
+        value:''
+      }
+      this.spouseAssetTypeOther = spouseAssetTypeOther;
+    },
 
 
 
