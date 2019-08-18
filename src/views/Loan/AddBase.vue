@@ -839,10 +839,10 @@
                     </el-table>
 
                     <!--新增编辑界面-->
-                    <el-dialog :title="operationSpouse?'新增':'新增'" width="60%" :visible.sync="addSpouseHousAssetDialogVisible" :close-on-click-modal="false">
-                      <el-form :model="assetTypeHouses" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                    <el-dialog :title="spouseAssetTypeHouses?'新增':'新增'" width="60%" :visible.sync="addSpouseHousAssetDialogVisible" :close-on-click-modal="false">
+                      <el-form :model="spouseAssetTypeHouses" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
                         <el-form-item label="是否不动产权证">
-                        <el-radio-group v-model="assetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
+                        <el-radio-group v-model="spouseAssetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
                           <el-radio  v-for="(vl, index) in WhetherOwnershipCertificatesOptions" :label="vl.VAL_CODE" :key="index">
                             {{vl.VAL_NAME}}
                           </el-radio>
@@ -850,18 +850,18 @@
                       </el-form-item>
 
                         <el-form-item label="不动产权证号" v-show="propertyCertificateNumberFlag">
-                          <el-input v-model="assetTypeHouses.propertyCertificateNumber" size="small" class="width180"></el-input>
+                          <el-input v-model="spouseAssetTypeHouses.propertyCertificateNumber" size="small" class="width180"></el-input>
                         </el-form-item>
 
                         <el-row >
                           <el-col span="8" v-show="deedNumberFlag">
                             <el-form-item label="房产证号">
-                              <el-input v-model="assetTypeHouses.deed"  size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeHouses.deed"  size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                           <el-col span="8" v-show="deedLandCertificateFlag">
                             <el-form-item label="土地证号">
-                              <el-input v-model="assetTypeHouses.landCertificate" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeHouses.landCertificate" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                         </el-row>
@@ -869,18 +869,18 @@
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="名称">
-                              <el-input v-model="assetTypeHouses.name" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeHouses.name" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                           <el-col span="8">
                             <el-form-item label="地址">
-                              <el-input v-model="assetTypeHouses.address" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeHouses.address" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                         </el-row>
 
                         <el-form-item label="所属地">
-                          <el-radio-group v-model="assetTypeHouses.affiliation">
+                          <el-radio-group v-model="spouseAssetTypeHouses.affiliation">
                             <el-radio  v-for="(vl, index) in AffiliationOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
@@ -890,18 +890,18 @@
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="房屋建筑面积">
-                              <el-input v-model="assetTypeHouses.constructionArea" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeHouses.constructionArea" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="assetTypeHouses.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeHouses.value" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                         </el-row>
 
                         <el-form-item label="融资情况">
-                          <el-radio-group v-model="assetTypeHouses.financingSituation">
+                          <el-radio-group v-model="spouseAssetTypeHouses.financingSituation">
                             <el-radio  v-for="(vl, index) in FinancingSituationOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
@@ -909,18 +909,18 @@
                         </el-form-item>
 
                         <el-form-item label="是否有共有人">
-                          <el-radio-group v-model="assetTypeHouses.whetherCoOwner" @change="whetherCoownerChange">
+                          <el-radio-group v-model="spouseAssetTypeHouses.whetherCoOwner" @change="whetherCoownerChange">
                             <el-radio  v-for="(vl, index) in WhetherCoownerOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
                           </el-radio-group>
                         </el-form-item>
                         <el-form-item label="共有人姓名" v-show="coOwnerNameFlag">
-                          <el-input v-model="assetTypeHouses.co_owner_name" size="small" class="width180"></el-input>
+                          <el-input v-model="spouseAssetTypeHouses.co_owner_name" size="small" class="width180"></el-input>
                         </el-form-item>
 
                         <el-form-item label="是否有租赁">
-                          <el-radio-group v-model="assetTypeHouses.whetherLease">
+                          <el-radio-group v-model="spouseAssetTypeHouses.whetherLease">
                             <el-radio  v-for="(vl, index) in WhetherLeaseOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
@@ -975,25 +975,25 @@
 
                     <!--新增编辑土地界面-->
                     <el-dialog :title="operationSpouseLand?'新增':'编辑'" width="60%" :visible.sync="addSpouseLandAssetDialogVisible" :close-on-click-modal="false">
-                      <el-form :model="assetTypeLand" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                      <el-form :model="spouseAssetTypeLand" label-width="80px" :rules="dataFormRules" ref="spouseAssetTypeLand" :size="size">
                         <el-form-item label="土地证号">
-                          <el-input v-model="assetTypeLand.landCertificate" size="small" class="width180"></el-input>
+                          <el-input v-model="spouseAssetTypeLand.landCertificate" size="small" class="width180"></el-input>
                         </el-form-item>
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="名称">
-                              <el-input v-model="assetTypeLand.name" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeLand.name" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                           <el-col span="8">
                             <el-form-item label="地址">
-                              <el-input v-model="assetTypeLand.address" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeLand.address" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                         </el-row>
 
                         <el-form-item label="所属地">
-                          <el-radio-group v-model="assetTypeLand.affiliation">
+                          <el-radio-group v-model="spouseAssetTypeLand.affiliation">
                             <el-radio  v-for="(vl, index) in AffiliationOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
@@ -1003,18 +1003,18 @@
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="房屋建筑面积">
-                              <el-input v-model="assetTypeLand.constructionArea" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeLand.constructionArea" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="assetTypeLand.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeLand.value" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                         </el-row>
 
                         <el-form-item label="融资情况">
-                          <el-radio-group v-model="assetTypeLand.financingSituation">
+                          <el-radio-group v-model="spouseAssetTypeLand.financingSituation">
                             <el-radio  v-for="(vl, index) in FinancingSituationOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
@@ -1022,18 +1022,18 @@
                         </el-form-item>
 
                         <el-form-item label="是否有共有人">
-                          <el-radio-group v-model="assetTypeLand.whetherCoOwner" @change="whetherCoownerChange">
+                          <el-radio-group v-model="spouseAssetTypeLand.whetherCoOwner" @change="whetherCoownerChange">
                             <el-radio  v-for="(vl, index) in WhetherCoownerOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
                           </el-radio-group>
                         </el-form-item>
                         <el-form-item label="共有人姓名" v-show="coOwnerNameFlag">
-                          <el-input v-model="assetTypeLand.coOwnerName" size="small" class="width180"></el-input>
+                          <el-input v-model="spouseAssetTypeLand.coOwnerName" size="small" class="width180"></el-input>
                         </el-form-item>
 
                         <el-form-item label="是否有租赁">
-                          <el-radio-group v-model="assetTypeLand.whetherLease">
+                          <el-radio-group v-model="spouseAssetTypeLand.whetherLease">
                             <el-radio  v-for="(vl, index) in WhetherLeaseOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
@@ -1086,28 +1086,28 @@
                       </el-table-column>
                     </el-table>
                     <el-dialog :title="operationSpouseCar?'新增':'编辑'" width="60%" :visible.sync="addSpouseCarAssetDialogVisible" :close-on-click-modal="false">
-                      <el-form :model="assetTypeCar" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                      <el-form :model="spouseAssetTypeCar" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="汽车品牌">
-                              <el-input v-model="assetTypeCar.brand" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeCar.brand" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="assetTypeCar.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeCar.value" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                         </el-row>
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="车牌号">
-                              <el-input v-model="assetTypeCar.numberPlate" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeCar.numberPlate" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                           <el-col span="8">
                             <el-form-item label="行驶证号">
-                              <el-input v-model="assetTypeCar.drivingLicenseNumber" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeCar.drivingLicenseNumber" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                         </el-row>
@@ -1148,16 +1148,16 @@
                       </el-table-column>
                     </el-table>
                     <el-dialog :title="operationSpouseSecurities?'新增':'编辑'" width="60%" :visible.sync="addSpouseSecuritiesAssetDialogVisible" :close-on-click-modal="false">
-                      <el-form :model="assetTypeSecurities" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                      <el-form :model="spouseAssetTypeSecurities" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
                         <el-form-item label="证券种类">
-                          <el-radio-group v-model="assetTypeSecurities.type">
+                          <el-radio-group v-model="spouseAssetTypeSecurities.type">
                             <el-radio  v-for="(vl, index) in SecuritiesTypeOptions" :label="vl.VAL_CODE" :key="index">
                               {{vl.VAL_NAME}}
                             </el-radio>
                           </el-radio-group>
                         </el-form-item>
                         <el-form-item label="价值">
-                          <el-input v-model="assetTypeSecurities.value" size="small" class="width180"></el-input>
+                          <el-input v-model="spouseAssetTypeSecurities.value" size="small" class="width180"></el-input>
                         </el-form-item>
                       </el-form>
                       <div slot="footer" class="dialog-footer">
@@ -1196,16 +1196,16 @@
                       </el-table-column>
                     </el-table>
                     <el-dialog :title="operationSpouseOther?'新增':'编辑'" width="60%" :visible.sync="addSpouseOtherAssetDialogVisible" :close-on-click-modal="false">
-                      <el-form :model="assetTypeOther" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                      <el-form :model="spouseAssetTypeOther" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="资产名称">
-                              <el-input v-model="assetTypeOther.assetName" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeOther.assetName" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="assetTypeOther.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeOther.value" size="small" class="width180"></el-input>
                             </el-form-item>
                           </el-col>
                         </el-row>
@@ -2363,7 +2363,7 @@
 
                     <!--新增编辑土地界面-->
                     <el-dialog :title="operationSpouseLand?'新增':'编辑'" width="60%" :visible.sync="addSpouseLandAssetDialogVisible" :close-on-click-modal="false">
-                      <el-form :model="spouseAssetTypeLand" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                      <el-form :model="spouseAssetTypeLand" label-width="80px" :rules="dataFormRules" ref="spouseAssetTypeLand" :size="size">
                         <el-form-item label="土地证号">
                           <el-input v-model="spouseAssetTypeLand.landCertificate" size="small" class="width180"></el-input>
                         </el-form-item>
@@ -5015,7 +5015,6 @@ export default {
     assetTypeAppend(){
       //资产情况（0、无）（1、有）
       let assetSituation = this.relatedPersonnelInformationForm.assetSituation;
-      alert('assetSituation='+assetSpouseSituation)
       if(assetSituation){
         if(assetSituation=='1'){
           //组装资产类型数据 房屋 获取房屋对象
@@ -5052,15 +5051,18 @@ export default {
           }
           //土地 获取土地对象
           if(this.relatedPersonnelInformationSpouseForm.assetType.indexOf('2') !=-1){
-            this.relatedPersonnelInformationSpouseForm.assetTypeLand =  this.spouseCarTableData;
+            //this.relatedPersonnelInformationSpouseForm.assetTypeLand =  this.spouseCarTableData;
+            this.relatedPersonnelInformationSpouseForm.assetTypeLand =  this.spouseLandTableData;
           }
           //汽车 获取汽车对象
           if(this.relatedPersonnelInformationSpouseForm.assetType.indexOf('3') !=-1){
-            this.relatedPersonnelInformationSpouseForm.assetTypeCar =  this.spouseSecuritiesTableData;
+            /*this.relatedPersonnelInformationSpouseForm.assetTypeCar =  this.spouseSecuritiesTableData;*/
+            this.relatedPersonnelInformationSpouseForm.assetTypeCar =  this.spouseCarTableData;
           }
           //有价证券 获取有价证券对象
           if(this.relatedPersonnelInformationSpouseForm.assetType.indexOf('4') !=-1){
-            this.relatedPersonnelInformationSpouseForm.assetTypeSecurities =  this.securitiesTableData;
+           /* this.relatedPersonnelInformationSpouseForm.assetTypeSecurities =  this.securitiesTableData;*/
+            this.relatedPersonnelInformationSpouseForm.assetTypeSecurities =  this.spouseSecuritiesTableData;
           }
           //其他 获取其他对象
           if(this.relatedPersonnelInformationSpouseForm.assetType.indexOf('5') !=-1){
@@ -5253,6 +5255,7 @@ export default {
                 this.clearRelatedPersonnelInformationForm();
                 this.clearRelatedPersonnelInformationSpouseForm();
                 this.householdIncomeFormClear();
+                this.clearTableDataList();
                 this.active=type;
                 //显示列表
                 this.listRelevantPeopleFlag = true;
@@ -5807,11 +5810,11 @@ export default {
      * 添加其他资产
      */
     addOtherAsset(){
-      spouseAssetTypeHouses
+     /* spouseAssetTypeHouses
       spouseAssetTypeLand
       spouseAssetTypeCar
       spouseAssetTypeSecurities
-      spouseAssetTypeOther
+      spouseAssetTypeOther*/
       this.addOtherAssetDialogVisible = true;
       this.operationOther = true;
     },
@@ -6030,6 +6033,7 @@ export default {
       this.assetTypeSpouseHousesTableData = assetTypeHousesTableDataNew;
       //关闭弹窗
       this.addSpouseHousAssetDialogVisible = false;
+      this.clearSpouseAssetTypeHouses();
     },
 
     /**
@@ -6084,6 +6088,7 @@ export default {
       let assetTypeHousesTableData = this.spouseLandTableData;
       let assetTypeHousesTableDataNew = [];
       let assetTypeLand = this.spouseAssetTypeLand;
+      console.log("spouseAssetTypeLand:",assetTypeLand);
      /* let dataParams = {};
       if(assetTypeLand){
         dataParams = {
@@ -6104,6 +6109,7 @@ export default {
       this.spouseLandTableData = assetTypeHousesTableDataNew;
       //关闭弹窗
       this.addSpouseLandAssetDialogVisible = false;
+      this.clearSpouseAssetTypeLand();
     },
 
     /**
@@ -6162,6 +6168,7 @@ export default {
       this.spouseCarTableData = assetTypeHousesTableDataNew;
       //关闭弹窗
       this.addSpouseCarAssetDialogVisible = false;
+      this.clearSpouseAssetTypeCar();
     },
 
     /**
@@ -6218,6 +6225,7 @@ export default {
       this.spouseSecuritiesTableData = assetTypeHousesTableDataNew;
       //关闭弹窗
       this.addSpouseSecuritiesAssetDialogVisible = false;
+      this.clearSpouseAssetTypeSecurities();
     },
 
     /**
@@ -6945,6 +6953,7 @@ export default {
             }
             dataNew.spouse = spouse;
             dataNew.name = data.name;
+            dataNew.id = data.id;
             assetsTableDataNew.push(dataNew);
           }
           this.assetsTableData = assetsTableDataNew;
