@@ -2873,8 +2873,11 @@
 
               <el-row>
                 <el-col span="8">
-                  <el-form-item label="房屋建筑面积">
+                  <el-form-item label="房屋建筑面积" v-if="buildingAreaFlag">
                     <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input>
+                  </el-form-item>
+                  <el-form-item label="土地占用面积" v-if="landOccupationAreaFlag">
+                    <el-input v-model="pawn.landOccupationArea" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -3086,8 +3089,11 @@
 
               <el-row>
                 <el-col span="8">
-                  <el-form-item label="房屋建筑面积">
+                  <el-form-item label="房屋建筑面积" v-if="buildingAreaFlag">
                     <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input>
+                  </el-form-item>
+                  <el-form-item label="土地占用面积" v-if="landOccupationAreaFlag">
+                    <el-input v-model="pawn.landOccupationArea" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
@@ -4112,7 +4118,10 @@ export default {
         contractSigningTime:'',
         groups:'',
         pawnPersonnelMapping:[],
+        landOccupationArea:'',
       },
+      buildingAreaFlag:false,
+      landOccupationAreaFlag:false,
       //抵押物类型
       MortgageTypeOptions:[{
         VAL_CODE: '0',
@@ -4957,11 +4966,15 @@ export default {
       this.propertyCertificateNumberFlag=false;
       this.deedLandCertificateFlag=false;
       this.deedNumberFlag=false;
+      this.buildingAreaFlag =false;
+      this.landOccupationAreaFlag =false;
         //房屋
        if(value=='0'){
+          this.buildingAreaFlag =true;
           this.EvaluationCorporationOptions=this.HousEvaluationCorporationOptions;
           this.whetherOwnershipCertificatesFlag=true;
        }else if(value=='1'){
+          this.landOccupationAreaFlag =true;
           this.EvaluationCorporationOptions=this.LandEvaluationCorporationOptions;
           this.pawn.whetherOwnershipCertificates='';
           this.deedLandCertificateFlag=true;
@@ -6333,6 +6346,7 @@ export default {
       this.otherTableData = assetTypeHousesTableDataNew;
       //关闭弹窗
       this.addOtherAssetDialogVisible = false;
+      this.clearAssetTypeOther();
     },
 
     /**
@@ -7417,6 +7431,19 @@ export default {
     },
 
     //清空其他资产信息
+    clearAssetTypeOther(){
+      //其他信息
+      let  assetTypeOther={
+          rpiId:'',
+          assetName:'',
+          value:''
+        };
+      this.assetTypeOther = assetTypeOther;
+    },
+
+
+
+    //清空其他资产信息
     clearSpouseAssetTypeOther(){
       let   spouseAssetTypeOther={
         rpiId:'',
@@ -7458,6 +7485,7 @@ export default {
           contractSigningTime:'',
           groups:'',
           pawnPersonnelMapping:[],
+          landOccupationArea:'',
       }
       this.pawn = pawn;
 
@@ -7715,7 +7743,8 @@ export default {
                   if(!this.isNull(whetherLease)){
                     whetherLeaseLandValue=whetherLease;
                   }
-
+                  //房屋建筑面积
+                  this.pawn.buildingArea=constructionAreaValue;
                 }else if(mortgageType=='1'){
                   //土地  土地证号
                   let landTypeCertificate = data.landTypeCertificate;
@@ -7771,9 +7800,9 @@ export default {
                   if(!this.isNull(whetherLeaseLand)){
                       whetherLeaseLandValue=whetherLeaseLand;
                   }
+                  //土地建筑面积
+                  this.pawn.landOccupationArea=constructionAreaValue;
                 }
-                //房屋建筑面积
-                this.pawn.buildingArea=constructionAreaValue;
                 //所属地
                 this.pawn.affiliation = affiliationValue;
                 //价值
