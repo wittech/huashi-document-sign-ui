@@ -2849,7 +2849,7 @@
                 <el-button type="primary" @click="referenceDialog()">引用</el-button>
               </el-form-item>
               <el-form-item label="是否不动产权证" v-if="whetherOwnershipCertificatesFlag">
-                <el-radio-group v-model="pawn.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
+                <el-radio-group v-model="pawn.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesPawnChange">
                   <el-radio  v-for="(vl, index) in WhetherOwnershipCertificateseOptions" :label="vl.VAL_CODE" :key="index">
                     {{vl.VAL_NAME}}
                   </el-radio>
@@ -4132,10 +4132,10 @@ export default {
       }],
       //是否不动产权证
       WhetherOwnershipCertificateseOptions:[{
-        VAL_CODE: '1',
+        VAL_CODE: '0',
         VAL_NAME: '不动产权证',
       },{
-        VAL_CODE: '2',
+        VAL_CODE: '1',
         VAL_NAME: '非不动产权证',
       }],
       //是否不动产权证
@@ -6653,6 +6653,28 @@ export default {
           this.deedLandCertificateFlag=true;
       }
     },
+
+    /**
+     * 是否不动产权证 抵押物
+     * @param value
+     */
+    whetherOwnershipCertificatesPawnChange(value){
+      this.propertyCertificateNumberFlag=false;
+      this.deedLandCertificateFlag=false;
+      this.deedNumberFlag=false;
+      //不动产权证
+      if(value=='0'){
+        this.propertyCertificateNumberFlag=true;
+        this.pawn.landCertificateNumber = '';
+        this.pawn.propertyCertificateNumber = '';
+      }else {
+        this.pawn.propertyCertificateNumber='';
+        this.deedNumberFlag=true;
+        this.deedLandCertificateFlag=true;
+      }
+    },
+
+
 
     /**
      *  是否有共同人
