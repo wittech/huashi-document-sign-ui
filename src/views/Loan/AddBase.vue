@@ -3068,7 +3068,7 @@
                 </el-radio-group>
               </el-form-item>
               <el-form-item label="是否不动产权证" v-if="whetherOwnershipCertificatesFlag">
-                <el-radio-group v-model="pawn.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
+                <el-radio-group v-model="pawn.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesPawnChange">
                   <el-radio  v-for="(vl, index) in WhetherOwnershipCertificateseOptions" :label="vl.VAL_CODE" :key="index">
                     {{vl.VAL_NAME}}
                   </el-radio>
