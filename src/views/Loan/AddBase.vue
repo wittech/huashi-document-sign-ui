@@ -1,9 +1,10 @@
 <template>
     <div>
-        <el-steps :active="active" finish-status="success">
+        <el-steps :active="active" finish-status="success" style="margin-top: 10px; margin-bottom: 10px;">
           <el-step title="基础信息" @click.native="stepClick(0)"  class="schedule"></el-step>
           <el-step title="借款人情况" @click.native="stepClick(1)" class="schedule"></el-step>
           <el-step title="相关人情况" @click.native="stepClick(2)" class="schedule"></el-step>
+          <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
           <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
           <el-step title="相关贷款业务信息" @click.native="stepClick(4)" class="schedule"></el-step>
           <!--<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>-->
@@ -51,8 +52,7 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary"  @click="saveBasicSubmit">下一步</el-button>
-              <el-button @click="previous">返回</el-button>
+              <el-button type="primary" @click="saveBasicSubmit">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
             </el-form-item>
           </el-form>
 
@@ -1392,7 +1392,7 @@
               </div>
               <!--家庭收支情况 end-->
               <el-form-item>
-                <el-button type="primary" @click="saveBorrowerSubumit(2)">下一步</el-button>
+                <el-button type="primary" @click="saveBorrowerSubumit(2)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
               </el-form-item>
           </el-form>
         </div>
@@ -1433,7 +1433,7 @@
             </el-table>
             <br>
             <el-form-item>
-              <el-button type="primary" @click="oterPersonnelNextStep(3)">下一步</el-button>
+              <el-button type="primary" @click="oterPersonnelNextStep(3)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
             </el-form-item>
           </el-form>
           </div>
@@ -2751,7 +2751,7 @@
                 </el-table-column>
               </el-table>
               <el-form-item>
-                <el-button type="primary" @click="savePawnNextStep(4)">下一步</el-button>
+                <el-button type="primary" @click="savePawnNextStep(4)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
               </el-form-item>
             </div>
             <div v-if="pawnAddFlag">
@@ -2814,7 +2814,7 @@
                 <el-button type="primary" @click="referenceDialog()">引用</el-button>
               </el-form-item>
               <el-form-item label="是否不动产权证" v-if="whetherOwnershipCertificatesFlag">
-                <el-radio-group v-model="pawn.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
+                <el-radio-group v-model="pawn.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesPawnChange">
                   <el-radio  v-for="(vl, index) in WhetherOwnershipCertificateseOptions" :label="vl.VAL_CODE" :key="index">
                     {{vl.VAL_NAME}}
                   </el-radio>
@@ -2836,11 +2836,24 @@
                 </el-col>
               </el-row>
 
+<<<<<<< HEAD
 
                   <el-form-item label="房屋建筑面积">
                     <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input> ㎡
                   </el-form-item>
 
+=======
+              <el-row>
+                <el-col span="8">
+                  <el-form-item label="房屋建筑面积" v-if="buildingAreaFlag">
+                    <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input>
+                  </el-form-item>
+                  <el-form-item label="土地占用面积" v-if="landOccupationAreaFlag">
+                    <el-input v-model="pawn.landOccupationArea" size="small" class="width180"></el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+>>>>>>> 0b15e8407020c5bd15bf628bb95d54b424133ccf
                 <el-row>
                 <el-col span="8">
                   <el-form-item label="抵押物名称">
@@ -3026,7 +3039,7 @@
                 </el-radio-group>
               </el-form-item>
               <el-form-item label="是否不动产权证" v-if="whetherOwnershipCertificatesFlag">
-                <el-radio-group v-model="pawn.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
+                <el-radio-group v-model="pawn.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesPawnChange">
                   <el-radio  v-for="(vl, index) in WhetherOwnershipCertificateseOptions" :label="vl.VAL_CODE" :key="index">
                     {{vl.VAL_NAME}}
                   </el-radio>
@@ -3047,8 +3060,13 @@
 
               <el-row>
                 <el-col span="8">
+
                   <el-form-item label="房屋建筑面积">
                     <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input> ㎡
+
+                  </el-form-item>
+                  <el-form-item label="土地占用面积" v-if="landOccupationAreaFlag">
+                    <el-input v-model="pawn.landOccupationArea" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
@@ -3401,7 +3419,7 @@
             </div>
             <br>
             <el-form-item>
-              <el-button type="primary" @click="loanBusinessNextStep(6)">下一步</el-button>
+              <el-button type="primary" @click="loanBusinessNextStep(6)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
             </el-form-item>
           </el-form>
       </div>
@@ -3436,7 +3454,7 @@
 
             <br>
             <el-form-item>
-              <el-button type="primary" @click="nextStep(6)">下一步</el-button>
+              <el-button type="primary" @click="nextStep(6)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -3601,7 +3619,7 @@
             </el-form-item>-->
             <br>
             <el-form-item>
-              <el-button type="primary" @click="personalLoanSurveyReportNextStep(7)">下一步</el-button>
+              <el-button type="primary" @click="personalLoanSurveyReportNextStep(7)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -4084,7 +4102,10 @@ export default {
         contractSigningTime:'',
         groups:'',
         pawnPersonnelMapping:[],
+        landOccupationArea:'',
       },
+      buildingAreaFlag:false,
+      landOccupationAreaFlag:false,
       //抵押物类型
       MortgageTypeOptions:[{
         VAL_CODE: '0',
@@ -4095,10 +4116,10 @@ export default {
       }],
       //是否不动产权证
       WhetherOwnershipCertificateseOptions:[{
-        VAL_CODE: '1',
+        VAL_CODE: '0',
         VAL_NAME: '不动产权证',
       },{
-        VAL_CODE: '2',
+        VAL_CODE: '1',
         VAL_NAME: '非不动产权证',
       }],
       //是否不动产权证
@@ -4929,11 +4950,15 @@ export default {
       this.propertyCertificateNumberFlag=false;
       this.deedLandCertificateFlag=false;
       this.deedNumberFlag=false;
+      this.buildingAreaFlag =false;
+      this.landOccupationAreaFlag =false;
         //房屋
        if(value=='0'){
+          this.buildingAreaFlag =true;
           this.EvaluationCorporationOptions=this.HousEvaluationCorporationOptions;
           this.whetherOwnershipCertificatesFlag=true;
        }else if(value=='1'){
+          this.landOccupationAreaFlag =true;
           this.EvaluationCorporationOptions=this.LandEvaluationCorporationOptions;
           this.pawn.whetherOwnershipCertificates='';
           this.deedLandCertificateFlag=true;
@@ -6305,6 +6330,7 @@ export default {
       this.otherTableData = assetTypeHousesTableDataNew;
       //关闭弹窗
       this.addOtherAssetDialogVisible = false;
+      this.clearAssetTypeOther();
     },
 
     /**
@@ -6611,6 +6637,28 @@ export default {
           this.deedLandCertificateFlag=true;
       }
     },
+
+    /**
+     * 是否不动产权证 抵押物
+     * @param value
+     */
+    whetherOwnershipCertificatesPawnChange(value){
+      this.propertyCertificateNumberFlag=false;
+      this.deedLandCertificateFlag=false;
+      this.deedNumberFlag=false;
+      //不动产权证
+      if(value=='0'){
+        this.propertyCertificateNumberFlag=true;
+        this.pawn.landCertificateNumber = '';
+        this.pawn.propertyCertificateNumber = '';
+      }else {
+        this.pawn.propertyCertificateNumber='';
+        this.deedNumberFlag=true;
+        this.deedLandCertificateFlag=true;
+      }
+    },
+
+
 
     /**
      *  是否有共同人
@@ -7389,6 +7437,19 @@ export default {
     },
 
     //清空其他资产信息
+    clearAssetTypeOther(){
+      //其他信息
+      let  assetTypeOther={
+          rpiId:'',
+          assetName:'',
+          value:''
+        };
+      this.assetTypeOther = assetTypeOther;
+    },
+
+
+
+    //清空其他资产信息
     clearSpouseAssetTypeOther(){
       let   spouseAssetTypeOther={
         rpiId:'',
@@ -7430,6 +7491,7 @@ export default {
           contractSigningTime:'',
           groups:'',
           pawnPersonnelMapping:[],
+          landOccupationArea:'',
       }
       this.pawn = pawn;
 
@@ -7687,7 +7749,8 @@ export default {
                   if(!this.isNull(whetherLease)){
                     whetherLeaseLandValue=whetherLease;
                   }
-
+                  //房屋建筑面积
+                  this.pawn.buildingArea=constructionAreaValue;
                 }else if(mortgageType=='1'){
                   //土地  土地证号
                   let landTypeCertificate = data.landTypeCertificate;
@@ -7743,9 +7806,9 @@ export default {
                   if(!this.isNull(whetherLeaseLand)){
                       whetherLeaseLandValue=whetherLeaseLand;
                   }
+                  //土地建筑面积
+                  this.pawn.landOccupationArea=constructionAreaValue;
                 }
-                //房屋建筑面积
-                this.pawn.buildingArea=constructionAreaValue;
                 //所属地
                 this.pawn.affiliation = affiliationValue;
                 //价值
