@@ -5,7 +5,6 @@
           <el-step title="借款人情况" @click.native="stepClick(1)" class="schedule"></el-step>
           <el-step title="相关人情况" @click.native="stepClick(2)" class="schedule"></el-step>
           <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
-          <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
           <el-step title="相关贷款业务信息" @click.native="stepClick(4)" class="schedule"></el-step>
           <!--<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>-->
           <el-step title="个人贷款调查报告表" @click.native="stepClick(6)" class="schedule"></el-step>
@@ -169,7 +168,7 @@
               </el-row>
               <el-row>
                 <el-col span="8">
-                  <el-form-item label="持股比例">
+                  <el-form-item label="持股比例" prop="shareholdingRatio">
                     <el-input v-model="relatedPersonnelInformationForm.shareholdingRatio" size="small" class="width150"></el-input> %
                   </el-form-item>
                 </el-col>
@@ -254,7 +253,7 @@
 
               <!--新增编辑界面-->
               <el-dialog :title="operation?'新增':'新增'" width="60%" :visible.sync="addHousAssetDialogVisible" :close-on-click-modal="false">
-                <el-form :model="assetTypeHouses" label-width="150px" :rules="dataFormRules" ref="dataForm" :size="size">
+                <el-form :model="assetTypeHouses"  label-width="150px" :rules="assetTypeHousesRules" ref="dataForm" :size="size">
                   <el-form-item label="是否不动产权证">
                   <el-radio-group v-model="assetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
                     <el-radio  v-for="(vl, index) in WhetherOwnershipCertificatesOptions" :label="vl.VAL_CODE" :key="index">
@@ -284,14 +283,14 @@
 
                   <el-row>
                     <el-col span="8">
-                      <el-form-item label="名称">
+                      <el-form-item label="名称" >
                         <el-input v-model="assetTypeHouses.name" size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col span="8">
-                      <el-form-item label="地址">
+                      <el-form-item label="地址" prop="address">
                         <el-input v-model="assetTypeHouses.address" size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
@@ -306,12 +305,12 @@
                   </el-form-item>
 
 
-                      <el-form-item label="房屋建筑面积">
+                      <el-form-item label="房屋建筑面积" prop="constructionArea">
                         <el-input v-model="assetTypeHouses.constructionArea" size="small" class="width180"></el-input> ㎡
                       </el-form-item>
 
 
-                      <el-form-item label="价值">
+                      <el-form-item label="价值" prop="value">
                         <el-input v-model="assetTypeHouses.value" size="small" class="width180"></el-input> 元
                       </el-form-item>
 
@@ -418,7 +417,7 @@
                   </el-form-item>
 
 
-                      <el-form-item label="土地占用面积">
+                      <el-form-item label="土地占用面积" prop="constructionArea">
                         <el-input v-model="assetTypeLand.constructionArea" size="small" class="width180"></el-input> ㎡
                       </el-form-item>
 
@@ -1282,12 +1281,12 @@
                 <hr>
                 <el-row>
                   <el-col span="8">
-                    <el-form-item label="家庭总资产">
+                    <el-form-item label="家庭总资产" prop="totalAssets">
                       <el-input v-model="householdIncomeForm.totalAssets" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
-                    <el-form-item label="家庭年总收入">
+                    <el-form-item label="家庭年总收入" prop="totalRevenue">
                       <el-input v-model="householdIncomeForm.totalRevenue" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
@@ -1458,7 +1457,7 @@
                 </el-col>
               </el-row>
 
-              <el-form-item label="年龄">
+              <el-form-item label="年龄" prop="age">
                 <el-input v-model="relatedPersonnelInformationForm.age" size="small" class="width150"></el-input> 岁
               </el-form-item>
               <el-form-item label="性别">
@@ -1559,7 +1558,7 @@
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
-                  <el-form-item label="单位工作年限">
+                  <el-form-item label="单位工作年限" prop="unitWorkingYears">
                     <el-input v-model="relatedPersonnelInformationForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input> 年
                   </el-form-item>
                 </el-col>
@@ -1571,7 +1570,7 @@
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
-                  <el-form-item label="行业经营年限">
+                  <el-form-item label="行业经营年限" prop="yearsOperation">
                     <el-input v-model="relatedPersonnelInformationForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input> 年
                   </el-form-item>
                 </el-col>
@@ -2694,7 +2693,7 @@
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="家庭总负债">
-                      <el-input v-model="householdIncomeForm.totalLiability" size="small" class="width180"></el-input> 元
+                      <el-input v-model="householdIncomeForm.totalLiability" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -2836,24 +2835,15 @@
                 </el-col>
               </el-row>
 
-<<<<<<< HEAD
 
-                  <el-form-item label="房屋建筑面积">
+                  <el-form-item label="房屋建筑面积"  v-if="buildingAreaFlag">
                     <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input> ㎡
                   </el-form-item>
+              <el-form-item label="土地占用面积" v-if="landOccupationAreaFlag">
+                <el-input v-model="pawn.landOccupationArea" size="small" class="width180"></el-input> ㎡
+              </el-form-item>
 
-=======
-              <el-row>
-                <el-col span="8">
-                  <el-form-item label="房屋建筑面积" v-if="buildingAreaFlag">
-                    <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input>
-                  </el-form-item>
-                  <el-form-item label="土地占用面积" v-if="landOccupationAreaFlag">
-                    <el-input v-model="pawn.landOccupationArea" size="small" class="width180"></el-input>
-                  </el-form-item>
-                </el-col>
-              </el-row>
->>>>>>> 0b15e8407020c5bd15bf628bb95d54b424133ccf
+
                 <el-row>
                 <el-col span="8">
                   <el-form-item label="抵押物名称">
@@ -3710,12 +3700,76 @@ export default {
     var ageTest=(rule,value,callback)=>{
       let reg=/^[0-9]*$/;
       if(!reg.test(value)&&value!== ''){
-        callback(new Error('年龄必须为数字值'));
+        callback(new Error('必须为数字值'));
       }else{
         callback();
       }
     };
-		return {
+    var localResidenceTimeTest=(rule,value,callback)=>{
+      let reg=/^[0-9]*$/;
+      if(!reg.test(value)&&value!== ''){
+        callback(new Error('必须为数字值'));
+      }else{
+        callback();
+      }
+    };
+    var shareholdingRatioTest=(rule,value,callback)=>{
+      let reg=/^[0-9]*$/;
+      if(!reg.test(value)&&value!== ''){
+        callback(new Error('必须为数字值'));
+      }else{
+        callback();
+      }
+    };
+    var unitWorkingYearsTest=(rule,value,callback)=>{
+      let reg=/^[0-9]*$/;
+      if(!reg.test(value)&&value!== ''){
+        callback(new Error('必须为数字值'));
+      }else{
+        callback();
+      }
+    };
+    var yearsOperationTest=(rule,value,callback)=>{
+      let reg=/^[0-9]*$/;
+      if(!reg.test(value)&&value!== ''){
+        callback(new Error('必须为数字值'));
+      }else{
+        callback();
+      }
+    };
+    var constructionAreaTest=(rule,value,callback)=>{
+      let reg=/^[0-9]*$/;
+      if(!reg.test(value)&&value!== ''){
+        callback(new Error('必须为数字值'));
+      }else{
+        callback();
+      }
+    };
+    var valueTest=(rule,value,callback)=>{
+      let reg=/^[0-9]*$/;
+      if(!reg.test(value)&&value!== ''){
+        callback(new Error('必须为数字值'));
+      }else{
+        callback();
+      }
+    };
+    var totalAssetsTest=(rule,value,callback)=>{
+      let reg=/^[0-9]*$/;alert(value);
+      if(!reg.test(value)&&value!== ''){
+        callback(new Error('必须为数字值'));
+      }else{
+        callback();
+      }
+    };
+    var totalRevenueTest=(rule,value,callback)=>{
+      let reg=/^[0-9]*$/;
+      if(!reg.test(value)&&value!== ''){
+        callback(new Error('必须为数字值'));
+      }else{
+        callback();
+      }
+    };
+    return {
       //基础信息验证
       loanBasisFormRules:{
         borrower: [
@@ -3737,7 +3791,32 @@ export default {
         ],
         age: [
           { validator: ageTest,trigger: 'blur'}
+        ],
+        localResidenceTime: [
+          { validator: localResidenceTimeTest,trigger: 'blur'}
+        ],
+        shareholdingRatio: [
+          { validator: shareholdingRatioTest,trigger: 'blur'}
+        ],
+        unitWorkingYears: [
+          { validator: unitWorkingYearsTest,trigger: 'blur'}
+        ],
+        yearsOperation: [
+          { validator: yearsOperationTest,trigger: 'blur'}
         ]
+      },
+      assetTypeHousesRules:{
+        constructionArea: [
+          { validator: constructionAreaTest,trigger: 'blur'}
+        ],
+        value: [
+          { required: true, message: '请输入价值', trigger: 'blur' },
+          { validator: valueTest,trigger: 'blur'}
+        ],
+        address: [
+          { required: true, message: '请输入地址', trigger: 'blur' },
+        ]
+
       },
 
       add3Rules:{
@@ -3752,6 +3831,21 @@ export default {
         ],
         maritalStatus: [
           { required: true, message: '请选择婚姻状况！', trigger: 'change' }
+        ],
+        age: [
+          { validator: ageTest,trigger: 'blur'}
+        ],
+        localResidenceTime: [
+          { validator: localResidenceTimeTest,trigger: 'blur'}
+        ],
+        shareholdingRatio: [
+          { validator: shareholdingRatioTest,trigger: 'blur'}
+        ],
+        unitWorkingYears: [
+          { validator: unitWorkingYearsTest,trigger: 'blur'}
+        ],
+        yearsOperation: [
+          { validator: yearsOperationTest,trigger: 'blur'}
         ]
       },
       //房屋资产弹窗标记
