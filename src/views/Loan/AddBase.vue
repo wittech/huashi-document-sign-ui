@@ -74,7 +74,7 @@
               </el-row>
 
               <el-form-item label="年龄" prop="age">
-                <el-input v-model.number="relatedPersonnelInformationForm.age" size="small" class="width150"></el-input>
+                <el-input v-model="relatedPersonnelInformationForm.age" size="small" class="width150"></el-input> 岁
               </el-form-item>
               <el-form-item label="性别">
                 <el-radio-group v-model="relatedPersonnelInformationForm.sex">
@@ -170,12 +170,12 @@
               <el-row>
                 <el-col span="8">
                   <el-form-item label="持股比例">
-                    <el-input v-model="relatedPersonnelInformationForm.shareholdingRatio" size="small" class="width150"></el-input>
+                    <el-input v-model="relatedPersonnelInformationForm.shareholdingRatio" size="small" class="width150"></el-input> %
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
                   <el-form-item label="工作年限" prop="unitWorkingYears">
-                    <el-input v-model="relatedPersonnelInformationForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input>
+                    <el-input v-model="relatedPersonnelInformationForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input> 年
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -187,7 +187,7 @@
                 </el-col>
                 <el-col span="8">
                   <el-form-item label="行业经营年限" prop="yearsOperation">
-                    <el-input v-model="relatedPersonnelInformationForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input>
+                    <el-input v-model="relatedPersonnelInformationForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input> 年
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -305,20 +305,15 @@
                     </el-radio-group>
                   </el-form-item>
 
-                  <el-row>
-                    <el-col span="8">
+
                       <el-form-item label="房屋建筑面积">
-                        <el-input v-model="assetTypeHouses.constructionArea" size="small" class="width180"></el-input>
+                        <el-input v-model="assetTypeHouses.constructionArea" size="small" class="width180"></el-input> ㎡
                       </el-form-item>
-                    </el-col>
-                  </el-row>
-                  <el-row>
-                    <el-col span="8">
+
+
                       <el-form-item label="价值">
-                        <el-input v-model="assetTypeHouses.value" size="small" class="width180"></el-input>
+                        <el-input v-model="assetTypeHouses.value" size="small" class="width180"></el-input> 元
                       </el-form-item>
-                    </el-col>
-                  </el-row>
 
                   <el-form-item label="融资情况">
                     <el-radio-group v-model="assetTypeHouses.financingSituation">
@@ -425,14 +420,14 @@
                   <el-row>
                     <el-col span="8">
                       <el-form-item label="土地占用面积">
-                        <el-input v-model="assetTypeLand.constructionArea" size="small" class="width180"></el-input>
+                        <el-input v-model="assetTypeLand.constructionArea" size="small" class="width180"></el-input> ㎡
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
                     <el-col span="8">
                       <el-form-item label="价值">
-                        <el-input v-model="assetTypeLand.value" size="small" class="width180"></el-input>
+                        <el-input v-model="assetTypeLand.value" size="small" class="width180"></el-input> 元
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -519,7 +514,7 @@
                     </el-col>
                     <el-col span="8">
                       <el-form-item label="价值">
-                        <el-input v-model="assetTypeCar.value" size="small" class="width180"></el-input>
+                        <el-input v-model="assetTypeCar.value" size="small" class="width180"></el-input> 元
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -581,7 +576,7 @@
                     </el-radio-group>
                   </el-form-item>
                   <el-form-item label="价值">
-                    <el-input v-model="assetTypeSecurities.value" size="small" class="width180"></el-input>
+                    <el-input v-model="assetTypeSecurities.value" size="small" class="width180"></el-input> 元
                   </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
@@ -629,7 +624,7 @@
                     </el-col>
                     <el-col span="8">
                       <el-form-item label="价值">
-                        <el-input v-model="assetTypeOther.value" size="small" class="width180"></el-input>
+                        <el-input v-model="assetTypeOther.value" size="small" class="width180"></el-input> 元
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -670,7 +665,7 @@
                       </el-col>
                     </el-row>
                   <el-form-item label="年龄">
-                    <el-input v-model="relatedPersonnelInformationSpouseForm.age" size="small" class="width150"></el-input>
+                    <el-input v-model="relatedPersonnelInformationSpouseForm.age" size="small" class="width150"></el-input> 岁
                   </el-form-item>
                     <el-form-item label="性别">
                       <el-radio-group v-model="relatedPersonnelInformationSpouseForm.sex">
@@ -766,12 +761,12 @@
                     <el-row>
                       <el-col span="8">
                         <el-form-item label="持股比例">
-                          <el-input v-model="relatedPersonnelInformationSpouseForm.shareholdingRatio" size="small" class="width150"></el-input>
+                          <el-input v-model="relatedPersonnelInformationSpouseForm.shareholdingRatio" size="small" class="width150"></el-input> %
                         </el-form-item>
                       </el-col>
                       <el-col span="8">
                         <el-form-item label="单位工作年限">
-                          <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" placeholder="该单位工作年限" size="small" class="width150"></el-input>
+                          <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" placeholder="该单位工作年限" size="small" class="width150"></el-input> 年
                         </el-form-item>
                       </el-col>
                     </el-row>
@@ -783,7 +778,7 @@
                       </el-col>
                       <el-col span="8">
                         <el-form-item label="行业经营年限">
-                          <el-input v-model="relatedPersonnelInformationSpouseForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input>
+                          <el-input v-model="relatedPersonnelInformationSpouseForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input> 年
                         </el-form-item>
                       </el-col>
                     </el-row>
@@ -904,14 +899,14 @@
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="房屋建筑面积">
-                              <el-input v-model="spouseAssetTypeHouses.constructionArea" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeHouses.constructionArea" size="small" class="width180"></el-input> ㎡
                             </el-form-item>
                           </el-col>
                         </el-row>
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="spouseAssetTypeHouses.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeHouses.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
                           </el-col>
                         </el-row>
@@ -1021,14 +1016,14 @@
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="房屋建筑面积">
-                              <el-input v-model="spouseAssetTypeLand.constructionArea" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeLand.constructionArea" size="small" class="width180"></el-input> ㎡
                             </el-form-item>
                           </el-col>
                         </el-row>
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="spouseAssetTypeLand.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeLand.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
                           </el-col>
                         </el-row>
@@ -1115,7 +1110,7 @@
                           </el-col>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="spouseAssetTypeCar.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeCar.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
                           </el-col>
                         </el-row>
@@ -1177,7 +1172,7 @@
                           </el-radio-group>
                         </el-form-item>
                         <el-form-item label="价值">
-                          <el-input v-model="spouseAssetTypeSecurities.value" size="small" class="width180"></el-input>
+                          <el-input v-model="spouseAssetTypeSecurities.value" size="small" class="width180"></el-input> 元
                         </el-form-item>
                       </el-form>
                       <div slot="footer" class="dialog-footer">
@@ -1225,7 +1220,7 @@
                           </el-col>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="spouseAssetTypeOther.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeOther.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
                           </el-col>
                         </el-row>
@@ -1302,109 +1297,109 @@
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="家庭总资产">
-                      <el-input v-model="householdIncomeForm.totalAssets" size="small" class="width150"></el-input>
+                      <el-input v-model="householdIncomeForm.totalAssets" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="家庭年总收入">
-                      <el-input v-model="householdIncomeForm.totalRevenue" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.totalRevenue" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="申请人年薪金收入">
-                      <el-input v-model="householdIncomeForm.applicantAnnualIncome" size="small" class="width150"></el-input>
+                      <el-input v-model="householdIncomeForm.applicantAnnualIncome" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="申请人年经营性收入">
-                      <el-input v-model="householdIncomeForm.applicantOperatingIncome" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.applicantOperatingIncome" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="申请人其他收入">
-                      <el-input v-model="householdIncomeForm.applicantOtherIncome" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.applicantOtherIncome" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="配偶年薪金收入">
-                      <el-input v-model="householdIncomeForm.spouseAnnualIncome" size="small" class="width150"></el-input>
+                      <el-input v-model="householdIncomeForm.spouseAnnualIncome" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="配偶年经营性收入">
-                      <el-input v-model="householdIncomeForm.spouseOperatingIncome" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.spouseOperatingIncome" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="配偶其他收入">
-                      <el-input v-model="householdIncomeForm.spouseOtherIncome" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.spouseOtherIncome" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="家庭年总支出">
-                      <el-input v-model="householdIncomeForm.totalAnnualExpenditure" size="small" class="width150"></el-input>
+                      <el-input v-model="householdIncomeForm.totalAnnualExpenditure" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="年日常生活总支出">
-                      <el-input v-model="householdIncomeForm.lifeTotalExpenditure" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.lifeTotalExpenditure" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="年日常基本生活支出">
-                      <el-input v-model="householdIncomeForm.basicLifeTotalExpenditure" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.basicLifeTotalExpenditure" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="年子女教育支出">
-                      <el-input v-model="householdIncomeForm.educationExpenditure" size="small" class="width150"></el-input>
+                      <el-input v-model="householdIncomeForm.educationExpenditure" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="年其他临时性支出">
-                      <el-input v-model="householdIncomeForm.temporaryExpenditure" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.temporaryExpenditure" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="年债务性总支出">
-                      <el-input v-model="householdIncomeForm.debtTotalExpenditure" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.debtTotalExpenditure" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="申请人年还贷支出">
-                      <el-input v-model="householdIncomeForm.annualLoanExpenditure" size="small" class="width150"></el-input>
+                      <el-input v-model="householdIncomeForm.annualLoanExpenditure" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="配偶年还贷支出">
-                      <el-input v-model="householdIncomeForm.spouseTemporaryExpenditure" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.spouseTemporaryExpenditure" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="家庭供养人口">
-                      <el-input v-model="householdIncomeForm.supportPopulation" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.supportPopulation" size="small" class="width180"></el-input> 人
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="家庭对外担保总额">
-                      <el-input v-model="householdIncomeForm.foreignGuaranteeLumpSum" size="small" class="width150"></el-input>
+                      <el-input v-model="householdIncomeForm.foreignGuaranteeLumpSum" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="家庭总负债">
-                      <el-input v-model="householdIncomeForm.totalLiability" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.totalLiability" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -1478,7 +1473,7 @@
               </el-row>
 
               <el-form-item label="年龄">
-                <el-input v-model="relatedPersonnelInformationForm.age" size="small" class="width150"></el-input>
+                <el-input v-model="relatedPersonnelInformationForm.age" size="small" class="width150"></el-input> 岁
               </el-form-item>
               <el-form-item label="性别">
                 <el-radio-group v-model="relatedPersonnelInformationForm.sex">
@@ -1579,7 +1574,7 @@
                 </el-col>
                 <el-col span="8">
                   <el-form-item label="单位工作年限">
-                    <el-input v-model="relatedPersonnelInformationForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input>
+                    <el-input v-model="relatedPersonnelInformationForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input> 年
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -1591,7 +1586,7 @@
                 </el-col>
                 <el-col span="8">
                   <el-form-item label="行业经营年限">
-                    <el-input v-model="relatedPersonnelInformationForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input>
+                    <el-input v-model="relatedPersonnelInformationForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input> 年
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -1708,12 +1703,12 @@
                     <el-row>
                       <el-col span="8">
                         <el-form-item label="房屋建筑面积">
-                          <el-input v-model="assetTypeHouses.constructionArea" size="small" class="width180"></el-input>
+                          <el-input v-model="assetTypeHouses.constructionArea" size="small" class="width180"></el-input> ㎡
                         </el-form-item>
                       </el-col>
                       <el-col span="8">
                         <el-form-item label="价值">
-                          <el-input v-model="assetTypeHouses.value" size="small" class="width180"></el-input>
+                          <el-input v-model="assetTypeHouses.value" size="small" class="width180"></el-input> 元
                         </el-form-item>
                       </el-col>
                     </el-row>
@@ -1821,12 +1816,12 @@
                     <el-row>
                       <el-col span="8">
                         <el-form-item label="房屋建筑面积">
-                          <el-input v-model="assetTypeLand.constructionArea" size="small" class="width180"></el-input>
+                          <el-input v-model="assetTypeLand.constructionArea" size="small" class="width180"></el-input> ㎡
                         </el-form-item>
                       </el-col>
                       <el-col span="8">
                         <el-form-item label="价值">
-                          <el-input v-model="assetTypeLand.value" size="small" class="width180"></el-input>
+                          <el-input v-model="assetTypeLand.value" size="small" class="width180"></el-input> 元
                         </el-form-item>
                       </el-col>
                     </el-row>
@@ -1913,7 +1908,7 @@
                       </el-col>
                       <el-col span="8">
                         <el-form-item label="价值">
-                          <el-input v-model="assetTypeCar.value" size="small" class="width180"></el-input>
+                          <el-input v-model="assetTypeCar.value" size="small" class="width180"></el-input> 元
                         </el-form-item>
                       </el-col>
                     </el-row>
@@ -1975,7 +1970,7 @@
                       </el-radio-group>
                     </el-form-item>
                     <el-form-item label="价值">
-                      <el-input v-model="assetTypeSecurities.value" size="small" class="width180"></el-input>
+                      <el-input v-model="assetTypeSecurities.value" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-form>
                   <div slot="footer" class="dialog-footer">
@@ -2023,7 +2018,7 @@
                       </el-col>
                       <el-col span="8">
                         <el-form-item label="价值">
-                          <el-input v-model="assetTypeOther.value" size="small" class="width180"></el-input>
+                          <el-input v-model="assetTypeOther.value" size="small" class="width180"></el-input> 元
                         </el-form-item>
                       </el-col>
                     </el-row>
@@ -2068,7 +2063,7 @@
                     </el-col>
                   </el-row>
                   <el-form-item label="年龄">
-                    <el-input v-model="relatedPersonnelInformationSpouseForm.age" size="small" class="width150"></el-input>
+                    <el-input v-model="relatedPersonnelInformationSpouseForm.age" size="small" class="width150"></el-input> 岁
                   </el-form-item>
                   <el-form-item label="性别">
                     <el-radio-group v-model="relatedPersonnelInformationSpouseForm.sex">
@@ -2093,7 +2088,7 @@
                   <el-row>
                     <el-col span="8">
                       <el-form-item label="本地居住时间">
-                        <el-input v-model="relatedPersonnelInformationSpouseForm.localResidenceTime" size="small" class="width150"></el-input>
+                        <el-input v-model="relatedPersonnelInformationSpouseForm.localResidenceTime" size="small" class="width150"></el-input> 年
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -2164,12 +2159,12 @@
                   <el-row>
                     <el-col span="8">
                       <el-form-item label="持股比例">
-                        <el-input v-model="relatedPersonnelInformationSpouseForm.shareholdingRatio" size="small" class="width150"></el-input>
+                        <el-input v-model="relatedPersonnelInformationSpouseForm.shareholdingRatio" size="small" class="width150"></el-input> %
                       </el-form-item>
                     </el-col>
                     <el-col span="8">
                       <el-form-item label="单位工作年限">
-                        <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input>
+                        <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input> 年
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -2302,14 +2297,14 @@
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="房屋建筑面积">
-                              <el-input v-model="spouseAssetTypeHouses.constructionArea" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeHouses.constructionArea" size="small" class="width180"></el-input> ㎡
                             </el-form-item>
                           </el-col>
                         </el-row>
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="spouseAssetTypeHouses.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeHouses.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
                           </el-col>
                         </el-row>
@@ -2419,14 +2414,14 @@
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="房屋建筑面积">
-                              <el-input v-model="spouseAssetTypeLand.constructionArea" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeLand.constructionArea" size="small" class="width180"></el-input> ㎡
                             </el-form-item>
                           </el-col>
                         </el-row>
                         <el-row>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="spouseAssetTypeLand.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeLand.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
                           </el-col>
                         </el-row>
@@ -2513,7 +2508,7 @@
                           </el-col>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="spouseAssetTypeCar.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeCar.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
                           </el-col>
                         </el-row>
@@ -2575,7 +2570,7 @@
                           </el-radio-group>
                         </el-form-item>
                         <el-form-item label="价值">
-                          <el-input v-model="spouseAssetTypeSecurities.value" size="small" class="width180"></el-input>
+                          <el-input v-model="spouseAssetTypeSecurities.value" size="small" class="width180"></el-input> 元
                         </el-form-item>
                       </el-form>
                       <div slot="footer" class="dialog-footer">
@@ -2623,7 +2618,7 @@
                           </el-col>
                           <el-col span="8">
                             <el-form-item label="价值">
-                              <el-input v-model="spouseAssetTypeOther.value" size="small" class="width180"></el-input>
+                              <el-input v-model="spouseAssetTypeOther.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
                           </el-col>
                         </el-row>
@@ -2700,36 +2695,36 @@
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="家庭总资产">
-                      <el-input v-model="householdIncomeForm.totalAssets" size="small" class="width150"></el-input>
+                      <el-input v-model="householdIncomeForm.totalAssets" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="家庭年总收入">
-                      <el-input v-model="householdIncomeForm.totalRevenue" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.totalRevenue" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="家庭年总支出">
-                      <el-input v-model="householdIncomeForm.totalAnnualExpenditure" size="small" class="width150"></el-input>
+                      <el-input v-model="householdIncomeForm.totalAnnualExpenditure" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="年债务性总支出">
-                      <el-input v-model="householdIncomeForm.debtTotalExpenditure" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.debtTotalExpenditure" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
                     <el-form-item label="家庭对外担保总额">
-                      <el-input v-model="householdIncomeForm.foreignGuaranteeLumpSum" size="small" class="width150"></el-input>
+                      <el-input v-model="householdIncomeForm.foreignGuaranteeLumpSum" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="家庭总负债">
-                      <el-input v-model="householdIncomeForm.totalLiability" size="small" class="width180"></el-input>
+                      <el-input v-model="householdIncomeForm.totalLiability" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -2874,7 +2869,7 @@
               <el-row>
                 <el-col span="8">
                   <el-form-item label="房屋建筑面积">
-                    <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input>
+                    <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input> ㎡
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -2912,7 +2907,7 @@
               <el-row>
                 <el-col span="8">
                   <el-form-item label="价值">
-                    <el-input v-model="pawn.value" size="small" class="width180"></el-input>
+                    <el-input v-model="pawn.value" size="small" class="width180"></el-input> 元
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -2994,7 +2989,7 @@
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="租金/月">
-                      <el-input v-model="pawn.rent" size="small" class="width180"></el-input>
+                      <el-input v-model="pawn.rent" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
@@ -3087,7 +3082,7 @@
               <el-row>
                 <el-col span="8">
                   <el-form-item label="房屋建筑面积">
-                    <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input>
+                    <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input> ㎡
                   </el-form-item>
                 </el-col>
                 <el-col span="8">
@@ -3121,7 +3116,7 @@
                 </el-col>
                 <el-col span="8">
                   <el-form-item label="价值">
-                    <el-input v-model="pawn.value" size="small" class="width180"></el-input>
+                    <el-input v-model="pawn.value" size="small" class="width180"></el-input> 元
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -3195,7 +3190,7 @@
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="租金/月">
-                      <el-input v-model="pawn.rent" size="small" class="width180"></el-input>
+                      <el-input v-model="pawn.rent" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                   <el-col span="8">
@@ -3279,7 +3274,7 @@
                 <el-input v-model="counterpartyInformation.bank" size="small" class="width180"></el-input>
               </el-form-item>
               <el-form-item label="交易金额">
-                <el-input v-model="counterpartyInformation.amount" size="small" class="width180"></el-input>
+                <el-input v-model="counterpartyInformation.amount" size="small" class="width180"></el-input> 元
               </el-form-item>
               <br>
               <div slot="footer" class="dialog-footer">
@@ -3293,14 +3288,14 @@
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="申请金额">
-                      <el-input v-model="loanBusinessInformation.applicationAmount" size="small" class="width150"></el-input>
+                      <el-input v-model="loanBusinessInformation.applicationAmount" size="small" class="width150"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
                   <el-row>
                   <el-col span="8">
                     <el-form-item label="申请期限">
-                      <el-input v-model="loanBusinessInformation.applicationPeriod" size="small" class="width180"></el-input>
+                      <el-input v-model="loanBusinessInformation.applicationPeriod" size="small" class="width180"></el-input> 月
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -3326,26 +3321,26 @@
                   </el-radio-group>
                 </el-form-item>
                 <el-form-item label="利率上浮幅度">
-                  <el-input v-model="loanBusinessInformation.interestRateRise" size="small" class="width150"></el-input>
+                  <el-input v-model="loanBusinessInformation.interestRateRise" size="small" class="width150"></el-input> %
                 </el-form-item>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="申请利率">
-                      <el-input v-model="loanBusinessInformation.applicationRate" size="small" class="width180"></el-input>
+                      <el-input v-model="loanBusinessInformation.applicationRate" size="small" class="width180"></el-input> %
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="保证金比例">
-                      <el-input v-model="loanBusinessInformation.marginRatio" size="small" class="width180"></el-input>
+                      <el-input v-model="loanBusinessInformation.marginRatio" size="small" class="width180"></el-input> %
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
                   <el-col span="8">
                     <el-form-item label="原信贷业务余额">
-                      <el-input v-model="loanBusinessInformation.originalCreditBalance" size="small" class="width180"></el-input>
+                      <el-input v-model="loanBusinessInformation.originalCreditBalance" size="small" class="width180"></el-input> 元
                     </el-form-item>
                   </el-col>
                 </el-row>
@@ -3564,17 +3559,19 @@
               </el-radio-group>
             </el-form-item>
 
-                <el-form-item label="申贷金额">
+              <!--  <el-form-item label="申贷金额">
                   <el-input v-model="personalLoanSurveyReport.amountLoan" size="small" class="width180"></el-input>
                 </el-form-item>
 
-                <el-form-item label="自筹资金">
-                  <el-input v-model="personalLoanSurveyReport.selfFunding" size="small" class="width180"></el-input>
-                </el-form-item>
-
-                <el-form-item label="借款期限">
+                 <el-form-item label="借款期限">
                   <el-input v-model="personalLoanSurveyReport.borrowingPeriod" size="small" class="width180"></el-input>
                 </el-form-item>
+                -->
+                <el-form-item label="自筹资金">
+                  <el-input v-model="personalLoanSurveyReport.selfFunding" size="small" class="width180"></el-input> 元
+                </el-form-item>
+
+
 
             <el-form-item label="申贷金额是否合理">
               <el-radio-group v-model="personalLoanSurveyReport.loanAmountWhetherReasonable">
@@ -3590,9 +3587,10 @@
                 </el-radio>
               </el-radio-group>
             </el-form-item>
+            <!--
             <el-form-item label="借款用途">
               <el-input v-model="personalLoanSurveyReport.useLoan" size="small" class="width180"></el-input>
-            </el-form-item>
+            </el-form-item>-->
             <el-form-item label="第一还款来源是否充足">
               <el-radio-group v-model="personalLoanSurveyReport.repaymentSourceWhetherSufficient">
                 <el-radio  v-for="(vl, index) in RepaymentSourceWhetherSufficientOptions" :label="vl.VAL_CODE" :key="index">
@@ -3725,6 +3723,14 @@ export default {
 			KtButton
 	},
 	data() {
+	  var ageTest=(rule,value,callback)=>{
+        let reg=/^[0-9]*$/;
+        if(!reg.test(value)&&value!== ''){
+          callback(new Error('年龄必须为数字值'));
+        }else{
+          callback();
+        }
+    };
 		return {
       //基础信息验证
       loanBasisFormRules:{
@@ -3746,7 +3752,7 @@ export default {
           { required: true, message: '请选择婚姻状况', trigger: 'change' }
         ],
         age: [
-          { type: 'number',required:false, message: '年龄必须为数字值'}
+          { validator: ageTest,trigger: 'blur'}
         ]
       },
 
