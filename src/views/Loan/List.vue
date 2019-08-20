@@ -49,6 +49,7 @@
         fixed="right" header-align="center" align="center" width="185" :label="$t('action.operation')">
         <template slot-scope="scope">
           <kt-button icon="fa fa-edit" label="查看" perms="loan:view" @click="handleDeail(scope.row)"/>
+          <kt-button icon="fa fa-edit" label="修改" perms="loan:view" @click="editHref(scope.row)"/>
         </template>
       </el-table-column>
 
@@ -561,6 +562,16 @@
         } else if (row[column.property] == '1') {
           return '续贷';
         }
+      },
+
+      //修改
+      editHref(data){
+        sessionStorage.setItem('baseLoneId', data.id);
+        sessionStorage.setItem('loanType', data.loanType);
+        sessionStorage.setItem('status', data.status);
+        this.$router.push('/loan/editBase');
+        //this.$router.push('/loan/addBase');
+
       },
 
     },
