@@ -1,9 +1,10 @@
 <template>
     <div>
-        <el-steps :active="active" finish-status="success">
+        <el-steps :active="active" finish-status="success" style="margin-top: 10px; margin-bottom: 10px;">
           <el-step title="基础信息" @click.native="stepClick(0)"  class="schedule"></el-step>
           <el-step title="借款人情况" @click.native="stepClick(1)" class="schedule"></el-step>
           <el-step title="相关人情况" @click.native="stepClick(2)" class="schedule"></el-step>
+          <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
           <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
           <el-step title="相关贷款业务信息" @click.native="stepClick(4)" class="schedule"></el-step>
           <!--<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>-->
@@ -51,8 +52,7 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary"  @click="saveBasicSubmit">下一步</el-button>
-              <el-button @click="previous">返回</el-button>
+              <el-button type="primary" @click="saveBasicSubmit">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
             </el-form-item>
           </el-form>
 
@@ -1411,7 +1411,7 @@
               </div>
               <!--家庭收支情况 end-->
               <el-form-item>
-                <el-button type="primary" @click="saveBorrowerSubumit(2)">下一步</el-button>
+                <el-button type="primary" @click="saveBorrowerSubumit(2)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
               </el-form-item>
           </el-form>
         </div>
@@ -1452,7 +1452,7 @@
             </el-table>
             <br>
             <el-form-item>
-              <el-button type="primary" @click="oterPersonnelNextStep(3)">下一步</el-button>
+              <el-button type="primary" @click="oterPersonnelNextStep(3)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
             </el-form-item>
           </el-form>
           </div>
@@ -2786,7 +2786,7 @@
                 </el-table-column>
               </el-table>
               <el-form-item>
-                <el-button type="primary" @click="savePawnNextStep(4)">下一步</el-button>
+                <el-button type="primary" @click="savePawnNextStep(4)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
               </el-form-item>
             </div>
             <div v-if="pawnAddFlag">
@@ -3446,7 +3446,7 @@
             </div>
             <br>
             <el-form-item>
-              <el-button type="primary" @click="loanBusinessNextStep(6)">下一步</el-button>
+              <el-button type="primary" @click="loanBusinessNextStep(6)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
             </el-form-item>
           </el-form>
       </div>
@@ -3481,7 +3481,7 @@
 
             <br>
             <el-form-item>
-              <el-button type="primary" @click="nextStep(6)">下一步</el-button>
+              <el-button type="primary" @click="nextStep(6)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -3643,7 +3643,7 @@
             </el-form-item>-->
             <br>
             <el-form-item>
-              <el-button type="primary" @click="personalLoanSurveyReportNextStep(7)">下一步</el-button>
+              <el-button type="primary" @click="personalLoanSurveyReportNextStep(7)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
             </el-form-item>
           </el-form>
         </div>
