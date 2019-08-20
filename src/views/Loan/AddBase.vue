@@ -4318,7 +4318,7 @@ export default {
       //配偶 end
 
 
-      loanBasisId:'80',
+      loanBasisId:'',
       size: 'small',
       dialogImageUrl: '',
       dialogVisible: false,
