@@ -417,20 +417,15 @@
                     </el-radio-group>
                   </el-form-item>
 
-                  <el-row>
-                    <el-col span="8">
+
                       <el-form-item label="土地占用面积">
                         <el-input v-model="assetTypeLand.constructionArea" size="small" class="width180"></el-input> ㎡
                       </el-form-item>
-                    </el-col>
-                  </el-row>
-                  <el-row>
-                    <el-col span="8">
+
                       <el-form-item label="价值">
                         <el-input v-model="assetTypeLand.value" size="small" class="width180"></el-input> 元
                       </el-form-item>
-                    </el-col>
-                  </el-row>
+
 
                   <el-form-item label="融资情况">
                     <el-radio-group v-model="assetTypeLand.financingSituation">
@@ -896,20 +891,16 @@
                           </el-radio-group>
                         </el-form-item>
 
-                        <el-row>
-                          <el-col span="8">
+
                             <el-form-item label="房屋建筑面积">
                               <el-input v-model="spouseAssetTypeHouses.constructionArea" size="small" class="width180"></el-input> ㎡
                             </el-form-item>
-                          </el-col>
-                        </el-row>
-                        <el-row>
-                          <el-col span="8">
+
+
                             <el-form-item label="价值">
                               <el-input v-model="spouseAssetTypeHouses.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
-                          </el-col>
-                        </el-row>
+
 
                         <el-form-item label="融资情况">
                           <el-radio-group v-model="spouseAssetTypeHouses.financingSituation">
@@ -1013,20 +1004,15 @@
                           </el-radio-group>
                         </el-form-item>
 
-                        <el-row>
-                          <el-col span="8">
+
                             <el-form-item label="房屋建筑面积">
                               <el-input v-model="spouseAssetTypeLand.constructionArea" size="small" class="width180"></el-input> ㎡
                             </el-form-item>
-                          </el-col>
-                        </el-row>
-                        <el-row>
-                          <el-col span="8">
+
                             <el-form-item label="价值">
                               <el-input v-model="spouseAssetTypeLand.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
-                          </el-col>
-                        </el-row>
+
 
                         <el-form-item label="融资情况">
                           <el-radio-group v-model="spouseAssetTypeLand.financingSituation">
@@ -1653,7 +1639,7 @@
 
                 <!--新增编辑界面-->
                 <el-dialog :title="operation?'新增':'新增'" width="60%" :visible.sync="addHousAssetDialogVisible" :close-on-click-modal="false">
-                  <el-form :model="assetTypeHouses" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                  <el-form :model="assetTypeHouses" label-width="150px" :rules="dataFormRules" ref="dataForm" :size="size">
                     <el-form-item label="是否不动产权证">
                     <el-radio-group v-model="assetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
                       <el-radio  v-for="(vl, index) in WhetherOwnershipCertificatesOptions" :label="vl.VAL_CODE" :key="index">
@@ -1700,18 +1686,15 @@
                       </el-radio-group>
                     </el-form-item>
 
-                    <el-row>
-                      <el-col span="8">
+
                         <el-form-item label="房屋建筑面积">
                           <el-input v-model="assetTypeHouses.constructionArea" size="small" class="width180"></el-input> ㎡
                         </el-form-item>
-                      </el-col>
-                      <el-col span="8">
+
                         <el-form-item label="价值">
                           <el-input v-model="assetTypeHouses.value" size="small" class="width180"></el-input> 元
                         </el-form-item>
-                      </el-col>
-                    </el-row>
+
 
                     <el-form-item label="融资情况">
                       <el-radio-group v-model="assetTypeHouses.financingSituation">
@@ -1788,7 +1771,7 @@
 
                 <!--新增编辑土地界面-->
                 <el-dialog :title="operationLand?'新增':'编辑'" width="60%" :visible.sync="addLandAssetDialogVisible" :close-on-click-modal="false">
-                  <el-form :model="assetTypeLand" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+                  <el-form :model="assetTypeLand" label-width="150px" :rules="dataFormRules" ref="dataForm" :size="size">
                     <el-form-item label="土地证号">
                       <el-input v-model="assetTypeLand.landCertificate" size="small" class="width180"></el-input>
                     </el-form-item>
@@ -1813,18 +1796,15 @@
                       </el-radio-group>
                     </el-form-item>
 
-                    <el-row>
-                      <el-col span="8">
+
                         <el-form-item label="房屋建筑面积">
                           <el-input v-model="assetTypeLand.constructionArea" size="small" class="width180"></el-input> ㎡
                         </el-form-item>
-                      </el-col>
-                      <el-col span="8">
+
                         <el-form-item label="价值">
                           <el-input v-model="assetTypeLand.value" size="small" class="width180"></el-input> 元
                         </el-form-item>
-                      </el-col>
-                    </el-row>
+
 
                     <el-form-item label="融资情况">
                       <el-radio-group v-model="assetTypeLand.financingSituation">
@@ -2294,20 +2274,15 @@
                           </el-radio-group>
                         </el-form-item>
 
-                        <el-row>
-                          <el-col span="8">
+
                             <el-form-item label="房屋建筑面积">
                               <el-input v-model="spouseAssetTypeHouses.constructionArea" size="small" class="width180"></el-input> ㎡
                             </el-form-item>
-                          </el-col>
-                        </el-row>
-                        <el-row>
-                          <el-col span="8">
+
                             <el-form-item label="价值">
                               <el-input v-model="spouseAssetTypeHouses.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
-                          </el-col>
-                        </el-row>
+
 
                         <el-form-item label="融资情况">
                           <el-radio-group v-model="spouseAssetTypeHouses.financingSituation">
@@ -2411,20 +2386,15 @@
                           </el-radio-group>
                         </el-form-item>
 
-                        <el-row>
-                          <el-col span="8">
+
                             <el-form-item label="房屋建筑面积">
                               <el-input v-model="spouseAssetTypeLand.constructionArea" size="small" class="width180"></el-input> ㎡
                             </el-form-item>
-                          </el-col>
-                        </el-row>
-                        <el-row>
-                          <el-col span="8">
+
                             <el-form-item label="价值">
                               <el-input v-model="spouseAssetTypeLand.value" size="small" class="width180"></el-input> 元
                             </el-form-item>
-                          </el-col>
-                        </el-row>
+
 
                         <el-form-item label="融资情况">
                           <el-radio-group v-model="spouseAssetTypeLand.financingSituation">
@@ -2866,13 +2836,11 @@
                 </el-col>
               </el-row>
 
-              <el-row>
-                <el-col span="8">
+
                   <el-form-item label="房屋建筑面积">
                     <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input> ㎡
                   </el-form-item>
-                </el-col>
-              </el-row>
+
                 <el-row>
                 <el-col span="8">
                   <el-form-item label="抵押物名称">
@@ -2904,13 +2872,11 @@
                   </el-form-item>
                 </el-col>
               </el-row>
-              <el-row>
-                <el-col span="8">
+
                   <el-form-item label="价值">
                     <el-input v-model="pawn.value" size="small" class="width180"></el-input> 元
                   </el-form-item>
-                </el-col>
-              </el-row>
+
 
               <el-form-item label="评估公司">
                 <el-radio-group v-model="pawn.evaluationCorporation">
@@ -3723,13 +3689,13 @@ export default {
 			KtButton
 	},
 	data() {
-	  var ageTest=(rule,value,callback)=>{
-        let reg=/^[0-9]*$/;
-        if(!reg.test(value)&&value!== ''){
-          callback(new Error('年龄必须为数字值'));
-        }else{
-          callback();
-        }
+    var ageTest=(rule,value,callback)=>{
+      let reg=/^[0-9]*$/;
+      if(!reg.test(value)&&value!== ''){
+        callback(new Error('年龄必须为数字值'));
+      }else{
+        callback();
+      }
     };
 		return {
       //基础信息验证
