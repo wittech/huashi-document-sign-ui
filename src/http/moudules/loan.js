@@ -67,3 +67,11 @@ export const findByLoanBasisIdList = (params) => {
   })
 }
 
+// 根据根据id查询数据
+export const getByKeyId = (params) => {
+  return axios({
+    url: '/loan/getByKeyId',
+    method: 'get',
+    params
+  })
+}

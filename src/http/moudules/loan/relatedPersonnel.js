@@ -19,3 +19,21 @@ export const findByBaseIdList = (data) => {
     data
   })
 }
+
+// 根据id查询
+export const findRelatedPersonnelList = (params) => {
+  return axios({
+    url: '/relatedPersonnelInformation/findByBaseIdList',
+    method: 'get',
+    params
+  })
+}
+
+// 根据id查询
+export const findByBaseIdAndType = (params) => {
+  return axios({
+    url: '/relatedPersonnelInformation/findByBaseIdAndType',
+    method: 'get',
+    params
+  })
+}

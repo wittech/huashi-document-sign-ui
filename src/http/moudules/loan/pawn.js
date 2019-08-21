@@ -9,3 +9,12 @@ export const save = (data) => {
         data
     })
 }
+
+// 保存
+export const findByLoanBasisId = (params) => {
+  return axios({
+    url: '/pawn/findByLoanBasisId',
+    method: 'get',
+    params
+  })
+}

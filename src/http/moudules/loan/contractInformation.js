@@ -8,3 +8,12 @@ export const save = (data) => {
         data
     })
 }
+
+// 根据根据id查询数据
+export const findByBaseId = (params) => {
+  return axios({
+    url: '/contractInformation/findByLoanBasisId',
+    method: 'get',
+    params
+  })
+}

@@ -22,6 +22,9 @@ import * as contractInformation from './moudules/loan/contractInformation'
 import * as fileDoc from './moudules/fileDoc'
 import * as postLoanCheck from './moudules/afterLoan/postLoanCheck'
 import * as collectionNotice from './moudules/maturity/collectionNotice'
+import * as loanSurveyReport from './moudules/loan/loanSurveyReport'
+import * as counterpartyInformation from './moudules/loan/counterpartyInformation'
+
 
 
 // 默认全部导出
@@ -41,10 +44,12 @@ export default {
     relatedPersonnel,
     oterRelatedPersonnel,
     pawn,
-    loanBusinessInformation,
+  loanBusinessInformation,
     personalLoanSurveyReport,
     contractInformation,
     fileDoc,
     postLoanCheck,
-    collectionNotice
+    collectionNotice,
+    loanSurveyReport,
+    counterpartyInformation
 }

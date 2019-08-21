@@ -7042,6 +7042,7 @@ export default {
           this.$confirm('确认提交吗？', '提示', {}).then(() => {
             let datas = {
               pawn:this.getPawnParams(),
+              loanBasisId:this.loanBasisId
             };
             console.log("datas:",datas);
             let params = Object.assign({}, datas)
