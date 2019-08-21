@@ -252,7 +252,7 @@
           if (url != '' && url != null) {
             window.open(url);
           } else {
-            this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+            this.$message({message: '操作失败', type: 'error'})
           }
         })
       },
@@ -278,7 +278,7 @@
           if (url != '' && url != null) {
             window.open(url);
           } else {
-            this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+            this.$message({message: '操作失败', type: 'error'})
           }
         });
       },
