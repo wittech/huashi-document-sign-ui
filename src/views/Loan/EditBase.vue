@@ -4833,9 +4833,9 @@
         //选中赋值
         checkedRadioData:'',
         //基础信息id
+        currentStaatus:'0'
 
-
-      }
+    }
     },
 
     created(){
@@ -4843,6 +4843,7 @@
         if(baseLoneId){
             this.loanBasisId = baseLoneId;
             let status = sessionStorage.getItem('status');
+            this.currentStaatus = status;
             this.active=status;
             //加载数据
             this.getData(status,baseLoneId);
@@ -7030,7 +7031,12 @@
        * 进度条状态切换
        */
       stepClick(value){
+        if(this.currentStaatus<value){
+          this.$message({message: '当前订单环节不可以切换,只允许一步一步做下去 ', type: 'error'})
+            return ;
+        }
         this.active=value;
+        this.getData(value,this.loanBasisId);
       },
 
       /**
