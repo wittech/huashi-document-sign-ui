@@ -118,7 +118,6 @@
     </el-dialog>
   </div>
 </template>
-
 <script>
   import axios from 'axios';
   import KtTable from "@/views/Core/KtTable"
@@ -240,17 +239,29 @@
         })
       },
 
+      displayUrl(url) {
+        const printContainer = document.getElementById('printContainer');
+        const deviceWidth = document.body.clientWidth;
+        const deviceHeight = document.body.clientHeight;
+        // printContainer.style.width = (Number(deviceWidth)-120) + 'px'; //数字是页面布局宽度差值
+        // printContainer.style.height = (Number(deviceHeight)-80) + 'px'; //数字是页面布局高度差
+        printContainer.style.display = "";
+        printContainer.src = url;
+      },
+
       /**
        * 打印
        */
       printClick(data) {
         let dataParams = {
           loanDocIds: data.id
-        }
+        };
+
         let params = Object.assign({}, dataParams);
         api.fileDoc.batchPrint(params).then((url) => {
-          if (url != '' && url != null) {
+          if (url !== '' && url != null) {
             window.open(url);
+            // this.displayUrl("http://www.baidu.com");
           } else {
             this.$message({message: '操作失败', type: 'error'})
           }
@@ -270,12 +281,12 @@
         }
         let dataParams = {
           loanDocIds: val.substr(0, val.length - 1)
-        }
+        };
         this.searchLoading = true;
         let params = Object.assign({}, dataParams);
         api.fileDoc.batchPrint(params).then((url) => {
           this.searchLoading = false;
-          if (url != '' && url != null) {
+          if (url !== '' && url != null) {
             window.open(url);
           } else {
             this.$message({message: '操作失败', type: 'error'})
@@ -306,6 +317,11 @@
         return checkVal;
       },
 
+      downloadFileName() {
+        let subject = this.loanBasisForm.borrower === '' ? "" : this.loanBasisForm.borrower;
+        return subject + "-" + this.dateFtt('yyyyMMddHHmmss', new Date()) + '.zip';
+      },
+
       /**
        * 批量下载
        */
@@ -324,8 +340,8 @@
         let params = Object.assign({}, dataParams);
         api.fileDoc.batchDownload(params).then((res) => {
           this.searchLoading = false;
-          const blob = new Blob([res], {type: 'application.zip'})//构造一个blob对象来处理数据
-          const fileName = this.dateFtt('yyyyMMddHHmmss', new Date()) + '.zip';
+          const blob = new Blob([res], {type: 'application.zip'});//构造一个blob对象来处理数据
+          const fileName = this.downloadFileName();
           //对于<a>标签，只有 Firefox 和 Chrome（内核） 支持 download 属性
           //IE10以上支持blob但是依然不支持download
           if ('download' in document.createElement('a')) { //支持a标签download的浏览器
