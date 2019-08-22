@@ -4892,26 +4892,22 @@
               let data = res.data;
               let types =[];
               if(data.type !=null){
-                types.push(data.type);
+                types.push(data.type.toString());
                 data.type =types;
               }
               if(data.sex !=null){
                 data.sex = data.sex.toString();
               }
-              let assetTypes =[];
-              if(data.assetType !=null){
-                 assetTypes.push(data.assetType);
-                 data.assetType =assetTypes;
-              }
-              console.log("data.assetType:",data.assetType);
               if(data.contactAddress !=null){
                 data.contactAddress = data.contactAddress.toString();
               }
               if(data.educationalLevel !=null){
                 data.educationalLevel = data.educationalLevel.toString();
+                this.educationaLevelChange(data.educationalLevel);
               }
               if(data.currentHousingSource !=null){
                 data.currentHousingSource = data.currentHousingSource.toString();
+                this.currentHousingSourceChange(data.currentHousingSource);
               }
               if(data.assetSituation !=null){
                 data.assetSituation = data.assetSituation.toString();
@@ -4921,18 +4917,86 @@
                 data.maritalStatus = data.maritalStatus.toString();
                 this.maritalStatusChange(data.maritalStatus);
               }
-              this.relatedPersonnelInformationForm=data;
+              let assetTypes =[];
+              if(data.assetTypeHouses !=null && data.assetTypeHouses.length>0){
+                this.housFlag=true;
+                assetTypes.push('1');
+                this.assetTypeHousesTableData = data.assetTypeHouses;
+              }
+              if(data.assetTypeLand !=null && data.assetTypeLand.length>0){
+                this.landFlag=true;
+                assetTypes.push('2');
+                this.landTableData = data.assetTypeLand;
+              }
+              if(data.assetTypeCar !=null  && data.assetTypeCar.length>0){
+                this.carFlag=true;
+                assetTypes.push('3');
+                this.carTableData = data.assetTypeCar;
+              }
+              if(data.assetTypeSecurities !=null && data.assetTypeSecurities.length>0){
+                this.securitiesFlag=true;
+                assetTypes.push('4');
+                this.securitiesTableData = data.assetTypeSecurities;
+              }
+              if(data.assetTypeOther !=null && data.assetTypeOther.length>0){
+                this.otherFlag=true;
+                assetTypes.push('5');
+                this.otherTableData = data.assetTypeOther;
+              }
+              if(assetTypes !=null){
+                data.assetType= assetTypes;
+              }
+              console.log("data.assetTypeSecurities:",data.assetTypeSecurities);
+              console.log("data.assetTypeOther:",data.assetTypeOther);
+              console.log("data.assetType:",data.assetType);
               if(data.spouseInfo){
+                let spouseInfoType=[];
+                if(data.spouseInfo.type !=null){
+                  spouseInfoType.push(data.spouseInfo.type.toString());
+                  data.spouseInfo.type =spouseInfoType;
+                }
+                if(data.spouseInfo.sex !=null){
+                  data.spouseInfo.sex = data.spouseInfo.sex.toString();
+                }
                 let assetTypess =[];
-                if(data.spouseInfo.assetType !=null){
-                  assetTypes.push(data.spouseInfo.assetType);
-                  data.spouseInfo.assetType =assetTypes;
+                if(data.spouseInfo.assetSituation !=null){
+                  data.spouseInfo.assetSituation = data.spouseInfo.assetSituation.toString();
+                  this.assetSituationSpouseChange(data.spouseInfo.assetSituation);
                 }
                 let typess =[];
-                if(data.spouseInfo.type !=null){
-                  typess.push(data.spouseInfo.type);
-                  data.spouseInfo.type =typess;
+                if(data.spouseInfo.maritalStatus !=null){
+                  data.spouseInfo.maritalStatus = data.spouseInfo.maritalStatus.toString();
+                  this.maritalStatusChange(data.spouseInfo.maritalStatus);
                 }
+                if(data.spouseInfo.assetTypeHouses !=null && data.spouseInfo.assetTypeHouses.length>0){
+                  this.housSpouseFlag=true;
+                  typess.push('1');
+                  this.assetTypeSpouseHousesTableData = data.assetTypeHouses;
+                }
+                if(data.spouseInfo.assetTypeLand !=null && data.spouseInfo.assetTypeLand.length>0){
+                  this.landSpouseFlag=true;
+                  typess.push('2');
+                  this.spouseLandTableData = data.assetTypeLand;
+                }
+                if(data.spouseInfo.assetTypeCar !=null && data.spouseInfo.assetTypeCar.length>0){
+                  this.carSpouseFlag=true;
+                  typess.push('3');
+                  this.spouseCarTableData = data.assetTypeCar;
+                }
+                if(data.spouseInfo.assetTypeSecurities !=null && data.spouseInfo.assetTypeSecurities.length>0){
+                  this.securitiesSpouseFlag=true;
+                  typess.push('4');
+                  this.spouseSecuritiesTableData = data.assetTypeSecurities;
+                }
+                if(data.spouseInfo.assetTypeOther !=null && data.spouseInfo.assetTypeOther.length>0){
+                  this.otherSpouseFlag=true;
+                  typess.push('5');
+                  this.spouseOtherTableData = data.assetTypeOther;
+                }
+                if(typess !=null){
+                  data.spouseInfo.assetType =typess;
+                }
+                this.relatedPersonnelInformationForm=data;
                 this.relatedPersonnelInformationSpouseForm=data.spouseInfo;
               }
               if(data.householdIncomeForm){
@@ -5063,10 +5127,14 @@
       //赋值
       setLoanBasisForm(data){
           this.loanBasisForm.id = data.id;
-          this.loanBasisForm.loanType = data.loanType.toString();
-          this.loanTypeChage(this.loanBasisForm.loanType);
+          if(data.loanType !=null){
+            this.loanBasisForm.loanType = data.loanType.toString();
+            this.loanTypeChage(this.loanBasisForm.loanType);
+          }
           //申请事项
-          this.loanBasisForm.applicationMatters = data.applicationMatters.toString();
+          if(data.loanType !=null){
+            this.loanBasisForm.applicationMatters = data.applicationMatters.toString();
+          }
           //担保方式
           let guaranteeMethod = data.guaranteeMethod;
           if(guaranteeMethod){

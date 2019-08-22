@@ -2774,7 +2774,7 @@
                   </el-table-column>
                   <el-table-column
                     fixed
-                    prop="assetType"
+                    prop="assetName"
                     label="资产名称"
                     width="150">
                   </el-table-column>
@@ -3623,7 +3623,7 @@
                 </el-form-item>
 
                 <el-form-item label="抵押担保合同编号">
-                  <el-input v-model="contractInformation.mortgageGuaranteeContractMo" size="small" class="width180"></el-input>
+                  <el-input v-model="contractInformation.mortgageGuaranteeContractNo" size="small" class="width180"></el-input>
                 </el-form-item>
 
              <!-- <el-col span="8">
@@ -4427,10 +4427,10 @@ export default {
       active:0,
       //贷款类型
       LoanTypeOptions:[{
-        VAL_CODE: '01',
+        VAL_CODE: '0',
         VAL_NAME: '新增',
       },{
-        VAL_CODE: '02',
+        VAL_CODE: '1',
         VAL_NAME: '续贷',
       }],
       //申请事项
