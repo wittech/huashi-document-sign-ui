@@ -4919,9 +4919,15 @@
               }
               let assetTypes =[];
               if(data.assetTypeHouses !=null && data.assetTypeHouses.length>0){
+               let assetTypeHousesNew = [];
+                for(let index in data.assetTypeHouses){
+                    let d = data.assetTypeHouses[index];
+                    d.whetherOwnershipCertificatess = this.getWhetherOwnershipCertificatesOptions(d.whetherOwnershipCertificates);
+                    assetTypeHousesNew.push(d);
+                }
                 this.housFlag=true;
                 assetTypes.push('1');
-                this.assetTypeHousesTableData = data.assetTypeHouses;
+                this.assetTypeHousesTableData = assetTypeHousesNew;
               }
               if(data.assetTypeLand !=null && data.assetTypeLand.length>0){
                 this.landFlag=true;
@@ -4971,27 +4977,35 @@
                 if(data.spouseInfo.assetTypeHouses !=null && data.spouseInfo.assetTypeHouses.length>0){
                   this.housSpouseFlag=true;
                   typess.push('1');
-                  this.assetTypeSpouseHousesTableData = data.assetTypeHouses;
+                  let assetTypeHousesNew = [];
+                  for(let index in data.spouseInfo.assetTypeHouses){
+                    let d = data.assetTypeHouses[index];
+                    d.whetherOwnershipCertificatess = this.getWhetherOwnershipCertificatesOptions(d.whetherOwnershipCertificates);
+                    assetTypeHousesNew.push(d);
+                  }
+                  this.housFlag=true;
+                  assetTypes.push('1');
+                  this.assetTypeSpouseHousesTableData = assetTypeHousesNew;
                 }
                 if(data.spouseInfo.assetTypeLand !=null && data.spouseInfo.assetTypeLand.length>0){
                   this.landSpouseFlag=true;
                   typess.push('2');
-                  this.spouseLandTableData = data.assetTypeLand;
+                  this.spouseLandTableData = data.spouseInfo.assetTypeLand;
                 }
                 if(data.spouseInfo.assetTypeCar !=null && data.spouseInfo.assetTypeCar.length>0){
                   this.carSpouseFlag=true;
                   typess.push('3');
-                  this.spouseCarTableData = data.assetTypeCar;
+                  this.spouseCarTableData = data.spouseInfo.assetTypeCar;
                 }
                 if(data.spouseInfo.assetTypeSecurities !=null && data.spouseInfo.assetTypeSecurities.length>0){
                   this.securitiesSpouseFlag=true;
                   typess.push('4');
-                  this.spouseSecuritiesTableData = data.assetTypeSecurities;
+                  this.spouseSecuritiesTableData = data.spouseInfo.assetTypeSecurities;
                 }
                 if(data.spouseInfo.assetTypeOther !=null && data.spouseInfo.assetTypeOther.length>0){
                   this.otherSpouseFlag=true;
                   typess.push('5');
-                  this.spouseOtherTableData = data.assetTypeOther;
+                  this.spouseOtherTableData = data.spouseInfo.assetTypeOther;
                 }
                 if(typess !=null){
                   data.spouseInfo.assetType =typess;
