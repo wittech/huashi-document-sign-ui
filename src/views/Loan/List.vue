@@ -82,13 +82,26 @@
         <el-button icon="el-icon-s-promotion" type="primary" @click="generateDocOnckick" :loading="loading">生成文档
         </el-button>
 
+        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange" border>全选</el-checkbox>
         <el-button icon="el-icon-download" type="success" @click="batchDown">批量下载</el-button>
         <el-button icon="el-icon-printer" type="warning" @click="batchPrint">批量打印</el-button>
-        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
 
+        <el-switch
+          v-model="watermarkSwitch"
+          active-color="#13ce66"
+          inactive-color="#409eff"
+          inactive-text="打印是否加入水印" style="margin-left: 10px; margin-right: 5px;" @change="watermarkSwitchChange">
+        </el-switch>
+        <el-input
+          placeholder="水印内容"
+          v-model="watermark"
+          v-show="watermarkDisplay"
+          style="width:350px;"
+          clearable>
+        </el-input>
       </el-row>
 
-      <el-row v-loading="searchLoading" element-loading-text="处理中" >
+      <el-row v-loading="searchLoading" element-loading-text="处理中">
         <el-checkbox-group v-model="checkedDocs" @change="handleCheckedDocChange">
           <el-col :span="4" v-for="(doc, index) in fileList">
             <el-card :body-style="{ padding: '0px' }">
@@ -136,7 +149,11 @@
         checkAll: false,
         checkedDocs: [],
         checkedDocIds: [],
-        searchLoading : false,
+        searchLoading: false,
+
+        watermark: '广西桂林漓江农村合作银行城北支行',
+        watermarkSwitch : false,
+        watermarkDisplay : false,
 
         //贷款类型
         LoanTypeOptions: [{
@@ -254,7 +271,8 @@
        */
       printClick(data) {
         let dataParams = {
-          loanDocIds: data.id
+          loanDocIds: data.id,
+          watermark: (this.watermarkSwitch === true ? this.watermark : "")
         };
 
         let params = Object.assign({}, dataParams);
@@ -280,7 +298,8 @@
           return;
         }
         let dataParams = {
-          loanDocIds: val.substr(0, val.length - 1)
+          loanDocIds: val.substr(0, val.length - 1),
+          watermark: (this.watermarkSwitch === true ? this.watermark : "")
         };
         this.searchLoading = true;
         let params = Object.assign({}, dataParams);
@@ -292,6 +311,10 @@
             this.$message({message: '操作失败', type: 'error'})
           }
         });
+      },
+
+      watermarkSwitchChange(val) {
+        this.watermarkDisplay = val;
       },
 
       handleCheckAllChange(val) {
@@ -581,7 +604,7 @@
       },
 
       //修改
-      editHref(data){
+      editHref(data) {
         sessionStorage.setItem('baseLoneId', data.id);
         sessionStorage.setItem('loanType', data.loanType);
         sessionStorage.setItem('status', data.status);
@@ -625,4 +648,11 @@
   .clearfix:after {
     clear: both
   }
+
+  .my-autocomplete li {
+    line-height: normal;
+    padding: 7px;
+  }
+
+
 </style>
