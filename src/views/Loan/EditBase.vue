@@ -4854,6 +4854,7 @@
     methods: {
       //根据id获取数据信息type 环境类型 每个环节获取每个环节的数据
       getData(status,baseLoneId){
+        alert(status);
         //1、第一步 基础信息
         if(status=='0'){
           //1、根据id获取对象信息
@@ -5022,9 +5023,9 @@
                 if(typess !=null){
                   data.spouseInfo.assetType =typess;
                 }
-                this.relatedPersonnelInformationForm=data;
                 this.relatedPersonnelInformationSpouseForm=data.spouseInfo;
               }
+              this.relatedPersonnelInformationForm=data;
               if(data.householdIncomeForm){
                 this.householdIncomeForm=data.householdIncomeForm;
               }
@@ -5476,9 +5477,9 @@
               //其他
               assetTypeOther: relatedPersonnelInformationForm.assetTypeOther,
               //配偶信息
-              spouseInfo: this.spouseAppend(),
+              spouseInfo: this.spouseDataAppend(relatedPersonnelInformationForm),
               //家庭收支情况
-              householdIncomeForm: this.householdIncomeForm,
+              householdIncomeForm: relatedPersonnelInformationForm.householdIncomeForm,
               createBy: sessionStorage.getItem("user")
             };
             dataParams = {
@@ -5501,6 +5502,85 @@
         }
       },
 
+      /**
+       * 数据组装 修改
+       */
+      spouseDataAppend(relatedPersonnelInformationSpouseForm){
+        //配偶信息
+        let datas = {
+          id:relatedPersonnelInformationSpouseForm.id,
+          lastUpdateBy :sessionStorage.getItem("user"),
+          loanBasisId:this.loanBasisId,
+          //类型
+          type:this.getType(this.relatedPersonnelInformationSpouseForm.type),
+          //姓名
+          name:relatedPersonnelInformationSpouseForm.name,
+          //年龄
+          age:relatedPersonnelInformationSpouseForm.age,
+          //性别
+          sex:relatedPersonnelInformationSpouseForm.sex,
+          //户籍所在地
+          domicile:relatedPersonnelInformationSpouseForm.domicile,
+          //身份证号码
+          identityNumber:relatedPersonnelInformationSpouseForm.identityNumber,
+          //现居住地址
+          currentHomeAddress:relatedPersonnelInformationSpouseForm.currentHomeAddress,
+          //常用通信地址
+          contactAddress:relatedPersonnelInformationSpouseForm.contactAddress,
+          //本地居住时间
+          localResidenceTime:relatedPersonnelInformationSpouseForm.localResidenceTime,
+          //电子邮箱
+          email:relatedPersonnelInformationSpouseForm.email,
+          //联系电话
+          contactNumber:relatedPersonnelInformationSpouseForm.contactNumber,
+          qq:relatedPersonnelInformationSpouseForm.qq,
+          //微信
+          wechat:relatedPersonnelInformationSpouseForm.wechat,
+          //文化程度
+          educationalLevel:relatedPersonnelInformationSpouseForm.educationalLevel,
+          //文化程度 其他
+          educationalLevelValue:relatedPersonnelInformationSpouseForm.educationalLevelValue,
+          //现住房来源
+          currentHousingSource:relatedPersonnelInformationSpouseForm.currentHousingSource,
+          //现住房来源其他值
+          currentHousingSourceValue:relatedPersonnelInformationSpouseForm.currentHousingSourceValue,
+          //工作单位
+          employer:relatedPersonnelInformationSpouseForm.employer,
+          //职务
+          position:relatedPersonnelInformationSpouseForm.position,
+          //单位工作年限
+          unitWorkingYears:relatedPersonnelInformationSpouseForm.unitWorkingYears,
+          //所投资或经营企业名称
+          companyName:relatedPersonnelInformationSpouseForm.companyName,
+          //持股比例
+          shareholdingRatio:relatedPersonnelInformationSpouseForm.shareholdingRatio,
+          //本行业和相近行业经营年限
+          yearsOperation:relatedPersonnelInformationSpouseForm.yearsOperation,
+          //资产情况（0、无）（1、有）
+          assetSituation:relatedPersonnelInformationSpouseForm.assetSituation,
+          //资产类型（1、房屋）（2、土地）（3、汽车）（4、有价证券）（5、其他）
+          // assetType:relatedPersonnelInformationForm.assetType,
+          //婚姻状况（0、未婚）（1、已婚）（2、离异未婚）（3、丧偶未婚）（4、其他）
+          maritalStatus:'1',
+          //原配偶姓名
+          originalSpouseName:relatedPersonnelInformationSpouseForm.originalSpouseName,
+          //离婚方式 （1、协议离婚）（2、协议离婚）
+          divorceMethod:relatedPersonnelInformationSpouseForm.divorceMethod,
+          //时间
+          divorceTime:relatedPersonnelInformationSpouseForm.divorceTime,
+          //房屋
+          assetTypeHouses:relatedPersonnelInformationSpouseForm.assetTypeHouses,
+          //土地信息
+          assetTypeLand:relatedPersonnelInformationSpouseForm.assetTypeLand,
+          //汽车信息
+          assetTypeCar:relatedPersonnelInformationSpouseForm.assetTypeCar,
+          //证券信息
+          assetTypeSecurities:relatedPersonnelInformationSpouseForm.assetTypeSecurities,
+          //其他
+          assetTypeOther:relatedPersonnelInformationSpouseForm.assetTypeOther
+        };
+        return datas;
+      },
 
       /**
        * 抵押物类型显示各自
