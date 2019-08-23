@@ -5085,7 +5085,7 @@ export default {
     loanTypeChage(value){
       //隐藏
       this.applicationMattersFlagHideAndShow(false);
-      if(value=='01'){
+      if(value=='0'){
         //显示
         this.applicationMattersFlagHideAndShow(true);
       }

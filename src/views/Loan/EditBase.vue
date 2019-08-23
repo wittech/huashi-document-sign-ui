@@ -4942,7 +4942,13 @@
               if(data.assetTypeSecurities !=null && data.assetTypeSecurities.length>0){
                 this.securitiesFlag=true;
                 assetTypes.push('4');
-                this.securitiesTableData = data.assetTypeSecurities;
+                let assetTypeSecuritiesNew = [];
+                for(let index in data.assetTypeSecurities){
+                  let d = data.assetTypeSecurities[index];
+                  d.types = this.getSecuritiesOptions(d.type);
+                  assetTypeSecuritiesNew.push(d);
+                }
+                this.securitiesTableData = assetTypeSecuritiesNew;
               }
               if(data.assetTypeOther !=null && data.assetTypeOther.length>0){
                 this.otherFlag=true;
@@ -5000,7 +5006,13 @@
                 if(data.spouseInfo.assetTypeSecurities !=null && data.spouseInfo.assetTypeSecurities.length>0){
                   this.securitiesSpouseFlag=true;
                   typess.push('4');
-                  this.spouseSecuritiesTableData = data.spouseInfo.assetTypeSecurities;
+                  let assetTypeSecuritiesNew = [];
+                  for(let index in data.spouseInfo.assetTypeSecurities){
+                    let d = data.spouseInfo.assetTypeSecurities[index];
+                    d.types = this.getSecuritiesOptions(d.type);
+                    assetTypeSecuritiesNew.push(d);
+                  }
+                  this.spouseSecuritiesTableData = assetTypeSecuritiesNew;
                 }
                 if(data.spouseInfo.assetTypeOther !=null && data.spouseInfo.assetTypeOther.length>0){
                   this.otherSpouseFlag=true;
@@ -5146,7 +5158,7 @@
             this.loanTypeChage(this.loanBasisForm.loanType);
           }
           //申请事项
-          if(data.loanType !=null){
+          if(data.applicationMatters !=null){
             this.loanBasisForm.applicationMatters = data.applicationMatters.toString();
           }
           //担保方式
@@ -8365,6 +8377,9 @@
               }
               //土地建筑面积
               this.pawn.landOccupationArea=constructionAreaValue;
+            }
+            if(data.address){
+              this.pawn.collateralDeposit=data.address;
             }
             //所属地
             this.pawn.affiliation = affiliationValue;
