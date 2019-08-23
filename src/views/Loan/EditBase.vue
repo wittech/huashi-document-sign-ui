@@ -3656,7 +3656,7 @@
           borrowingStartPeriod:'',
           borrowingEndPeriod:'',
           loanDate:'',
-          loanBasisId:'',
+          loanBasisId:this.loanBasisId,
           lastUpdateBy:sessionStorage.getItem("user")
         },
         //配偶姓名
@@ -3814,7 +3814,7 @@
         //贷款业务信息
         loanBusinessInformation:{
           id:'',
-          loanBasisId:'',
+          loanBasisId:this.loanBasisId,
           borrowerAccount:'',
           clientNumber:'',
           applicationAmount:'',
@@ -3968,7 +3968,7 @@
         operationPawn:false,
         //抵押物对象
         pawn:{
-          loanBasisId:'',
+          loanBasisId:this.loanBasisId,
           mortgageType:'',
           whetherOwnershipCertificates:'',
           propertyCertificateNumber:'',
@@ -4457,7 +4457,7 @@
         //相关人员信息
         relatedPersonnelInformationForm:{
           id:'',
-          loanBasisId:'',
+          loanBasisId:this.loanBasisId,
           //类型
           type:[],
           //姓名
@@ -4530,7 +4530,7 @@
         //相关人员信息配偶
         relatedPersonnelInformationSpouseForm:{
           id:'',
-          loanBasisId:'',
+          loanBasisId:this.loanBasisId,
           //类型
           type:[],
           //姓名
@@ -4601,7 +4601,7 @@
         },
         //其他相关人员信息配偶
         relatedOterPersonnelInformationForm:{
-          loanBasisId:'',
+          loanBasisId:this.loanBasisId,
           //类型
           type:'',
           //姓名
@@ -4807,7 +4807,7 @@
 
         //家庭收支情况
         householdIncomeForm:{
-          loanBasisId:'',
+          loanBasisId:this.loanBasisId,
           totalAssets:'',
           totalRevenue:'',
           applicantAnnualIncome:'',
@@ -5213,7 +5213,7 @@
             borrowingStartPeriod:'',
             borrowingEndPeriod:'',
             loanDate:'',
-            loanBasisId:'',
+            loanBasisId:this.loanBasisId,
             lastUpdateBy:sessionStorage.getItem("user")
         };
         this.contractInformation = contractInformation;
@@ -5278,7 +5278,7 @@
       clearBusinessInformation(){
         let   loanBusinessInformation={
             id:'',
-            loanBasisId:'',
+            loanBasisId:this.loanBasisId,
             borrowerAccount:'',
             clientNumber:'',
             applicationAmount:'',
@@ -8023,7 +8023,7 @@
       //清空抵押物
       clearPawn(){
         let pawn={
-          loanBasisId:'',
+          loanBasisId:this.loanBasisId,
           mortgageType:'',
           whetherOwnershipCertificates:'',
           propertyCertificateNumber:'',
@@ -8089,7 +8089,7 @@
        */
       householdIncomeFormClear(){
         let householdIncomeForm={
-          loanBasisId:'',
+          loanBasisId:this.loanBasisId,
           totalAssets:'',
           totalRevenue:'',
           applicantAnnualIncome:'',
