@@ -79,6 +79,7 @@
         <br>
       </el-form>
       <el-row style="margin-bottom: 5px;">
+        <!--<el-button icon="fa fa-refresh" @click="refresh()">刷新</el-button>-->
         <el-button icon="el-icon-s-promotion" type="primary" @click="generateDocOnckick" :loading="loading">生成文档
         </el-button>
 
@@ -407,13 +408,13 @@
       generateDocOnckick() {
         let dataParams = {
           loanBasisId: this.loanBasisId
-        }
+        };
         this.searchLoading = true;
         let params = Object.assign({}, dataParams);
         api.loan.generateDoc(params).then((res) => {
           this.searchLoading = false;
           this.findFileList(this.loanBasisId);
-          if (res.code == 200) {
+          if (res.code === 200) {
             this.$message({message: '操作成功', type: 'success'})
           } else {
             this.$message({message: '操作失败, ' + res.msg, type: 'error'})

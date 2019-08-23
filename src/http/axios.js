@@ -65,7 +65,7 @@ export default function $axios(options) {
         }
         return Promise.reject(error) // 在调用的那边可以拿到(catch)你想返回的错误信息
       }
-    )
+    );
 
     // response 拦截器
     instance.interceptors.response.use(
