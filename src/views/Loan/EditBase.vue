@@ -4994,15 +4994,15 @@
                 if(data.spouseInfo.assetTypeHouses !=null && data.spouseInfo.assetTypeHouses.length>0){
                   this.housSpouseFlag=true;
                   typess.push('1');
-                  let assetTypeHousesNew = [];
+                  let assetTypeHousesNews = [];
                   for(let index in data.spouseInfo.assetTypeHouses){
-                    let d = data.assetTypeHouses[index];
+                    let d = data.spouseInfo.assetTypeHouses[index];
                     d.whetherOwnershipCertificatess = this.getWhetherOwnershipCertificatesOptions(d.whetherOwnershipCertificates);
-                    assetTypeHousesNew.push(d);
+                    assetTypeHousesNews.push(d);
                   }
                   this.housFlag=true;
                   assetTypes.push('1');
-                  this.assetTypeSpouseHousesTableData = assetTypeHousesNew;
+                  this.assetTypeSpouseHousesTableData = assetTypeHousesNews;
                 }
                 if(data.spouseInfo.assetTypeLand !=null && data.spouseInfo.assetTypeLand.length>0){
                   this.landSpouseFlag=true;
