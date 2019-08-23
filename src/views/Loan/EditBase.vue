@@ -4854,7 +4854,6 @@
     methods: {
       //根据id获取数据信息type 环境类型 每个环节获取每个环节的数据
       getData(status,baseLoneId){
-        alert(status);
         //1、第一步 基础信息
         if(status=='0'){
           //1、根据id获取对象信息
