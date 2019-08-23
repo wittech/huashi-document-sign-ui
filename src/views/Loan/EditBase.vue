@@ -5408,19 +5408,24 @@
 
       //赋值
       setRelatedPersonnel(dataList){
-        this.oterPersonneltableData = dataList;
-        return;
+     /*   this.oterPersonneltableData = dataList;
+        return;*/
         let assetTypeHousesTableData = this.oterPersonneltableData;
         let assetTypeHousesTableDataNew = [];
         if(dataList){
           for(let index in dataList){
               let dataParams = {};
               let relatedPersonnelInformationForm = dataList[index];
+            let spouseInfoType=[];
+            if(relatedPersonnelInformationForm.type !=null){
+              spouseInfoType.push(relatedPersonnelInformationForm.type.toString());
+            }
             //资产类型数据组装 配偶
             let datas = {
+              id:relatedPersonnelInformationForm.id,
               loanBasisId: this.loanBasisId,
               //类型
-              type: this.getType(relatedPersonnelInformationForm.type),
+              type: this.getType(spouseInfoType),
               //姓名
               name: relatedPersonnelInformationForm.name,
               //年龄
@@ -5507,7 +5512,7 @@
               assetTypeHousesTableDataNew.push(assetTypeHousesTableData[index]);
             }
           }
-
+          console.log("assetTypeHousesTableDataNew:", assetTypeHousesTableDataNew);
           this.oterPersonneltableData=assetTypeHousesTableDataNew;
         }
       },
