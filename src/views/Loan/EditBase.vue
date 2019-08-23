@@ -1,22 +1,22 @@
 <template>
   <div>
     <el-steps :active="active" finish-status="success">
-      <el-step title="基础信息" @click.native="stepClick(0)"  class="schedule"></el-step>
+<!--      <el-step title="基础信息" @click.native="stepClick(0)"  class="schedule"></el-step>
       <el-step title="借款人情况" @click.native="stepClick(1)" class="schedule"></el-step>
       <el-step title="相关人情况" @click.native="stepClick(2)" class="schedule"></el-step>
       <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
       <el-step title="相关贷款业务信息" @click.native="stepClick(4)" class="schedule"></el-step>
-      <!--<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>-->
+      &lt;!&ndash;<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>&ndash;&gt;
       <el-step title="个人贷款调查报告表" @click.native="stepClick(6)" class="schedule"></el-step>
-      <el-step title="合同信息" @click.native="stepClick(7)" class="schedule"></el-step>
-      <!-- <el-step title="基础信息"></el-step>
+      <el-step title="合同信息" @click.native="stepClick(7)" class="schedule"></el-step>-->
+          <el-step title="基础信息"></el-step>
           <el-step title="借款人情况"></el-step>
           <el-step title="相关人情况"></el-step>
           <el-step title="抵押物"></el-step>
           <el-step title="相关贷款业务信息"></el-step>
-         &lt;!&ndash; <el-step title="合影"></el-step>&ndash;&gt;
+         <!-- <el-step title="合影"></el-step>-->
           <el-step title="个人贷款调查报告表"></el-step>
-          <el-step title="合同信息"></el-step>-->
+          <el-step title="合同信息"></el-step>
     </el-steps>
     <!--0、基础信息-->
     <div v-if="active==0" class="step1">
@@ -4844,9 +4844,9 @@
             this.loanBasisId = baseLoneId;
             let status = sessionStorage.getItem('status');
             this.currentStaatus = status;
-            this.active=status;
+            this.active='0';
             //加载数据
-            this.getData(status,baseLoneId);
+            this.getData('0',baseLoneId);
 
         }
     },
@@ -4961,7 +4961,10 @@
               console.log("data.assetTypeSecurities:",data.assetTypeSecurities);
               console.log("data.assetTypeOther:",data.assetTypeOther);
               console.log("data.assetType:",data.assetType);
-              if(data.spouseInfo){
+              if(data.spouseInfo !=null){
+                if(data.spouseInfo.contactAddress !=null){
+                  data.spouseInfo.contactAddress = data.spouseInfo.contactAddress.toString();
+                }
                 let spouseInfoType=[];
                 if(data.spouseInfo.type !=null){
                   spouseInfoType.push(data.spouseInfo.type.toString());
@@ -4975,10 +4978,18 @@
                   data.spouseInfo.assetSituation = data.spouseInfo.assetSituation.toString();
                   this.assetSituationSpouseChange(data.spouseInfo.assetSituation);
                 }
+                if(data.spouseInfo.currentHousingSource !=null){
+                  data.spouseInfo.currentHousingSource = data.spouseInfo.currentHousingSource.toString();
+                  this.currentHousingSourceChange(data.spouseInfo.currentHousingSource);
+                }
                 let typess =[];
                 if(data.spouseInfo.maritalStatus !=null){
                   data.spouseInfo.maritalStatus = data.spouseInfo.maritalStatus.toString();
                   this.maritalStatusChange(data.spouseInfo.maritalStatus);
+                }
+                if(data.spouseInfo.educationalLevel !=null){
+                  data.spouseInfo.educationalLevel = data.spouseInfo.educationalLevel.toString();
+                  this.educationaLevelChange(data.spouseInfo.educationalLevel);
                 }
                 if(data.spouseInfo.assetTypeHouses !=null && data.spouseInfo.assetTypeHouses.length>0){
                   this.housSpouseFlag=true;
@@ -5081,7 +5092,7 @@
             data.loanMethodPledgeGuarantee =  data.loanMethodPledgeGuarantee.toString();
           }
           if (data.whetherAmountMatch !=null){
-            data.whetherAmountMatch =  data.whetherAmountMatch.toString();
+              data.whetherAmountMatch =  data.whetherAmountMatch.toString();
           }
           if (data.borrowerWhetherHaveCivilAction !=null){
             data.borrowerWhetherHaveCivilAction =  data.borrowerWhetherHaveCivilAction.toString();
@@ -5691,6 +5702,7 @@
                   //赋值
                   this.secondAssignment();
                   this.active=1;
+                  this.getData(1,this.loanBasisId);
                   this.$message({ message: '操作成功', type: 'success' })
                 } else {
                   this.active=0;
@@ -5960,6 +5972,7 @@
                   this.householdIncomeFormClear();
                   this.clearTableDataList();
                   this.active=type;
+                  this.getData(type,this.loanBasisId);
                   //显示列表
                   this.listRelevantPeopleFlag = true;
                   //隐藏添加
@@ -5995,6 +6008,7 @@
                   //清空 资产类型选中
                   this.clearAssetSpouseType();
                   this.active=type;
+                  this.getData(type,this.loanBasisId);
                   this.$message({ message: '操作成功', type: 'success' })
                 } else {
                   this.active=1;
@@ -7204,10 +7218,10 @@
        * 进度条状态切换
        */
       stepClick(value){
-        if(this.currentStaatus<value){
+       /* if(this.currentStaatus<value){
           this.$message({message: '当前订单环节不可以切换,只允许一步一步做下去 ', type: 'error'})
             return ;
-        }
+        }*/
         this.active=value;
         this.getData(value,this.loanBasisId);
       },
@@ -7603,6 +7617,7 @@
               this.$api.pawn.save(params).then((res) => {
                 if(res.code == 200) {
                   this.active=type;
+                  this.getData(type,this.loanBasisId);
                   this.$message({ message: '操作成功', type: 'success' })
                 } else {
                   this.$message({message: '操作失败, ' + res.msg, type: 'error'})
@@ -7851,6 +7866,7 @@
               this.$api.loanBusinessInformation.save(params).then((res) => {
                 if(res.code == 200) {
                   this.active=type;
+                  this.getData(type,this.loanBasisId);
                   this.$message({ message: '操作成功', type: 'success' })
                 } else {
                   this.$message({message: '操作失败, ' + res.msg, type: 'error'})
@@ -7888,6 +7904,7 @@
               this.$api.personalLoanSurveyReport.save(params).then((res) => {
                 if(res.code == 200) {
                   this.active=type;
+                  this.getData(type,this.loanBasisId);
                   this.$message({ message: '操作成功', type: 'success' })
                 } else {
                   this.$message({message: '操作失败, ' + res.msg, type: 'error'})
@@ -7919,6 +7936,7 @@
                   this.$store.commit('menuRouteLoaded', false); // 要求重新加载导航菜单
                   this.$router.push('/loan/list');
                   this.active=0;
+                  //this.getData(type,this.loanBasisId);
                   this.$message({ message: '操作成功', type: 'success' })
                 } else {
                   this.$message({message: '操作失败, ' + res.msg, type: 'error'})

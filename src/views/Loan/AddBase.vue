@@ -3522,7 +3522,7 @@
               </el-radio-group>
             </el-form-item>
             <el-form-item label="其他需调查反映的情况">
-              <el-input type="textarea" v-model="personalLoanSurveyReport.othersurveyhappening"></el-input>
+              <el-input type="textarea" v-model="personalLoanSurveyReport.otherSurveyHappening"></el-input>
             </el-form-item>
 
             <el-form-item label="借款人是否具有完全民事行为能力">
@@ -3576,7 +3576,7 @@
               <el-input type="textarea" v-model="personalLoanSurveyReport.borrowerRepayAbilityEstimate"></el-input>
             </el-form-item>
             <el-form-item label="贷款偿还能力是否与申请贷款额度相符">
-              <el-radio-group v-model="personalLoanSurveyReport.whetherAmountAatch">
+              <el-radio-group v-model="personalLoanSurveyReport.whetherAmountMatch">
                 <el-radio  v-for="(vl, index) in WhetherAmountAatchOptions" :label="vl.VAL_CODE" :key="index">
                   {{vl.VAL_NAME}}
                 </el-radio>
@@ -3881,7 +3881,7 @@ export default {
         annualHouseholdIncome:'',
         familyExpense:'',
         borrowerHealthStatus:'',
-        othersurveyhappening:'',
+        othersurveyHappening:'',
         borrowerWhetherHaveCivilAction:'',
         amountLoan:'',
         selfFunding:'',
@@ -3891,7 +3891,7 @@ export default {
         useLoan:'',
         repaymentSourceWhetherSufficient:'',
         borrowerRepayAbilityEstimate:'',
-        whetherAmountAatch:'',
+        whetherAmountMatch:'',
         withoutDebtLitigation:'',
         loanAethodGuarantee:'',
         loanMethodGuaranteeRemark:'',
