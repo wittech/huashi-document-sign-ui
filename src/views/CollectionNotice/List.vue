@@ -42,7 +42,7 @@
         prop="status" header-align="center" align="center" label="状态" :formatter="statusFormat">
       </el-table-column>
       <el-table-column
-        fixed="right" header-align="center" align="center" :label="$t('action.operation')">
+        fixed="right" header-align="center" width="300" align="center" :label="$t('action.operation')">
         <template slot-scope="scope">
           <kt-button icon="fa fa-edit" label="填写" perms="loan:view" @click="collectionNoticeDialog(scope.row)"/>
           <kt-button icon="fa fa-edit" label="查看" perms="loan:view" @click="handleDeail(scope.row)"/>
@@ -53,18 +53,18 @@
 
     <!--填写界面-->
     <el-dialog title="填写" width="50%" :visible.sync="collectionNoticeDialogVisible" :close-on-click-modal="false">
-      <el-form :model="collectionNoticeForm" label-width="80px" ref="collectionNoticeForm" :size="size">
+      <el-form :model="collectionNoticeForm" label-width="150px" ref="collectionNoticeForm" :size="size">
         <el-form-item label="借款人">
-          <el-input v-model="collectionNoticeForm.borrower" disabled="true" size="small" class="width350"></el-input>
+          <el-input v-model="collectionNoticeForm.borrower" disabled="true" size="small" class="width180"></el-input>
         </el-form-item>
         <el-form-item label="个人借款合同编号">
-          <el-input v-model="collectionNoticeForm.personalLoanContractNumber" disabled="true" size="small" class="width350"></el-input>
+          <el-input v-model="collectionNoticeForm.personalLoanContractNumber" disabled="true" size="small" class="width180"></el-input>
         </el-form-item>
         <el-form-item label="借款期限">
-          <el-input v-model="collectionNoticeForm.borrowingPeriod" disabled="true" size="small" class="width350"></el-input>
+          <el-input v-model="collectionNoticeForm.borrowingPeriod" disabled="true" size="small" class="width180"></el-input> 月
         </el-form-item>
         <el-form-item label="贷款起止日期">
-          <el-input v-model="collectionNoticeForm.loanStartAndStopDate" disabled="true" size="small" class="width350"></el-input>
+          <el-input v-model="collectionNoticeForm.loanStartAndStopDate" disabled="true" size="small" class="width180"></el-input>
         </el-form-item>
         <el-form-item label="填写日期">
           <el-date-picker
@@ -74,10 +74,10 @@
           </el-date-picker>
         </el-form-item>
         <el-form-item label="所欠本金">
-          <el-input v-model="collectionNoticeForm.owePrincipal" size="small" class="width350"></el-input>
+          <el-input v-model="collectionNoticeForm.owePrincipal" size="small" class="width180"></el-input> 元
         </el-form-item>
         <el-form-item label="所欠利息">
-          <el-input v-model="collectionNoticeForm.oweInterest" disabled="true" size="small" class="width350"></el-input>
+          <el-input v-model="collectionNoticeForm.oweInterest"  size="small" class="width180"></el-input> 元
         </el-form-item>
         <br>
         <el-form-item>
@@ -677,5 +677,79 @@
 </script>
 
 <style scoped>
+
+  <!--文本下拉框-->
+  .el-widith-l{
+    width:180px!important;
+  }
+  .el-form-item{
+    margin-bottom: 15px!important;
+  }
+  .el-radio-group{
+    width: 660px!important;
+  }
+  .el-form-item__label{
+    width: 150px!important;
+  }
+  .el-checkbox-group{
+    width: 660px!important;
+  }
+  .checkgroup{
+    width: 660px!important;
+  }
+  .width180{width:180px!important;}
+  .width150{width:210px!important;}
+  .width350{width:550px!important;}
+  .width378{max-width:378px;}
+  .height30{height:30px!important;}
+  .row-list-ove{
+    position: relative;
+    height:auto;
+    margin-bottom:10px;
+    display: flex;
+    flex-direction:row;
+  }
+  .ove-block{
+    /*width:auto;*/
+    flex:1;
+    margin-right:20px;
+    display: flex;
+    flex-direction:row;
+  }
+  .ove-title{
+    /*width:auto;*/
+    flex:0.7;
+    /*width:80px;*/
+    /*background:#eee;*/
+    display: flex;
+    flex-direction:row-reverse;
+    align-items:center;
+  }
+  .typeface{
+    font-size:12px;
+    font-family: Helvetica Neue,"微软雅黑","黑体";
+    color:#333;
+  }
+  .ove-content{
+    /*flex:1;*/
+    /*background:#888;*/
+    margin-left:10px;
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+  }
+  .redface{
+    font-size:12px;
+    font-family: Helvetica Neue,"微软雅黑","黑体";
+    color:#F44848;
+  }
+  .top5{margin-top:5px;}
+  .el-date-table .el-radio {
+
+  }
+  /*进度 样式*/
+  .schedule{
+    cursor:pointer;
+  }
 
 </style>

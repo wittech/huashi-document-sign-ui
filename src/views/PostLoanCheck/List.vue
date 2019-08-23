@@ -42,7 +42,7 @@
         prop="status" header-align="center" align="center" label="状态" :formatter="statusFormat">
       </el-table-column>
       <el-table-column
-        fixed="right" header-align="center" align="center" :label="$t('action.operation')">
+        fixed="right" header-align="center" width="300" align="center" :label="$t('action.operation')">
         <template slot-scope="scope">
           <kt-button icon="fa fa-edit" label="填写" perms="loan:view" @click="fillDialog(scope.row)"/>
           <kt-button icon="fa fa-edit" label="查看" perms="loan:view" @click="handleDeail(scope.row)"/>
@@ -53,7 +53,7 @@
 
     <!--填写界面-->
     <el-dialog title="填写" width="70%" :visible.sync="fillDialogVisible" :close-on-click-modal="false">
-      <el-form :model="postLoanCheckForm" label-width="80px" ref="postLoanCheckForm" :size="size">
+      <el-form :model="postLoanCheckForm" label-width="250px" ref="postLoanCheckForm" :size="size">
         <el-form-item label="检查时间">
           <el-date-picker
             v-model="postLoanCheckForm.checkTime"
@@ -61,49 +61,45 @@
             placeholder="检查时间">
           </el-date-picker>
         </el-form-item>
-        <el-row>
-          <el-col span="8">
+
             <el-form-item label="借款人">
-              <el-input v-model="postLoanCheckForm.borrower" disabled="true" size="small" class="width350"></el-input>
+              <el-input v-model="postLoanCheckForm.borrower" disabled="true" size="small" class="width180"></el-input>
             </el-form-item>
-          </el-col>
-          <el-col span="8">
+
             <el-form-item label="贷款品种">
-              <el-input v-model="postLoanCheckForm.loanVariety" disabled="true" size="small" class="width350"></el-input>
+              <el-input v-model="postLoanCheckForm.loanVariety" disabled="true" size="small" class="width180"></el-input>
             </el-form-item>
-          </el-col>
-        </el-row>
+
+
+
+            <el-form-item label="贷款金额">
+              <el-input v-model="postLoanCheckForm.loanAmount" disabled="true" size="small" class="width180"></el-input> 元
+            </el-form-item>
+
+            <el-form-item label="贷款余额">
+              <el-input v-model="postLoanCheckForm.loanBalance" size="small" class="width180"></el-input> 元
+            </el-form-item>
+
         <el-row>
           <el-col span="8">
             <el-form-item label="贷款用途">
               <el-input v-model="postLoanCheckForm.loanUse" disabled="true" size="small" class="width350"></el-input>
             </el-form-item>
           </el-col>
-          <el-col span="8">
-            <el-form-item label="贷款金额">
-              <el-input v-model="postLoanCheckForm.loanAmount" disabled="true" size="small" class="width350"></el-input>
-            </el-form-item>
-          </el-col>
         </el-row>
         <el-row>
           <el-col span="8">
-            <el-form-item label="贷款余额">
-              <el-input v-model="postLoanCheckForm.loanBalance" size="small" class="width350"></el-input>万元
-            </el-form-item>
-          </el-col>
-          <el-col span="8">
             <el-form-item label="担保方式">
-              <el-input v-model="postLoanCheckForm.guaranteeMethod" disabled="true" size="small" class="width350"></el-input>
+              <el-input v-model="postLoanCheckForm.guaranteeMethod" disabled="true" size="small" class="width180"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-form-item label="贷款起止日期">
-          <el-input v-model="postLoanCheckForm.loanStartAndStopDate" disabled="true" size="small" class="width350"></el-input>
+          <el-input v-model="postLoanCheckForm.loanStartAndStopDate" disabled="true" size="small" class="width180"></el-input>
         </el-form-item>
         <br>
         检查结果<hr>
-        <el-row>
-          <el-col span="8">
+
             <el-form-item label="自主支付方式提款">
               <el-radio-group v-model="postLoanCheckForm.paymentMethodWithdrawal">
                 <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
@@ -111,8 +107,7 @@
                 </el-radio>
               </el-radio-group>
             </el-form-item>
-          </el-col>
-          <el-col span="8">
+
             <el-form-item label="资金支付交易对手是否符合合同约定">
               <el-radio-group v-model="postLoanCheckForm.contractualAgreement">
                 <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
@@ -120,11 +115,7 @@
                 </el-radio>
               </el-radio-group>
             </el-form-item>
-          </el-col>
-        </el-row>
 
-        <el-row>
-          <el-col span="8">
             <el-form-item label="资金使用是否符合约定用途">
               <el-radio-group v-model="postLoanCheckForm.intendedUse">
                 <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
@@ -132,8 +123,7 @@
                 </el-radio>
               </el-radio-group>
             </el-form-item>
-          </el-col>
-          <el-col span="8">
+
             <el-form-item label="贷款资料是否完整">
               <el-radio-group v-model="postLoanCheckForm.isComplete">
                 <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
@@ -141,12 +131,9 @@
                 </el-radio>
               </el-radio-group>
             </el-form-item>
-          </el-col>
-        </el-row>
 
 
-        <el-row>
-          <el-col span="8">
+
             <el-form-item label="抵（质押）登记或担保手续是否完备">
               <el-radio-group v-model="postLoanCheckForm.complete">
                 <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
@@ -154,17 +141,15 @@
                 </el-radio>
               </el-radio-group>
             </el-form-item>
-          </el-col>
-          <el-col span="8">
-            <el-form-item label="部门提出的限制性条款以及贷后管理要求是否已落实">
+
+            <el-form-item label="限制性条款及贷后管理要求是否落实">
               <el-radio-group v-model="postLoanCheckForm.hasImplemented">
                 <el-radio  v-for="(vl, index) in WhetherOptions" :label="vl.VAL_CODE" :key="index">
                   {{vl.VAL_NAME}}
                 </el-radio>
               </el-radio-group>
             </el-form-item>
-          </el-col>
-        </el-row>
+
         <el-form-item>
           <el-button type="primary" @click="postLoanCheckFormSave(7)">保存</el-button>
           <el-button type="primary" @click="returnUrl">返回</el-button>
@@ -787,5 +772,79 @@ export default {
 </script>
 
 <style scoped>
+
+  <!--文本下拉框-->
+  .el-widith-l{
+    width:180px!important;
+  }
+  .el-form-item{
+    margin-bottom: 15px!important;
+  }
+  .el-radio-group{
+    width: 660px!important;
+  }
+  .el-form-item__label{
+    width: 150px!important;
+  }
+  .el-checkbox-group{
+    width: 660px!important;
+  }
+  .checkgroup{
+    width: 660px!important;
+  }
+  .width180{width:180px!important;}
+  .width150{width:210px!important;}
+  .width350{width:550px!important;}
+  .width378{max-width:378px;}
+  .height30{height:30px!important;}
+  .row-list-ove{
+    position: relative;
+    height:auto;
+    margin-bottom:10px;
+    display: flex;
+    flex-direction:row;
+  }
+  .ove-block{
+    /*width:auto;*/
+    flex:1;
+    margin-right:20px;
+    display: flex;
+    flex-direction:row;
+  }
+  .ove-title{
+    /*width:auto;*/
+    flex:0.7;
+    /*width:80px;*/
+    /*background:#eee;*/
+    display: flex;
+    flex-direction:row-reverse;
+    align-items:center;
+  }
+  .typeface{
+    font-size:12px;
+    font-family: Helvetica Neue,"微软雅黑","黑体";
+    color:#333;
+  }
+  .ove-content{
+    /*flex:1;*/
+    /*background:#888;*/
+    margin-left:10px;
+    display: flex;
+    flex-direction:row;
+    align-items:center;
+  }
+  .redface{
+    font-size:12px;
+    font-family: Helvetica Neue,"微软雅黑","黑体";
+    color:#F44848;
+  }
+  .top5{margin-top:5px;}
+  .el-date-table .el-radio {
+
+  }
+  /*进度 样式*/
+  .schedule{
+    cursor:pointer;
+  }
 
 </style>
