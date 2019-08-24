@@ -638,6 +638,7 @@
 
   .image {
     width: 16px;
+    padding: 0;
   }
 
   .clearfix:before,
