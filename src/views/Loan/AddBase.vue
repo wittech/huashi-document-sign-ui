@@ -7904,6 +7904,9 @@ export default {
                   //土地建筑面积
                   this.pawn.landOccupationArea=constructionAreaValue;
                 }
+                if(data.address){
+                  this.pawn.collateralDeposit=data.address;
+                }
                 //所属地
                 this.pawn.affiliation = affiliationValue;
                 //价值
