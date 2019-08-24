@@ -4966,7 +4966,6 @@
                   data.spouseInfo.contactAddress = data.spouseInfo.contactAddress.toString();
                 }
                 //let spouseInfoType=[];
-                alert(data.spouseInfo.type.toString());
                 if(data.spouseInfo.type !=null){
                   //spouseInfoType.push(data.spouseInfo.type.toString());
                   data.spouseInfo.type =data.spouseInfo.type.toString();
