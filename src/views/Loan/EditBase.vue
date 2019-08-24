@@ -4859,13 +4859,13 @@
           //1、根据id获取对象信息
           this.getBaseById(baseLoneId);
         }else if(status=='1'){
-          //1、贷款业务信息表
+          //1、贷款业务信息表  借款人信息
           this.getRelatedPersonnelById(baseLoneId);
         }else if(status=='2'){
-          //2、贷款业务信息表
+          //2、贷款业务信息表 其他相关人
           this.getOterPersonnelById(baseLoneId);
         }else if(status=='3'){
-          //3、贷款业务信息表
+          //3、贷款业务信息表 抵押物
           this.getPawnById(baseLoneId);
         }else if(status=='4'){
           //4、贷款业务信息表
@@ -4892,8 +4892,8 @@
               let data = res.data;
               let types =[];
               if(data.type !=null){
-                types.push(data.type.toString());
-                data.type =types;
+                //types.push(data.type.toString());
+                data.type =data.type.toString();
               }
               if(data.sex !=null){
                 data.sex = data.sex.toString();
@@ -5414,18 +5414,14 @@
         let assetTypeHousesTableDataNew = [];
         if(dataList){
           for(let index in dataList){
-              let dataParams = {};
-              let relatedPersonnelInformationForm = dataList[index];
-            let spouseInfoType=[];
-            if(relatedPersonnelInformationForm.type !=null){
-              spouseInfoType.push(relatedPersonnelInformationForm.type.toString());
-            }
+            let dataParams = {};
+            let relatedPersonnelInformationForm = dataList[index];
             //资产类型数据组装 配偶
             let datas = {
               id:relatedPersonnelInformationForm.id,
               loanBasisId: this.loanBasisId,
               //类型
-              type: this.getType(spouseInfoType),
+              type: relatedPersonnelInformationForm.type.toString(),
               //姓名
               name: relatedPersonnelInformationForm.name,
               //年龄
