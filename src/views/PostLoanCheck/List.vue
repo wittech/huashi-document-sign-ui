@@ -625,8 +625,8 @@
       findFileList: function (data) {
         let dataParams = {
           loanCheckId: data.id
-        }
-        let params = Object.assign({}, dataParams)
+        };
+        let params = Object.assign({}, dataParams);
         api.postLoanCheck.findByLoanCheckId(params).then((res) => {
           if (res.code == '200') {
             this.setFileList(res.data);
@@ -637,6 +637,7 @@
       },
 
       setFileList(dataList) {
+        console.log(dataList);
         if (dataList) {
           for (let index in dataList) {
             let data = dataList[index];

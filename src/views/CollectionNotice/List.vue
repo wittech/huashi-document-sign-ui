@@ -96,7 +96,7 @@
     </el-dialog>
 
     <!--查看界面-->
-    <el-dialog title="查看" width="50%" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
+    <el-dialog title="查看" width="1000px" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
       <el-form :model="loanBasisForm" label-width="80px" :rules="dataFormRules" ref="loanBasisForm" :size="size">
         <div>
           <el-form-item label="贷款类型">
@@ -297,7 +297,7 @@
           if (url !=='' && url != null) {
             window.open(url);
           } else {
-            this.$message({message: '操作失败, ' + res.msg, type: 'error'})
+            this.$message({message: '操作失败', type: 'error'})
           }
         })
       },
@@ -571,7 +571,7 @@
         };
         let params = Object.assign({}, dataParams);
         api.collectionNotice.findByLoanNoticeId(params).then((res) => {
-          if (res.code === '200') {
+          if (res.code == '200') {
             this.setFileList(res.data);
           } else {
             this.fileList = {};

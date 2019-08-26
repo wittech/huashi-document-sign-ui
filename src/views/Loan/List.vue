@@ -56,7 +56,7 @@
     </el-table>
 
     <!--查看界面-->
-    <el-dialog title="查看文件详情" width="80%" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
+    <el-dialog title="查看文件详情" width="1300px" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
       <el-form :model="loanBasisForm" label-width="80px" :rules="dataFormRules" ref="loanBasisForm" :size="size">
         <div>
           <el-form-item label="贷款类型">
