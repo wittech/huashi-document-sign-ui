@@ -5063,7 +5063,7 @@
       //6、设置个人调查报告信息
       setPersonalLoanSurveyReport(data){
         console.log("data",data);
-        if(data){
+        if(!this.isNull(data)){
           if(data.whetherLocalHouseholdRegistration !=null){
             data.whetherLocalHouseholdRegistration =  data.whetherLocalHouseholdRegistration.toString();
           }
@@ -5100,8 +5100,8 @@
           if (data.repaymentSourceWhetherSufficient !=null){
             data.repaymentSourceWhetherSufficient =  data.repaymentSourceWhetherSufficient.toString();
           }
+          this.personalLoanSurveyReport= data;
         }
-        this.personalLoanSurveyReport= data;
       },
 
       //清空个人借款报告
@@ -5962,7 +5962,6 @@
               this.assetTypeAppend();
               //资产类型数据组装 配偶
               console.log("assetTypeHouses:",relatedPersonnelInformationForm.assetTypeHouses);
-              alert(relatedPersonnelInformationForm.type);
               let datas = {
                 id:relatedPersonnelInformationForm.id,
                 loanBasisId:this.loanBasisId,
