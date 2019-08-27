@@ -5263,42 +5263,41 @@
 
       //7、设置合同数据
       setBusinessInformation(data){
-        if(data.id){
-          //获取交易对手信息
-          this.getCounterpartyById(data.id);
-        }
-        if(data.useInfo !=null){
-          data.useInfo = data.useInfo.toString();
-        }
-        if(data.whetherPersonalHomeLoan !=null){
-          data.whetherPersonalHomeLoan = data.whetherPersonalHomeLoan.toString();
-        }
-        if(data.whetherExclusiveCreditClient !=null){
-          data.whetherExclusiveCreditClient = data.whetherExclusiveCreditClient.toString();
-          this.whetherExclusiveCreditClientChange(data.whetherExclusiveCreditClient);
-        }
-        if(data.adjustmentMethod !=null){
-          data.adjustmentMethod = data.adjustmentMethod.toString();
-        }
-        if(data.repayment !=null){
+        if(data){
+          if(data.id){
+            //获取交易对手信息
+            this.getCounterpartyById(data.id);
+          }
+          if(data.useInfo !=null){
+            data.useInfo = data.useInfo.toString();
+          }
+          if(data.whetherPersonalHomeLoan !=null){
+            data.whetherPersonalHomeLoan = data.whetherPersonalHomeLoan.toString();
+          }
+          if(data.whetherExclusiveCreditClient !=null){
+            data.whetherExclusiveCreditClient = data.whetherExclusiveCreditClient.toString();
+            this.whetherExclusiveCreditClientChange(data.whetherExclusiveCreditClient);
+          }
+          if(data.adjustmentMethod !=null){
+            data.adjustmentMethod = data.adjustmentMethod.toString();
+          }
+          if(data.repayment !=null){
             data.repayment = data.repayment.toString();
             this.repaymentChange(data.repayment);
-        }
-        if(data.interestRate !=null){
-          data.interestRate = data.interestRate.toString();
-          this.interestRateChange(data.interestRate);
-        }
-        if(data.cycleQuota !=null){
-          data.cycleQuota = data.cycleQuota.toString();
-        }
-        if(data.whetherProvidentFundCombinationLoan !=null){
-          data.whetherProvidentFundCombinationLoan = data.whetherProvidentFundCombinationLoan.toString();
-          this.whetherProvidentFundCombinationLoanChange(data.whetherProvidentFundCombinationLoan);
-        }
-        if(data){
+          }
+          if(data.interestRate !=null){
+            data.interestRate = data.interestRate.toString();
+            this.interestRateChange(data.interestRate);
+          }
+          if(data.cycleQuota !=null){
+            data.cycleQuota = data.cycleQuota.toString();
+          }
+          if(data.whetherProvidentFundCombinationLoan !=null){
+            data.whetherProvidentFundCombinationLoan = data.whetherProvidentFundCombinationLoan.toString();
+            this.whetherProvidentFundCombinationLoanChange(data.whetherProvidentFundCombinationLoan);
+          }
           this.loanBusinessInformation=data;
         }
-
       },
 
       //7、清空贷款业务数据
@@ -5371,15 +5370,20 @@
       setPawnTableData(dataList){
           if(dataList){
               let assetTypeHousesTableDataNew = [];
+            console.log("dataList:", dataList);
               for(let index in dataList){
                 let dataParams = {};
                 let data = dataList[index];
-              /*  if(data.mortgageType !=null){
-                  data.mortgageTypes = this.getMortgageType(data.mortgageType);
+                let stars ="";
+                let pawnPersonnelMapping = [];
+                for(let idx in data.pawnPersonnelMapping){
+                    let d = data.pawnPersonnelMapping[idx];
+                    stars+=d.name+',';
+                    pawnPersonnelMapping.push({'rpiId':d.rpiId});
                 }
-                if(data.landNature !=null){
-                  data.landNatures =this.getLandNatures(data.landNature);
-                }*/
+                data.pawnPersonnelMapping = pawnPersonnelMapping;
+                data.groups = stars;
+                console.log("data:", data);
                 dataParams = {
                   mortgageTypes:this.getMortgageType(data.mortgageType),
                   landNatures:this.getLandNatures(data.landNature),
@@ -5391,6 +5395,7 @@
                 };
                 assetTypeHousesTableDataNew.push(dataParams);
               }
+            console.log("assetTypeHousesTableDataNew:", assetTypeHousesTableDataNew);
               this.pawnTableData=assetTypeHousesTableDataNew;
           }
       },
