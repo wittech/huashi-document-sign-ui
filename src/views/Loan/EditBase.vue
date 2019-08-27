@@ -5221,7 +5221,9 @@
 
       //7、设置合同数据
       setContractInformation(data){
+        if(data){
           this.contractInformation=data;
+        }
       },
 
       //7、清空合同数据
@@ -5293,7 +5295,9 @@
           data.whetherProvidentFundCombinationLoan = data.whetherProvidentFundCombinationLoan.toString();
           this.whetherProvidentFundCombinationLoanChange(data.whetherProvidentFundCombinationLoan);
         }
-        this.loanBusinessInformation=data;
+        if(data){
+          this.loanBusinessInformation=data;
+        }
 
       },
 
