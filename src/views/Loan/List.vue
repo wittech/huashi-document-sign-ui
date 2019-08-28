@@ -257,14 +257,16 @@
         })
       },
 
-      displayUrl(url) {
-        const printContainer = document.getElementById('printContainer');
-        const deviceWidth = document.body.clientWidth;
-        const deviceHeight = document.body.clientHeight;
-        // printContainer.style.width = (Number(deviceWidth)-120) + 'px'; //数字是页面布局宽度差值
-        // printContainer.style.height = (Number(deviceHeight)-80) + 'px'; //数字是页面布局高度差
-        printContainer.style.display = "";
-        printContainer.src = url;
+      openUrl(url) {
+        const link = document.createElement('a');//创建a标签
+        link.target = "_blank";
+        link.href = url;
+        document.body.appendChild(link);
+        link.click();
+        //释放url
+        URL.revokeObjectURL(link.href);
+        //释放标签
+        document.body.removeChild(link);
       },
 
       /**
@@ -279,13 +281,16 @@
         let params = Object.assign({}, dataParams);
         api.fileDoc.batchPrint(params).then((url) => {
           if (url !== '' && url != null) {
-            window.open(url);
+            // window.open(url);
+            this.openUrl(url);
             // this.displayUrl("http://www.baidu.com");
           } else {
             this.$message({message: '操作失败', type: 'error'})
           }
         })
       },
+
+
 
       /**
        * 批量打印
@@ -307,7 +312,8 @@
         api.fileDoc.batchPrint(params).then((url) => {
           this.searchLoading = false;
           if (url !== '' && url != null) {
-            window.open(url);
+            // window.open(url);
+            this.openUrl(url);
           } else {
             this.$message({message: '操作失败', type: 'error'})
           }
