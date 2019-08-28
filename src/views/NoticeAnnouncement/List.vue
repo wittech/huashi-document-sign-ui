@@ -30,7 +30,7 @@
         </el-form-item>
         <el-form-item label="内容" prop="content">
             <el-card style="height: 310px;">
-              <quill-editor v-model="dataForm.content" ref="myQuillEditor" style="height: 310px;" :options="editorOption">
+              <quill-editor v-model="dataForm.content" ref="myQuillEditor" style="height: 310px;width:689.39px;" :options="editorOption">
               </quill-editor>
             </el-card>
           <!--<el-input v-model="dataForm.content" auto-complete="off"></el-input>-->
@@ -48,15 +48,15 @@
   import KtTable from "@/views/Core/KtTable"
   import KtButton from "@/views/Core/KtButton"
   import { format } from "@/utils/datetime"
- /* import { quillEditor } from 'vue-quill-editor' //调用编辑器*/
-/*  import 'quill/dist/quill.core.css'
+  import { quillEditor } from 'vue-quill-editor' //调用编辑器
+  import 'quill/dist/quill.core.css'
   import 'quill/dist/quill.snow.css'
-  import 'quill/dist/quill.bubble.css'*/
+  import 'quill/dist/quill.bubble.css'
   export default {
     components:{
       KtTable,
-      KtButton
-     /* quillEditor*/
+      KtButton,
+      quillEditor
     },
     computed: {
       editor() {
