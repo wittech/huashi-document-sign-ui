@@ -91,6 +91,7 @@ import KtTable from "@/views/Core/KtTable"
 import KtButton from "@/views/Core/KtButton"
 import TableColumnFilterDialog from "@/views/Core/TableColumnFilterDialog"
 import { format } from "@/utils/datetime"
+import api from '@/http/api'
 export default {
 	components:{
 		PopupTreeInput,
@@ -151,7 +152,7 @@ export default {
 		},
 		// 加载用户角色信息
 		findUserRoles: function () {
-			this.$api.roole.findAll().then((res) => {
+      api.role.findAll().then((res) => {
 				// 加载角色集合
 				this.roles = res.data
 			})
