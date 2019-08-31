@@ -46,7 +46,7 @@
         fixed="right" header-align="center" width="300" align="center" :label="$t('action.operation')">
         <template slot-scope="scope">
           <kt-button icon="fa fa-edit" label="填写" perms="loan:view" @click="fillDialog(scope.row)"/>
-          <kt-button icon="fa fa-edit" label="查看" perms="loan:view" @click="handleDeail(scope.row)"/>
+          <kt-button icon="fa fa-edit" label="预览打印" perms="loan:view" @click="handleDeail(scope.row)"/>
           <kt-button icon="fa fa-edit" label="已处理" perms="loan:view" @click="processedClick(scope.row)"/>
         </template>
       </el-table-column>
@@ -163,7 +163,7 @@
     </el-dialog>
 
     <!--查看界面-->
-    <el-dialog title="查看" width="50%" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
+    <el-dialog title="预览打印" width="50%" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
       <el-form :model="loanBasisForm" label-width="80px" :rules="dataFormRules" ref="loanBasisForm" :size="size">
         <div>
           <el-form-item label="贷款类型">
