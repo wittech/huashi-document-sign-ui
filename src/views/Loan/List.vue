@@ -46,9 +46,9 @@
         prop="createBy" header-align="center" align="center" label="添加人">
       </el-table-column>
       <el-table-column
-        fixed="right" header-align="center" align="center" width="185" :label="$t('action.operation')">
+        fixed="right" header-align="center" align="center" width="215" :label="$t('action.operation')">
         <template slot-scope="scope">
-          <kt-button icon="fa fa-edit" label="查看" perms="loan:view" @click="handleDeail(scope.row)"/>
+          <kt-button icon="fa fa-edit" label="打印预览" perms="loan:view" @click="handleDeail(scope.row)"/>
           <kt-button icon="fa fa-edit" label="修改" perms="loan:view" @click="editHref(scope.row)"/>
         </template>
       </el-table-column>
@@ -56,7 +56,7 @@
     </el-table>
 
     <!--查看界面-->
-    <el-dialog title="查看文件详情" width="1300px" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
+    <el-dialog title="打印预览" width="1300px" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
       <el-form :model="loanBasisForm" label-width="80px" :rules="dataFormRules" ref="loanBasisForm" :size="size">
         <div>
           <el-form-item label="贷款类型">
