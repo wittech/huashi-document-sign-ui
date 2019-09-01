@@ -5106,20 +5106,6 @@
       }
     },
     methods: {
-      customUpload(file) {
-        // 自定义上传
-        let fileFormData = new FormData();
-        fileFormData.append('type', '2');
-        let dataParams = {
-          type: '2',
-          file: file
-        };
-        let params = Object.assign({}, dataParams);
-        api.fileDoc.fileUpload(params).then(response => {
-          console.log(response)
-        })
-      },
-
       getFile(event) {
         this.file = event.target.files[0];
         this.type='2';

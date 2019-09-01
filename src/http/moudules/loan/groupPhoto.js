@@ -9,3 +9,11 @@ export const save = (data) => {
         data
     })
 }
+
+export const findByBasisIdList = (params) => {
+  return axios({
+    url: '/groupPhoto/findByBasisIdList',
+    method: 'get',
+    params
+  })
+}
