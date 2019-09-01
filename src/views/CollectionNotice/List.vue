@@ -51,6 +51,12 @@
         </template>
       </el-table-column>
     </el-table>
+    <!--分页栏-->
+    <div class="toolbar" style="padding:10px;">
+      <el-pagination layout="total, prev, pager, next, jumper" @current-change="refreshPageRequest"
+                     :current-page="pageRequest.pageNum" :page-size="pageRequest.pageSize" :total="pageResult.totalSize" style="float:right;">
+      </el-pagination>
+    </div>
 
     <!--填写界面-->
     <el-dialog title="填写" width="50%" :visible.sync="collectionNoticeDialogVisible" :close-on-click-modal="false">
@@ -279,6 +285,14 @@
     },
 
     methods: {
+      // 换页刷新
+      refreshPageRequest: function (pageNum) {
+        this.pageRequest.pageNum = pageNum;
+        let data = {
+          'pageRequest':this.pageRequest
+        }
+        this.findPages(data)
+      },
 
       watermarkSwitchChange(val) {
         this.watermarkDisplay = val;

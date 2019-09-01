@@ -54,6 +54,12 @@
       </el-table-column>
 
     </el-table>
+    <!--分页栏-->
+    <div class="toolbar" style="padding:10px;">
+      <el-pagination layout="total, prev, pager, next, jumper" @current-change="refreshPageRequest"
+                     :current-page="pageRequest.pageNum" :page-size="pageRequest.pageSize" :total="pageResult.totalSize" style="float:right;">
+      </el-pagination>
+    </div>
 
     <!--查看界面-->
     <el-dialog title="打印预览" width="1300px" :visible.sync="deailDialogVisible" :close-on-click-modal="false">
@@ -188,7 +194,7 @@
           borrower: '',
           status: '0'
         },
-        pageRequest: {pageNum: 1, pageSize: 8},
+        pageRequest: {pageNum: 1, pageSize: 10},
         pageResult: {},
 
         operation: false, // true:新增, false:编辑
@@ -221,7 +227,14 @@
     },
 
     methods: {
-
+        // 换页刷新
+      refreshPageRequest: function (pageNum) {
+        this.pageRequest.pageNum = pageNum;
+        let data = {
+          'pageRequest':this.pageRequest
+        }
+        this.findPages(data)
+      },
       /**
        * 下载
        */
