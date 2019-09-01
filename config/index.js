@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
       // 判断接口地址，就将本机域名端口替换为target
       '/huashi-document-sign-server': { //用户登录url
-        target: 'http://47.103.152.232:8001/',       //测试环境的电脑
+        target: 'http://localhost:8001/',       //测试环境的电脑
         changeOrigin: true,
         secure: false,
       }

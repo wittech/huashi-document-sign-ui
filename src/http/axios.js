@@ -59,9 +59,11 @@ export default function $axios(options) {
         if (errorInfo) {
           error = errorInfo.data;  // 页面那边catch的时候就能拿到详细的错误信息,看最下边的Promise.reject
           const errorStatus = errorInfo.status; // 404 403 500 ...
-          router.push({
-            path: `/error/${errorStatus}`
-          })
+          // router.push({
+          //   path: `/error/${errorStatus}`
+          // })
+
+          router.push('/login');
         }
         return Promise.reject(error) // 在调用的那边可以拿到(catch)你想返回的错误信息
       }
