@@ -2593,7 +2593,7 @@
                     </el-row>
                   </el-form>
                   <div slot="footer" class="dialog-footer">
-                    <el-button :size="size" @click.native="addOtherAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
+                    <el-button :size="size" @click.native="addSpouseOtherAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
                     <el-button :size="size" type="primary" @click.native="assetTypeSpouseOtherForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
                   </div>
                 </el-dialog>
