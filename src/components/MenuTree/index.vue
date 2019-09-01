@@ -4,7 +4,7 @@
       <i :class="menu.icon" ></i>
       <span slot="title">{{menu.name}}</span>
     </template>
-    <MenuTree v-for="item in menu.children" :key="item.id" :menu="item"></MenuTree>
+    <MenuTree v-for="item in menu.children" :key="item.id" :menu="item" v-if="item.id !='66'"></MenuTree>
   </el-submenu>
   <el-menu-item v-else :index="'' + menu.id" @click="oute(menu)">
     <i :class="menu.icon"></i>
