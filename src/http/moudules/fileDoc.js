@@ -19,3 +19,12 @@ export const batchPrint = (params) => {
   })
 };
 
+// 上传
+export const fileUpload = (params) => {
+  return axios({
+    url: '/file/upload',
+    method: 'post',
+    headers: {'Content-Type':'multipart/form-data'},
+    params
+  })
+};

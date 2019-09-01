@@ -6,7 +6,7 @@
           <el-step title="相关人情况" @click.native="stepClick(2)" class="schedule"></el-step>
           <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
           <el-step title="相关贷款业务信息" @click.native="stepClick(4)" class="schedule"></el-step>
-          <!--<el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>-->
+          <el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>
           <el-step title="个人贷款调查报告表" @click.native="stepClick(6)" class="schedule"></el-step>
           <el-step title="合同信息" @click.native="stepClick(7)" class="schedule"></el-step>
          <!-- <el-step title="基础信息"></el-step>
@@ -3416,26 +3416,41 @@
         <!--5、合影-->
         <div v-if="active==5">
           <el-form ref="form" :model="form" label-width="80px">
-            签字照
+            签字照（最多上传10张）
             <el-upload
-              action="http://localhost:8001/file/upload/"
+              :action="upimg"
               list-type="picture-card"
+              accept="image/*"
+              :limit="20"
+              :multiple="true"
               :on-preview="handlePictureCardPreview"
-              :on-success="success"
-              :on-remove="emove">
-
+              :on-remove="handleRemove"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+              :on-error="imgUploadError"
+              :headers="headers"
+              :data="ruleFileForm"
+            >
               <i class="el-icon-plus"></i>
             </el-upload>
             <el-dialog :visible.sync="dialogVisible" size="tiny">
               <img width="100%" :src="dialogImageUrl" alt="">
             </el-dialog>
-            合影照
+            合影照(最多上传10张)
             <el-upload
-              action="http://localhost:8001/file/upload/"
+              :action="upimg"
               list-type="picture-card"
+              accept="image/*"
+              :limit="20"
+              :multiple="true"
               :on-preview="handlePictureCardPreview"
-              :on-success="success"
-              :on-remove="emove">
+              :on-remove="handleRemove"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+              :on-error="imgUploadError"
+              :headers="headers"
+              :data="ruleFileHyForm"
+            >
               <i class="el-icon-plus"></i>
             </el-upload>
             <el-dialog :visible.sync="dialogVisible2" size="tiny">
@@ -3444,7 +3459,7 @@
 
             <br>
             <el-form-item>
-              <el-button type="primary" @click="nextStep(6)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+              <el-button type="primary" @click="groupPhotoSubmit(6)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -3691,11 +3706,19 @@ import KtButton from "@/views/Core/KtButton"
 import { format } from "@/utils/datetime"
 import { getIFrameUrl, getIFramePath } from '@/utils/iframe'
 import api from '@/http/api'
+import Cookies from "js-cookie";
 export default {
 	components:{
 			KtTable,
 			KtButton
 	},
+  computed:{
+    headers(){
+      return {
+        'token': Cookies.get('token')
+      }
+    }
+  },
 	data() {
     var ageTest=(rule,value,callback)=>{
       let reg=/^[0-9]*$/;
@@ -3848,6 +3871,7 @@ export default {
           { validator: yearsOperationTest,trigger: 'blur'}
         ]
       },
+      upimg:'http://localhost:8001/file/upload',
       //房屋资产弹窗标记
       referenceDialogVisible:false,
       //房屋土地资产列表
@@ -4318,7 +4342,7 @@ export default {
       //配偶 end
 
 
-      loanBasisId:'',
+      loanBasisId:'11',
       size: 'small',
       dialogImageUrl: '',
       dialogVisible: false,
@@ -5031,10 +5055,146 @@ export default {
       radioData:'',
       //选中赋值
       checkedRadioData:'',
-
+      //！！！点击提交按钮，除file文件外，可以携带其它参数
+      //签字
+      ruleFileForm: {
+        type: '2',
+      },
+      //合影
+      ruleFileHyForm:{
+        type: '1',
+      },
+      file: '',
+      type:'',
+      //文件合影数据
+      filePhotoList:[],
 		}
 	},
 	methods: {
+    customUpload(file) {
+      // 自定义上传
+      let fileFormData = new FormData();
+      fileFormData.append('type', '2');
+      let dataParams = {
+        type: '2',
+        file: file
+      };
+      let params = Object.assign({}, dataParams);
+      api.fileDoc.fileUpload(params).then(response => {
+        console.log(response)
+      })
+    },
+
+    getFile(event) {
+      this.file = event.target.files[0];
+      this.type='2';
+      console.log('file',this.file);
+    },
+
+    //移除图片时调用
+    handleRemove(file, fileList) {
+      let filePhotoList = this.filePhotoList;
+      console.log('filePhotoList===',filePhotoList)
+      if(filePhotoList){
+        let filePhotoListNew = [];
+        for(let index in filePhotoList){
+            let data = filePhotoList[index];
+            if(data.fileName !=file.name){
+              filePhotoListNew.push(data);
+            }
+        }
+        if(filePhotoListNew){
+            this.filePhotoList = filePhotoListNew;
+        }
+      }
+      console.log('this.filePhotoList===',this.filePhotoList)
+      console.log('file===',file)
+      console.log('fileList===',fileList)
+      this.images[0].url='';
+    },
+    errorimg(res){
+      this.$message({
+        message:res.msg,
+        type: 'warning'
+      });
+    },
+//上传时调用
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      console.log('dialogImageUrl===',this.dialogImageUrl)
+      this.dialogVisible = true;
+    },
+    // 超出上传个数时调用
+    exceed(){
+      this.$message({
+        message: "只能选择一个图片",
+        type: 'warning'
+      });
+    },
+    //上传图片前调用
+    beforeAvatarUpload(file) {//文件上传之前调用做一些拦截限制
+      let token=Cookies.get('token');
+      console.log('token===',token);
+      const isJPG = true;
+      // const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        this.$message.error('上传图片大小不能超过 2MB!');
+      }
+      return isJPG && isLt2M;
+    },
+    handleAvatarSuccess(res, file) {//图片上传成功
+      console.log('res==',res);
+      if(res.code=='200'){
+        let data = {
+          docMetaId:res.data,
+          loanBasisId:this.loanBasisId,
+          fileName:file.name
+        };
+        this.filePhotoList.push(data);
+        console.log('handleAvatarSuccess this.filePhotoList==',this.filePhotoList);
+        return;
+      }
+      this.$message({
+        message: res.msg,
+        type: 'warning'
+      });
+      console.log('file',file);
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
+    handleExceed(files, fileList) {//图片上传超过数量限制
+      console.log('handleExceed FILE ',files);
+      console.log('handleExceed fileList',fileList);
+     /* this.$message.error('上传图片不能超过6张!');*/
+      return true;
+    },
+    imgUploadError(err, file, fileList){//图片上传失败调用
+      console.log(err)
+      this.$message.error('上传图片失败!');
+    },
+
+    /**
+     *  合影下一步
+     */
+    groupPhotoSubmit(active){
+      console.log('filePhotoList',this.filePhotoList);
+      let filePhotoList = this.filePhotoList;
+      if(filePhotoList){
+      }else{
+          this.$message.error('请选择需要上传图片!');
+          return;
+      }
+      let params = Object.assign({}, filePhotoList);
+      api.groupPhoto.save(filePhotoList).then((res) => {
+        if(res.code=='200'){
+          this.filePhotoList=[];
+          this.active=active;
+          this.$message({ message: '操作成功', type: 'success' })
+        }else{
+          this.$message({ message: '操作失败', type: 'success' })
+        }
+      })
+    },
 
     /**
      * 抵押物类型显示各自

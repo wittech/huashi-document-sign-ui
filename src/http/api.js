@@ -24,8 +24,7 @@ import * as postLoanCheck from './moudules/afterLoan/postLoanCheck'
 import * as collectionNotice from './moudules/maturity/collectionNotice'
 import * as loanSurveyReport from './moudules/loan/loanSurveyReport'
 import * as counterpartyInformation from './moudules/loan/counterpartyInformation'
-
-
+import * as groupPhoto from './moudules/loan/groupPhoto'
 
 // 默认全部导出
 export default {
@@ -51,5 +50,6 @@ export default {
     postLoanCheck,
     collectionNotice,
     loanSurveyReport,
-    counterpartyInformation
+    counterpartyInformation,
+    groupPhoto
 }
