@@ -3443,7 +3443,7 @@
         </div>
         <br>
         <el-form-item>
-          <el-button type="primary" @click="loanBusinessNextStep(6)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+          <el-button type="primary" @click="loanBusinessNextStep(5)">下一步<i class="el-icon-arrow-right el-icon--right"></i></el-button>
         </el-form-item>
       </el-form>
     </div>
