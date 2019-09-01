@@ -3735,6 +3735,7 @@
 </template>
 
 <script>
+  import { baseUrl } from '@/utils/global'
   import KtTable from "@/views/Core/KtTable"
   import KtButton from "@/views/Core/KtButton"
   import { format } from "@/utils/datetime"
@@ -3905,7 +3906,7 @@
             { validator: yearsOperationTest,trigger: 'blur'}
           ]
         },
-        upimg:'http://localhost:8001/file/upload',
+        upimg:baseUrl+'/file/upload',
         //房屋资产弹窗标记
         referenceDialogVisible:false,
         //房屋土地资产列表
