@@ -72,7 +72,6 @@
         columns: [
           {prop:"id", label:"ID", minWidth:50},
           {prop:"title", label:"标题", minWidth:100},
-          {prop:"content", label:"内容", minWidth:100},
           {prop:"createBy", label:"创建人", minWidth:100},
           {prop:"createTime", label:"创建时间", minWidth:120, formatter:this.dateFormat}
         ],
