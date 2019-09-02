@@ -48,7 +48,7 @@
       <el-table-column
         fixed="right" header-align="center" align="center" width="215" :label="$t('action.operation')">
         <template slot-scope="scope">
-          <kt-button icon="fa fa-edit" label="打印预览" perms="loan:view" @click="handleDeail(scope.row)"/>
+          <kt-button icon="fa el-icon-printer" label="打印预览" perms="loan:view" @click="handleDeail(scope.row)"/>
           <kt-button icon="fa fa-edit" label="修改" perms="loan:view" @click="editHref(scope.row)"/>
         </template>
       </el-table-column>

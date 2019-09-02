@@ -22,9 +22,18 @@ export const batchDelete = (data) => {
 }
 // 分页查询
 export const findPage = (data) => {
-    return axios({
-        url: '/noticeAnnouncement/findPage',
-        method: 'post',
-        data
-    })
+  return axios({
+    url: '/noticeAnnouncement/findPage',
+    method: 'post',
+    data
+  })
 }
+
+// 分页查询
+export const findLastest = () => {
+  return axios({
+    url: '/noticeAnnouncement/getTopNotice',
+    method: 'get'
+  })
+}
+

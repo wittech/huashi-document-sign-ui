@@ -46,7 +46,7 @@
         fixed="right" header-align="center" width="300" align="center" :label="$t('action.operation')">
         <template slot-scope="scope">
           <kt-button icon="fa fa-edit" label="填写" perms="loan:view" @click="collectionNoticeDialog(scope.row)"/>
-          <kt-button icon="fa fa-edit" label="预览打印" perms="loan:view" @click="handleDeail(scope.row)"/>
+          <kt-button icon="el-icon-printer" label="预览打印" perms="loan:view" @click="handleDeail(scope.row)"/>
           <kt-button icon="fa fa-edit" label="已处理" perms="loan:view" @click="processedClick(scope.row)"/>
         </template>
       </el-table-column>
