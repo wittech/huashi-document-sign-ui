@@ -2,6 +2,8 @@ import axios from 'axios';
 import config from './config';
 import Cookies from "js-cookie";
 import router from '@/router'
+import store from '@/store'
+import Vue from 'vue'
 
 // 使用vuex做全局loading时使用
 // import store from '@/store'
@@ -14,7 +16,6 @@ export default function $axios(options) {
       timeout: config.timeout,
       withCredentials: config.withCredentials
     });
-
     // request 拦截器
     instance.interceptors.request.use(
       config => {
@@ -108,6 +109,17 @@ export default function $axios(options) {
               err.message = '未授权，请登录';
               break;
             case 403:
+              let vue = new Vue();
+              vue.$alert('登录超时！请重新登录！', '登录超时', {
+                confirmButtonText: '确定',
+                //type: 'warning',
+                callback: action => {
+                  if (action == 'confirm') {
+
+                    router.push('/login');
+                  }
+                }
+              });
               err.message = '拒绝访问';
               break;
             case 404:

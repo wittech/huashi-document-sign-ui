@@ -20,6 +20,15 @@ export default {
             state.themeColor = themeColor
         },
         menuRouteLoaded(state, menuRouteLoaded){  // 改变菜单和路由的加载状态
+
+         /* this.$confirm('请求超时！请重新登录！', '登录提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+
+          }).catch(() => {
+          });*/
             state.menuRouteLoaded = menuRouteLoaded;
         }
     },
