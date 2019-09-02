@@ -17,3 +17,12 @@ export const findByBasisIdList = (params) => {
     params
   })
 }
+
+export const update = (data) => {
+  return axios({
+    url: '/groupPhoto/update',
+    method: 'post',
+    data
+  })
+}
+

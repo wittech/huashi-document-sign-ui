@@ -3440,6 +3440,7 @@
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
           :on-error="imgUploadError"
+          :file-list="updateFileList"
           :headers="headers"
           :data="ruleFileForm"
         >
@@ -3462,6 +3463,7 @@
           :on-error="imgUploadError"
           :headers="headers"
           :data="ruleFileHyForm"
+          :file-list="updateGroupPhotoFileList"
         >
           <i class="el-icon-plus"></i>
         </el-upload>
@@ -3618,7 +3620,9 @@
 </template>
 
 <script>
+  import Cookies from "js-cookie"
   import { baseUrl } from '@/utils/global'
+  import { groupPhotoUrl } from '@/utils/global'
   import KtTable from "@/views/Core/KtTable"
   import KtButton from "@/views/Core/KtButton"
   import { format } from "@/utils/datetime"
@@ -3628,6 +3632,13 @@
     components:{
       KtTable,
       KtButton
+    },
+    computed:{
+      headers(){
+        return {
+          'token': Cookies.get('token')
+        }
+      }
     },
     data() {
       return {
@@ -4876,6 +4887,10 @@
         type:'',
         //文件合影数据
         filePhotoList:[],
+        updateFileList:[
+        ],
+        updateGroupPhotoFileList:[
+        ]
     }
     },
 
@@ -4957,7 +4972,8 @@
           let data = {
             docMetaId:res.data,
             loanBasisId:this.loanBasisId,
-            fileName:file.name
+            fileName:file.name,
+            id:'0'
           };
           this.filePhotoList.push(data);
           console.log('handleAvatarSuccess this.filePhotoList==',this.filePhotoList);
@@ -4992,8 +5008,12 @@
           this.$message.error('请选择需要上传图片!');
           return;
         }
-        let params = Object.assign({}, filePhotoList);
-        api.groupPhoto.save(filePhotoList).then((res) => {
+        let data ={
+          filePhotoList : filePhotoList,
+          loanBasisId : this.loanBasisId
+        }
+        let params = Object.assign({}, data);
+        api.groupPhoto.update(params).then((res) => {
           if(res.code=='200'){
             this.filePhotoList=[];
             this.active=active;
@@ -5024,7 +5044,7 @@
           this.getBusinessById(baseLoneId);
         }else if(status==5){
           //5、合影数据获取
-          this.findByBasisIdList(baseLoneId);
+          this.findByBasisIdListInit(baseLoneId);
         }else if(status=='6'){
           //6、调查报告 第六步
           this.getSurveyReportById(baseLoneId);
@@ -5417,17 +5437,45 @@
       },
 
       //5、根据loanBasicId查询合影
-      findByBasisIdList(id){
+      findByBasisIdListInit(id){
         let dataParams = {
-          loanBasicId:'11'
+          loanBasisId:id
         }
         let params = Object.assign({}, dataParams);
         api.groupPhoto.findByBasisIdList(params).then((res) => {
+          this.updateFileList=[];
           if(res.code=='200'){
             //赋值
-
+            this.setUpdateFileList(res.data);
           }
         })
+      },
+
+      //设置合影默认图片
+      setUpdateFileList(dataList){
+          let updateFileListNew = [];
+          let filePhotoListNew = [];
+          let updateGroupPhotoFileListNew =[];
+          if(dataList){
+            for(let index in dataList){
+              let data = dataList[index];
+              if(data.type=='1'){
+                updateGroupPhotoFileListNew.push({'name':data.originName,'url':groupPhotoUrl+'/'+data.url});
+              }else{
+                updateFileListNew.push({'name':data.originName,'url':groupPhotoUrl+'/'+data.url});
+              }
+              let dataParams = {
+                docMetaId:data.id,
+                loanBasisId:this.loanBasisId,
+                fileName:data.originName,
+                id:'1'
+              };
+              filePhotoListNew.push(dataParams)
+            }
+          }
+          this.filePhotoList = filePhotoListNew;
+          this.updateFileList = updateFileListNew;
+          this.updateGroupPhotoFileList = updateGroupPhotoFileListNew;
       },
 
       //7、设置合同数据
