@@ -1421,7 +1421,7 @@
             <el-table-column
               prop="identityNumber"
               label="身份证号码"
-              width="120">
+              width="250">
             </el-table-column>
             <el-table-column
               prop="age"
