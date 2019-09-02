@@ -4,8 +4,8 @@
       <div class="tip">
         <p>系统公告</p>
       </div>
-      <div style="width:100%;text-align: center">
-        <iframe name="notice" height="500" width="98%" style="border:1px #DCDCDC solid"></iframe>
+      <div style="width:98%; margin-left:1%; border : 1px #DCDCDC solid;height: 500px;overflow-y: auto;" v-html="notice">
+        <!--<iframe ref="iframe" id="iframe" height="500" width="98%" style="border:1px #DCDCDC solid"></iframe>-->
       </div>
     </el-row>
     <el-row>
@@ -13,46 +13,29 @@
         <p>催缴通知列表</p>
       </div>
       <el-col :span="24">
-        <!--<el-table :data="collectionNoticeData" stripe size="mini" style="width: 100%;">-->
-          <!--<el-table-column-->
-            <!--prop="borrower" header-align="center" align="center" width="80" label="借款人">-->
-          <!--</el-table-column>-->
-          <!--<el-table-column-->
-            <!--prop="loanType" header-align="center" align="center" width="150" label="贷款类型" :formatter="loanTypeFormat">-->
-          <!--</el-table-column>-->
-          <!--<el-table-column-->
-            <!--prop="applicationMatters" header-align="center" align="center" width="120" label="申请事项"-->
-            <!--:formatter="applicationMattersFormat">-->
-          <!--</el-table-column>-->
-          <!--<el-table-column-->
-            <!--prop="applicationAmount" header-align="center" align="center" label="申请金额">-->
-          <!--</el-table-column>-->
-          <!--<el-table-column-->
-            <!--prop="loanStartAndStopDate" header-align="center" align="center" label="贷款起止日期">-->
-          <!--</el-table-column>-->
-          <!--<el-table-column-->
-            <!--prop="status" header-align="center" align="center" label="状态" :formatter="statusFormat">-->
-          <!--</el-table-column>-->
-        <!--</el-table>-->
-
-
-        <el-table
-          :data="tableData"
-          border
-          style="width: 100%">
+        <el-table :data="collectionNoticeData" border style="width: 100%;">
           <el-table-column
-            prop="date"
-            label="日期"
-            width="180">
+            type="index" label="序"
+            header-align="center" align="center">
           </el-table-column>
           <el-table-column
-            prop="name"
-            label="姓名"
-            width="180">
+            prop="borrower" header-align="center" align="center" width="80" label="借款人">
           </el-table-column>
           <el-table-column
-            prop="address"
-            label="地址">
+            prop="loanType" header-align="center" align="center" width="150" label="贷款类型" :formatter="loanTypeFormat">
+          </el-table-column>
+          <el-table-column
+            prop="applicationMatters" header-align="center" align="center" width="120" label="申请事项"
+            :formatter="applicationMattersFormat">
+          </el-table-column>
+          <el-table-column
+            prop="applicationAmount" header-align="center" align="center" label="申请金额">
+          </el-table-column>
+          <el-table-column
+            prop="loanStartAndStopDate" header-align="center" align="center" label="贷款起止日期">
+          </el-table-column>
+          <el-table-column
+            prop="status" header-align="center" align="center" label="状态" :formatter="statusFormat">
           </el-table-column>
         </el-table>
       </el-col>
@@ -62,23 +45,29 @@
         <p>贷后检查列表</p>
       </div>
       <el-col :span="24">
-        <el-table
-          :data="tableData"
-          border
-          style="width: 100%">
+        <el-table :data="postloanCheckData" border style="width: 100%">
           <el-table-column
-            prop="date"
-            label="日期"
-            width="180">
+            type="index" label="序"
+            header-align="center" align="center">
           </el-table-column>
           <el-table-column
-            prop="name"
-            label="姓名"
-            width="180">
+            prop="borrower" header-align="center" align="center" width="80" label="借款人">
           </el-table-column>
           <el-table-column
-            prop="address"
-            label="地址">
+            prop="loanType" header-align="center" align="center" width="150" label="贷款类型" :formatter="loanTypeFormat">
+          </el-table-column>
+          <el-table-column
+            prop="applicationMatters" header-align="center" align="center" width="120" label="申请事项"
+            :formatter="applicationMattersFormat">
+          </el-table-column>
+          <el-table-column
+            prop="applicationAmount" header-align="center" align="center" label="申请金额">
+          </el-table-column>
+          <el-table-column
+            prop="loanDate" header-align="center" align="center" label="放款时间" :formatter="dateFormat">
+          </el-table-column>
+          <el-table-column
+            prop="status" header-align="center" align="center" label="状态" :formatter="statusFormat">
           </el-table-column>
         </el-table>
       </el-col>
@@ -91,6 +80,7 @@
   import KtTable from "@/views/Core/KtTable"
   import KtButton from "@/views/Core/KtButton"
   import {format} from "@/utils/datetime"
+  import api from '@/http/api'
 
   export default {
     components: {
@@ -101,37 +91,77 @@
     },
     created(){
       this.loadNotice();
+      this.findCollectionNoticeData();
+      this.findPostloanCheckData();
     },
     methods: {
 
       loadNotice() {
+        // alert(document.getElementById('iframe'));
         this.$api.noticeAnnouncement.findLastest({}).then((res) => {
           if (res.data !==null) {
-            this.$el.getElementsByTagName('iframe')[0].contentWindow.body = res.data.content;
+            this.notice = res.data.content
           }
         });
+      },
+
+      // 获取分页数据
+      findCollectionNoticeData() {
+        api.collectionNotice.findLastest({}).then((res) => {
+          this.collectionNoticeData = res.data;
+        });
+      },
+
+      // 获取分页数据
+      findPostloanCheckData() {
+        api.postLoanCheck.findLastest({}).then((res) => {
+          this.postloanCheckData = res.data;
+        });
+      },
+
+      // 状态 0未处理 1已处理
+      statusFormat: function (row, column, cellValue, index) {
+        if (row[column.property] == '0') {
+          return '未处理';
+        } else if (row[column.property] == '1') {
+          return '已处理';
+        }
+      },
+      // 贷款类型: 0新增 1续贷
+      loanTypeFormat: function (row, column, cellValue, index) {
+        if (row[column.property] == '0') {
+          return '新增';
+        } else if (row[column.property] == '1') {
+          return '续贷';
+        }
+      },
+
+      //申请事项：0 个人经营性贷款 1信用贷款 2 房屋按揭贷款 3个人消费类贷款
+      applicationMattersFormat: function (row, column, cellValue, index) {
+        if (row[column.property] == '0') {
+          return '个人经营性贷款';
+        } else if (row[column.property] == '1') {
+          return '信用贷款';
+        } else if (row[column.property] == '2') {
+          return '房屋按揭贷款';
+        } else if (row[column.property] == '3') {
+          return '个人消费类贷款';
+        }
+      },
+
+      // 时间格式化
+      dateFormat: function (row, column, cellValue, index) {
+        return format(row[column.property])
       }
 
     },
     data() {
       return {
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }]
+
+        notice : "",
+        collectionNoticeData : [],
+        postloanCheckData : [],
+
       }
     }
   }

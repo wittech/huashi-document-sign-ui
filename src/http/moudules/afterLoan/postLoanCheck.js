@@ -76,3 +76,12 @@ export const findByLoanCheckId = (params) => {
     params
   })
 }
+
+// 查询最近5条
+export const findLastest = (params) => {
+  return axios({
+    url: '/postLoanCheck/findLastest',
+    method: 'get',
+    params
+  })
+}

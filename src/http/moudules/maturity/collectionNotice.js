@@ -75,4 +75,13 @@ export const findByLoanNoticeId = (params) => {
     method: 'get',
     params
   })
+};
+
+// 查询最近5条
+export const findLastest = (params) => {
+  return axios({
+    url: '/collectionNotice/findLastest',
+    method: 'get',
+    params
+  })
 }
