@@ -2783,15 +2783,15 @@
                 label="资产类型"
                 width="150">
               </el-table-column>
-              <el-table-column
+            <!--  <el-table-column
                 fixed
                 prop="assetType"
                 label="资产名称"
                 width="150">
-              </el-table-column>
+              </el-table-column>-->
               <el-table-column
                 prop="assetName"
-                label="资产名称"
+                label="抵押物名称"
                 width="120">
               </el-table-column>
               <el-table-column
