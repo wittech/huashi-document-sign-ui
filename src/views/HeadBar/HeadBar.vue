@@ -87,8 +87,8 @@ export default {
       user: {
         name: "Louis",
         avatar: "",
-        role: "超级管理员",
-        registeInfo: "注册时间：2018-12-20 "
+        role: "超级管理员"
+       // registeInfo: "注册时间：2018-12-20 "
       },
       activeIndex: '1',
       langVisible: false

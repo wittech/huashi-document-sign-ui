@@ -2,14 +2,14 @@
   <div class="personal-panel">
     <div class="personal-desc" :style="{'background':this.$store.state.app.themeColor}">
         <div class="avatar-container">
-          <img class="avatar" :src="require('@/assets/user.png')" />
+          <img class="avatar" :src="require('@/assets/user1.png')" />
         </div>
         <div class="name-role">
           <span class="sender">{{ user.name }} - {{ user.role }}</span>
         </div>
         <div class="registe-info">
           <span class="registe-info">
-            <li class="fa fa-clock-o"></li>
+           <!-- <li class="fa fa-clock-o"></li>-->
             {{ user.registeInfo }}
           </span>
         </div>
@@ -66,7 +66,7 @@ export default {
       type: Object,
       default: {
         name: "admin",
-        avatar: "@/assets/user.png",
+        avatar: "@/assets/user12.png",
         role: "超级管理员",
         registeInfo: "注册时间：2018-12-25 "
       }
