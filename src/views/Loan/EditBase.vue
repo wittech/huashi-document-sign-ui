@@ -3427,7 +3427,7 @@
     </div>
     <!--5、合影-->
     <div v-if="active==5">
-      <el-form ref="form" :model="form" label-width="80px">
+      <el-form ref="form" :model="formGroupPhoto" label-width="80px">
         签字照（最多上传10张）
         <el-upload
           :action="upimg"
@@ -3642,6 +3642,7 @@
     },
     data() {
       return {
+        formGroupPhoto:[],
         //基础信息验证
         loanBasisFormRules:{
           borrower: [
@@ -4972,8 +4973,7 @@
           let data = {
             docMetaId:res.data,
             loanBasisId:this.loanBasisId,
-            fileName:file.name,
-            id:'0'
+            fileName:file.name
           };
           this.filePhotoList.push(data);
           console.log('handleAvatarSuccess this.filePhotoList==',this.filePhotoList);
@@ -5467,8 +5467,7 @@
               let dataParams = {
                 docMetaId:data.id,
                 loanBasisId:this.loanBasisId,
-                fileName:data.originName,
-                id:'1'
+                fileName:data.originName
               };
               filePhotoListNew.push(dataParams)
             }
