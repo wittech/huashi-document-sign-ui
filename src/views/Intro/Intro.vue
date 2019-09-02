@@ -105,7 +105,7 @@
     methods: {
 
       loadNotice() {
-        this.$api.noticeAnnouncement.findLastest().then((res) => {
+        this.$api.noticeAnnouncement.findLastest({}).then((res) => {
           if (res.data !==null) {
             this.$el.getElementsByTagName('iframe')[0].contentWindow.body = res.data.content;
           }

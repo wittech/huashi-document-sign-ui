@@ -30,10 +30,11 @@ export const findPage = (data) => {
 }
 
 // 分页查询
-export const findLastest = () => {
+export const findLastest = (data) => {
   return axios({
     url: '/noticeAnnouncement/getTopNotice',
-    method: 'get'
+    method: 'get',
+    data
   })
 }
 
