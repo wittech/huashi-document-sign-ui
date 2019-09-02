@@ -6,7 +6,7 @@
       <!-- 语言切换 -->
       <!-- <lang-selector class="lang-selector"></lang-selector>    -->
     </span>
-    <h2 class="title" style="padding-left:22px;" >信贷材料管理系统</h2>
+    <h2 class="title" style="padding-left:22px;" >华时智能信贷系统</h2>
     <el-form-item prop="account">
       <el-input type="text" v-model="loginForm.account" auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
