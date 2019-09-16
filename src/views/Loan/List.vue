@@ -57,7 +57,8 @@
     <!--分页栏-->
     <div class="toolbar" style="padding:10px;">
       <el-pagination layout="total, prev, pager, next, jumper" @current-change="refreshPageRequest"
-                     :current-page="pageRequest.pageNum" :page-size="pageRequest.pageSize" :total="pageResult.totalSize" style="float:right;">
+                     :current-page="pageRequest.pageNum" :page-size="pageRequest.pageSize" :total="pageResult.totalSize"
+                     style="float:right;">
       </el-pagination>
     </div>
 
@@ -85,11 +86,20 @@
         <br>
       </el-form>
       <el-row style="margin-bottom: 5px;">
+        <el-select v-model="category" collapse-tags multiple placeholder="请选择文件归属范畴" @change="categorySearch">
+          <el-option
+            v-for="c in categories"
+            :key="c.value"
+            :label="c.title"
+            :value="c.value">
+          </el-option>
+        </el-select>
         <!--<el-button icon="fa fa-refresh" @click="refresh()">刷新</el-button>-->
         <el-button icon="el-icon-s-promotion" type="primary" @click="generateDocOnckick" :loading="loading">生成文档
         </el-button>
 
-        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange" border>全选</el-checkbox>
+        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange" border>全选
+        </el-checkbox>
         <el-button icon="el-icon-download" type="success" @click="batchDown">批量下载</el-button>
         <el-button icon="el-icon-printer" type="warning" @click="batchPrint">批量打印</el-button>
 
@@ -106,6 +116,7 @@
           style="width:350px;"
           clearable>
         </el-input>
+
       </el-row>
 
       <el-row v-loading="searchLoading" element-loading-text="处理中">
@@ -159,8 +170,19 @@
         searchLoading: false,
 
         watermark: '广西桂林漓江农村合作银行城北支行',
-        watermarkSwitch : false,
-        watermarkDisplay : false,
+        watermarkSwitch: false,
+        watermarkDisplay: false,
+        category: [],
+        categories: [{
+          value: '1',
+          title: '客户签字材料'
+        }, {
+          value: '2',
+          title: '内部审批材料'
+        }, {
+          value: '3',
+          title: '合同'
+        }],
 
         //贷款类型
         LoanTypeOptions: [{
@@ -227,11 +249,11 @@
     },
 
     methods: {
-        // 换页刷新
+      // 换页刷新
       refreshPageRequest: function (pageNum) {
         this.pageRequest.pageNum = pageNum;
         let data = {
-          'pageRequest':this.pageRequest
+          'pageRequest': this.pageRequest
         }
         this.findPages(data)
       },
@@ -304,7 +326,6 @@
       },
 
 
-
       /**
        * 批量打印
        */
@@ -342,6 +363,10 @@
         this.isIndeterminate = false;
       },
 
+      categorySearch() {
+        this.findFileList(this.loanBasisId);
+      },
+
       handleCheckedDocChange(value) {
         let checkedCount = value.length;
         this.checkAll = checkedCount === this.fileList.length;
@@ -363,6 +388,21 @@
       downloadFileName() {
         let subject = this.loanBasisForm.borrower === '' ? "" : this.loanBasisForm.borrower;
         return subject + "-" + this.dateFtt('yyyyMMddHHmmss', new Date()) + '.zip';
+      },
+
+      categoryIds: function () {
+        let categoryValues = this.category;
+        let categoryIds = "";
+        for (let index in categoryValues) {
+          let data = categoryValues[index];
+          categoryIds += data + ",";
+        }
+
+        if(categoryIds === '') {
+          return '';
+        }
+
+        return categoryIds.substr(0, categoryIds.length - 1);
       },
 
       /**
@@ -457,7 +497,8 @@
       //根据id获取文件数据
       findFileList: function (loanBasisId) {
         let dataParams = {
-          loanBasisId: loanBasisId
+          loanBasisId: loanBasisId,
+          category: this.categoryIds()
         }
         let params = Object.assign({}, dataParams);
         api.loan.queryByLoanBasisId(params).then((res) => {
