@@ -19,6 +19,7 @@ import * as pawn from './moudules/loan/pawn'
 import * as loanBusinessInformation from './moudules/loan/loanBusinessInformation'
 import * as personalLoanSurveyReport from './moudules/loan/personalLoanSurveyReport'
 import * as contractInformation from './moudules/loan/contractInformation'
+import * as finalAudit from './moudules/loan/finalAudit'
 import * as fileDoc from './moudules/fileDoc'
 import * as postLoanCheck from './moudules/afterLoan/postLoanCheck'
 import * as collectionNotice from './moudules/maturity/collectionNotice'
@@ -43,7 +44,7 @@ export default {
     relatedPersonnel,
     oterRelatedPersonnel,
     pawn,
-  loanBusinessInformation,
+    loanBusinessInformation,
     personalLoanSurveyReport,
     contractInformation,
     fileDoc,
@@ -51,5 +52,6 @@ export default {
     collectionNotice,
     loanSurveyReport,
     counterpartyInformation,
-    groupPhoto
+    groupPhoto,
+    finalAudit
 }

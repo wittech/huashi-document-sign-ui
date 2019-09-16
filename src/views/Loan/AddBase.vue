@@ -3675,22 +3675,22 @@
 
 
             <el-form-item label="借款金额">
-              <el-input v-model="contractInformation.personalLoanContractNo" size="small" class="width150"></el-input>
+              <el-input v-model="finalAudit.loanAmount" size="small" class="width150"></el-input>
             </el-form-item>
 
             <el-form-item label="借款期限">
-              <el-input v-model="contractInformation.mortgageGuaranteeContractNo" size="small" class="width150"></el-input>
+              <el-input v-model="finalAudit.loanLimit" size="small" class="width150"></el-input>
             </el-form-item>
 
             <el-row >
               <el-form-item label="利率执行标准">
-                <el-col span="3">
-                  <el-radio v-model="radio" label="1年">1年</el-radio>
-                  <el-radio v-model="radio" label="5年">5年</el-radio>
+                <el-col span="4">
+                  <el-radio v-model="finalAudit.interestRateType" label="1年">1年</el-radio>
+                  <el-radio v-model="finalAudit.interestRateType" label="5年">5年</el-radio>
                 </el-col>
                 <el-col span="3">
                   <el-form-item label="贷款市场报价利率">
-                    <el-input placeholder="" size="small" class="width150" v-model="input2">
+                    <el-input placeholder="" size="small" class="width150" v-model="finalAudit.interestRate">
                       <template slot="append">%</template>
                     </el-input>
                   </el-form-item>
@@ -3701,13 +3701,13 @@
 
             <el-row >
               <el-form-item label="浮动方式">
-                <el-col span="3">
-                  <el-radio v-model="radio" label="上浮">上浮</el-radio>
-                  <el-radio v-model="radio" label="下浮">下浮</el-radio>
+                <el-col span="4">
+                  <el-radio v-model="finalAudit.floatedType" label="上浮">上浮</el-radio>
+                  <el-radio v-model="finalAudit.floatedType" label="下浮">下浮</el-radio>
                 </el-col>
                 <el-col span="3">
                   <el-form-item label="">
-                    <el-input placeholder=""  size="small" class="width150" v-model="input2">
+                    <el-input placeholder=""  size="small" class="width150" v-model="finalAudit.floatedRate">
                       <template slot="append">%</template>
                     </el-input>
                   </el-form-item>
@@ -3717,34 +3717,25 @@
 
             <el-form-item label="执行年利率">
               <el-form-item label="">
-                <el-input placeholder="执行年利率" size="small" class="width150" v-model="input2">
+                <el-input placeholder="执行年利率" size="small" class="width150" v-model="finalAudit.yearInterestRate">
                   <template slot="append">%</template>
                 </el-input>
               </el-form-item>
             </el-form-item>
             <el-form-item label="结息方式">
-              <el-radio v-model="radio" label="按月">按月</el-radio>
-              <el-radio v-model="radio" label="按季">按季</el-radio>
-              <el-radio v-model="radio" label="按年">按年</el-radio>
+              <el-radio v-model="finalAudit.interestType" label="按月">按月</el-radio>
+              <el-radio v-model="finalAudit.interestType" label="按季">按季</el-radio>
+              <el-radio v-model="finalAudit.interestType" label="按年">按年</el-radio>
             </el-form-item>
 
-            <el-row >
-              <el-form-item label="还款方式">
-                <el-col span="12">
-                  <el-radio v-model="radio" label="利随本清">利随本清</el-radio>
-                  <el-radio v-model="radio" label="到期一次性还本">到期一次性还本</el-radio>
-                  <el-radio v-model="radio" label="分期还本">分期还本</el-radio>
-                  <el-radio v-model="radio" label="等额本金">等额本金</el-radio>
-                  <el-radio v-model="radio" label="等额本息">等额本息</el-radio>
-                  <el-radio v-model="radio" label="其他">其他</el-radio>
-                </el-col>
-                <el-col span="1">
-                  <el-form-item label="">
-                    <el-input v-model="contractInformation.guaranteeGuaranteeContractNo" size="small" class="width150"></el-input>
-                  </el-form-item>
-                </el-col>
-              </el-form-item>
-            </el-row>
+            <el-form-item label="还款方式">
+              <el-radio-group v-model="finalAudit.repaymentType" @change="repaymentChange">
+                <el-radio  v-for="(vl, index) in RepaymentOptions" :label="vl.VAL_CODE" :key="index">
+                  {{vl.VAL_NAME}}
+                </el-radio>
+              </el-radio-group>
+              <el-input v-if="repaymentOtherFlag" v-model="finalAudit.otherRepayment" size="small" class="width150"></el-input>
+            </el-form-item>
           </el-form>
         </div>
       </el-card>
@@ -4359,6 +4350,20 @@
           pawnPersonnelMapping:[],
           landOccupationArea:'',
         },
+        finalAudit:{
+          loanBasisId:'',
+          loanAmount:'',
+          loanLimit:'',
+          interestRate:'',
+          floatedRate:'',
+          yearInterestRate:'',
+          interestRateType:'',
+          floatedType:'',
+          interestType:'',
+          repaymentType:''
+
+        },
+        otherRepaymentType:'',
         buildingAreaFlag:false,
         landOccupationAreaFlag:false,
         //抵押物类型
@@ -7635,12 +7640,20 @@
        */
       contractInformationNextStep(type){
         this.contractInformation.loanBasisId=this.loanBasisId;;
+        this.finalAudit.loanBasisId=this.loanBasisId;
         this.contractInformation.createBy=sessionStorage.getItem("user");
         this.$refs.contractInformation.validate((valid) => {
           if (valid) {
             this.$confirm('确认提交吗？', '提示', {}).then(() => {
-              let params = Object.assign({}, this.contractInformation)
+              let params = Object.assign({}, this.contractInformation);
+              let auditParams = Object.assign({}, this.finalAudit)
               console.log("params:",params);
+              console.log("auditParams:",auditParams);
+
+              this.$api.finalAudit.save(auditParams).then((res) => {
+//                this.$refs['contractInformation'].resetFields()
+              })
+
               this.$api.contractInformation.save(params).then((res) => {
                 if(res.code == 200) {
                   let dataPs = {
@@ -7655,6 +7668,12 @@
                 }
                 this.$refs['contractInformation'].resetFields()
               })
+
+
+
+
+
+
             })
           }
         })
