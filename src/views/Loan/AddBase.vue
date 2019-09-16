@@ -3664,72 +3664,171 @@
     </div>
     <!--7、合同信息-->
     <div v-if="active==7">
-      <el-form :model="contractInformation" label-width="150px" :rules="dataFormRules" ref="contractInformation" :size="size">
 
 
-        <el-form-item label="个人借款合同编号">
-          <el-input v-model="contractInformation.personalLoanContractNo" size="small" class="width150"></el-input>
-        </el-form-item>
-
-        <el-form-item label="抵押担保合同编号">
-          <el-input v-model="contractInformation.mortgageGuaranteeContractNo" size="small" class="width150"></el-input>
-        </el-form-item>
-
-        <!-- <el-col span="8">
-                <el-form-item label="抵押物清单合同编号">
-                  <el-input v-model="contractInformation.pawnContractNo" size="small" class="width150"></el-input>
-                </el-form-item>
-              </el-col>-->
-
-        <!--   <el-col span="8">
-                <el-form-item label="抵押物清单合同编号">
-                  <el-input v-model="contractInformation.pawnContractNo" size="small" class="width150"></el-input>
-                </el-form-item>
-              </el-col>-->
-
-        <el-form-item label="保证担保合同编号">
-          <el-input v-model="contractInformation.guaranteeGuaranteeContractNo" size="small" class="width150"></el-input>
-        </el-form-item>
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>最终审批信息</span>
+        </div>
+        <div class="text item">
+          <el-form :model="finalAuditInformation" label-width="150px" :rules="dataFormRules" ref="contractInformation" :size="size">
 
 
-        <el-form-item label="合同签订日">
-          <el-date-picker
-            v-model="contractInformation.contractSigningDate"
-            type="date"
-            placeholder="合同签订日">
-          </el-date-picker>
-          <!-- <el-input v-model="contractInformation.contractSigningDate" size="small" class="width150"></el-input>-->
-        </el-form-item>
+            <el-form-item label="借款金额">
+              <el-input v-model="contractInformation.personalLoanContractNo" size="small" class="width150"></el-input>
+            </el-form-item>
+
+            <el-form-item label="借款期限">
+              <el-input v-model="contractInformation.mortgageGuaranteeContractNo" size="small" class="width150"></el-input>
+            </el-form-item>
+
+            <el-row >
+              <el-form-item label="利率执行标准">
+                <el-col span="3">
+                  <el-radio v-model="radio" label="1年">1年</el-radio>
+                  <el-radio v-model="radio" label="5年">5年</el-radio>
+                </el-col>
+                <el-col span="3">
+                  <el-form-item label="贷款市场报价利率">
+                    <el-input placeholder="" size="small" class="width150" v-model="input2">
+                      <template slot="append">%</template>
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-form-item>
+            </el-row>
 
 
-        <el-form-item label="借款期限">
-          <el-date-picker
-            v-model="contractInformation.borrowingStartPeriod"
-            type="date"
-            placeholder="开始日期">
-          </el-date-picker>
-          到
-          <el-date-picker
-            v-model="contractInformation.borrowingEndPeriod"
-            type="date"
-            placeholder="截至日期">
-          </el-date-picker>
-        </el-form-item>
+            <el-row >
+              <el-form-item label="浮动方式">
+                <el-col span="3">
+                  <el-radio v-model="radio" label="上浮">上浮</el-radio>
+                  <el-radio v-model="radio" label="下浮">下浮</el-radio>
+                </el-col>
+                <el-col span="3">
+                  <el-form-item label="">
+                    <el-input placeholder=""  size="small" class="width150" v-model="input2">
+                      <template slot="append">%</template>
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-form-item>
+            </el-row>
 
-        <el-form-item label="放款日期">
-          <el-date-picker
-            v-model="contractInformation.loanDate"
-            type="date"
-            placeholder="放款日期">
-          </el-date-picker>
-        </el-form-item>
+            <el-form-item label="执行年利率">
+              <el-form-item label="">
+                <el-input placeholder="执行年利率" size="small" class="width150" v-model="input2">
+                  <template slot="append">%</template>
+                </el-input>
+              </el-form-item>
+            </el-form-item>
+            <el-form-item label="结息方式">
+              <el-radio v-model="radio" label="按月">按月</el-radio>
+              <el-radio v-model="radio" label="按季">按季</el-radio>
+              <el-radio v-model="radio" label="按年">按年</el-radio>
+            </el-form-item>
 
-        <br>
-        <el-form-item>
+            <el-row >
+              <el-form-item label="还款方式">
+                <el-col span="12">
+                  <el-radio v-model="radio" label="利随本清">利随本清</el-radio>
+                  <el-radio v-model="radio" label="到期一次性还本">到期一次性还本</el-radio>
+                  <el-radio v-model="radio" label="分期还本">分期还本</el-radio>
+                  <el-radio v-model="radio" label="等额本金">等额本金</el-radio>
+                  <el-radio v-model="radio" label="等额本息">等额本息</el-radio>
+                  <el-radio v-model="radio" label="其他">其他</el-radio>
+                </el-col>
+                <el-col span="1">
+                  <el-form-item label="">
+                    <el-input v-model="contractInformation.guaranteeGuaranteeContractNo" size="small" class="width150"></el-input>
+                  </el-form-item>
+                </el-col>
+              </el-form-item>
+            </el-row>
+          </el-form>
+        </div>
+      </el-card>
+
+
+
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>合同信息</span>
+        </div>
+        <div class="text item">
+          <el-form :model="contractInformation" label-width="150px" :rules="dataFormRules" ref="contractInformation" :size="size">
+
+
+            <el-form-item label="个人借款合同编号">
+              <el-input v-model="contractInformation.personalLoanContractNo" size="small" class="width150"></el-input>
+            </el-form-item>
+
+            <el-form-item label="抵押担保合同编号">
+              <el-input v-model="contractInformation.mortgageGuaranteeContractNo" size="small" class="width150"></el-input>
+            </el-form-item>
+
+            <!-- <el-col span="8">
+                    <el-form-item label="抵押物清单合同编号">
+                      <el-input v-model="contractInformation.pawnContractNo" size="small" class="width150"></el-input>
+                    </el-form-item>
+                  </el-col>-->
+
+            <!--   <el-col span="8">
+                    <el-form-item label="抵押物清单合同编号">
+                      <el-input v-model="contractInformation.pawnContractNo" size="small" class="width150"></el-input>
+                    </el-form-item>
+                  </el-col>-->
+
+            <el-form-item label="保证担保合同编号">
+              <el-input v-model="contractInformation.guaranteeGuaranteeContractNo" size="small" class="width150"></el-input>
+            </el-form-item>
+
+
+            <el-form-item label="合同签订日">
+              <el-date-picker
+                v-model="contractInformation.contractSigningDate"
+                type="date"
+                placeholder="合同签订日">
+              </el-date-picker>
+              <!-- <el-input v-model="contractInformation.contractSigningDate" size="small" class="width150"></el-input>-->
+            </el-form-item>
+
+
+            <el-form-item label="借款期限">
+              <el-date-picker
+                v-model="contractInformation.borrowingStartPeriod"
+                type="date"
+                placeholder="开始日期">
+              </el-date-picker>
+              到
+              <el-date-picker
+                v-model="contractInformation.borrowingEndPeriod"
+                type="date"
+                placeholder="截至日期">
+              </el-date-picker>
+            </el-form-item>
+
+            <el-form-item label="放款日期">
+              <el-date-picker
+                v-model="contractInformation.loanDate"
+                type="date"
+                placeholder="放款日期">
+              </el-date-picker>
+            </el-form-item>
+
+            <br>
+
+
+          </el-form>
+        </div>
+      </el-card>
+      <el-row style="margin-top:10px;margin-bottom:20px">
+        <el-col span="6">
           <el-button type="primary" @click="contractInformationNextStep(5)">保存</el-button>
-        </el-form-item>
+        </el-col>
+      </el-row>
 
-      </el-form>
+
     </div>
   </div>
 </template>
@@ -3741,11 +3840,14 @@
   import { format } from "@/utils/datetime"
   import { getIFrameUrl, getIFramePath } from '@/utils/iframe'
   import api from '@/http/api'
-  import Cookies from "js-cookie";
+  import Cookies from "js-cookie"
+  import FinalAudit from "@/views/Loan/FinalAudit";
+
   export default {
     components:{
       KtTable,
-      KtButton
+      KtButton,
+      FinalAudit
     },
     computed:{
       headers(){
