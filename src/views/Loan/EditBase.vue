@@ -6257,7 +6257,7 @@
        * 配偶数据组装
        */
       spouseAppend(){
-        alert(this.relatedPersonnelInformationSpouseForm.type);
+//        alert(this.relatedPersonnelInformationSpouseForm.type);
         //配偶信息
         let relatedPersonnelInformationSpouseForm = this.relatedPersonnelInformationSpouseForm;
         let datas = {
