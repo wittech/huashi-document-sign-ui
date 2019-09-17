@@ -61,12 +61,12 @@
     <div v-if="active==1">
       <el-form :model="relatedPersonnelInformationForm" label-width="150px" :rules="add2Rules" ref="relatedPersonnelInformationForm" :size="size">
         <el-row>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="姓名" class="item" prop="name">
               <el-input v-model="relatedPersonnelInformationForm.name" size="small" class="width150"></el-input>
             </el-form-item>
           </el-col>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="身份证号码" prop="identityNumber">
               <el-input v-model="relatedPersonnelInformationForm.identityNumber" size="small" class="width150"></el-input>
             </el-form-item>
@@ -84,12 +84,12 @@
           </el-radio-group>
         </el-form-item>
         <el-row>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="户籍所在地">
               <el-input v-model="relatedPersonnelInformationForm.domicile" size="small" class="width150"></el-input>
             </el-form-item>
           </el-col>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="现居住地址">
               <el-input v-model="relatedPersonnelInformationForm.currentHomeAddress" size="small" class="width150"></el-input>
             </el-form-item>
@@ -97,7 +97,7 @@
         </el-row>
 
         <el-row>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="本地居住时间" prop="localResidenceTime">
               <el-input v-model="relatedPersonnelInformationForm.localResidenceTime" size="small" class="width150"></el-input> 年
             </el-form-item>
@@ -112,12 +112,12 @@
         </el-form-item>
 
         <el-row>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="联系电话">
               <el-input v-model="relatedPersonnelInformationForm.contactNumber" size="small" class="width150"></el-input>
             </el-form-item>
           </el-col>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="电子邮箱">
               <el-input v-model="relatedPersonnelInformationForm.email" size="small" class="width150"></el-input>
             </el-form-item>
@@ -125,12 +125,12 @@
         </el-row>
 
         <el-row>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="QQ号">
               <el-input v-model="relatedPersonnelInformationForm.qq" size="small" class="width150"></el-input>
             </el-form-item>
           </el-col>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="微信号">
               <el-input v-model="relatedPersonnelInformationForm.wechat" size="small" class="width150"></el-input>
             </el-form-item>
@@ -156,36 +156,36 @@
           <el-input v-model="relatedPersonnelInformationForm.currentHousingSourceValue" v-show="currentHousingSourceFlag" size="small" class="width150"></el-input>
         </el-form-item>
         <el-row>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="工作单位">
               <el-input v-model="relatedPersonnelInformationForm.employer" size="small" class="width150"></el-input>
             </el-form-item>
           </el-col>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="职务">
               <el-input v-model="relatedPersonnelInformationForm.position" size="small" class="width150"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="持股比例">
               <el-input v-model="relatedPersonnelInformationForm.shareholdingRatio" size="small" class="width150"></el-input> %
             </el-form-item>
           </el-col>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="工作年限" prop="unitWorkingYears">
               <el-input v-model="relatedPersonnelInformationForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input> 年
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="投资经营企业">
               <el-input v-model="relatedPersonnelInformationForm.companyName" placeholder="所投资或经营企业名称" size="small" class="width150"></el-input> 年
             </el-form-item>
           </el-col>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="行业经营年限" prop="yearsOperation">
               <el-input v-model="relatedPersonnelInformationForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input> 年
             </el-form-item>
@@ -268,14 +268,14 @@
               </el-form-item>
 
               <el-row>
-                <el-col span="8" v-show="deedNumberFlag">
+                <el-col :span="8" v-show="deedNumberFlag">
                   <el-form-item label="房产证号">
                     <el-input v-model="assetTypeHouses.deed"  size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
-                <el-col span="8" v-show="deedLandCertificateFlag">
+                <el-col :span="8" v-show="deedLandCertificateFlag">
                   <el-form-item label="土地证号">
                     <el-input v-model="assetTypeHouses.landCertificate"  size="small" class="width180"></el-input>
                   </el-form-item>
@@ -283,14 +283,14 @@
               </el-row>
 
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="名称">
                     <el-input v-model="assetTypeHouses.name" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="地址">
                     <el-input v-model="assetTypeHouses.address" size="small" class="width180"></el-input>
                   </el-form-item>
@@ -344,7 +344,7 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
               <el-button :size="size" @click.native="addHousAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-              <el-button :size="size" type="primary" @click.native="assetTypeHousesForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+              <el-button :size="size" type="primary" @click.native="assetTypeHousesForm">{{$t('action.submit')}}</el-button>
             </div>
           </el-dialog>
           <br><br>
@@ -395,14 +395,14 @@
                 <el-input v-model="assetTypeLand.landCertificate" size="small" class="width180"></el-input>
               </el-form-item>
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="名称">
                     <el-input v-model="assetTypeLand.name" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="地址">
                     <el-input v-model="assetTypeLand.address" size="small" class="width180"></el-input>
                   </el-form-item>
@@ -456,7 +456,7 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
               <el-button :size="size" @click.native="addLandAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-              <el-button :size="size" type="primary" @click.native="assetTypeLandForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+              <el-button :size="size" type="primary" @click.native="assetTypeLandForm">{{$t('action.submit')}}</el-button>
             </div>
           </el-dialog>
           <br><br>
@@ -502,7 +502,7 @@
           <el-dialog :title="operationCar?'新增':'编辑'" width="60%" :visible.sync="addCarAssetDialogVisible" :close-on-click-modal="false">
             <el-form :model="assetTypeCar" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="汽车品牌">
                     <el-input v-model="assetTypeCar.brand" size="small" class="width180"></el-input>
                   </el-form-item>
@@ -514,14 +514,14 @@
                   </el-form-item>
 
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="车牌号">
                     <el-input v-model="assetTypeCar.numberPlate" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="行驶证号">
                     <el-input v-model="assetTypeCar.drivingLicenseNumber" size="small" class="width180"></el-input>
                   </el-form-item>
@@ -530,7 +530,7 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
               <el-button :size="size" @click.native="addCarAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-              <el-button :size="size" type="primary" @click.native="assetTypeCarForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+              <el-button :size="size" type="primary" @click.native="assetTypeCarForm">{{$t('action.submit')}}</el-button>
             </div>
           </el-dialog>
           <br><br>
@@ -578,7 +578,7 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
               <el-button :size="size" @click.native="addSecuritiesAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-              <el-button :size="size" type="primary" @click.native="assetTypeSecuritiesForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+              <el-button :size="size" type="primary" @click.native="assetTypeSecuritiesForm">{{$t('action.submit')}}</el-button>
             </div>
           </el-dialog>
           <br><br>
@@ -614,7 +614,7 @@
           <el-dialog :title="operationOther?'新增':'编辑'" width="60%" :visible.sync="addOtherAssetDialogVisible" :close-on-click-modal="false">
             <el-form :model="assetTypeOther" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="资产名称">
                     <el-input v-model="assetTypeOther.assetName" size="small" class="width180"></el-input>
                   </el-form-item>
@@ -628,7 +628,7 @@
             </el-form>
             <div slot="footer" class="dialog-footer">
               <el-button :size="size" @click.native="addOtherAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-              <el-button :size="size" type="primary" @click.native="assetTypeOtherForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+              <el-button :size="size" type="primary" @click.native="assetTypeOtherForm">{{$t('action.submit')}}</el-button>
             </div>
           </el-dialog>
           <br><br>
@@ -650,12 +650,12 @@
           <div v-show="maritalStatusMarriedFlag">
 
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="姓名" class="item">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.name" size="small" class="width150"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="身份证号码">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.identityNumber" size="small" class="width150"></el-input>
                 </el-form-item>
@@ -672,12 +672,12 @@
               </el-radio-group>
             </el-form-item>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="户籍所在地">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.domicile" size="small" class="width150"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="现居住地址">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.currentHomeAddress" size="small" class="width150"></el-input>
                 </el-form-item>
@@ -685,7 +685,7 @@
             </el-row>
 
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="本地居住时间">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.localResidenceTime" size="small" class="width150"></el-input>
                 </el-form-item>
@@ -700,12 +700,12 @@
             </el-form-item>
 
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="联系电话">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.contactNumber" size="small" class="width150"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="电子邮箱">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.email" size="small" class="width150"></el-input>
                 </el-form-item>
@@ -713,12 +713,12 @@
             </el-row>
 
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="QQ号">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.qq" size="small" class="width150"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="微信号">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.wechat" size="small" class="width150"></el-input>
                 </el-form-item>
@@ -744,36 +744,36 @@
               <el-input v-model="relatedPersonnelInformationSpouseForm.currentHousingSourceValue" v-show="currentHousingSourceFlag" size="small" class="width150"></el-input>
             </el-form-item>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="工作单位">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.employer" size="small" class="width150"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="职务">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.position" size="small" class="width150"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="持股比例">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.shareholdingRatio" size="small" class="width150"></el-input> %
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="单位工作年限">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" placeholder="该单位工作年限" size="small" class="width150"></el-input> 年
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="投资经营企业">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.companyName" placeholder="所投资或经营企业名称" size="small" class="width150"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="行业经营年限">
                   <el-input v-model="relatedPersonnelInformationSpouseForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input> 年
                 </el-form-item>
@@ -856,14 +856,14 @@
                   </el-form-item>
 
                   <el-row>
-                    <el-col span="8" v-show="deedNumberFlag">
+                    <el-col :span="8" v-show="deedNumberFlag">
                       <el-form-item label="房产证号">
                         <el-input v-model="spouseAssetTypeHouses.deed"  size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
-                    <el-col span="8" v-show="deedLandCertificateFlag">
+                    <el-col :span="8" v-show="deedLandCertificateFlag">
                       <el-form-item label="土地证号">
                         <el-input v-model="spouseAssetTypeHouses.landCertificate" size="small" class="width180"></el-input>
                       </el-form-item>
@@ -871,14 +871,14 @@
                   </el-row>
 
                   <el-row>
-                    <el-col span="8">
+                    <el-col :span="8">
                       <el-form-item label="名称">
                         <el-input v-model="spouseAssetTypeHouses.name" size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
-                    <el-col span="8">
+                    <el-col :span="8">
                       <el-form-item label="地址">
                         <el-input v-model="spouseAssetTypeHouses.address" size="small" class="width180"></el-input>
                       </el-form-item>
@@ -932,7 +932,7 @@
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                   <el-button :size="size" @click.native="addSpouseHousAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                  <el-button :size="size" type="primary" @click.native="assetTypeSpouseHousesForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                  <el-button :size="size" type="primary" @click.native="assetTypeSpouseHousesForm">{{$t('action.submit')}}</el-button>
                 </div>
               </el-dialog>
               <br><br>
@@ -983,14 +983,14 @@
                     <el-input v-model="spouseAssetTypeLand.landCertificate" size="small" class="width180"></el-input>
                   </el-form-item>
                   <el-row>
-                    <el-col span="8">
+                    <el-col :span="8">
                       <el-form-item label="名称">
                         <el-input v-model="spouseAssetTypeLand.name" size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
-                    <el-col span="8">
+                    <el-col :span="8">
                       <el-form-item label="地址">
                         <el-input v-model="spouseAssetTypeLand.address" size="small" class="width180"></el-input>
                       </el-form-item>
@@ -1044,7 +1044,7 @@
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                   <el-button :size="size" @click.native="addSpouseLandAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                  <el-button :size="size" type="primary" @click.native="assetTypeSpouseLandForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                  <el-button :size="size" type="primary" @click.native="assetTypeSpouseLandForm">{{$t('action.submit')}}</el-button>
                 </div>
               </el-dialog>
               <br><br>
@@ -1090,7 +1090,7 @@
               <el-dialog :title="operationSpouseCar?'新增':'编辑'" width="60%" :visible.sync="addSpouseCarAssetDialogVisible" :close-on-click-modal="false">
                 <el-form :model="spouseAssetTypeCar" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
                   <el-row>
-                    <el-col span="8">
+                    <el-col :span="8">
                       <el-form-item label="汽车品牌">
                         <el-input v-model="spouseAssetTypeCar.brand" size="small" class="width180"></el-input>
                       </el-form-item>
@@ -1103,14 +1103,14 @@
                     </el-form-item>
 
                   <el-row>
-                    <el-col span="8">
+                    <el-col :span="8">
                       <el-form-item label="车牌号">
                         <el-input v-model="spouseAssetTypeCar.numberPlate" size="small" class="width180"></el-input>
                       </el-form-item>
                     </el-col>
                   </el-row>
                   <el-row>
-                    <el-col span="8">
+                    <el-col :span="8">
                       <el-form-item label="行驶证号">
                         <el-input v-model="spouseAssetTypeCar.drivingLicenseNumber" size="small" class="width180"></el-input>
                       </el-form-item>
@@ -1119,7 +1119,7 @@
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                   <el-button :size="size" @click.native="addSpouseCarAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                  <el-button :size="size" type="primary" @click.native="assetTypeSpouseCarForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                  <el-button :size="size" type="primary" @click.native="assetTypeSpouseCarForm">{{$t('action.submit')}}</el-button>
                 </div>
               </el-dialog>
               <br><br>
@@ -1167,7 +1167,7 @@
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                   <el-button :size="size" @click.native="addSpouseSecuritiesAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                  <el-button :size="size" type="primary" @click.native="assetTypeSpouseSecuritiesForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                  <el-button :size="size" type="primary" @click.native="assetTypeSpouseSecuritiesForm">{{$t('action.submit')}}</el-button>
                 </div>
               </el-dialog>
               <br><br>
@@ -1203,7 +1203,7 @@
               <el-dialog :title="operationSpouseOther?'新增':'编辑'" width="60%" :visible.sync="addSpouseOtherAssetDialogVisible" :close-on-click-modal="false">
                 <el-form :model="spouseAssetTypeOther" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
                   <el-row>
-                    <el-col span="8">
+                    <el-col :span="8">
                       <el-form-item label="资产名称">
                         <el-input v-model="spouseAssetTypeOther.assetName" size="small" class="width180"></el-input>
                       </el-form-item>
@@ -1218,7 +1218,7 @@
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                   <el-button :size="size" @click.native="addSpouseOtherAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                  <el-button :size="size" type="primary" @click.native="assetTypeSpouseOtherForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                  <el-button :size="size" type="primary" @click.native="assetTypeSpouseOtherForm">{{$t('action.submit')}}</el-button>
                 </div>
               </el-dialog>
               <br><br>
@@ -1229,12 +1229,12 @@
           <!--离异-->
           <div v-show="maritalStatusDivorcedFlag">
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="原配偶姓名">
                   <el-input v-model="relatedPersonnelInformationForm.originalSpouseName" size="small" class="width180"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="离婚时间">
                   <el-date-picker
                     v-model="relatedPersonnelInformationForm.divorceTime"
@@ -1256,12 +1256,12 @@
           <!--丧偶-->
           <div v-show="maritalStatusWidowedFlag">
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="原配偶姓名">
                   <el-input v-model="relatedPersonnelInformationForm.originalSpouseName" size="small" class="width180"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="原配偶死亡时间">
                   <el-date-picker
                     v-model="relatedPersonnelInformationForm.divorceTime"
@@ -1286,109 +1286,109 @@
         <div>
           <hr>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="家庭总资产">
                 <el-input v-model="householdIncomeForm.totalAssets" size="small" class="width150"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="家庭年总收入">
                 <el-input v-model="householdIncomeForm.totalRevenue" size="small" class="width180"></el-input> 元
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="申请人年薪金收入">
                 <el-input v-model="householdIncomeForm.applicantAnnualIncome" size="small" class="width150"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="申请人年经营性收入">
                 <el-input v-model="householdIncomeForm.applicantOperatingIncome" size="small" class="width180"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="申请人其他收入">
                 <el-input v-model="householdIncomeForm.applicantOtherIncome" size="small" class="width180"></el-input> 元
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="配偶年薪金收入">
                 <el-input v-model="householdIncomeForm.spouseAnnualIncome" size="small" class="width150"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="配偶年经营性收入">
                 <el-input v-model="householdIncomeForm.spouseOperatingIncome" size="small" class="width180"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="配偶其他收入">
                 <el-input v-model="householdIncomeForm.spouseOtherIncome" size="small" class="width180"></el-input> 元
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="家庭年总支出">
                 <el-input v-model="householdIncomeForm.totalAnnualExpenditure" size="small" class="width150"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="年日常生活总支出">
                 <el-input v-model="householdIncomeForm.lifeTotalExpenditure" size="small" class="width180"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="年日常基本生活支出">
                 <el-input v-model="householdIncomeForm.basicLifeTotalExpenditure" size="small" class="width180"></el-input> 元
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="年子女教育支出">
                 <el-input v-model="householdIncomeForm.educationExpenditure" size="small" class="width150"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="年其他临时性支出">
                 <el-input v-model="householdIncomeForm.temporaryExpenditure" size="small" class="width180"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="年债务性总支出">
                 <el-input v-model="householdIncomeForm.debtTotalExpenditure" size="small" class="width180"></el-input> 元
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="申请人年还贷支出">
                 <el-input v-model="householdIncomeForm.annualLoanExpenditure" size="small" class="width150"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="配偶年还贷支出">
                 <el-input v-model="householdIncomeForm.spouseTemporaryExpenditure" size="small" class="width180"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="家庭供养人口">
                 <el-input v-model="householdIncomeForm.supportPopulation" size="small" class="width180"></el-input> 元
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="家庭对外担保总额">
                 <el-input v-model="householdIncomeForm.foreignGuaranteeLumpSum" size="small" class="width150"></el-input> 元
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="家庭总负债">
                 <el-input v-model="householdIncomeForm.totalLiability" size="small" class="width180"></el-input> 元
               </el-form-item>
@@ -1451,12 +1451,12 @@
             </el-checkbox-group>
           </el-form-item>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="姓名" class="item" prop="name">
                 <el-input v-model="relatedPersonnelInformationForm.name" size="small" class="width150"></el-input>
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="身份证号码" prop="identityNumber">
                 <el-input v-model="relatedPersonnelInformationForm.identityNumber" size="small" class="width150"></el-input>
               </el-form-item>
@@ -1474,12 +1474,12 @@
             </el-radio-group>
           </el-form-item>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="户籍所在地">
                 <el-input v-model="relatedPersonnelInformationForm.domicile" size="small" class="width150"></el-input>
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="现居住地址">
                 <el-input v-model="relatedPersonnelInformationForm.currentHomeAddress" size="small" class="width150"></el-input>
               </el-form-item>
@@ -1487,7 +1487,7 @@
           </el-row>
 
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="本地居住时间">
                 <el-input v-model="relatedPersonnelInformationForm.localResidenceTime" size="small" class="width150"></el-input> 年
               </el-form-item>
@@ -1502,12 +1502,12 @@
           </el-form-item>
 
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="联系电话">
                 <el-input v-model="relatedPersonnelInformationForm.contactNumber" size="small" class="width150"></el-input>
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="电子邮箱">
                 <el-input v-model="relatedPersonnelInformationForm.email" size="small" class="width150"></el-input>
               </el-form-item>
@@ -1515,12 +1515,12 @@
           </el-row>
 
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="QQ号">
                 <el-input v-model="relatedPersonnelInformationForm.qq" size="small" class="width150"></el-input>
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="微信号">
                 <el-input v-model="relatedPersonnelInformationForm.wechat" size="small" class="width150"></el-input>
               </el-form-item>
@@ -1546,36 +1546,36 @@
             <el-input v-model="relatedPersonnelInformationForm.currentHousingSourceValue" v-show="currentHousingSourceFlag" size="small" class="width150"></el-input>
           </el-form-item>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="工作单位">
                 <el-input v-model="relatedPersonnelInformationForm.employer" size="small" class="width150"></el-input>
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="职务">
                 <el-input v-model="relatedPersonnelInformationForm.position" size="small" class="width150"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="持股比例">
                 <el-input v-model="relatedPersonnelInformationForm.shareholdingRatio" size="small" class="width150"></el-input> %
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="单位工作年限">
                 <el-input v-model="relatedPersonnelInformationForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input> 年
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="投资经营企业">
                 <el-input v-model="relatedPersonnelInformationForm.companyName" placeholder="所投资或经营企业名称" size="small" class="width150"></el-input>
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="行业经营年限">
                 <el-input v-model="relatedPersonnelInformationForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input> 年
               </el-form-item>
@@ -1658,12 +1658,12 @@
                 </el-form-item>
 
                 <el-row >
-                  <el-col span="8" v-show="deedNumberFlag">
+                  <el-col :span="8" v-show="deedNumberFlag">
                     <el-form-item label="房产证号">
                       <el-input v-model="assetTypeHouses.deed" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
-                  <el-col span="8" v-show="deedLandCertificateFlag">
+                  <el-col :span="8" v-show="deedLandCertificateFlag">
                     <el-form-item label="土地证号">
                       <el-input v-model="assetTypeHouses.landCertificate" size="small" class="width180"></el-input>
                     </el-form-item>
@@ -1671,12 +1671,12 @@
                 </el-row>
 
                 <el-row>
-                  <el-col span="8">
+                  <el-col :span="8">
                     <el-form-item label="名称">
                       <el-input v-model="assetTypeHouses.name" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
-                  <el-col span="8">
+                  <el-col :span="8">
                     <el-form-item label="地址">
                       <el-input v-model="assetTypeHouses.address" size="small" class="width180"></el-input>
                     </el-form-item>
@@ -1730,7 +1730,7 @@
               </el-form>
               <div slot="footer" class="dialog-footer">
                 <el-button :size="size" @click.native="addHousAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                <el-button :size="size" type="primary" @click.native="assetTypeHousesForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                <el-button :size="size" type="primary" @click.native="assetTypeHousesForm">{{$t('action.submit')}}</el-button>
               </div>
             </el-dialog>
             <br><br>
@@ -1781,12 +1781,12 @@
                   <el-input v-model="assetTypeLand.landCertificate" size="small" class="width180"></el-input>
                 </el-form-item>
                 <el-row>
-                  <el-col span="8">
+                  <el-col :span="8">
                     <el-form-item label="名称">
                       <el-input v-model="assetTypeLand.name" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
-                  <el-col span="8">
+                  <el-col :span="8">
                     <el-form-item label="地址">
                       <el-input v-model="assetTypeLand.address" size="small" class="width180"></el-input>
                     </el-form-item>
@@ -1840,7 +1840,7 @@
               </el-form>
               <div slot="footer" class="dialog-footer">
                 <el-button :size="size" @click.native="addLandAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                <el-button :size="size" type="primary" @click.native="assetTypeLandForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                <el-button :size="size" type="primary" @click.native="assetTypeLandForm">{{$t('action.submit')}}</el-button>
               </div>
             </el-dialog>
             <br><br>
@@ -1886,7 +1886,7 @@
             <el-dialog :title="operationCar?'新增':'编辑'" width="60%" :visible.sync="addCarAssetDialogVisible" :close-on-click-modal="false">
               <el-form :model="assetTypeCar" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
                 <el-row>
-                  <el-col span="8">
+                  <el-col :span="8">
                     <el-form-item label="汽车品牌">
                       <el-input v-model="assetTypeCar.brand" size="small" class="width180"></el-input>
                     </el-form-item>
@@ -1898,14 +1898,14 @@
                     </el-form-item>
 
                 <el-row>
-                  <el-col span="8">
+                  <el-col :span="8">
                     <el-form-item label="车牌号">
                       <el-input v-model="assetTypeCar.numberPlate" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
                 </el-row>
                 <el-row>
-                  <el-col span="8">
+                  <el-col :span="8">
                     <el-form-item label="行驶证号">
                       <el-input v-model="assetTypeCar.drivingLicenseNumber" size="small" class="width180"></el-input>
                     </el-form-item>
@@ -1914,7 +1914,7 @@
               </el-form>
               <div slot="footer" class="dialog-footer">
                 <el-button :size="size" @click.native="addCarAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                <el-button :size="size" type="primary" @click.native="assetTypeCarForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                <el-button :size="size" type="primary" @click.native="assetTypeCarForm">{{$t('action.submit')}}</el-button>
               </div>
             </el-dialog>
             <br><br>
@@ -1962,7 +1962,7 @@
               </el-form>
               <div slot="footer" class="dialog-footer">
                 <el-button :size="size" @click.native="addSecuritiesAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                <el-button :size="size" type="primary" @click.native="assetTypeSecuritiesForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                <el-button :size="size" type="primary" @click.native="assetTypeSecuritiesForm">{{$t('action.submit')}}</el-button>
               </div>
             </el-dialog>
             <br><br>
@@ -1998,7 +1998,7 @@
             <el-dialog :title="operationOther?'新增':'编辑'" width="60%" :visible.sync="addOtherAssetDialogVisible" :close-on-click-modal="false">
               <el-form :model="assetTypeOther" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
                 <el-row>
-                  <el-col span="8">
+                  <el-col :span="8">
                     <el-form-item label="资产名称">
                       <el-input v-model="assetTypeOther.assetName" size="small" class="width180"></el-input>
                     </el-form-item>
@@ -2012,7 +2012,7 @@
               </el-form>
               <div slot="footer" class="dialog-footer">
                 <el-button :size="size" @click.native="addOtherAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                <el-button :size="size" type="primary" @click.native="assetTypeOtherForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                <el-button :size="size" type="primary" @click.native="assetTypeOtherForm">{{$t('action.submit')}}</el-button>
               </div>
             </el-dialog>
             <br><br>
@@ -2038,12 +2038,12 @@
                 </el-checkbox-group>
               </el-form-item>
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="姓名" class="item">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.name" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="身份证号码">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.identityNumber" size="small" class="width150"></el-input>
                   </el-form-item>
@@ -2060,12 +2060,12 @@
                 </el-radio-group>
               </el-form-item>
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="户籍所在地">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.domicile" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="现居住地址">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.currentHomeAddress" size="small" class="width150"></el-input>
                   </el-form-item>
@@ -2073,7 +2073,7 @@
               </el-row>
 
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="本地居住时间">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.localResidenceTime" size="small" class="width150"></el-input> 年
                   </el-form-item>
@@ -2088,12 +2088,12 @@
               </el-form-item>
 
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="联系电话">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.contactNumber" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="电子邮箱">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.email" size="small" class="width150"></el-input>
                   </el-form-item>
@@ -2101,12 +2101,12 @@
               </el-row>
 
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="QQ号">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.qq" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="微信号">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.wechat" size="small" class="width150"></el-input>
                   </el-form-item>
@@ -2132,36 +2132,36 @@
                 <el-input v-model="relatedPersonnelInformationSpouseForm.currentHousingSourceValue" v-show="currentHousingSourceFlag" size="small" class="width150"></el-input>
               </el-form-item>
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="工作单位">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.employer" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="职务">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.position" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="持股比例">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.shareholdingRatio" size="small" class="width150"></el-input> %
                   </el-form-item>
                 </el-col>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="单位工作年限">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.unitWorkingYears" placeholder="在该单位工作年限" size="small" class="width150"></el-input> 年
                   </el-form-item>
                 </el-col>
               </el-row>
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="投资经营企业">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.companyName" placeholder="所投资或经营企业名称" size="small" class="width150"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="行业经营年限">
                     <el-input v-model="relatedPersonnelInformationSpouseForm.yearsOperation" placeholder="本行业和相近行业经营年限" size="small" class="width180"></el-input> 年
                   </el-form-item>
@@ -2244,14 +2244,14 @@
                     </el-form-item>
 
                     <el-row>
-                      <el-col span="8" v-show="deedNumberFlag">
+                      <el-col :span="8" v-show="deedNumberFlag">
                         <el-form-item label="房产证号">
                           <el-input v-model="spouseAssetTypeHouses.deed" size="small" class="width180"></el-input>
                         </el-form-item>
                       </el-col>
                     </el-row>
                     <el-row>
-                      <el-col span="8" v-show="deedLandCertificateFlag">
+                      <el-col :span="8" v-show="deedLandCertificateFlag">
                         <el-form-item label="土地证号">
                           <el-input v-model="spouseAssetTypeHouses.landCertificate" size="small" class="width180"></el-input>
                         </el-form-item>
@@ -2259,14 +2259,14 @@
                     </el-row>
 
                     <el-row>
-                      <el-col span="8">
+                      <el-col :span="8">
                         <el-form-item label="名称">
                           <el-input v-model="spouseAssetTypeHouses.name" size="small" class="width180"></el-input>
                         </el-form-item>
                       </el-col>
                     </el-row>
                     <el-row>
-                      <el-col span="8">
+                      <el-col :span="8">
                         <el-form-item label="地址">
                           <el-input v-model="spouseAssetTypeHouses.address" size="small" class="width180"></el-input>
                         </el-form-item>
@@ -2320,7 +2320,7 @@
                   </el-form>
                   <div slot="footer" class="dialog-footer">
                     <el-button :size="size" @click.native="addSpouseHousAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                    <el-button :size="size" type="primary" @click.native="assetTypeSpouseHousesForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                    <el-button :size="size" type="primary" @click.native="assetTypeSpouseHousesForm">{{$t('action.submit')}}</el-button>
                   </div>
                 </el-dialog>
                 <br><br>
@@ -2371,14 +2371,14 @@
                       <el-input v-model="spouseAssetTypeLand.landCertificate" size="small" class="width180"></el-input>
                     </el-form-item>
                     <el-row>
-                      <el-col span="8">
+                      <el-col :span="8">
                         <el-form-item label="名称">
                           <el-input v-model="spouseAssetTypeLand.name" size="small" class="width180"></el-input>
                         </el-form-item>
                       </el-col>
                     </el-row>
                     <el-row>
-                      <el-col span="8">
+                      <el-col :span="8">
                         <el-form-item label="地址">
                           <el-input v-model="spouseAssetTypeLand.address" size="small" class="width180"></el-input>
                         </el-form-item>
@@ -2432,7 +2432,7 @@
                   </el-form>
                   <div slot="footer" class="dialog-footer">
                     <el-button :size="size" @click.native="addSpouseLandAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                    <el-button :size="size" type="primary" @click.native="assetTypeSpouseLandForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                    <el-button :size="size" type="primary" @click.native="assetTypeSpouseLandForm">{{$t('action.submit')}}</el-button>
                   </div>
                 </el-dialog>
                 <br><br>
@@ -2478,7 +2478,7 @@
                 <el-dialog :title="operationSpouseCar?'新增':'编辑'" width="60%" :visible.sync="addSpouseCarAssetDialogVisible" :close-on-click-modal="false">
                   <el-form :model="spouseAssetTypeCar" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
                     <el-row>
-                      <el-col span="8">
+                      <el-col :span="8">
                         <el-form-item label="汽车品牌">
                           <el-input v-model="spouseAssetTypeCar.brand" size="small" class="width180"></el-input>
                         </el-form-item>
@@ -2490,14 +2490,14 @@
                         </el-form-item>
 
                     <el-row>
-                      <el-col span="8">
+                      <el-col :span="8">
                         <el-form-item label="车牌号">
                           <el-input v-model="spouseAssetTypeCar.numberPlate" size="small" class="width180"></el-input>
                         </el-form-item>
                       </el-col>
                     </el-row>
                     <el-row>
-                      <el-col span="8">
+                      <el-col :span="8">
                         <el-form-item label="行驶证号">
                           <el-input v-model="spouseAssetTypeCar.drivingLicenseNumber" size="small" class="width180"></el-input>
                         </el-form-item>
@@ -2506,7 +2506,7 @@
                   </el-form>
                   <div slot="footer" class="dialog-footer">
                     <el-button :size="size" @click.native="addSpouseCarAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                    <el-button :size="size" type="primary" @click.native="assetTypeSpouseCarForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                    <el-button :size="size" type="primary" @click.native="assetTypeSpouseCarForm">{{$t('action.submit')}}</el-button>
                   </div>
                 </el-dialog>
                 <br><br>
@@ -2554,7 +2554,7 @@
                   </el-form>
                   <div slot="footer" class="dialog-footer">
                     <el-button :size="size" @click.native="addSpouseSecuritiesAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                    <el-button :size="size" type="primary" @click.native="assetTypeSpouseSecuritiesForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                    <el-button :size="size" type="primary" @click.native="assetTypeSpouseSecuritiesForm">{{$t('action.submit')}}</el-button>
                   </div>
                 </el-dialog>
                 <br><br>
@@ -2590,7 +2590,7 @@
                 <el-dialog :title="operationSpouseOther?'新增':'编辑'" width="60%" :visible.sync="addSpouseOtherAssetDialogVisible" :close-on-click-modal="false">
                   <el-form :model="assetTypeOther" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
                     <el-row>
-                      <el-col span="8">
+                      <el-col :span="8">
                         <el-form-item label="资产名称">
                           <el-input v-model="spouseAssetTypeOther.assetName" size="small" class="width180"></el-input>
                         </el-form-item>
@@ -2605,7 +2605,7 @@
                   </el-form>
                   <div slot="footer" class="dialog-footer">
                     <el-button :size="size" @click.native="addSpouseOtherAssetDialogVisible = false">{{$t('action.cancel')}}</el-button>
-                    <el-button :size="size" type="primary" @click.native="assetTypeSpouseOtherForm" :loading="editLoading">{{$t('action.submit')}}</el-button>
+                    <el-button :size="size" type="primary" @click.native="assetTypeSpouseOtherForm">{{$t('action.submit')}}</el-button>
                   </div>
                 </el-dialog>
                 <br><br>
@@ -2616,12 +2616,12 @@
             <!--离异-->
             <div v-show="maritalStatusDivorcedFlag">
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="原配偶姓名">
                     <el-input v-model="relatedPersonnelInformationForm.originalSpouseName" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="离婚时间">
                     <el-date-picker
                       v-model="relatedPersonnelInformationForm.divorceTime"
@@ -2643,12 +2643,12 @@
             <!--丧偶-->
             <div v-show="maritalStatusWidowedFlag">
               <el-row>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="原配偶姓名">
                     <el-input v-model="relatedPersonnelInformationForm.originalSpouseName" size="small" class="width180"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col span="8">
+                <el-col :span="8">
                   <el-form-item label="原配偶死亡时间">
                     <el-date-picker
                       v-model="relatedPersonnelInformationForm.divorceTime"
@@ -2673,36 +2673,36 @@
           <div>
             <hr>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="家庭总资产">
                   <el-input v-model="householdIncomeForm.totalAssets" size="small" class="width150"></el-input> 元
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="家庭年总收入">
                   <el-input v-model="householdIncomeForm.totalRevenue" size="small" class="width180"></el-input> 元
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="家庭年总支出">
                   <el-input v-model="householdIncomeForm.totalAnnualExpenditure" size="small" class="width150"></el-input> 元
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="年债务性总支出">
                   <el-input v-model="householdIncomeForm.debtTotalExpenditure" size="small" class="width180"></el-input> 元
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="家庭对外担保总额">
                   <el-input v-model="householdIncomeForm.foreignGuaranteeLumpSum" size="small" class="width150"></el-input> 元
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="家庭总负债">
                   <el-input v-model="householdIncomeForm.totalLiability" size="small" class="width180"></el-input> 元
                 </el-form-item>
@@ -2836,7 +2836,7 @@
           </el-form-item>
 
           <el-row >
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="房产证号" v-show="deedNumberFlag">
                 <el-input v-model="pawn.propertyCertificateNumber" size="small" class="width180"></el-input>
               </el-form-item>
@@ -2847,7 +2847,7 @@
           </el-row>
 
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="房屋建筑面积" v-if="buildingAreaFlag">
                 <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input> ㎡
               </el-form-item>
@@ -2857,7 +2857,7 @@
             </el-col>
           </el-row>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="抵押物名称">
                 <el-input v-model="pawn.collateralName" size="small" class="width180"></el-input>
               </el-form-item>
@@ -2881,14 +2881,14 @@
           </el-form-item>
 
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="抵押物存放地">
                 <el-input v-model="pawn.collateralDeposit" size="small" class="width180"></el-input>
               </el-form-item>
             </el-col>
           </el-row>
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="价值">
                 <el-input v-model="pawn.value" size="small" class="width180"></el-input> 元
               </el-form-item>
@@ -2931,19 +2931,19 @@
           </el-form-item>
           <div v-if="whetherLeaseFlag">
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="租赁合同名称">
                   <el-input v-model="pawn.leaseContractName" size="small" class="width180"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="承租方姓名">
                   <el-input v-model="pawn.lesseeName" size="small" class="width180"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="承租期限(开始)">
                   <el-date-picker
                     v-model="pawn.leaseTermStartTime"
@@ -2952,7 +2952,7 @@
                   </el-date-picker>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="承租期限(结束)">
                   <el-date-picker
                     v-model="pawn.leaseTermEndTime"
@@ -2970,12 +2970,12 @@
               </el-radio-group>
             </el-form-item>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="租金/月">
                   <el-input v-model="pawn.rent" size="small" class="width180"></el-input> 元
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="合同签署时间">
                   <el-date-picker
                     v-model="pawn.contractSigningTime"
@@ -2993,7 +2993,7 @@
           </el-form-item>
           <br>
           <div slot="footer" class="dialog-footer">
-            <el-button :size="size" type="primary" @click.native="assetTypePawnForm" :loading="editLoading">保存</el-button>
+            <el-button :size="size" type="primary" @click.native="assetTypePawnForm">保存</el-button>
           </div>
         </div>
         <el-dialog title="相关人员列表" width="50%" :visible.sync="addPawnDialogVisible" :close-on-click-modal="false">
@@ -3055,7 +3055,7 @@
           </el-form-item>
 
           <el-row v-show="deedLandCertificateFlag">
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="土地证号">
                 <el-input v-model="pawn.landCertificateNumber" size="small" class="width180"></el-input>
               </el-form-item>
@@ -3063,7 +3063,7 @@
           </el-row>
 
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="房屋建筑面积" v-if="buildingAreaFlag">
                 <el-input v-model="pawn.buildingArea" size="small" class="width180"></el-input> ㎡
               </el-form-item>
@@ -3071,7 +3071,7 @@
                 <el-input v-model="pawn.landOccupationArea" size="small" class="width180"></el-input> ㎡
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="抵押物名称">
                 <el-input v-model="pawn.collateralName" size="small" class="width180"></el-input>
               </el-form-item>
@@ -3095,12 +3095,12 @@
           </el-form-item>
 
           <el-row>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="抵押物存放地">
                 <el-input v-model="pawn.collateralDeposit" size="small" class="width180"></el-input>
               </el-form-item>
             </el-col>
-            <el-col span="8">
+            <el-col :span="8">
               <el-form-item label="价值">
                 <el-input v-model="pawn.value" size="small" class="width180"></el-input> 元
               </el-form-item>
@@ -3143,24 +3143,24 @@
           </el-form-item>
           <div v-if="whetherLeaseFlag">
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="租赁合同名称">
                   <el-input v-model="pawn.leaseContractName" size="small" class="width180"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="承租方姓名">
                   <el-input v-model="pawn.lesseeName" size="small" class="width180"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="承租期限(开始)">
                   <el-input v-model="pawn.leaseTermStartTime" size="small" class="width180"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="承租期限(结束)">
                   <el-input v-model="pawn.leaseTermEndTime" size="small" class="width180"></el-input>
                 </el-form-item>
@@ -3174,12 +3174,12 @@
               </el-radio-group>
             </el-form-item>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="租金/月">
                   <el-input v-model="pawn.rent" size="small" class="width180"></el-input> 元
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="合同签署时间">
                   <el-input v-model="pawn.contractSigningTime" size="small" class="width180"></el-input>
                 </el-form-item>
@@ -3192,7 +3192,7 @@
           </el-form-item>
           <br>
           <div slot="footer" class="dialog-footer">
-            <el-button :size="size" type="primary" @click.native="assetTypePawnFormEdit" :loading="editLoading">{{$t('action.submit')}}</el-button>
+            <el-button :size="size" type="primary" @click.native="assetTypePawnFormEdit">{{$t('action.submit')}}</el-button>
           </div>
         </el-dialog>
 
@@ -3203,12 +3203,12 @@
     <div v-if="active==4">
       <el-form :model="loanBusinessInformation" label-width="150px" :rules="dataFormRules" ref="loanBusinessInformation" :size="size">
         <el-row>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="借款人账号" class="item">
               <el-input v-model="loanBusinessInformation.borrowerAccount" size="small" class="width150"></el-input>
             </el-form-item>
           </el-col>
-          <el-col span="8">
+          <el-col :span="8">
             <el-form-item label="客户号">
               <el-input v-model="loanBusinessInformation.clientNumber" size="small" class="width150"></el-input>
             </el-form-item>
@@ -3264,7 +3264,7 @@
           </el-form-item>
           <br>
           <div slot="footer" class="dialog-footer">
-            <el-button :size="size" type="primary" @click.native="counterpartyFormSave" :loading="editLoading">{{$t('action.submit')}}</el-button>
+            <el-button :size="size" type="primary" @click.native="counterpartyFormSave">{{$t('action.submit')}}</el-button>
           </div>
         </el-dialog>
         <br>
@@ -3272,14 +3272,14 @@
           <hr>
           <el-form :model="loanBusinessInformation" label-width="150px" :rules="dataFormRules" ref="loanBusinessInformation" :size="size">
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="申请金额">
                   <el-input v-model="loanBusinessInformation.applicationAmount" size="small" class="width150"></el-input> 元
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="申请期限">
                   <el-input v-model="loanBusinessInformation.applicationPeriod" size="small" class="width150"></el-input> 月
                 </el-form-item>
@@ -3310,21 +3310,21 @@
               <el-input v-model="loanBusinessInformation.interestRateRise" size="small" class="width150"></el-input> %
             </el-form-item>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="申请利率">
                   <el-input v-model="loanBusinessInformation.applicationRate" size="small" class="width150"></el-input> %
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="保证金比例">
                   <el-input v-model="loanBusinessInformation.marginRatio" size="small" class="width150"></el-input> %
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="原信贷业务余额">
                   <el-input v-model="loanBusinessInformation.originalCreditBalance" size="small" class="width150"></el-input> 元
                 </el-form-item>
@@ -3349,14 +3349,14 @@
               <el-input v-if="repaymentOtherFlag" v-model="loanBusinessInformation.value" size="small" class="width150"></el-input>
             </el-form-item>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="扣款账户户名">
                   <el-input v-model="loanBusinessInformation.debitAccountName" size="small" class="width150"></el-input>
                 </el-form-item>
               </el-col>
             </el-row>
             <el-row>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="扣款账号">
                   <el-input v-model="loanBusinessInformation.accountNumber" size="small" class="width150"></el-input>
                 </el-form-item>
@@ -3366,12 +3366,12 @@
               <el-input v-model="loanBusinessInformation.repaymentPeriod" size="small" class="width150"></el-input>
             </el-form-item>
             <el-row v-if="repaymentPeriodFlag">
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="还款计划">
                   <el-input v-model="repaymentPlan.repaymentTime" size="small" class="width150"></el-input>
                 </el-form-item>
               </el-col>
-              <el-col span="8">
+              <el-col :span="8">
                 <el-form-item label="偿还贷款本金">
                   <el-input v-model="repaymentPlan.amount" size="small" class="width150"></el-input> 元
                 </el-form-item>
@@ -3561,8 +3561,95 @@
         </el-form-item>
       </el-form>
     </div>
+
+
+
+
     <!--7、合同信息-->
     <div v-if="active==7">
+
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>最终审批信息</span>
+        </div>
+        <div class="text item">
+          <el-form :model="finalAudit" label-width="150px" :rules="finalAuditRules" ref="finalAudit" :size="size">
+
+
+            <el-form-item label="借款金额">
+              <el-input v-model="finalAudit.loanAmount" size="small" class="width150"></el-input>
+            </el-form-item>
+
+            <el-form-item label="借款期限">
+              <el-input v-model="finalAudit.loanLimit" size="small" class="width150"></el-input>
+            </el-form-item>
+
+            <el-row >
+              <el-form-item label="利率执行标准">
+                <el-col :span="4">
+                  <el-radio v-model="finalAudit.interestRateType" label="1年">1年</el-radio>
+                  <el-radio v-model="finalAudit.interestRateType" label="5年">5年</el-radio>
+                </el-col>
+                <el-col :span="3">
+                  <el-form-item label="贷款市场报价利率">
+                    <el-input placeholder="" size="small" class="width150" v-model="finalAudit.interestRate">
+                      <template slot="append">%</template>
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-form-item>
+            </el-row>
+
+
+            <el-row >
+              <el-form-item label="浮动方式">
+                <el-col :span="4">
+                  <el-radio v-model="finalAudit.floatedType" label="上浮">上浮</el-radio>
+                  <el-radio v-model="finalAudit.floatedType" label="下浮">下浮</el-radio>
+                </el-col>
+                <el-col :span="3">
+                  <el-form-item label="">
+                    <el-input placeholder=""  size="small" class="width150" v-model="finalAudit.floatedRate">
+                      <template slot="append">%</template>
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+              </el-form-item>
+            </el-row>
+
+            <el-form-item label="执行年利率">
+              <el-form-item label="">
+                <el-input placeholder="执行年利率" size="small" class="width150" v-model="finalAudit.yearInterestRate">
+                  <template slot="append">%</template>
+                </el-input>
+              </el-form-item>
+            </el-form-item>
+            <el-form-item label="结息方式">
+              <el-radio v-model="finalAudit.interestType" label="按月">按月</el-radio>
+              <el-radio v-model="finalAudit.interestType" label="按季">按季</el-radio>
+              <el-radio v-model="finalAudit.interestType" label="按年">按年</el-radio>
+            </el-form-item>
+
+            <el-form-item label="还款方式">
+              <el-radio-group v-model="finalAudit.repaymentType" @change="repaymentChange">
+                <el-radio  v-for="(vl, index) in RepaymentOptions" :label="vl.VAL_CODE" :key="index">
+                  {{vl.VAL_NAME}}
+                </el-radio>
+              </el-radio-group>
+              <el-input v-if="repaymentOtherFlag" v-model="finalAudit.otherRepayment" size="small" class="width150"></el-input>
+            </el-form-item>
+          </el-form>
+        </div>
+      </el-card>
+
+
+
+
+      <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>合同信息</span>
+        </div>
+        <div class="text item">
       <el-form :model="contractInformation" label-width="150px" :rules="dataFormRules" ref="contractInformation" :size="size">
         <el-form-item label="个人借款合同编号">
           <el-input v-model="contractInformation.personalLoanContractNo" size="small" class="width150"></el-input>
@@ -3608,13 +3695,24 @@
           </el-date-picker>
         </el-form-item>
 
-        <br>
-        <el-form-item>
-          <el-button type="primary" @click="contractInformationNextStep(5)">保存</el-button>
-        </el-form-item>
+        <!--<el-form-item>-->
+          <!--<el-button type="primary" @click="contractInformationNextStep(5)">保存</el-button>-->
+        <!--</el-form-item>-->
 
       </el-form>
+        </div>
+      </el-card>
+      <el-row style="margin-top:10px;margin-bottom:20px">
+        <el-col :span="6">
+          <el-button type="primary" @click="contractInformationNextStep(5)">保存</el-button>
+        </el-col>
+      </el-row>
     </div>
+
+
+
+
+
 
   </div>
 </template>
@@ -3699,6 +3797,24 @@
           loanDate:'',
           loanBasisId:this.loanBasisId,
           lastUpdateBy:sessionStorage.getItem("user")
+        },
+        finalAuditRules:{
+          loanAmount: [
+            { required: true, message: '请输入正确的借款金额！', trigger: 'blur' }
+          ]
+        },
+        finalAudit:{
+          id:'',
+          loanBasisId:'',
+          loanAmount:'',
+          loanLimit:'',
+          interestRate:'',
+          floatedRate:'',
+          yearInterestRate:'',
+          interestRateType:'',
+          floatedType:'',
+          interestType:'',
+          repaymentType:''
         },
         //配偶姓名
         maritalStatusFlag:false,
@@ -4121,6 +4237,7 @@
         addLandAssetDialogVisible:false,
         //土地标题
         operationLand:false,
+        operation:false,
         //汽车资产弹窗
         addCarAssetDialogVisible:false,
         //汽车标题
@@ -4896,10 +5013,11 @@
     },
 
     created(){
-        let baseLoneId = sessionStorage.getItem('baseLoneId');
-        if(baseLoneId){
+//        let baseLoneId = sessionStorage.getItem('baseLoneId');
+      let baseLoneId = this.$route.query.baseLoneId;
+        if(baseLoneId && baseLoneId > 0){
             this.loanBasisId = baseLoneId;
-            let status = sessionStorage.getItem('status');
+            let status = this.$route.query.status;
             this.currentStaatus = status;
             this.active='0';
             //加载数据
@@ -5051,6 +5169,7 @@
         }else if(status=='7'){
           //7、合同信息
           this.getContractById(baseLoneId);
+          this.getFinalAuditByBasisId(baseLoneId);
         }
       },
 
@@ -5065,154 +5184,156 @@
             if(res.code=='200'){
               //赋值
               let data = res.data;
-              let types =[];
-              if(data.type !=null){
-                //types.push(data.type.toString());
-                data.type =data.type.toString();
-              }
-              if(data.sex !=null){
-                data.sex = data.sex.toString();
-              }
-              if(data.contactAddress !=null){
-                data.contactAddress = data.contactAddress.toString();
-              }
-              if(data.educationalLevel !=null){
-                data.educationalLevel = data.educationalLevel.toString();
-                this.educationaLevelChange(data.educationalLevel);
-              }
-              if(data.currentHousingSource !=null){
-                data.currentHousingSource = data.currentHousingSource.toString();
-                this.currentHousingSourceChange(data.currentHousingSource);
-              }
-              if(data.assetSituation !=null){
-                data.assetSituation = data.assetSituation.toString();
-                this.assetSituationChange(data.assetSituation);
-              }
-              if(data.maritalStatus !=null){
-                data.maritalStatus = data.maritalStatus.toString();
-                this.maritalStatusChange(data.maritalStatus);
-              }
-              let assetTypes =[];
-              if(data.assetTypeHouses !=null && data.assetTypeHouses.length>0){
-               let assetTypeHousesNew = [];
-                for(let index in data.assetTypeHouses){
+              if(data) {
+                let types =[];
+                if(data.type){
+                  //types.push(data.type.toString());
+                  data.type =data.type.toString();
+                }
+                if(data.sex){
+                  data.sex = data.sex.toString();
+                }
+                if(data.contactAddress){
+                  data.contactAddress = data.contactAddress.toString();
+                }
+                if(data.educationalLevel){
+                  data.educationalLevel = data.educationalLevel.toString();
+                  this.educationaLevelChange(data.educationalLevel);
+                }
+                if(data.currentHousingSource){
+                  data.currentHousingSource = data.currentHousingSource.toString();
+                  this.currentHousingSourceChange(data.currentHousingSource);
+                }
+                if(data.assetSituation){
+                  data.assetSituation = data.assetSituation.toString();
+                  this.assetSituationChange(data.assetSituation);
+                }
+                if(data.maritalStatus){
+                  data.maritalStatus = data.maritalStatus.toString();
+                  this.maritalStatusChange(data.maritalStatus);
+                }
+                let assetTypes =[];
+                if(data.assetTypeHouses && data.assetTypeHouses.length>0){
+                  let assetTypeHousesNew = [];
+                  for(let index in data.assetTypeHouses){
                     let d = data.assetTypeHouses[index];
                     d.whetherOwnershipCertificatess = this.getWhetherOwnershipCertificatesOptions(d.whetherOwnershipCertificates);
                     assetTypeHousesNew.push(d);
-                }
-                this.housFlag=true;
-                assetTypes.push('1');
-                this.assetTypeHousesTableData = assetTypeHousesNew;
-              }
-              if(data.assetTypeLand !=null && data.assetTypeLand.length>0){
-                this.landFlag=true;
-                assetTypes.push('2');
-                this.landTableData = data.assetTypeLand;
-              }
-              if(data.assetTypeCar !=null  && data.assetTypeCar.length>0){
-                this.carFlag=true;
-                assetTypes.push('3');
-                this.carTableData = data.assetTypeCar;
-              }
-              if(data.assetTypeSecurities !=null && data.assetTypeSecurities.length>0){
-                this.securitiesFlag=true;
-                assetTypes.push('4');
-                let assetTypeSecuritiesNew = [];
-                for(let index in data.assetTypeSecurities){
-                  let d = data.assetTypeSecurities[index];
-                  d.types = this.getSecuritiesOptions(d.type);
-                  assetTypeSecuritiesNew.push(d);
-                }
-                this.securitiesTableData = assetTypeSecuritiesNew;
-              }
-              if(data.assetTypeOther !=null && data.assetTypeOther.length>0){
-                this.otherFlag=true;
-                assetTypes.push('5');
-                this.otherTableData = data.assetTypeOther;
-              }
-              if(assetTypes !=null){
-                data.assetType= assetTypes;
-              }
-              console.log("data.assetTypeSecurities:",data.assetTypeSecurities);
-              console.log("data.assetTypeOther:",data.assetTypeOther);
-              console.log("data.assetType:",data.assetType);
-              if(data.spouseInfo !=null){
-                if(data.spouseInfo.contactAddress !=null){
-                  data.spouseInfo.contactAddress = data.spouseInfo.contactAddress.toString();
-                }
-                //let spouseInfoType=[];
-                if(data.spouseInfo.type !=null){
-                  //spouseInfoType.push(data.spouseInfo.type.toString());
-                  data.spouseInfo.type =data.spouseInfo.type.toString();
-                }
-                if(data.spouseInfo.sex !=null){
-                  data.spouseInfo.sex = data.spouseInfo.sex.toString();
-                }
-                let assetTypess =[];
-                if(data.spouseInfo.assetSituation !=null){
-                  data.spouseInfo.assetSituation = data.spouseInfo.assetSituation.toString();
-                  this.assetSituationSpouseChange(data.spouseInfo.assetSituation);
-                }
-                if(data.spouseInfo.currentHousingSource !=null){
-                  data.spouseInfo.currentHousingSource = data.spouseInfo.currentHousingSource.toString();
-                  this.currentHousingSourceChange(data.spouseInfo.currentHousingSource);
-                }
-                let typess =[];
-                if(data.spouseInfo.maritalStatus !=null){
-                  data.spouseInfo.maritalStatus = data.spouseInfo.maritalStatus.toString();
-                  this.maritalStatusChange(data.spouseInfo.maritalStatus);
-                }
-                if(data.spouseInfo.educationalLevel !=null){
-                  data.spouseInfo.educationalLevel = data.spouseInfo.educationalLevel.toString();
-                  this.educationaLevelChange(data.spouseInfo.educationalLevel);
-                }
-                if(data.spouseInfo.assetTypeHouses !=null && data.spouseInfo.assetTypeHouses.length>0){
-                  this.housSpouseFlag=true;
-                  typess.push('1');
-                  let assetTypeHousesNews = [];
-                  for(let index in data.spouseInfo.assetTypeHouses){
-                    let d = data.spouseInfo.assetTypeHouses[index];
-                    d.whetherOwnershipCertificatess = this.getWhetherOwnershipCertificatesOptions(d.whetherOwnershipCertificates);
-                    assetTypeHousesNews.push(d);
                   }
                   this.housFlag=true;
                   assetTypes.push('1');
-                  this.assetTypeSpouseHousesTableData = assetTypeHousesNews;
+                  this.assetTypeHousesTableData = assetTypeHousesNew;
                 }
-                if(data.spouseInfo.assetTypeLand !=null && data.spouseInfo.assetTypeLand.length>0){
-                  this.landSpouseFlag=true;
-                  typess.push('2');
-                  this.spouseLandTableData = data.spouseInfo.assetTypeLand;
+                if(data.assetTypeLand && data.assetTypeLand.length>0){
+                  this.landFlag=true;
+                  assetTypes.push('2');
+                  this.landTableData = data.assetTypeLand;
                 }
-                if(data.spouseInfo.assetTypeCar !=null && data.spouseInfo.assetTypeCar.length>0){
-                  this.carSpouseFlag=true;
-                  typess.push('3');
-                  this.spouseCarTableData = data.spouseInfo.assetTypeCar;
+                if(data.assetTypeCar  && data.assetTypeCar.length>0){
+                  this.carFlag=true;
+                  assetTypes.push('3');
+                  this.carTableData = data.assetTypeCar;
                 }
-                if(data.spouseInfo.assetTypeSecurities !=null && data.spouseInfo.assetTypeSecurities.length>0){
-                  this.securitiesSpouseFlag=true;
-                  typess.push('4');
+                if(data.assetTypeSecurities && data.assetTypeSecurities.length>0){
+                  this.securitiesFlag=true;
+                  assetTypes.push('4');
                   let assetTypeSecuritiesNew = [];
-                  for(let index in data.spouseInfo.assetTypeSecurities){
-                    let d = data.spouseInfo.assetTypeSecurities[index];
+                  for(let index in data.assetTypeSecurities){
+                    let d = data.assetTypeSecurities[index];
                     d.types = this.getSecuritiesOptions(d.type);
                     assetTypeSecuritiesNew.push(d);
                   }
-                  this.spouseSecuritiesTableData = assetTypeSecuritiesNew;
+                  this.securitiesTableData = assetTypeSecuritiesNew;
                 }
-                if(data.spouseInfo.assetTypeOther !=null && data.spouseInfo.assetTypeOther.length>0){
-                  this.otherSpouseFlag=true;
-                  typess.push('5');
-                  this.spouseOtherTableData = data.spouseInfo.assetTypeOther;
+                if(data.assetTypeOther && data.assetTypeOther.length>0){
+                  this.otherFlag=true;
+                  assetTypes.push('5');
+                  this.otherTableData = data.assetTypeOther;
                 }
-                if(typess !=null){
-                  data.spouseInfo.assetType =typess;
+                if(assetTypes){
+                  data.assetType= assetTypes;
                 }
-                this.relatedPersonnelInformationSpouseForm=data.spouseInfo;
-              }
-              this.relatedPersonnelInformationForm=data;
-              if(data.householdIncomeForm){
-                this.householdIncomeForm=data.householdIncomeForm;
+                console.log("data.assetTypeSecurities:",data.assetTypeSecurities);
+                console.log("data.assetTypeOther:",data.assetTypeOther);
+                console.log("data.assetType:",data.assetType);
+                if(data.spouseInfo){
+                  if(data.spouseInfo.contactAddress){
+                    data.spouseInfo.contactAddress = data.spouseInfo.contactAddress.toString();
+                  }
+                  //let spouseInfoType=[];
+                  if(data.spouseInfo.type){
+                    //spouseInfoType.push(data.spouseInfo.type.toString());
+                    data.spouseInfo.type =data.spouseInfo.type.toString();
+                  }
+                  if(data.spouseInfo.sex){
+                    data.spouseInfo.sex = data.spouseInfo.sex.toString();
+                  }
+                  let assetTypess =[];
+                  if(data.spouseInfo.assetSituation){
+                    data.spouseInfo.assetSituation = data.spouseInfo.assetSituation.toString();
+                    this.assetSituationSpouseChange(data.spouseInfo.assetSituation);
+                  }
+                  if(data.spouseInfo.currentHousingSource){
+                    data.spouseInfo.currentHousingSource = data.spouseInfo.currentHousingSource.toString();
+                    this.currentHousingSourceChange(data.spouseInfo.currentHousingSource);
+                  }
+                  let typess =[];
+                  if(data.spouseInfo.maritalStatus){
+                    data.spouseInfo.maritalStatus = data.spouseInfo.maritalStatus.toString();
+                    this.maritalStatusChange(data.spouseInfo.maritalStatus);
+                  }
+                  if(data.spouseInfo.educationalLevel){
+                    data.spouseInfo.educationalLevel = data.spouseInfo.educationalLevel.toString();
+                    this.educationaLevelChange(data.spouseInfo.educationalLevel);
+                  }
+                  if(data.spouseInfo.assetTypeHouses && data.spouseInfo.assetTypeHouses.length>0){
+                    this.housSpouseFlag=true;
+                    typess.push('1');
+                    let assetTypeHousesNews = [];
+                    for(let index in data.spouseInfo.assetTypeHouses){
+                      let d = data.spouseInfo.assetTypeHouses[index];
+                      d.whetherOwnershipCertificatess = this.getWhetherOwnershipCertificatesOptions(d.whetherOwnershipCertificates);
+                      assetTypeHousesNews.push(d);
+                    }
+                    this.housFlag=true;
+                    assetTypes.push('1');
+                    this.assetTypeSpouseHousesTableData = assetTypeHousesNews;
+                  }
+                  if(data.spouseInfo.assetTypeLand && data.spouseInfo.assetTypeLand.length>0){
+                    this.landSpouseFlag=true;
+                    typess.push('2');
+                    this.spouseLandTableData = data.spouseInfo.assetTypeLand;
+                  }
+                  if(data.spouseInfo.assetTypeCar && data.spouseInfo.assetTypeCar.length>0){
+                    this.carSpouseFlag=true;
+                    typess.push('3');
+                    this.spouseCarTableData = data.spouseInfo.assetTypeCar;
+                  }
+                  if(data.spouseInfo.assetTypeSecurities && data.spouseInfo.assetTypeSecurities.length>0){
+                    this.securitiesSpouseFlag=true;
+                    typess.push('4');
+                    let assetTypeSecuritiesNew = [];
+                    for(let index in data.spouseInfo.assetTypeSecurities){
+                      let d = data.spouseInfo.assetTypeSecurities[index];
+                      d.types = this.getSecuritiesOptions(d.type);
+                      assetTypeSecuritiesNew.push(d);
+                    }
+                    this.spouseSecuritiesTableData = assetTypeSecuritiesNew;
+                  }
+                  if(data.spouseInfo.assetTypeOther && data.spouseInfo.assetTypeOther.length>0){
+                    this.otherSpouseFlag=true;
+                    typess.push('5');
+                    this.spouseOtherTableData = data.spouseInfo.assetTypeOther;
+                  }
+                  if(typess !=null){
+                    data.spouseInfo.assetType =typess;
+                  }
+                  this.relatedPersonnelInformationSpouseForm=data.spouseInfo;
+                }
+                this.relatedPersonnelInformationForm=data;
+                if(data.householdIncomeForm){
+                  this.householdIncomeForm=data.householdIncomeForm;
+                }
               }
             }
           })
@@ -5394,10 +5515,33 @@
         })
       },
 
+      //根据id查询contract_information 合同信息表
+      getFinalAuditByBasisId(id){
+        let dataParams = {
+          loanBasisId:id
+        }
+        let params = Object.assign({}, dataParams);
+        api.finalAudit.getFinalAuditByLoanBasisId(params).then((res) => {
+          if(res.code=='200'){
+            //赋值
+            this.setFinalAudit(res.data);
+          }else{
+            //清空
+            this.clearFinalAudit();
+          }
+        })
+      },
+
       //7、设置合同数据
       setContractInformation(data){
         if(data){
           this.contractInformation=data;
+        }
+      },
+
+      setFinalAudit(data) {
+        if(data) {
+          this.finalAudit = data;
         }
       },
 
@@ -5417,6 +5561,22 @@
             lastUpdateBy:sessionStorage.getItem("user")
         };
         this.contractInformation = contractInformation;
+      },
+
+      //7、清空最终审批
+      clearFinalAudit(){
+        let finalAudit ={
+          loanAmount:'',
+          loanLimit:'',
+          interestRate:'',
+          floatedRate:'',
+          yearInterestRate:'',
+          interestRateType:'',
+          floatedType:'',
+          interestType:'',
+          repaymentType:''
+        };
+        this.finalAudit = finalAudit;
       },
 
       //根据loanBasicId查询
@@ -8311,13 +8471,23 @@
        * @param type
        */
       contractInformationNextStep(type){
-        this.contractInformation.loanBasisId=this.loanBasisId;;
+        this.contractInformation.loanBasisId=this.loanBasisId;
+        this.finalAudit.loanBasisId=this.loanBasisId;
         this.contractInformation.createBy=sessionStorage.getItem("user");
         this.$refs.contractInformation.validate((valid) => {
           if (valid) {
             this.$confirm('确认提交吗？', '提示', {}).then(() => {
               let params = Object.assign({}, this.contractInformation)
               console.log("params:",params);
+              let auditParams = Object.assign({}, this.finalAudit)
+              console.log("params:",params);
+              console.log("auditParams:",auditParams);
+
+              this.$api.finalAudit.save(auditParams).then((res) => {
+                this.$refs['finalAudit'].resetFields()
+              })
+
+
               this.$api.contractInformation.save(params).then((res) => {
                 if(res.code == 200) {
                   let dataPs = {

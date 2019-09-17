@@ -12,3 +12,12 @@ export const save = (data) => {
   })
 }
 
+// 根据根据id查询数据
+export const getFinalAuditByLoanBasisId = (params) => {
+  return axios({
+    url: '/loan/getFinalAuditByLoanBasisId',
+    method: 'get',
+    params
+  })
+}
+

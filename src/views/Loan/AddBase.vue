@@ -3832,7 +3832,6 @@
   import { getIFrameUrl, getIFramePath } from '@/utils/iframe'
   import api from '@/http/api'
   import Cookies from "js-cookie"
-  import FinalAudit from "@/views/Loan/FinalAudit";
 
   export default {
     components:{
@@ -7651,7 +7650,10 @@
               console.log("auditParams:",auditParams);
 
               this.$api.finalAudit.save(auditParams).then((res) => {
-//                this.$refs['contractInformation'].resetFields()
+                if(res.code == 200) {
+                  this.$refs['finalAudit'].resetFields();
+                }
+
               })
 
               this.$api.contractInformation.save(params).then((res) => {

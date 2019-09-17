@@ -666,10 +666,17 @@
 
       //修改
       editHref(data) {
-        sessionStorage.setItem('baseLoneId', data.id);
-        sessionStorage.setItem('loanType', data.loanType);
-        sessionStorage.setItem('status', data.status);
-        this.$router.push('/loan/editBase');
+//        sessionStorage.setItem('baseLoneId', data.id);
+//        sessionStorage.setItem('loanType', data.loanType);
+//        sessionStorage.setItem('status', data.status);
+        this.$router.push({
+          path:'/loan/editBase',
+          query:{
+            baseLoneId:data.id,
+            loanType:data.loanType,
+            status:data.status
+          }
+        });
         //this.$router.push('/loan/addBase');
 
       },
