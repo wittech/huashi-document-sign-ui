@@ -98,7 +98,6 @@
         <el-button icon="el-icon-s-promotion" type="primary" @click="generateDocOnckick" :loading="loading">生成文档
         </el-button>
 
-        <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll" @change="handleCheckAllChange" border>全选
         </el-checkbox>
         <el-button icon="el-icon-download" type="success" @click="batchDown">批量下载</el-button>
         <el-button icon="el-icon-printer" type="warning" @click="batchPrint">批量打印</el-button>
@@ -106,7 +105,7 @@
         <el-switch
           v-model="watermarkSwitch"
           active-color="#13ce66"
-          inactive-color="#409eff"
+          inactive-color="#ccc"
           inactive-text="打印是否加入水印" style="margin-left: 10px; margin-right: 5px;" @change="watermarkSwitchChange">
         </el-switch>
         <el-input
@@ -120,7 +119,7 @@
       </el-row>
 
       <el-row v-loading="searchLoading" element-loading-text="处理中">
-        <el-checkbox-group v-model="checkedDocs" @change="handleCheckedDocChange">
+        <el-checkbox-group v-model="checkedDocs">
           <el-col :span="4" v-for="(doc, index) in fileList">
             <el-card :body-style="{ padding: '0px' }">
               <div style="padding: 14px; height : 155px;">
@@ -163,8 +162,6 @@
     },
     data() {
       return {
-        isIndeterminate: false,
-        checkAll: false,
         checkedDocs: [],
         checkedDocIds: [],
         searchLoading: false,
@@ -358,19 +355,8 @@
         this.watermarkDisplay = val;
       },
 
-      handleCheckAllChange(val) {
-        this.checkedDocs = val ? this.checkedDocIds : [];
-        this.isIndeterminate = false;
-      },
-
       categorySearch() {
         this.findFileList(this.loanBasisId);
-      },
-
-      handleCheckedDocChange(value) {
-        let checkedCount = value.length;
-        this.checkAll = checkedCount === this.fileList.length;
-        this.isIndeterminate = checkedCount > 0 && checkedCount < this.fileList.length;
       },
 
       checkVal: function () {
@@ -490,6 +476,8 @@
         this.getByIds(row);
         //获取文件数据
         this.findFileList(row.id);
+        this.category = [];
+        this.categorySearch();
         //获取文件列表数据
         this.deailDialogVisible = true;
       },
@@ -512,11 +500,13 @@
 
       setFileList(dataList) {
         if (dataList) {
+          this.checkedDocIds = [];
           for (let index in dataList) {
             let data = dataList[index];
             data.fileName = data.docName + '-' + data.sort;
             this.checkedDocIds.push(data.id);
           }
+          this.checkedDocs = this.checkedDocIds;
           this.fileList = dataList;
 
         }
