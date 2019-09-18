@@ -20,7 +20,7 @@
     </el-steps>
     <!--0、基础信息-->
     <div v-if="active==0" class="step1">
-      <el-form :model="loanBasisForm" label-width="80px" :rules="loanBasisFormRules" ref="loanBasisForm" :size="size">
+      <el-form :model="loanBasisForm" label-width="150px" :rules="loanBasisFormRules" ref="loanBasisForm" :size="size">
         <div>
           <el-form-item label="贷款类型" prop="loanType">
             <el-radio-group v-model="loanBasisForm.loanType" @change="loanTypeChage">
@@ -30,10 +30,46 @@
             </el-radio-group>
           </el-form-item>
         </div>
+
+        <div>
+          <el-form-item label="贷款客户类型"  prop="customerType">
+
+
+            <!--<el-radio v-model="loanBasisForm.customerType" label="0">对私贷款</el-radio>-->
+            <!--<el-radio v-model="loanBasisForm.customerType" label="1">对公贷款</el-radio>-->
+            <el-radio-group v-model="loanBasisForm.customerType" @change="customerTypeChange">
+              <el-radio  v-for="(vl, index) in CustomerTypeOptions" :label="vl.VAL_CODE" :key="index">
+                {{vl.VAL_NAME}}
+              </el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </div>
+
+        <div>
+          <el-form-item label="对私申请类型" prop="privateApplyType" v-show="showPrivateApplyType">
+            <el-radio-group v-model="loanBasisForm.privateApplyType" @change="privateApplyTypeChange">
+              <el-radio  v-for="(vl, index) in PrivateApplyTypeOptions" :label="vl.VAL_CODE" :key="index">
+                {{vl.VAL_NAME}}
+              </el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </div>
+
         <div>
           <el-form-item label="申请事项" v-show="applicationMattersFlag">
             <el-radio-group v-model="loanBasisForm.applicationMatters" @change="applicationMattersChange">
               <el-radio  v-for="(vl, index) in ApplicationMattersOptions" :label="vl.VAL_CODE" :key="index">
+                {{vl.VAL_NAME}}
+              </el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </div>
+
+
+        <div>
+          <el-form-item label="是否最高额循环授信" v-show="showTopQuotaRepeatCredit">
+            <el-radio-group v-model="loanBasisForm.topQuotaRepeatCreditFlag">
+              <el-radio  v-for="(vl, index) in BooleanOptions" :label="vl.VAL_CODE" :key="index">
                 {{vl.VAL_NAME}}
               </el-radio>
             </el-radio-group>
@@ -3748,6 +3784,9 @@
           ],
           loanType: [
             { required: true, message: '请选择贷款类型', trigger: 'change' }
+          ],
+          customerType: [
+            { required: true, message: '请选择贷款客户类型', trigger: 'change' }
           ]
         },
         add2Rules:{
@@ -3784,6 +3823,10 @@
         referenceDialogVisible:false,
         //房屋土地资产列表
         referenceAssetList:[],
+        //是否最高额循环授信
+        showTopQuotaRepeatCredit:false,
+        //显示对私申请类型
+        showPrivateApplyType:false,
         //合同信息
         contractInformation:{
           id:'',
@@ -3860,6 +3903,14 @@
         },{
           VAL_CODE: '1',
           VAL_NAME: '已婚',
+        }],
+        //是否选项
+        BooleanOptions:[{
+          VAL_CODE: '0',
+          VAL_NAME: '否',
+        },{
+          VAL_CODE: '1',
+          VAL_NAME: '是',
         }],
         //是否本地户籍
         WhetherLocalHouseholdRegistrationOptions:[{
@@ -4387,6 +4438,23 @@
         },{
           VAL_CODE: '1',
           VAL_NAME: '续贷',
+        }, {
+          VAL_CODE:'2',
+          VAL_NAME:'展期'}],
+        //贷款客户类型
+        CustomerTypeOptions:[{
+          VAL_CODE: '0',
+          VAL_NAME: '对私贷款',
+        },{
+          VAL_CODE: '1',
+          VAL_NAME: '对公贷款',
+        }],
+        PrivateApplyTypeOptions:[{
+          VAL_CODE: '0',
+          VAL_NAME: '个人贷款',
+        },{
+          VAL_CODE: '1',
+          VAL_NAME: '农户贷款',
         }],
         //申请事项
         ApplicationMattersOptions:[{
@@ -4401,6 +4469,15 @@
         },{
           VAL_CODE: '3',
           VAL_NAME: '个人消费类贷款',
+        },{
+          VAL_CODE: '4',
+          VAL_NAME: '公务员信用消费贷款',
+        },{
+          VAL_CODE: '5',
+          VAL_NAME: '流动资金贷款',
+        },{
+          VAL_CODE: '6',
+          VAL_NAME: '固定资产投资贷款',
         }],
         //担保方式
         GuaranteeMethodOptions:[{
@@ -4412,6 +4489,9 @@
         },{
           VAL_CODE: '质押',
           VAL_NAME: '质押',
+        },{
+          VAL_CODE: '信用',
+          VAL_NAME: '信用',
         }],
         //性别
         SexOptions:[{
@@ -4607,6 +4687,9 @@
         loanBasisForm: {
           id:'',
           loanType:'',
+          customerType:'',
+          privateApplyType:'',
+          topQuotaRepeatCreditFlag:'',
           applicationMatters:'',
           guaranteeMethod: [],
           borrower: '',
@@ -5481,6 +5564,22 @@
           if(data.borrower){
             this.loanBasisForm.borrower=data.borrower;
           }
+//        alert(data.customerType);
+          if(data.customerType) {
+
+            this.loanBasisForm.customerType=data.customerType.toString();
+            customerTypeChange(this.loanBasisForm.customerType);
+          }
+//        alert(data.privateApplyType);
+          if(data.privateApplyType) {
+            this.loanBasisForm.privateApplyType=data.privateApplyType.toString();
+            privateApplyTypeChange(this.loanBasisForm.privateApplyType);
+          }
+//        alert(data.topQuotaRepeatCreditFlag);
+          if(data.topQuotaRepeatCreditFlag) {
+            this.loanBasisForm.topQuotaRepeatCreditFlag=data.topQuotaRepeatCreditFlag.toString();
+            this.showTopQuotaRepeatCredit = true;
+          }
       },
 
       //清空基础信息
@@ -5489,6 +5588,9 @@
             id:this.loanBasisForm.id,
             loanType:'',
             applicationMatters:'',
+            customerType:'',
+            privateApplyType:'',
+            topQuotaRepeatCreditFlag:'',
             guaranteeMethod: [],
             borrower: '',
             lastUpdateBy:sessionStorage.getItem("user"),
@@ -6026,10 +6128,87 @@
        */
       loanTypeChage(value){
         //隐藏
-        this.applicationMattersFlagHideAndShow(false);
+//        this.applicationMattersFlagHideAndShow(false);
+        this.showTopQuotaRepeatCredit = false;
         if(value=='0'){
           //显示
-          this.applicationMattersFlagHideAndShow(true);
+//          this.applicationMattersFlagHideAndShow(true);
+        }
+
+        if(value == '0' || value == '1') {
+          this.showTopQuotaRepeatCredit = true;
+        }
+      },
+
+      privateApplyTypeChange(value) {
+        this.applicationMattersFlag = true;
+        if(value == '0') {
+
+
+          this.ApplicationMattersOptions = [{
+            VAL_CODE: '0',
+            VAL_NAME: '个人经营性贷款',
+          },{
+            VAL_CODE: '1',
+            VAL_NAME: '信用贷款',
+          },{
+            VAL_CODE: '2',
+            VAL_NAME: '房屋按揭贷款',
+          },{
+            VAL_CODE: '3',
+            VAL_NAME: '个人消费类贷款',
+          },{
+            VAL_CODE: '4',
+            VAL_NAME: '公务员信用消费贷款',
+          }];
+        } else if(value == '1') {
+          this.ApplicationMattersOptions = [{
+            VAL_CODE: '0',
+            VAL_NAME: '个人经营性贷款',
+          },{
+            VAL_CODE: '1',
+            VAL_NAME: '信用贷款',
+          },{
+            VAL_CODE: '2',
+            VAL_NAME: '房屋按揭贷款',
+          },{
+            VAL_CODE: '3',
+            VAL_NAME: '个人消费类贷款',
+          }];
+        }
+      },
+
+      customerTypeChange(value) {
+        this.showPrivateApplyType = false;
+        this.applicationMattersFlag = false;
+        if(value == '0') {
+          this.showPrivateApplyType = true;
+          this.privateApplyTypeChange('0');
+          this.ApplicationMattersOptions = [{
+                          VAL_CODE: '0',
+                          VAL_NAME: '个人经营性贷款',
+                        },{
+                          VAL_CODE: '1',
+                          VAL_NAME: '信用贷款',
+                        },{
+                          VAL_CODE: '2',
+                          VAL_NAME: '房屋按揭贷款',
+                        },{
+                          VAL_CODE: '3',
+                          VAL_NAME: '个人消费类贷款',
+                        },{
+                          VAL_CODE: '4',
+                          VAL_NAME: '公务员信用消费贷款',
+                        }];
+        } else if(value == '1') {
+          this.ApplicationMattersOptions = [{
+                          VAL_CODE: '5',
+                          VAL_NAME: '流动资金贷款',
+                        },{
+                          VAL_CODE: '6',
+                          VAL_NAME: '固定资产投资贷款',
+                        }];
+          this.applicationMattersFlag = true;
         }
       },
 
@@ -6076,6 +6255,9 @@
                 id:this.loanBasisForm.id,
                 loanType:this.loanBasisForm.loanType,
                 applicationMatters:this.loanBasisForm.applicationMatters,
+                customerType:this.loanBasisForm.customerType,
+                privateApplyType:this.loanBasisForm.privateApplyType,
+                topQuotaRepeatCreditFlag:this.loanBasisForm.topQuotaRepeatCreditFlag,
                 guaranteeMethod: this.getGuaranteeMethod(),
                 borrower: this.loanBasisForm.borrower,
                 lastUpdateBy:sessionStorage.getItem("user")
