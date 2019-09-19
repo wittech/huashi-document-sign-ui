@@ -77,7 +77,7 @@
         </div>
 
         <el-form-item label="担保方式" v-show="guaranteeNethodFlag">
-          <el-checkbox-group  v-model="loanBasisForm.guaranteeMethod" class="checkgroup">
+          <el-checkbox-group  v-model="loanBasisForm.guaranteeMethod" class="checkgroup" @change="guaranteeMethodChange">
             <el-checkbox v-for="vl in GuaranteeMethodOptions" :key="vl.VAL_CODE" :label="vl.VAL_CODE">{{vl.VAL_NAME}}</el-checkbox>
           </el-checkbox-group>
         </el-form-item>
@@ -4682,7 +4682,7 @@
         //申请事项隐藏标记
         applicationMattersFlag:false,
         //担保方式隐藏标记
-        guaranteeNethodFlag:false,
+        guaranteeNethodFlag:true,
         //借口人基础信息
         loanBasisForm: {
           id:'',
@@ -6206,13 +6206,29 @@
        */
       applicationMattersChange(value){
         //信用贷款隐藏 否则显示
-        if(value=='02'){
+        if(value=='2'){
           //隐藏
           this.guaranteeNethodFlagHideAndShow(false);
           return;
         }
         //显示
         this.guaranteeNethodFlagHideAndShow(true);
+
+        if(value == '4') {
+          this.loanBasisForm.guaranteeMethod = [];
+          this.loanBasisForm.guaranteeMethod.push('信用');
+        }
+      },
+
+      guaranteeMethodChange(value) {
+        let gmArrays = value.toString().split(',');
+        for(var i = 0;i<gmArrays.length;i++) {
+          if(gmArrays[i] == '信用') {
+            this.loanBasisForm.guaranteeMethod = [];
+            this.loanBasisForm.guaranteeMethod.push('信用');
+            break;
+          }
+        }
       },
 
       /**
@@ -6222,7 +6238,7 @@
         //申请事项隐藏标记
         this.applicationMattersFlag=flag;
         //担保方式隐藏标记
-        this.guaranteeNethodFlag=flag;
+        // this.guaranteeNethodFlag=flag;
       },
 
       /**
@@ -6230,7 +6246,7 @@
        */
       guaranteeNethodFlagHideAndShow(flag){
         //担保方式隐藏标记
-        this.guaranteeNethodFlag=flag;
+        // this.guaranteeNethodFlag=flag;
       },
 
       /**
