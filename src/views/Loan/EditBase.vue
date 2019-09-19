@@ -5102,7 +5102,7 @@
             this.loanBasisId = baseLoneId;
             let status = this.$route.query.status;
             this.currentStaatus = status;
-            this.active='0';
+            this.active=0;
             //加载数据
             this.getData('0',baseLoneId);
 
@@ -5564,19 +5564,17 @@
           if(data.borrower){
             this.loanBasisForm.borrower=data.borrower;
           }
-//        alert(data.customerType);
-          if(data.customerType) {
+          if(data.customerType != null) {
 
             this.loanBasisForm.customerType=data.customerType.toString();
-            customerTypeChange(this.loanBasisForm.customerType);
+            this.customerTypeChange(this.loanBasisForm.customerType);
           }
-//        alert(data.privateApplyType);
-          if(data.privateApplyType) {
+          if(data.privateApplyType != null) {
             this.loanBasisForm.privateApplyType=data.privateApplyType.toString();
-            privateApplyTypeChange(this.loanBasisForm.privateApplyType);
+            this.privateApplyTypeChange(this.loanBasisForm.privateApplyType);
           }
 //        alert(data.topQuotaRepeatCreditFlag);
-          if(data.topQuotaRepeatCreditFlag) {
+          if(data.topQuotaRepeatCreditFlag != null) {
             this.loanBasisForm.topQuotaRepeatCreditFlag=data.topQuotaRepeatCreditFlag.toString();
             this.showTopQuotaRepeatCredit = true;
           }
@@ -6149,9 +6147,6 @@
             VAL_CODE: '0',
             VAL_NAME: '个人经营性贷款',
           },{
-            VAL_CODE: '1',
-            VAL_NAME: '信用贷款',
-          },{
             VAL_CODE: '2',
             VAL_NAME: '房屋按揭贷款',
           },{
@@ -6165,9 +6160,6 @@
           this.ApplicationMattersOptions = [{
             VAL_CODE: '0',
             VAL_NAME: '个人经营性贷款',
-          },{
-            VAL_CODE: '1',
-            VAL_NAME: '信用贷款',
           },{
             VAL_CODE: '2',
             VAL_NAME: '房屋按揭贷款',
@@ -6187,9 +6179,6 @@
           this.ApplicationMattersOptions = [{
                           VAL_CODE: '0',
                           VAL_NAME: '个人经营性贷款',
-                        },{
-                          VAL_CODE: '1',
-                          VAL_NAME: '信用贷款',
                         },{
                           VAL_CODE: '2',
                           VAL_NAME: '房屋按揭贷款',

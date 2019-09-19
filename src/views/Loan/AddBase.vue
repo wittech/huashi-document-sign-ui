@@ -33,7 +33,11 @@
 
         <div>
           <el-form-item label="贷款客户类型"  prop="customerType">
-            <el-radio-group v-model="loanBasisForm.customerType" @change="customerTypeChage">
+
+
+            <!--<el-radio v-model="loanBasisForm.customerType" label="0">对私贷款</el-radio>-->
+            <!--<el-radio v-model="loanBasisForm.customerType" label="1">对公贷款</el-radio>-->
+            <el-radio-group v-model="loanBasisForm.customerType" @change="customerTypeChange">
               <el-radio  v-for="(vl, index) in CustomerTypeOptions" :label="vl.VAL_CODE" :key="index">
                 {{vl.VAL_NAME}}
               </el-radio>
@@ -5098,7 +5102,7 @@
         this.loanBasisId = baseLoneId;
         let status = this.$route.query.status;
         this.currentStaatus = status;
-        this.active='0';
+        this.active=0;
         //加载数据
         this.getData('0',baseLoneId);
 
@@ -5560,19 +5564,18 @@
         if(data.borrower){
           this.loanBasisForm.borrower=data.borrower;
         }
+        if(data.customerType != null) {
 
-        if(data.customerType) {
-          this.loanBasisForm.customerType=data.customerType;
-          customerTypeChage(this.loanBasisForm.customerType);
+          this.loanBasisForm.customerType=data.customerType.toString();
+          this.customerTypeChange(this.loanBasisForm.customerType);
         }
-
-        if(data.privateApplyType) {
-          this.loanBasisForm.privateApplyType=data.privateApplyType;
-          privateApplyTypeChange(this.loanBasisForm.privateApplyType);
+        if(data.privateApplyType != null) {
+          this.loanBasisForm.privateApplyType=data.privateApplyType.toString();
+          this.privateApplyTypeChange(this.loanBasisForm.privateApplyType);
         }
-
-        if(data.topQuotaRepeatCreditFlag) {
-          this.loanBasisForm.topQuotaRepeatCreditFlag=data.topQuotaRepeatCreditFlag;
+//        alert(data.topQuotaRepeatCreditFlag);
+        if(data.topQuotaRepeatCreditFlag != null) {
+          this.loanBasisForm.topQuotaRepeatCreditFlag=data.topQuotaRepeatCreditFlag.toString();
           this.showTopQuotaRepeatCredit = true;
         }
       },
@@ -5891,7 +5894,7 @@
       //赋值
       setRelatedPersonnel(dataList){
         /*   this.oterPersonneltableData = dataList;
-         return;*/
+           return;*/
         let assetTypeHousesTableData = this.oterPersonneltableData;
         let assetTypeHousesTableDataNew = [];
         if(dataList){
@@ -6123,7 +6126,7 @@
        */
       loanTypeChage(value){
         //隐藏
-        this.applicationMattersFlagHideAndShow(false);
+//        this.applicationMattersFlagHideAndShow(false);
         this.showTopQuotaRepeatCredit = false;
         if(value=='0'){
           //显示
@@ -6144,9 +6147,6 @@
             VAL_CODE: '0',
             VAL_NAME: '个人经营性贷款',
           },{
-            VAL_CODE: '1',
-            VAL_NAME: '信用贷款',
-          },{
             VAL_CODE: '2',
             VAL_NAME: '房屋按揭贷款',
           },{
@@ -6161,9 +6161,6 @@
             VAL_CODE: '0',
             VAL_NAME: '个人经营性贷款',
           },{
-            VAL_CODE: '1',
-            VAL_NAME: '信用贷款',
-          },{
             VAL_CODE: '2',
             VAL_NAME: '房屋按揭贷款',
           },{
@@ -6173,7 +6170,7 @@
         }
       },
 
-      customerTypeChage(value) {
+      customerTypeChange(value) {
         this.showPrivateApplyType = false;
         this.applicationMattersFlag = false;
         if(value == '0') {
@@ -6182,9 +6179,6 @@
           this.ApplicationMattersOptions = [{
             VAL_CODE: '0',
             VAL_NAME: '个人经营性贷款',
-          },{
-            VAL_CODE: '1',
-            VAL_NAME: '信用贷款',
           },{
             VAL_CODE: '2',
             VAL_NAME: '房屋按揭贷款',
@@ -7255,10 +7249,10 @@
        */
       addOtherAsset(){
         /* spouseAssetTypeHouses
-         spouseAssetTypeLand
-         spouseAssetTypeCar
-         spouseAssetTypeSecurities
-         spouseAssetTypeOther*/
+      spouseAssetTypeLand
+      spouseAssetTypeCar
+      spouseAssetTypeSecurities
+      spouseAssetTypeOther*/
         this.addOtherAssetDialogVisible = true;
         this.operationOther = true;
       },
@@ -7425,14 +7419,14 @@
         if(assetTypeHouses){
           assetTypeHouses.whetherOwnershipCertificatess = this.getWhetherOwnershipCertificatesOptions(assetTypeHouses.whetherOwnershipCertificates);
           /*dataParams = {
-           whetherOwnershipCertificatess:this.getWhetherOwnershipCertificatesOptions(assetTypeHouses.whetherOwnershipCertificates),
-           propertyCertificateNumber:assetTypeHouses.propertyCertificateNumber,
-           deed:assetTypeHouses.deed,
-           landCertificate:assetTypeHouses.landCertificate,
-           name:assetTypeHouses.name,
-           constructionArea:assetTypeHouses.constructionArea,
-           assetTypeHouses:assetTypeHouses
-           };*/
+            whetherOwnershipCertificatess:this.getWhetherOwnershipCertificatesOptions(assetTypeHouses.whetherOwnershipCertificates),
+            propertyCertificateNumber:assetTypeHouses.propertyCertificateNumber,
+            deed:assetTypeHouses.deed,
+            landCertificate:assetTypeHouses.landCertificate,
+            name:assetTypeHouses.name,
+            constructionArea:assetTypeHouses.constructionArea,
+            assetTypeHouses:assetTypeHouses
+          };*/
         }
         if(assetTypeHousesTableData){
           for(let index in assetTypeHousesTableData){
@@ -7458,14 +7452,14 @@
         if(assetTypeHouses){
           assetTypeHouses.whetherOwnershipCertificatess = this.getWhetherOwnershipCertificatesOptions(assetTypeHouses.whetherOwnershipCertificates);
           /*  dataParams = {
-           whetherOwnershipCertificatess:this.getWhetherOwnershipCertificatesOptions(assetTypeHouses.whetherOwnershipCertificates),
-           propertyCertificateNumber:assetTypeHouses.propertyCertificateNumber,
-           deed:assetTypeHouses.deed,
-           landCertificate:assetTypeHouses.landCertificate,
-           name:assetTypeHouses.name,
-           constructionArea:assetTypeHouses.constructionArea,
-           assetTypeHouses:assetTypeHouses
-           };*/
+          whetherOwnershipCertificatess:this.getWhetherOwnershipCertificatesOptions(assetTypeHouses.whetherOwnershipCertificates),
+          propertyCertificateNumber:assetTypeHouses.propertyCertificateNumber,
+          deed:assetTypeHouses.deed,
+          landCertificate:assetTypeHouses.landCertificate,
+          name:assetTypeHouses.name,
+          constructionArea:assetTypeHouses.constructionArea,
+          assetTypeHouses:assetTypeHouses
+        };*/
         }
         if(assetTypeHousesTableData){
           for(let index in assetTypeHousesTableData){
@@ -7505,14 +7499,14 @@
         let assetTypeLand = this.assetTypeLand;
         /*let dataParams = {};*/
         /* if(assetTypeLand){
-         dataParams = {
-         landCertificate:assetTypeLand.landCertificate,
-         name:assetTypeLand.name,
-         address:assetTypeLand.address,
-         constructionArea:assetTypeLand.constructionArea,
-         assetTypeLand:assetTypeLand
-         };
-         }*/
+        dataParams = {
+          landCertificate:assetTypeLand.landCertificate,
+          name:assetTypeLand.name,
+          address:assetTypeLand.address,
+          constructionArea:assetTypeLand.constructionArea,
+          assetTypeLand:assetTypeLand
+        };
+      }*/
         if(assetTypeHousesTableData){
           for(let index in assetTypeHousesTableData){
             assetTypeHousesTableDataNew.push(assetTypeHousesTableData[index]);
@@ -7534,15 +7528,15 @@
         let assetTypeLand = this.spouseAssetTypeLand;
         console.log("spouseAssetTypeLand:",assetTypeLand);
         /* let dataParams = {};
-         if(assetTypeLand){
-         dataParams = {
-         landCertificate:assetTypeLand.landCertificate,
-         name:assetTypeLand.name,
-         address:assetTypeLand.address,
-         constructionArea:assetTypeLand.constructionArea,
-         assetTypeLand:assetTypeLand
-         };
-         }*/
+      if(assetTypeLand){
+        dataParams = {
+          landCertificate:assetTypeLand.landCertificate,
+          name:assetTypeLand.name,
+          address:assetTypeLand.address,
+          constructionArea:assetTypeLand.constructionArea,
+          assetTypeLand:assetTypeLand
+        };
+      }*/
         if(assetTypeHousesTableData){
           for(let index in assetTypeHousesTableData){
             assetTypeHousesTableDataNew.push(assetTypeHousesTableData[index]);
@@ -7737,7 +7731,7 @@
           }
         }
         /*  console.log("dataParams:",dataParams);
-         console.log(" assetTypeHousesTableDataNew:", assetTypeHousesTableDataNew);*/
+      console.log(" assetTypeHousesTableDataNew:", assetTypeHousesTableDataNew);*/
         assetTypeHousesTableDataNew.push(dataParams);
         //赋值列表
         this.spouseOtherTableData = assetTypeHousesTableDataNew;
@@ -7755,17 +7749,17 @@
             let dataParams = {};
             if (relatedPersonnelInformationForm) {
               /*//资产类型数据组装
-               this.assetTypeAppend();
-               //家庭收支情况
-               relatedPersonnelInformationForm.householdIncomeForm = this.householdIncomeForm;
-               //类型BORROWER(1, "借款人本人"), BORROWER_COUPLE(2, "借款人配偶"), MORTGAGE_GUARANTOR(3, "抵押担保人"),GUARANTOR(4, "保证担保人"), GUARANTOR_BOTH(5, "抵押担保人、保证担保人");
-               relatedPersonnelInformationForm.type=this.getType(this.relatedPersonnelInformationForm.type);
-               dataParams = {
-               name:relatedPersonnelInformationForm.name,
-               identityNumber:relatedPersonnelInformationForm.identityNumber,
-               age:relatedPersonnelInformationForm.age,
-               relatedPersonnelInformationForm:relatedPersonnelInformationForm
-               };*/
+            this.assetTypeAppend();
+            //家庭收支情况
+            relatedPersonnelInformationForm.householdIncomeForm = this.householdIncomeForm;
+            //类型BORROWER(1, "借款人本人"), BORROWER_COUPLE(2, "借款人配偶"), MORTGAGE_GUARANTOR(3, "抵押担保人"),GUARANTOR(4, "保证担保人"), GUARANTOR_BOTH(5, "抵押担保人、保证担保人");
+            relatedPersonnelInformationForm.type=this.getType(this.relatedPersonnelInformationForm.type);
+            dataParams = {
+              name:relatedPersonnelInformationForm.name,
+              identityNumber:relatedPersonnelInformationForm.identityNumber,
+              age:relatedPersonnelInformationForm.age,
+              relatedPersonnelInformationForm:relatedPersonnelInformationForm
+            };*/
               let relatedPersonnelInformationForm = this.relatedPersonnelInformationForm;
               //配偶信息
               let relatedPersonnelInformationSpouseForm = this.relatedPersonnelInformationSpouseForm;
@@ -7946,8 +7940,8 @@
        */
       stepClick(value){
         /* if(this.currentStaatus<value){
-         this.$message({message: '当前订单环节不可以切换,只允许一步一步做下去 ', type: 'error'})
-         return ;
+           this.$message({message: '当前订单环节不可以切换,只允许一步一步做下去 ', type: 'error'})
+             return ;
          }*/
         this.active=value;
         this.getData(value,this.loanBasisId);
