@@ -3,12 +3,12 @@
     <el-steps :active="active" finish-status="success">
       <el-step title="基础信息" @click.native="stepClick(0)"  class="schedule"></el-step>
       <el-step title="借款人情况" @click.native="stepClick(1)" class="schedule"></el-step>
-      <el-step title="相关人情况" @click.native="stepClick(2)" class="schedule"></el-step>
-      <el-step title="抵押物" @click.native="stepClick(3)" class="schedule"></el-step>
+      <el-step title="关联人情况" @click.native="stepClick(2)" class="schedule"></el-step>
+      <el-step title="抵（质）押物" @click.native="stepClick(3)" class="schedule"></el-step>
       <el-step title="相关贷款业务信息" @click.native="stepClick(4)" class="schedule"></el-step>
       <el-step title="合影" @click.native="stepClick(5)" class="schedule"></el-step>
-      <el-step title="个人贷款调查报告表" @click.native="stepClick(6)" class="schedule"></el-step>
-      <el-step title="合同信息" @click.native="stepClick(7)" class="schedule"></el-step>
+      <el-step title="调查报告" @click.native="stepClick(6)" class="schedule"></el-step>
+      <el-step title="最终审核及合同信息" @click.native="stepClick(7)" class="schedule"></el-step>
       <!--          <el-step title="基础信息"></el-step>
                 <el-step title="借款人情况"></el-step>
                 <el-step title="相关人情况"></el-step>
@@ -1414,7 +1414,7 @@
             </el-col>
             <el-col :span="8">
               <el-form-item label="家庭供养人口">
-                <el-input v-model="householdIncomeForm.supportPopulation" size="small" class="width180"></el-input> 元
+                <el-input v-model="householdIncomeForm.supportPopulation" size="small" class="width180"></el-input> 人
               </el-form-item>
             </el-col>
           </el-row>
@@ -1680,7 +1680,7 @@
 
             <!--新增编辑界面-->
             <el-dialog :title="operation?'新增':'新增'" width="60%" :visible.sync="addHousAssetDialogVisible" :close-on-click-modal="false">
-              <el-form :model="assetTypeHouses" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+              <el-form :model="assetTypeHouses" label-width="150px" :rules="dataFormRules" ref="dataForm" :size="size">
                 <el-form-item label="是否不动产权证">
                   <el-radio-group v-model="assetTypeHouses.whetherOwnershipCertificates" @change="whetherOwnershipCertificatesChange">
                     <el-radio  v-for="(vl, index) in WhetherOwnershipCertificatesOptions" :label="vl.VAL_CODE" :key="index">
@@ -1699,6 +1699,9 @@
                       <el-input v-model="assetTypeHouses.deed" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
+                </el-row>
+
+                <el-row>
                   <el-col :span="8" v-show="deedLandCertificateFlag">
                     <el-form-item label="土地证号">
                       <el-input v-model="assetTypeHouses.landCertificate" size="small" class="width180"></el-input>
@@ -1712,6 +1715,9 @@
                       <el-input v-model="assetTypeHouses.name" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
+                </el-row>
+
+                <el-row>
                   <el-col :span="8">
                     <el-form-item label="地址">
                       <el-input v-model="assetTypeHouses.address" size="small" class="width180"></el-input>
@@ -1812,7 +1818,7 @@
 
             <!--新增编辑土地界面-->
             <el-dialog :title="operationLand?'新增':'编辑'" width="60%" :visible.sync="addLandAssetDialogVisible" :close-on-click-modal="false">
-              <el-form :model="assetTypeLand" label-width="80px" :rules="dataFormRules" ref="dataForm" :size="size">
+              <el-form :model="assetTypeLand" label-width="150px" :rules="dataFormRules" ref="dataForm" :size="size">
                 <el-form-item label="土地证号">
                   <el-input v-model="assetTypeLand.landCertificate" size="small" class="width180"></el-input>
                 </el-form-item>
@@ -1822,6 +1828,9 @@
                       <el-input v-model="assetTypeLand.name" size="small" class="width180"></el-input>
                     </el-form-item>
                   </el-col>
+                </el-row>
+
+                <el-row>
                   <el-col :span="8">
                     <el-form-item label="地址">
                       <el-input v-model="assetTypeLand.address" size="small" class="width180"></el-input>
@@ -3613,11 +3622,11 @@
 
 
             <el-form-item label="借款金额">
-              <el-input v-model="finalAudit.loanAmount" size="small" class="width150"></el-input>
+              <el-input v-model="finalAudit.loanAmount" size="small" class="width150"></el-input> 元
             </el-form-item>
 
             <el-form-item label="借款期限">
-              <el-input v-model="finalAudit.loanLimit" size="small" class="width150"></el-input>
+              <el-input v-model="finalAudit.loanLimit" size="small" class="width150"></el-input> 月
             </el-form-item>
 
             <el-row >
@@ -3628,7 +3637,7 @@
                 </el-col>
                 <el-col :span="3">
                   <el-form-item label="贷款市场报价利率">
-                    <el-input placeholder="" size="small" class="width150" v-model="finalAudit.interestRate">
+                    <el-input placeholder="" size="small" class="width140" v-model="finalAudit.interestRate">
                       <template slot="append">%</template>
                     </el-input>
                   </el-form-item>
@@ -3645,7 +3654,7 @@
                 </el-col>
                 <el-col :span="3">
                   <el-form-item label="">
-                    <el-input placeholder=""  size="small" class="width150" v-model="finalAudit.floatedRate">
+                    <el-input placeholder=""  size="small" class="width140" v-model="finalAudit.floatedRate">
                       <template slot="append">%</template>
                     </el-input>
                   </el-form-item>
@@ -3655,7 +3664,7 @@
 
             <el-form-item label="执行年利率">
               <el-form-item label="">
-                <el-input placeholder="执行年利率" size="small" class="width150" v-model="finalAudit.yearInterestRate">
+                <el-input placeholder="执行年利率" size="small" class="width140" v-model="finalAudit.yearInterestRate">
                   <template slot="append">%</template>
                 </el-input>
               </el-form-item>
@@ -9317,6 +9326,7 @@
   }
   .width180{width:180px!important;}
   .width150{width:210px!important;}
+  .width140{width:140px!important;}
   .width350{width:330px!important;}
   .width378{max-width:378px;}
   .height30{height:30px!important;}
